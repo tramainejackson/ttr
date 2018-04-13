@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PlayerProfile extends Authenticatable
 {
@@ -26,6 +28,10 @@ class PlayerProfile extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	
+	public function full_name() {
+		return $this->firstname . " " . $this->lastname;
+	}
 	
 	/**
      *
@@ -71,5 +77,28 @@ class PlayerProfile extends Authenticatable
 		} else {
 			return false;
 		}
+	}
+	
+	public static function get_player_profiles_by_letter($letter) {
+		$players = self::where('lastname', 'LIKE', $letter . '%')->orderBy('lastname', 'desc')->get();
+		
+		return $players;
+	}
+	
+	public static function find_recent_added_players() {
+		$date = Carbon::now()->subMonth();
+		$players = self::where('created_date', '>', $date)->orderBy('created_date', 'desc')->get();
+
+		return $players;
+	}
+	
+	public static function find_player_videos_by_id($ID) {
+		$playerVideo = DB::table('videos')->where('player_id', $ID)->get();
+		
+		return $playerVideo;
+	}
+	
+	public function get_player_id() {
+		return $this->player_id;
 	}
 }

@@ -20,6 +20,6 @@
     "vue": "^2.5.3"
   },
   "dependencies": {
-    "popper.js": "^1.13.0"
+    "popper.js": "^1.14.3"
   }
 }

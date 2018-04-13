@@ -22,7 +22,6 @@
 </head>
 <body>
 <div id="backgroundImageP"></div>
-<?php include ('/modal.php'); include ('/menu2.php');?>
 <div class="playersPage">
 	<table id="playersPage2">
 		

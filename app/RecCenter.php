@@ -26,4 +26,11 @@ class RecCenter extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	
+	public static function get_rec_centers() {
+		$recs = self::all();
+
+		return $recs;
+	}
+	
 }

@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('welcome');
+        
     }
 
     /**
@@ -41,5 +41,15 @@ class HomeController extends Controller
 		$fireRecs = PlayerProfile::get_fire_recs();
 		
         return view('welcome', compact('getRecs', 'getLeagues', 'fireRecs'));
+    }
+	
+	/**
+     * Show the application about us page for public.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function about()
+    {
+        return view('about', compact(''));
     }
 }

@@ -1,5 +1,4 @@
 <?php
-	date_default_timezone_set("America/New_York");
 	$date = date("Y-m-d");
 	$datetime = date("Y-m-d H:i:s");
 	

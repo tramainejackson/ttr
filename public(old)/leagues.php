@@ -6,7 +6,6 @@
 	<?php require_once("../public/menu.php"); ?>
 	<?php require_once("../public/about.html"); ?>
 	<div class="container-fluid">
-		<?php if(isset($_GET["age"])) { ?>
 			<div id="leagues">
 				<?php $ages = array("10", "12", "14", "16", "18", "30", "50", "unlimited"); ?>
 				<h2>City Leagues <span class="switchFilterOption"><a href="leagues.php?comp=false" class="">Switch To Comp</a></span></h2>
@@ -163,75 +162,6 @@
 						</div>
 					</div>
 				</div>
-		<?php } ?>
-		<?php if(isset($_GET["league"])) { ?>
-			<?php $league = League_Profile::get_league_by_id($_GET["leagueID"]) ?>
-			<div class="indLeague" style="background-image:url('images/<?php echo $league->leagues_picture; ?>');">
-				<h1 class="">
-					<?php echo ucwords($league->leagues_name); ?>
-					<?php if($league->ttr_league == "Y") { ?>
-						<span class="ttrSite">This Leagues Keeps Online Stats. Click <a href="<?php echo $league->ttr_league_site; ?>" class="" target="_blank">here</a> to see.</span>
-					<?php } ?>
-				</h1>
-				<div class="indLeaguesInfo">
-					<span>Address:</span>
-					<span class=""><?php echo $league->leagues_address != "" ? $league->leagues_address : "No Address Listed"; ?></span>
-				</div>
-				<div class="indLeaguesInfo">
-					<span>Phone #:</span>
-					<span class=""><?php echo $league->leagues_phone != "" ? $league->leagues_phone : "No Phone Number Listed"; ?></span>
-				</div>
-				<div class="indLeaguesInfo">
-					<span>Email:</span>
-					<span class=""><?php echo $league->leagues_email != "" ? $league->leagues_email : "No Email Address Listed"; ?></span>
-				</div>
-				<div class="indLeaguesInfo">
-					<span>Website:</span>
-					<span class=""><?php echo $league->leagues_website != "" ? "<a href='http://".$league->leagues_website."'>".$league->leagues_website."</a>" : "No Website For This League"; ?></span>
-				</div>
-				<div class="indLeaguesInfo">
-					<span>Entry Fee:</span>
-					<span class=""><?php echo settype($league->leagues_fee, "integer") < 1 ? $league->leagues_fee : "Please Contact For League Entry"; ?></span>
-				</div>
-				<div class="indLeaguesInfo">
-					<span>Ref Fee:</span>
-					<span class=""><?php echo settype($league->ref_fee, "integer") < 1 ? $league->ref_fee : "No Ref Fee's Added Yet"; ?></span>
-				</div>
-				<div class="indLeaguesInfo compLevelTable">
-					<span>Comp Levels:</span>
-					<div class="container-fluid">
-						<div class="row">
-							<?php if($league->leagues_comp != "") { ?>
-								<ul class="compLevelsList">
-									<?php $levelsArray = explode(" ", $league->leagues_comp); ?>
-									<?php for($i=0; $i < count($levelsArray); $i++) { ?>
-										<li class="col-md-4"><?php echo str_ireplace(" ", "", ucwords(str_ireplace("_", " ", $levelsArray[$i]))); ?></li>
-									<?php } ?>
-								</ul>
-							<?php } else { ?>
-								<span class=""><?php echo $league->leagues_comp; ?></span>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-				<div class="indLeaguesInfo ageLevelTable">
-					<span>Age Levels:</span>
-					<div class="container-fluid">
-						<div class="row">
-							<?php if($league->leagues_comp != "") { ?>
-								<ul class="compLevelsList">
-									<?php $agesArray = explode(" ", $league->leagues_age); ?>
-									<?php for($i=0; $i < count($agesArray); $i++) { ?>
-										<li class="col-md-4"><?php echo ucwords(str_ireplace("_", " ", $agesArray[$i])); ?></li>
-									<?php } ?>
-								</ul>
-							<?php } else { ?>
-								<span class=""><?php echo $league->leagues_age; ?></span>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</div>
 		<?php } ?>
 	</div>
 	<?php require_once("../include/footer.php"); ?>

@@ -1,15 +1,23 @@
-@import url(https://fonts.googleapis.com/css?family=Lato|Oswald|Special+Elite|Slabo+27px|Raleway|PT+Sans+Narrow|PT+Serif|Indie+Flower|Bitter|Playfair+Display|Arvo|Lobster|Bree+Serif|Shadows+Into+Light|Orbitron|Pacifico|Rokkitt|Sigmar+One|Amatic+SC|Dancing+Script|Bangers);
-@import "normalize.css";
+@import url(https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Source+Sans+Pro|Lato|Oswald|Special+Elite|Slabo+27px|Raleway|PT+Sans+Narrow|PT+Serif|Indie+Flower|Bitter|Playfair+Display|Arvo|Lobster|Bree+Serif|Shadows+Into+Light|Orbitron|Pacifico|Rokkitt|Sigmar+One|Amatic+SC|Dancing+Script|Bangers);
 
-body {
-	background-color: #050505;
-	width:100%;
-	position: relative;
-	min-height: 1080px;
-	z-index: 0;
-	margin: 0 auto;
+html, body {
 	font-family: 'Indie Flower', serif;
+	font-weight: 100;
+	min-height: 100vh;
+	margin: 0;
 }
+
+.wow {
+    visibility: hidden;
+}
+
+/** Different Text **/
+.coolText1 {font-family: 'Fredericka the Great', cursive;}
+.coolText2 {font-family: 'Cinzel Decorative', cursive;}
+.coolText3 {font-family: 'Allerta Stencil', cursive;}
+.coolText4 {font-family: 'Fanwood Text', cursive;}
+.coolText5 {font-family: 'Germania One', cursive;}
+/** .Different Text **/
 
 button:focus {
 	outline:0 !important;
@@ -20,27 +28,44 @@ button:hover {
 }
 
 /* Let's get this party started */
-::-webkit-scrollbar {
-    width: 5px;
-}
+/* ::-webkit-scrollbar { */
+    /* width: 5px; */
+/* } */
  
 /* Track */
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 20px;
-}
+/* ::-webkit-scrollbar-track { */
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+    /* -webkit-border-radius: 10px; */
+    /* border-radius: 20px; */
+/* } */
  
 /* Handle */
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(0,128,0,0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+/* ::-webkit-scrollbar-thumb { */
+    /* -webkit-border-radius: 10px; */
+    /* border-radius: 10px; */
+    /* background: rgba(0,128,0,0.8);  */
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  */
+/* } */
+/* ::-webkit-scrollbar-thumb:window-inactive { */
+	/* background: rgba(0,128,0,0.4);  */
+/* } */
+
+.welcomeVideo .col {
+    padding: 0px;
 }
-::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(0,128,0,0.4); 
+
+.welcomeVideo .col .jumbotron {
+    padding: 0px;
 }
+
+.navbar {
+    background-color: transparent;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
 
 #mainBody {
 	background-image:url("/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg");
@@ -54,20 +79,6 @@ button:hover {
 	min-height: 1068px;
 	background-color: #050505;
 	z-index: 0;
-}
-
-.container a, img, h1, h2, h3, h4, h5, h6, ol, ul, p{
-	margin:0px;
-	padding:0px;
-	text-decoration:none;
-}
-
-.container a{
-	color:green;
-}
-
-div {
-	/* overflow:hidden; */
 }
 
 .playerProfileContainer {
@@ -108,18 +119,6 @@ div[id^="backgroundImage"]::after {
 	position: absolute;
 	z-index: -1;
 	background-color: rgba(5,5,5,.5);
-}
-div#loading_image {
-	display: none;
-}
-
-div#loading_image img {
-    display: block;
-    position: fixed;
-    top: 25px;
-    margin: 0% 25%;
-    z-index: 11;
-    border-radius: 100px;
 }
 
 div#playerProfileContainer {
@@ -232,7 +231,7 @@ text-align: -webkit-center;
 /* text-align: center; */
 }
 
-.maine_overlay, #about_ttr, .registration, #addtData, .moreGamesNotifi, .gameTime {
+.maine_overlay, .registration, #addtData, .moreGamesNotifi, .gameTime {
 	display: none;
 }
 
@@ -277,7 +276,6 @@ text-align: -webkit-center;
 	border-radius: 5px;
 	text-align: center;
 	background-color: white;
-	font-family: 'Indie Flower', cursive;
 	width: 25%;
 	display: none;
 	z-index: 11;
@@ -370,22 +368,6 @@ button.close_x {
     position: absolute;
 }
 
-div.container {
-    /* max-width: 74%; */
-    /* width: 73%; */
-    /* margin: 0% 0% 0% 26.5%; */
-    /* padding: 0% 0% 3%; */
-    position: relative;
-    /* display: -webkit-inline-box; */
-    /* display: inline-block; */
-    /* vertical-align: top; */
-    /* background-size: 98% 100%; */
-    /* background-position: center center; */
-    /* background-repeat: no-repeat; */
-    font-family: 'Indie Flower', serif;
-    overflow-x: hidden;
-}
-
 div.indLeague {
     background: antiquewhite;
     border: solid 2px green;
@@ -404,7 +386,7 @@ div.indLeague {
 div.indLeague div.indLeaguesInfo {
 	font-size: 135%;
 	padding: 0.2% 0%;
-	}
+}
 
 .indLeaguesInfo {
     margin-right: 2%;
@@ -588,7 +570,6 @@ p.confirmation_modal_content {
     position: absolute;
     right: 10px;
     z-index: 1;
-    font-family: 'Indie Flower', cursive;
     padding: 0% 0%;
 	display: none;
 }
@@ -639,13 +620,6 @@ a.changeRegistrationLink {
 	text-align:center;
 	/* background-color:gray; */
 	opacity:0.8;
-}
-
-.content p, ul {
-	color: white;
-	list-style:none;
-	margin: 1% 0%;
-	font-size: 125%;
 }
 
 .alert_modal p:last-of-type {
@@ -916,7 +890,6 @@ button.addMoreVideos, button.noMoreVideos {
 span.menuLiSpan {
     display: -webkit-inline-box;
     display: inline-block;
-    font-family: 'Indie Flower', serif;
     vertical-align: text-top;
     padding-left: 5px;
     font-size: 110%;
@@ -1898,12 +1871,9 @@ table#leagues_validate_form select {/* width: 63%; *//* max-width: 63%; */}
     padding: 2% 2% 2% 12%;
 }
 
-div#about_ttr {
-	position: fixed;
-	z-index: 10;
-}
+div#about_ttr {}
 
-.contactPage, .contactPageDis{
+.contactPage {
 	font-size: 135%;
 	background-color: #feae46;
 	border: solid 5px green;
@@ -1913,31 +1883,9 @@ div#about_ttr {
 	z-index: 10;
 }
 
-.contactPageDis {
-    width: 50%;
-    right: 33.8%;
-}
-
 .contactPage {
     right: 1%;
     width: 32%;
-}
-
-.contactPageDis p{
-	font-size: 125%;
-	padding: 0% 4%;
-}
-
-.contactPageDis p:last-child{
-	margin: 0% 0% 2% 0%;
-}
-
-.contactPageDis ul {
-	max-width: 50%;
-	list-style: none;
-	margin: 1% 0% 2.5% 29%;
-	font-size: 125%;
-	color: black;
 }
 
 .contactPage table {
@@ -2790,7 +2738,6 @@ table.allCalendar_table {
     margin: 0% 5%;
     width: 90%;
     display: none;
-    font-family: 'Indie Flower', cursive;
     background-image: url(../images/sixers_kids.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -2902,7 +2849,7 @@ table.currentMonth {
 }
 
 /*Smartphones portrait*/
-@media only screen and (min-device-width:320px) and (max-device-width:768px){
+@media only screen and (max-device-width:575.99px){
 
 body {
 	min-height: 1750px;
@@ -3152,7 +3099,7 @@ a.search_list_link {
   font-size: 200%;
 }
 
-#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .contactPageDis, .playerDisplay, .updatePage {
+#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay, .updatePage {
     background-color: #feae46;
     border: 5px solid green;
     border-radius: 5px;
@@ -3339,7 +3286,7 @@ iframe[id^='twitter-widget-']{
 }
 
 /*Coverage between iPad and Smartphone*/
-@media only screen and (min-device-width:768px) and (max-device-width:1023px){
+@media only screen and (min-device-width:576px) {
 
 .menu {
 	font-size:125%;
@@ -3355,14 +3302,6 @@ iframe[id^='twitter-widget-']{
 
 .content {
     font-size: 13px;
-}
-
-.content p, ul {
-	max-width: 100%;
-	margin-left: 0%;
-	list-style: none;
-	padding: 1% 0%;
-	font-size: 100%;
 }
 
 .list {
@@ -3413,7 +3352,7 @@ iframe[id^='twitter-widget-']{
 	margin: 1% 5%;
 }
 
-#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .contactPageDis, .playerDisplay, .updatePage {
+#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay, .updatePage {
     margin: 1% 10%;
     font-size: 135%;
     background-color: #FEAE46;
@@ -3437,7 +3376,7 @@ iframe[id^='twitter-widget-']{
 }
 
 /*Coverage between iPad and Smartphone*/
-@media only screen and (min-width:1024px) and (max-width:1279px){
+@media only screen and (min-width:768px) {
 
 #leagues_registration_table, #player_registration_table {
   /* min-width: 78%; */
@@ -3624,7 +3563,7 @@ p.nbaMatchup, p.calendarMatchups {
 	margin: 1% 5%;
 }
 
-.contactPage, .contactPageDis, .faqsPage, .playerDisplay, .updatePage {
+.contactPage, .faqsPage, .playerDisplay, .updatePage {
 	/* margin: 5% 1%; */
 	font-size: 135%;
 }
@@ -3725,12 +3664,7 @@ input.player_search {
     width: 90%;
 }
 
-.contactPageDis {
-	margin: 1% 6%;
-	font-size: 110%;
-	right: 37.3%;
-	opacity: 0.9;
-}
+.contactPageDis {}
 
 .contactPage {
 	margin: 1%;
@@ -3842,7 +3776,7 @@ div.indLeague {
 }
 
 /*Bigger Screens*/
-@media only screen and (min-width:1280px) and (max-width:1449px){
+@media only screen and (min-width:992px) {
 
 .maine_modal {
 	width: 55%;
@@ -3988,7 +3922,7 @@ div#updateBio {}
 	max-width: 30%;
 }
 
-.contactPage, .contactPageDis {
+.contactPage {
 	padding: 0%;
 }
 
@@ -4033,109 +3967,113 @@ div.updatePlayerForm:first-of-type {
 }
 }
 
-@media only screen and (min-width:1450px){
-.maine_modal {padding: 0% 3% 1%;}
+@media only screen and (min-width:1200px) {
+	.maine_modal {padding: 0% 3% 1%;}
 
-.maine_modal h2.maine_modal_header {
-    font-size: 250%;
+	.maine_modal h2.maine_modal_header {
+		font-size: 250%;
+	}
+
+	.maine_modal p {
+		font-size: 135%;
+	}
+
+	.alert_modal{
+	  width: 20%;
+	}
+
+	.alert_modal .modal_title {
+		background-color: darkred;
+	}
+
+	.alert_modal p:last-of-type {
+		font-size: 145%;
+		padding: 5% 2%;
+	}
+
+	.playersPage {
+	  /* margin: 1% 0%; */
+	}
+
+	.playerPicture {}
+
+	.playerNameHeader {}
+
+	.playerBio {}
+
+	.playerFooter {}
+
+	.register { 
+	  margin: 5% 5%;
+	}
+
+	.menu {
+	}
+
+	.menu li {
+		margin: 1.3% 0.5%;
+		max-width: 99%;
+		font-size: 150%;
+	}
+
+	.register img {
+		padding: 0% 35%;
+	}
+
+	.contenders table {
+	  margin: 0% 20%;
+	  width: 100%;
+	}
+
+	.list {
+	  margin: 0.85% 2% 1%;
+	}
+	.leaguesPage {
+	  margin: 1% 10%;
+	}
+
+	#playerPagePic button.playerPic_btn {
+	  margin: 8% 3%;
+	  width: 30%;
+	}
+	div.updateLeagueForm:first-of-type, 
+	div.updatePlayerForm:first-of-type {
+
+	}
+
+	div.indLeague {
+		background: antiquewhite;
+		border: solid 2px green;
+		border-radius: 10px;
+		margin-bottom: 5%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 1% 29% 1% 1%;
+		max-width: 75%;
+		background-repeat: no-repeat;
+		background-size: 40% 100%;
+		background-position: 100% 50%;
+		z-index: 6;
+	}
+
+	a.changeRegistrationLink {
+		top: 100px;
+		left: 50px;
+	}
+
+	.registrationPage {
+		width: 90%;
+		margin: 100px 5%;
+		background-color: rgba(0, 0, 0, 0.35);
+		border-radius: 10px;
+		box-shadow: 0px 0px 10px darkgreen;
+		color: white;
+	}
+	
+	.playersPage {
+		width: 15%;
+	}
 }
 
-.maine_modal p {
-    font-size: 135%;
-}
-
-.alert_modal{
-  width: 20%;
-}
-
-.alert_modal .modal_title {
-    background-color: darkred;
-}
-
-.alert_modal p:last-of-type {
-    font-size: 145%;
-    padding: 5% 2%;
-}
-
-.playersPage {
-  /* margin: 1% 0%; */
-}
-
-.playerPicture {}
-
-.playerNameHeader {}
-
-.playerBio {}
-
-.playerFooter {}
-
-.register { 
-  margin: 5% 5%;
-}
-
-.menu {
-}
-
-.menu li {
-    margin: 1.3% 0.5%;
-    max-width: 99%;
-    font-size: 150%;
-}
-
-.register img {
-	padding: 0% 35%;
-}
-
-.contenders table {
-  margin: 0% 20%;
-  width: 100%;
-}
-
-.list {
-  margin: 0.85% 2% 1%;
-}
-.leaguesPage {
-  margin: 1% 10%;
-}
-
-#playerPagePic button.playerPic_btn {
-  margin: 8% 3%;
-  width: 30%;
-}
-div.updateLeagueForm:first-of-type, 
-div.updatePlayerForm:first-of-type {
-
-}
-
-div.indLeague {
-    background: antiquewhite;
-    border: solid 2px green;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1% 29% 1% 1%;
-    max-width: 75%;
-    background-repeat: no-repeat;
-    background-size: 40% 100%;
-    background-position: 100% 50%;
-    z-index: 6;
-}
-
-a.changeRegistrationLink {
-    top: 100px;
-    left: 50px;
-}
-
-.registrationPage {
-    width: 90%;
-    margin: 100px 5%;
-    background-color: rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px darkgreen;
-    color: white;
-}
-.playersPage {
-    width: 15%;
-}
+@media only screen and (min-width:1400px){
 }

@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
+@section('additional_scripts')
+	<script type="text/javascript">
+		$('nav.navbar').addClass('fixed-top scrolling-navbar');
+	</script>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
+		<div class="row welcomeVideo">
+			<div class="col">
+				<div class="jumbotron">
+					<video loop="true" autoplay="true" muted="true">
+						<source src="../videos/ChosenLeague.mp4" type="video/mp4">
+					</video>
+				</div>
+			</div>
+		</div>
 		<div class="searches">
 			<div class="searchesBgrd"></div>
 			

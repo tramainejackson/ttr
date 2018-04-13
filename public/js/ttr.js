@@ -15,6 +15,69 @@ $(document).ready(function() {
 	var searchedHight = $(".searches").height();
 	var currentY = 0;
 
+	// Tooltips Initialization
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip();
+	});
+	
+	// MDB Lightbox Init
+	$(function () {
+		$("#mdb-lightbox-ui").load("/addons/mdb-lightbox-ui.html");
+	});
+
+	// Animations initialization
+	new WOW().init();
+	
+	// Initialize MDB select
+	$('.mdb-select').material_select();
+	
+	// Initialize datetimepicker
+	$('.datetimepicker').pickadate({
+		// Escape any “rule” characters with an exclamation mark (!).
+		format: 'mm/dd/yyyy',
+		formatSubmit: 'yyyy/mm/dd',
+	});
+	
+	$('.timepicker').pickatime({
+		// 12 or 24 hour 
+		twelvehour: true,
+		autoclose: true,
+		default: '18:00',
+	});
+	
+	// Dropdown Init
+	$('.dropdown-toggle').dropdown();
+	
+	// SideNav Scrollbar Initialization
+	var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+	Ps.initialize(sideNavScrollbar);
+	// SideNav Button Initialization
+	$(".button-collapse").sideNav({
+		edge: 'left', // Choose the horizontal origin
+		closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	});
+
+	// Remove flash message if there is one after 8 seconds
+	if($('.flashMessage').length == 1) {
+		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
+		setTimeout(function(){
+			$('.flashMessage').animate({top:'-150px'}, function(){
+				// $('.flashMessage').remove();
+			});
+		}, 8000);
+	}
+	
+	//Toggle value for checked item
+	$("body").on("click", ".propUtilSwitch", function(e) {
+		$(this).toggleClass('btn-success active btn-blue-grey');
+		
+		if($(this).children().attr('checked') == 'checked') {
+			$(this).children().removeAttr('checked');
+		} else {
+			$(this).children().attr('checked', 'checked');
+		}
+	});
+	
 //Player filter
 	$("body").on("click", ".addFilter", function(e) {
 		e.preventDefault();
@@ -43,7 +106,8 @@ $(document).ready(function() {
 //Scroll page to the bottom where selected league is
 	if($(".indLeague, .addVideoDiv").length > 0) {
 		$("body").animate({scrollTop:screenHeight+"px"}, "slow");
-	}	
+	}
+	
 //Change calendar user is viewing
 	var monthlyCalendar = $(".allCalendar_table");
 	var currentMonth = new Date().getMonth();
@@ -281,23 +345,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-//About TTR Drop Down
-	$("body").on("click", "#contact_li", function(e) {
-		e.preventDefault();
-		$(".maine_overlay, #about_ttr").show();
-		var contact1 = $(".contactPageDis").height() + 25;
-		var contact2 = $(".contactPage").height() + 25;
-		$(".contactPageDis").animate({top:"15px"}, "slow");
-		$(".contactPage").animate({top:"15px"}, "medium");
-		$(".maine_overlay").on("click", function() {
-			$(".contactPageDis").animate({top:"-"+contact1+"px"}, "slow");
-			$(".contactPage").animate({top:"-"+contact2+"px"}, "medium", function() {
-				$("#about_ttr").fadeOut();
-				$(".maine_overlay").fadeOut();
-			});
-		});
-	});
+
 	
 //Add more videos to page
 	$("body").on("click", ".addMoreVideos", function(e)	{
@@ -433,24 +481,7 @@ $(document).ready(function() {
 			});
 		});
 	});
-	
-//Add scroll to the top button
-	$(window).scroll(function()
-	{
-		if(window.pageYOffset >= 300){
-			$("#scroll_to_top").show("slow");
-		}	
-		if(window.pageYOffset < 300){
-			$("#scroll_to_top").hide("slow");
-		}
-	});
-	
-//Scroll to the top of the page
-	$("#scroll_to_top").on("click", function() {
-		var body = document.body;
-		$("body").animate({scrollTop:"0"}, "slow");
-	});
-	
+
 //Close modals
 	$("body").on("click", ".close_x, .maine_overlay", function() {
 		$(".maine_overlay").fadeOut("slow");
@@ -488,9 +519,3 @@ $(document).ready(function() {
 		}
 	});
 });
-
-(function () {
-	if($(".container").length > 0) {
-		$(".navi").css({position:"fixed"});
-	}	
-})();

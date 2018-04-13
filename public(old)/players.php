@@ -2,9 +2,6 @@
 <?php require_once("../include/header.php"); ?>
 <body>
 	<div id="backgroundImageP"></div>
-	<?php require_once("../public/modal.php"); ?>
-	<?php require_once("../public/menu.php"); ?>
-	<?php require_once("../public/about.html"); ?>
 	<div class="container-fluid" id="playerProfileContainer">
 		<h2 id="player_page_header" class="page_header">ToTheRec Players</h2>
 		<div class="alphabetClass">
