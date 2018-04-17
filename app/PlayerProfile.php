@@ -29,6 +29,14 @@ class PlayerProfile extends Authenticatable
         'password', 'remember_token',
     ];
 	
+	/**
+	* Get the players profile photo.
+	*/
+    public function image()
+    {
+        return $this->hasOne('App\PlayerProfileImages');
+    }
+	
 	public function full_name() {
 		return $this->firstname . " " . $this->lastname;
 	}

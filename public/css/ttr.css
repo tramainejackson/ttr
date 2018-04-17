@@ -66,6 +66,9 @@ button:hover {
     background-color: #4285F4;
 }
 
+.twitterHeader {
+	color: #1b95e0;
+}
 
 #mainBody {
 	background-image:url("/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg");
@@ -895,49 +898,13 @@ span.menuLiSpan {
     font-size: 110%;
 }
 
-.glyphicon {
-    font-size: 90%;
-    vertical-align: middle;
-}
-
-.header img{
-	width:100%;
-	height:10em;
-	margin-bottom: -2%;
-}
-
-div#header {
-	border-bottom: solid 2px green;
-	border-top: solid 2px green;
-}
-
-footer {
-	clear:both;
-	background-color:black;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	max-width: 100%;
-}
-
-footer p {
-	margin:0%;
-	min-width: 100%;
-	text-align: center;
-	color:white;
-	color: white;
-	position: relative;
-	background-color: black;
-	bottom: 0px;
-}
-
 .searches{
-	background-color: rgba(0,0,0,0.40);
-	position: relative;
-	padding: 4% 0% 10%;
+	background-image: url('/images/dunk_bcgrd.jpg');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
 }
-
-.searchesBgrd {content: "";position: absolute;top: 0px;right: 0;bottom: 0;left: 0;background-image: url("../images/dunk_bcgrd.jpg");z-index: -1;background-size: 100% 200%;background-repeat: no-repeat;background-position-x: 100%;background-position-y: -350px;}
 
 .searchesHeader {
     padding: 1% 0% 5%;
@@ -951,30 +918,19 @@ footer p {
     font-size: 200%;
 }
 
-.list {
-	/* float:left; */
-	display: -webkit-inline-box;
-	display: inline-block;
-	width: 65%;
-	height: 200px;
-	background-color: rgba(116, 116, 116, 0.75);
-	border: inset 5px;
-	margin:0.85% 2.2% 1%;
-	overflow:auto;
-	border-radius: 10px;
-	box-shadow: 2px 2px 10px black;
-}
+.list {}
 
-.list2, .list1 {
-	/* height: 100%; */
-	width: 100%;
-	color: white;
-	font-size: 150%;
-}
+.list2, .list1 {}
 
-table.list1 td {
-    position: relative;
-}
+.list2 td {}
+
+.list2 a:not(.noLeaguesLink), .list1 a {}
+
+.list1 td a:hover, .list2 td a:not(.noLeaguesLink):hover {}
+
+.list2 td a:hover {}
+
+table.list1 td {}
 
 img.fireIcon1, img.fireIcon2 {
     height: 65px;
@@ -995,21 +951,8 @@ img.fireIcon2 {
     right: 0px;
 }
 
-.list2 td {
-	/* padding: 0%; */
-}
-
 .noLeaguesRow td {
     padding: 3px 0px;
-}
-
-.list2 a:not(.noLeaguesLink), .list1 a {
-	display: block;
-	width: 100%;
-	text-align:center;
-	font-size: 125%;
-	text-decoration: none;
-	color: white;
 }
 
 .recDiv, .leagueDiv {
@@ -1035,13 +978,6 @@ img.fireIcon2 {
     /* border-bottom: solid 1px #ff6a00; */
 }
 
-.list1 td a:hover, .list2 td a:not(.noLeaguesLink):hover {
-  background-color: rgba(12, 12, 12, 0.8);
-}
-
-.list2 td a:hover {
-}
-
 .media h3 {
 	margin: 0%;
 	padding:1% 30%;
@@ -1057,20 +993,6 @@ img.fireIcon2 {
 	padding:1% 18%;
 }
 
-.media {
-	/* min-width: 70%; */
-	/* max-height: 58em; */
-	margin: 0% 0%;
-	padding: 4% 0.5%;
-	background: #d8d8d8;
-}
-
-#twitter {
-	margin: 2% 35%;
-	font-family: 'Indie Flower', cursive;
-	font-size: 515%;
-	color: #1677b4;
-}
 
 .feed {
     /* margin: 0 auto; */
@@ -2907,21 +2829,10 @@ body {
   margin: 3% 3% 0%;
 }
 
-.list {
-	width: 94%;
-	height: 15em;
-}
-
-.media {
-	min-width: 94%;
-}
+.list {}
 
 iframe[id^='twitter-widget-'] {
 	padding: 3% 0% 0% 0% !important;
-}
-
-.media:last-of-type {
-  background-color: cyan;
 }
 
 input#regLeague_btn, input#regProfile_btn, input#editProfile_btn {
@@ -2997,14 +2908,7 @@ input#regLeague_btn, input#regProfile_btn, input#editProfile_btn {
 	margin-top: 3%;
 }
 
-.list {
-	min-height: 150px;
-	background-color: #feae46;
-	border: solid gray 5px;
-	margin: 0.85% 2.5% 1%;
-	font-size: 100%;
-	min-width:90%;
-}
+.list {}
 
 .content p, ul {
 	margin: 4% 0%;
@@ -3030,9 +2934,7 @@ a.search_list_link {
     font-size: 150%;
 }
 
-.list2 td a {
-    font-size: 140%;
-}
+.list2 td a {}
 
 .media img {
     padding: 0 1%;
@@ -3044,20 +2946,10 @@ a.search_list_link {
 	font-size: 350%;
 }
 
-#twitterFeed {
-	height: 62em;
-	max-height: 62em;
-	margin: 0% 0% 3.8%;
-}
-
 .media h3 {
     margin: 0;
     max-width: 100%;
     padding: 1% 30%;
-}
-
-.media {
-    width: 100%;
 }
 
 .navi {
@@ -3304,28 +3196,12 @@ iframe[id^='twitter-widget-']{
     font-size: 13px;
 }
 
-.list {
-	min-width: 100%;
-	min-height: 150px;
-	background-color: #feae46;
-	border: solid gray 5px;
-	margin: 1% 1%;
-	overflow:auto;
-}
+.list {}
 
-.list2 {
-	padding: 0%;
-}
+.list2 {}
 
 .champs {
 	overflow-y:hidden;
-}
-
-.media {
-	overflow:auto;
-	min-width:100%;
-	max-height:100%;
-	margin:0%;
 }
 
 .media img {
@@ -3430,18 +3306,9 @@ p.nbaMatchup, p.calendarMatchups {
 	background: initial;
 }
 
-.list {
-    /* float: left; */
-    /* overflow-y: scroll; */
-    /* width: 46%; */
-    /* min-height: 150px; */
-    /* border: solid gray 5px; */
-    /* margin: 1% 1.5%; */
-}
+.list {}
 
-.searchesBgrd {
-    /* background-position-y: -550px; */
-}	
+.searchesBgrd {}	
 
 #champs, #twitter {
     margin: 2% 25% 0.5%;
@@ -3540,13 +3407,6 @@ p.nbaMatchup, p.calendarMatchups {
     width: 50%;
     height: 13em;
     margin: 0% 25%;
-}
-
-.media {
-	/* overflow: auto; */
-	/* min-width: 100%; */
-	/* max-height: 100%; */
-	/* margin: 2% 0%; */
 }
 
 .media img {
@@ -3825,22 +3685,13 @@ div.indLeague {
     font-size: 91.4%;
 }
 
-.list {
-	margin: 0.85% 1.5% 1%;
-	overflow:auto;
-}
+.list {}
 
 .register {
 }
 
 .register img {
 	padding: 0% 33%;
-}
-
-.media {
-	float: left;
-	max-width: 100%;
-	max-height: none;
 }
 
 .media img {
@@ -3857,11 +3708,6 @@ div.indLeague {
 
 .feed {
     max-width: 33%;
-}
-
-#twitterFeed{
-	float:none;
-	
 }
 
 /*iframe[id^='twitter-widget-'] {
@@ -4025,9 +3871,8 @@ div.updatePlayerForm:first-of-type {
 	  width: 100%;
 	}
 
-	.list {
-	  margin: 0.85% 2% 1%;
-	}
+	.list {}
+	
 	.leaguesPage {
 	  margin: 1% 10%;
 	}
