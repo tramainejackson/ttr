@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
+@section('addt_style')
+	<style type="text/css">
+		.view {
+			min-height: initial !important;
+		}
+	</style>
+@endsection
+
 @section('content')
 	@include('include.functions')
 	
-	<div class="container-fluid">
-
-		<div id="backgroundImageP"></div>
+	<div class="container-fluid" id="players_page">
 
 		<h2 id="player_page_header" class="page_header">ToTheRec Players</h2>
 

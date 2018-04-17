@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/about_us', 'HomeController@about')->name('about');
 
 Route::resource('rec_centers', 'RecCenterController');
@@ -26,6 +28,3 @@ Route::resource('rec_centers', 'RecCenterController');
 Route::resource('players', 'PlayerProfileController');
 
 Route::resource('leagues', 'LeagueProfileController');
-
-// Route::get('/home', 'HomeController@index')->name('home');
-

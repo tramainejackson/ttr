@@ -14,7 +14,7 @@ $(document).ready(function() {
 	var searchedWinLoc = $(".searches").offset();
 	var searchedHight = $(".searches").height();
 	var currentY = 0;
-
+	
 	// Tooltips Initialization
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip();
@@ -68,13 +68,15 @@ $(document).ready(function() {
 	}
 	
 	//Toggle value for checked item
-	$("body").on("click", ".propUtilSwitch", function(e) {
-		$(this).toggleClass('btn-success active btn-blue-grey');
+	$("body").on("click", ".registrationFormCard .profileSelection button", function(e) {
+		$(this).add($(this).siblings()).toggleClass('green grey active');
 		
 		if($(this).children().attr('checked') == 'checked') {
 			$(this).children().removeAttr('checked');
+			$(this).siblings().children().attr('checked', 'checked');
 		} else {
 			$(this).children().attr('checked', 'checked');
+			$(this).siblings().children().removeAttr('checked');
 		}
 	});
 	

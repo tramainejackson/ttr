@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="/favicon_jrh.ico" type="image/x-icon">
-	<link rel="icon" href="/favicon_jrh.ico" type="image/x-icon">
+	<!-- <link rel="shortcut icon" href="/favicon_jrh.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon_jrh.ico" type="image/x-icon"> -->
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -46,35 +46,28 @@
 			<div id="slide-out" class="side-nav fixed">
 				<ul class="custom-scrollbar">
 					<!--/. Side navigation links -->
+					<li id="index"><a href="{{ route('welcome') }}">Home</a></li>	
+					<li id="rec_li"><a href="{{ route('rec_centers.index') }}">Parks N Recs</a></li>
+					<li id="player_li"><a href="{{ route('players.index') }}">Players</a></li>
+					<li id="league_li"><a href="{{ route('leagues.index') }}">City Leagues</a></li>			
+					<li id="news_li"><a href="news.php">News</a></li>
+					<li id="clips_li"><a id="videos_link" href="videos.php">Clips</a></li>
+					<li id="contact_li"><a href="{{ route('about') }}">About TTR</a></li>
+					
 					@if (Auth::guest())
 						<li><a href="{{ route('login') }}">Login</a></li>
 						<li><a href="{{ route('register') }}">Register</a></li>
-						<li id="index"><a href="{{ route('welcome') }}">Home</a></li>	
-						<li id="rec_li"><a href="{{ route('rec_centers.index') }}">Parks N Recs</a></li>
-						<li id="player_li"><a href="{{ route('players.index') }}">Players</a></li>
-						<li id="league_li"><a href="{{ route('leagues.index') }}">City Leagues</a></li>			
-						<li id="news_li"><a href="news.php">News</a></li>
-						<li id="clips_li"><a id="videos_link" href="videos.php">Clips</a></li>
-						<li id="contact_li"><a href="{{ route('about') }}">About TTR</a></li>
 					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user()->name }} <span class="caret"></span>
+						<li class="">
+							<a href="{{ route('logout') }}"
+								onclick="event.preventDefault();
+										 document.getElementById('logout-form').submit();">
+								Logout
 							</a>
 
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-												 document.getElementById('logout-form').submit();">
-										Logout
-									</a>
-
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
-									</form>
-								</li>
-							</ul>
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
 						</li>
 					@endif
 					<!--/. Side navigation links -->
@@ -86,39 +79,54 @@
 				<!-- Right Side Of Navbar -->
 				<ul class="nav navbar-nav navbar-right">
 					<!-- Authentication Links -->
-					@if (Auth::guest())
-						<li  class="nav-item" id="index">
-							<a class="nav-link" href="{{ route('welcome') }}">Home</a>
-						</li>	
-						<li id="rec_li" class="nav-item">
-							<a class="nav-link" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+					<li  class="nav-item" id="index">
+						<a class="nav-link" href="{{ route('welcome') }}">Home</a>
+					</li>	
+					<li id="rec_li" class="nav-item">
+						<a class="nav-link" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+					</li>
+					<li id="player_li" class="nav-item">
+						<a class="nav-link" href="{{ route('players.index') }}">Players</a>
+					</li>
+					<li id="league_li" class="nav-item">
+						<a class="nav-link" href="{{ route('leagues.index') }}">City Leagues</a>
+					</li>
+					<li id="news_li" class="nav-item">
+						<a class="nav-link" href="news.php">News</a>
+					</li>
+					<li id="clips_li" class="nav-item">
+						<a class="nav-link" id="videos_link" href="videos.php">Clips</a>
+					</li>
+					<li id="contact_li" class="nav-item">
+						<a class="nav-link" href="{{ route('about') }}">About TTR</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="d-none d-lg-flex" id="">
+				<ul class="nav navbar-nav navbar-right">
+					@if(Auth::guest())
+						<!-- Logins -->
+						<li class="nav-item">
+							<a href="{{ route('login') }}" class="nav-link btn indigo">Login
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</a>
 						</li>
-						<li id="player_li" class="nav-item">
-							<a class="nav-link" href="{{ route('players.index') }}">Players</a>
-						</li>
-						<li id="league_li" class="nav-item">
-							<a class="nav-link" href="{{ route('leagues.index') }}">City Leagues</a>
-						</li>
-						<li id="news_li" class="nav-item">
-							<a class="nav-link" href="news.php">News</a>
-						</li>
-						<li id="clips_li" class="nav-item">
-							<a class="nav-link" id="videos_link" href="videos.php">Clips</a>
-						</li>
-						<li id="contact_li" class="nav-item">
-							<a class="nav-link" href="{{ route('about') }}">About TTR</a>
+						<li class="nav-item">
+							<a href="{{ route('register') }}" class="nav-link btn indigo lighten-1">Register
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</a>
 						</li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user()->name }} <span class="caret"></span>
+								{{ $player->full_name() }} <span class="caret"></span>
 							</a>
 
 							<ul class="dropdown-menu" role="menu">
 								<li>
 									<a href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-												 document.getElementById('logout-form').submit();">
+										onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 										Logout
 									</a>
 
@@ -127,24 +135,8 @@
 									</form>
 								</li>
 							</ul>
-						</li>
+						</li>				
 					@endif
-				</ul>
-			</div>
-			
-			<div class="d-none d-lg-flex" id="">
-				<ul class="nav navbar-nav navbar-right">
-					<!-- Logins -->
-					<li class="nav-item">
-						<a href="{{ route('login') }}" class="nav-link btn indigo">Login
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ route('register') }}" class="nav-link btn indigo lighten-1">Register
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</a>
-					</li>
 				</ul>
 			</div>
         </nav>
