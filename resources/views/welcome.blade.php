@@ -12,7 +12,7 @@
 			<div class="col">
 				<div class="jumbotron">
 					<video loop="true" autoplay="true" muted="true">
-						<source src="../videos/ChosenLeague.mp4" type="video/mp4">
+						<source src="/videos/ChosenLeague.mp4" type="video/mp4">
 					</video>
 				</div>
 			</div>

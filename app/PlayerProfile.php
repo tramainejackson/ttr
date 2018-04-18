@@ -2,32 +2,21 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class PlayerProfile extends Authenticatable
+class PlayerProfile extends Model
 {
-    use Notifiable;
+    use SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-    */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $dates = ['deleted_at'];
 	
 	/**
 	* Get the players profile photo.
@@ -37,6 +26,17 @@ class PlayerProfile extends Authenticatable
         return $this->hasOne('App\PlayerProfileImages');
     }
 	
+	/**
+	* Get the players profile photo.
+	*/
+    public function playgrounds()
+    {
+        return $this->hasMany('App\PlayerPlayground');
+    }
+	
+	/**
+	* Get the players full name.
+	*/
 	public function full_name() {
 		return $this->firstname . " " . $this->lastname;
 	}

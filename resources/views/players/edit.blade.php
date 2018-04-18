@@ -52,14 +52,13 @@
 				</div>
 				<div class="myPlayground">
 					<div class="">
-						<?php $playgrounds = explode("; ", $player->player_playground); ?>
 						<h1 class="indProfileHeader">My Playground</h1>
 						<div class="myPlaygroundClass">
 							<p class="">List your top 3 places to play for the best runs.</p>
 						</div>
 						<div class="myPlaygroundClass">
 							<ul class="">
-								<?php for($i=0; $i < 3; $i++) { ?>
+								@for($i=0; $i < 3; $i++)
 									<li class="row">
 										<span class="myPlaygroundRank col-md-1">
 											<select class="" name="" disabled>
@@ -72,9 +71,8 @@
 											<select class="" name="rec_name[]">
 												<option class="blank" value="" selected>------- Select A Rec -------</option>
 												@for($ii=0; $ii < count($recs); $ii++)
-													<?php $playgroundInfo = explode(" ", $playgrounds[$i]); ?>
-													@if($playgrounds[$i] != "")
-														<option value="<?php echo str_ireplace(" ", "_", $recs[$ii]->recs_name); ?>" <?php echo str_ireplace(" ", "_", $recs[$ii]->recs_name) == $playgroundInfo[0] ? "selected" : ""; ?>><?php echo str_ireplace("_", " ", $recs[$ii]->recs_name); ?></option>
+													@if($playgrounds[$i]->playground != "")
+														<option value="<?php echo str_ireplace(" ", "_", $recs[$ii]->recs_name); ?>" <?php echo str_ireplace(" ", "_", $recs[$ii]->recs_name) == $playgrounds[0]->playground ? "selected" : ""; ?>><?php echo str_ireplace("_", " ", $recs[$ii]->recs_name); ?></option>
 													@else
 														<option value="<?php echo str_ireplace(" ", "_", $recs[$ii]->recs_name); ?>"><?php echo str_ireplace("_", " ", $recs[$ii]->recs_name); ?></option>
 													@endif
@@ -84,14 +82,13 @@
 										<span class="myPlaygroundRank col-md-4">
 											<select class="" name="day_name[]">
 												<option class="blank" value="">------- Select A Day -------</option>
-												
+
 												@for($ii=0; $ii < count($days); $ii++)
-													<?php $playgroundInfo = explode(" ", $playgrounds[$i]); ?>
-													<?php if($playgrounds[$i] != "") { ?>
-														<option value="<?php echo $days[$ii]; ?>" <?php echo $days[$ii] == $playgroundInfo[1] ? "selected" : ""; ?>><?php echo $days[$ii]; ?></option>
-													<?php } else { ?>
+													@if($playgrounds[$i]->playground != "")
+														<option value="<?php echo $days[$ii]; ?>" <?php echo $days[$ii] == $playgroundInfo->playground ? "selected" : ""; ?>><?php echo $days[$ii]; ?></option>
+													@else
 														<option value="<?php echo $days[$ii]; ?>"><?php echo $days[$ii]; ?></option>
-													<?php } ?>
+													@endif
 												@endfor
 
 											</select>
@@ -122,7 +119,7 @@
 											</select>
 										</span>
 									</li>
-								<?php } ?>
+								@endfor
 							</ul>
 						</div>
 					</div>
@@ -131,7 +128,7 @@
 			</form>
 		</div>
 		<div class="">
-			<?php $getPlayerVideos = Video::find_player_videos_by_id($player->get_player_id()); ?>
+			<?php $getPlayerVideos = App\Video::find_player_videos_by_id($player->get_player_id()); ?>
 			<?php if(!empty($getPlayerVideos)) { ?>
 				<?php if(isset($_GET["remove_video"])) { ?>
 					<div class="deleteVids">
