@@ -19,6 +19,32 @@ class PlayerProfile extends Model
     protected $dates = ['deleted_at'];
 	
 	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+    ];
+	
+	/**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+    ];
+	
+	/**
+	* Get the contact for the media object.
+	*/
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+	
+	/**
 	* Get the players profile photo.
 	*/
     public function image()
@@ -32,6 +58,22 @@ class PlayerProfile extends Model
     public function playgrounds()
     {
         return $this->hasMany('App\PlayerPlayground');
+    }
+	
+	/**
+	* Get the players profile photo.
+	*/
+    public function videos()
+    {
+        return $this->hasMany('App\PlayerProfileVideos');
+    }
+	
+	/**
+	* Get the players profile photo.
+	*/
+    public function leagues()
+    {
+        return $this->hasMany('App\LeaguePlayer');
     }
 	
 	/**

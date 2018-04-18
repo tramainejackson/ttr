@@ -19,7 +19,7 @@
 								</div>
 								
 								<div class="">
-									{!! Form::open(['route' => ['login'], 'method' => 'POST']) !!}
+									{!! Form::open(['route' => ['register'], 'method' => 'POST']) !!}
 										<div class="">
 											<h2 class="text-muted"><u>Registration Type</u></h2>
 											
@@ -35,13 +35,13 @@
 										<div class="md-form{{ $errors->has('name') ? ' has-error' : '' }}">
 											<i class="fa fa-user prefix grey-text"></i>
 											
-											<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+											<input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required>
 
-											<label for="name" class="">Name</label>
+											<label for="username" class="">Username</label>
 											
-											@if ($errors->has('name'))
+											@if ($errors->has('username'))
 												<span class="help-block">
-													<strong>{{ $errors->first('name') }}</strong>
+													<strong>{{ $errors->first('username') }}</strong>
 												</span>
 											@endif
 										</div>

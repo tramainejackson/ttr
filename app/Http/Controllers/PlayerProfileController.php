@@ -69,9 +69,16 @@ class PlayerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PlayerProfile $player)
     {
-        //
+        // Validate incoming data
+		$this->validate($request, [
+			'firstname' => 'required|max:50',
+			'lastname' => 'nullable|max:50',
+			'nickname' => 'nullable|max:50',
+			'email' => 'required|max:50:unique',
+			'weight' => 'numeric|min:0|max:999',
+		]);
     }
 
     /**

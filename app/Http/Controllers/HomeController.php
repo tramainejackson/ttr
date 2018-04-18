@@ -29,13 +29,18 @@ class HomeController extends Controller
     public function index()
     {
 		if(PlayerProfile::where('user_id', Auth::id())->first()) {
+			// Get player instance
 			$player = PlayerProfile::where('user_id', Auth::id())->first();
+			$playgrounds = $player->playgrounds;
+			$videos = $player->videos;
+			$leagues = $player->leagues;
+			// $checkLinks = League_Player::link_player_accounts($player->email);
+			
 			$recs = RecCenter::all();
 			$times = DB::table('game_times')->get();
 			$days = DB::table('calendar_day')->get();
-			$playgrounds = $player->playgrounds;
 
-			return view('players.edit', compact('player', 'recs', 'times', 'days', 'playgrounds'));
+			return view('players.edit', compact('player', 'recs', 'times', 'days', 'playgrounds', 'videos', 'leagues'));
 		} else {
 			$league = LeagueProfile::where('user_id', Auth::id())->first();
 			

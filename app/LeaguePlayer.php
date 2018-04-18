@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
-class LeagueProfile extends Model
+class LeaguePlayer extends Model
 {
     use SoftDeletes;
 
@@ -36,31 +35,31 @@ class LeagueProfile extends Model
     ];
 	
 	/**
-	* Get the players for the league object.
+	* Get the contact for the media object.
 	*/
-    public function players()
+    public function player_profile()
     {
-        return $this->hasMany('App\LeaguePlayer');
+        return $this->belongsTo('App\PlayerProfile');
     }
 	
 	/**
-	* Get the team for the league object.
+	* Get the contact for the media object.
 	*/
-    public function teams()
+    public function league_team()
     {
-        return $this->hasMany('App\LeagueTeam');
+        return $this->belongsTo('App\PlayerProfile');
     }
 	
 	/**
-	* Get the standings for the league object.
+	* Get the league for the team object.
 	*/
-    public function standings()
+    public function league_profile()
     {
-        return $this->hasMany('App\LeagueStanding');
+        return $this->belongsTo('App\LeagueProfile');
     }
 	
 	/**
-	* Get the standings for the league object.
+	* Get the league for the team object.
 	*/
     public function stats()
     {

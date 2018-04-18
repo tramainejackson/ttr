@@ -147,39 +147,41 @@
 									@foreach($getRecs as $showRec)
 										<tr>
 											<td class="text-center{{ in_array(str_ireplace(' ', '_', $showRec->recs_name), $fireRecs) ? ' d-flex align-items-center justify-content-between' : '' }}">
-												@if(in_array(str_ireplace(" ", "_", $showRec->recs_name), $fireRecs))
+												@if(in_array(str_ireplace(" ", "_", $showRec->name), $fireRecs))
 													<span><img src="/images/fire.png" class="fireIcon1" /></span>
 												@endif
 												
-												<a class="quick_rec">{{ $showRec->recs_name }}</a>
+												<a class="quick_rec">{{ $showRec->name }}</a>
 												
-												@if(in_array(str_ireplace(" ", "_", $showRec->recs_name), $fireRecs))
+												@if(in_array(str_ireplace(" ", "_", $showRec->name), $fireRecs))
 													<span><img src="/images/fire.png" class="fireIcon2" /></span>
 												@endif
 												
 												<div class="recDiv">
 													<div class="recDivHeader">
-														<h2 class=""><?php echo $showRec->recs_name; ?><span><?php echo $showRec->recs_nickname != "" ? $showRec->recs_nickname : ""; ?><span></h2>
+														<h2 class=""><?php echo $showRec->recs_name; ?><span><?php echo $showRec->nickname != "" ? $showRec->nickname : ""; ?><span></h2>
 													</div>
 													<div class="recDivContent">
 														<div class="recProfile">
 															<span class="recProfileSub recProfileContent">Rec Owner:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->recs_owner == "" ? $showRec->recs_owner : "Call or See Website For More Info"; ?></span>
+															<span class="recProfileInfo recProfileContent"><?php echo $showRec->owner == "" ? $showRec->owner : "Call or See Website For More Info"; ?></span>
 														</div>
 														<div class="recProfile">
 															<span class="recProfileSub recProfileContent">Address:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->recs_address == "" ? $showRec->recs_address : "Call or See Website For More Info"; ?></span>
+															<span class="recProfileInfo recProfileContent"><?php echo $showRec->address == "" ? $showRec->address : "Call or See Website For More Info"; ?></span>
 														</div>
 														<div class="recProfile">
 															<span class="recProfileSub recProfileContent">Phone:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->recs_phone; ?></span>
+															<span class="recProfileInfo recProfileContent"><?php echo $showRec->phone; ?></span>
 														</div>
-														<?php if($showRec->recs_website != "") { ?>
+														
+														@if($showRec->website != "")
 															<div class="recProfile">
 																<span class="recProfileSub recProfileContent">Website:</span>
-																<span class="recProfileInfo recProfileContent"><?php echo $showRec->recs_website == "" ? $showRec->recs_website : "No Website"; ?></span>
+																<span class="recProfileInfo recProfileContent"><?php echo $showRec->website == "" ? $showRec->website : "No Website"; ?></span>
 															</div>
-														<?php } ?>
+														@endif
+														
 														<div class="recProfile">
 															<span class="recProfileSub recProfileContent">Indoor/Outdoor Court:</span>
 															<span class="recProfileInfo recProfileContent">
