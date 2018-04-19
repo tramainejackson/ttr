@@ -38,6 +38,7 @@ $(document).ready(function() {
 		formatSubmit: 'yyyy/mm/dd',
 	});
 	
+	// Initialize timepicker
 	$('.timepicker').pickatime({
 		// 12 or 24 hour 
 		twelvehour: true,
@@ -62,10 +63,37 @@ $(document).ready(function() {
 		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
 		setTimeout(function(){
 			$('.flashMessage').animate({top:'-150px'}, function(){
-				// $('.flashMessage').remove();
+				$('.flashMessage').remove();
 			});
 		}, 8000);
 	}
+	
+	// Add playground to DOM after cloning default list item
+	$('body').on('click', '.addPlayground', function(e) {
+		var newItem = $(this).parents('.myPlayground').find('.defaultPlaygroundItem').clone();
+
+		// Only add a max of 3 list items
+		if($('ol.myPlaygroundsList').children().length < 4) {
+			$(newItem).removeClass('defaultPlaygroundItem hidden')
+				.removeAttr('hidden')
+				.find('#select_rec')
+				.addClass('selectRec' + $('ol.myPlaygroundsList').children().length);
+			$(newItem).find($('selectRec' + $('ol.myPlaygroundsList').children().length))
+				.material_select();
+			
+			// Initialize timepicker
+			$('.timepicker').pickatime({
+				// 12 or 24 hour 
+				twelvehour: true,
+				autoclose: true,
+				default: '18:00',
+			});
+			
+			$(newItem).appendTo('ol.myPlaygroundsList');
+		} else {
+			toastr["info"]("You have reached the max amount of playgrounds to add");
+		}
+	});
 	
 	//Toggle value for checked item
 	$("body").on("click", ".registrationFormCard .profileSelection button", function(e) {
@@ -77,6 +105,28 @@ $(document).ready(function() {
 		} else {
 			$(this).children().attr('checked', 'checked');
 			$(this).siblings().children().removeAttr('checked');
+		}
+	});
+	
+	//Toggle value for leagues ages and competition for leages edit page
+	$("body").on("click", ".compBtnSelect, .ageBtnSelect", function(e) {
+		console.log($(this));
+		if($(this).hasClass('compBtnSelect')) {
+			$(this).toggleClass('orange gray active');
+			
+			if($(this).children().attr('checked') == 'checked') {
+				$(this).children().removeAttr('checked');
+			} else {
+				$(this).children().attr('checked', 'checked');
+			}
+		} else {
+			$(this).toggleClass('blue gray active');
+			
+			if($(this).children().attr('checked') == 'checked') {
+				$(this).children().removeAttr('checked');
+			} else {
+				$(this).children().attr('checked', 'checked');
+			}
 		}
 	});
 	

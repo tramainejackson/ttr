@@ -1,5 +1,7 @@
 ------------------------------------------------------
 						ToTheRec
 ------------------------------------------------------
-
+Fix the nav where the logged in user shows
+Add a player type: Example: bruiser, high flyer, magician, lock down defender
+Add something to the leagues profile edit page card. And a background. Make font larger
 export HTTP_PROXY="http://155.247.166.25:8080"

@@ -29,29 +29,6 @@ button:hover {
 	cursor: pointer;
 }
 
-/* Let's get this party started */
-/* ::-webkit-scrollbar { */
-    /* width: 5px; */
-/* } */
- 
-/* Track */
-/* ::-webkit-scrollbar-track { */
-    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
-    /* -webkit-border-radius: 10px; */
-    /* border-radius: 20px; */
-/* } */
- 
-/* Handle */
-/* ::-webkit-scrollbar-thumb { */
-    /* -webkit-border-radius: 10px; */
-    /* border-radius: 10px; */
-    /* background: rgba(0,128,0,0.8);  */
-    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  */
-/* } */
-/* ::-webkit-scrollbar-thumb:window-inactive { */
-	/* background: rgba(0,128,0,0.4);  */
-/* } */
-
 .welcomeVideo .col {
     padding: 0px;
 }
@@ -120,6 +97,10 @@ div[id^="backgroundImage"]::after {
 	position: absolute;
 	z-index: -1;
 	background-color: rgba(5,5,5,.5);
+}
+
+.myPlaygroundClass input.select-dropdown {
+    color: white;
 }
 
 .leaguesFilterOption {
@@ -503,14 +484,6 @@ div.container#recsPageContainer::after {
     max-height: 1080px;
 }
 
-div.container#leaguesProfileContainer {
-    background-repeat: no-repeat;
-    background-size: 74% 100%;
-    background-position: 100% 100%;
-    background-attachment: fixed;
-    padding: 0% 0% 3%;
-}
-
 #mainBody::after {
     position: absolute;
     content: "";
@@ -649,26 +622,6 @@ a.changeRegistrationLink {
 	opacity: 0.8;
 	position: fixed;
 	font-family: fantasy;
-}
-
-.myPlaygroundClass ul span.myPlaygroundRank {
-    /* max-width: 28%; */
-    /* min-width: 5%; */
-    /* display: -webkit-inline-box; */
-    /* display: inline-block; */
-    /* position: relative; */
-    padding: 0.2% 0%;
-}
-
-.myPlaygroundClass ul span.myPlaygroundRank select {
-    max-width: 100%;
-    width: 98%;
-    height: 100%;
-    text-align: -webkit-center;
-    text-align: center;
-    margin: 0 auto;
-    display: -webkit-box;
-    display: block;
 }
 
 .active {
@@ -1170,12 +1123,6 @@ iframe[id^='twitter-widget-'] {
     border-top-right-radius: 2px;
 }
 
-div.updateVids, div.myPlayground, div.addVids, div.deleteVids, div.indProfileLeagues {
-    border-top: solid 1.5px white;
-    padding: 10% 0%;
-    position: relative;
-}
-
 .deleteVids {
     background: linear-gradient(to right, darkgrey, transparent, transparent, darkred);
 }
@@ -1184,32 +1131,7 @@ div.updateVids, div.myPlayground, div.addVids, div.deleteVids, div.indProfileLea
     background: linear-gradient(to right, darkgrey, transparent, transparent, transparent, darkgreen);
 }
 
-.indProfileHeader {
-    color: whitesmoke;
-    text-align: -webkit-center;
-    text-align: center;
-    font-size: 350%;
-    margin: -2% 0% 5%;
-}
-
-.myPlaygroundClass {
-    color: whitesmoke;
-}
-
-.myPlaygroundClass .row {
-	max-width: 100%;
-	margin: 0 auto;
-}
-
-.myPlaygroundClass ul {
-    color: black;
-    padding: 0% 12%;
-    font-size: 125%;
-}
-
-.myPlaygroundInstr {
-    color: whitesmoke;
-}
+.indProfileHeader {}
 
 a.indProfileLeaguesLink {
     text-align: -webkit-center;
@@ -1456,8 +1378,6 @@ button.viewClip {
     border: solid 1px;
 }
 
-.updatePage h2:hover {}
-
 div#noVideos_message p {
     padding: 1% 0%;
     text-align: center;
@@ -1601,8 +1521,6 @@ table#leagues_validate_form select {/* width: 63%; *//* max-width: 63%; */}
     padding: 1% 1% 1%;
     text-align: center;
 }
-
-#current_pic {}
 
 .maine_modal #my_leagues_photo {
 	height: 14em;
@@ -2594,8 +2512,6 @@ iframe[id^='twitter-widget-'] {
 	font-size: 200%;
 }
 
-#current_pic {}
-
 #updatePic_btn {
   height: 2em;
   width: 85%;
@@ -2830,74 +2746,70 @@ iframe[id^='twitter-widget-']{
 /*Coverage between iPad and Smartphone*/
 @media only screen and (min-device-width:576px) {
 
-.menu {
-	font-size:125%;
-}
+	.menu {
+		font-size:125%;
+	}
 
-.menu li {
-	margin:0;
-}
+	.menu li {
+		margin:0;
+	}
 
-.menu li a {
-	width:105px;
-}
+	.menu li a {
+		width:105px;
+	}
 
-.content {
-    font-size: 13px;
-}
+	.content {
+		font-size: 13px;
+	}
 
-.list {}
+	.list {}
 
-.list2 {}
+	.list2 {}
 
-.champs {
-	overflow-y:hidden;
-}
+	.champs {
+		overflow-y:hidden;
+	}
 
-.media img {
-	padding: 1% 5%;
-	width:90%;
-}
+	.media img {
+		padding: 1% 5%;
+		width:90%;
+	}
 
-iframe[id^='twitter-widget-']{
-	width:100% !important;
-	padding:1% 0% 0% 0% !important;
-}
+	iframe[id^='twitter-widget-']{
+		width:100% !important;
+		padding:1% 0% 0% 0% !important;
+	}
 
-#profilePic {
-    padding: 5% 0% 0% 35%;
-    float: none;
-}
+	#profilePic {
+		padding: 5% 0% 0% 35%;
+		float: none;
+	}
 
-.playerPageInfo {
-	min-width: 100%;
-	padding-left:19%;
-}
+	.playerPageInfo {
+		min-width: 100%;
+		padding-left:19%;
+	}
 
-.playerDisplay {
-	margin: 1% 5%;
-}
+	.playerDisplay {
+		margin: 1% 5%;
+	}
 
-#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay {
-    margin: 1% 10%;
-    font-size: 135%;
-    background-color: #FEAE46;
-    border: 5px solid #008000;
-    border-radius: 5px;
-    opacity: 0.8;
-}
+	#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay {
+		margin: 1% 10%;
+		font-size: 135%;
+		background-color: #FEAE46;
+		border: 5px solid #008000;
+		border-radius: 5px;
+		opacity: 0.8;
+	}
 
-.leaguesPage {
-    float: left;
-    margin: 1%;
-    padding: 0.5% 0% 0%;
-    height: 250px;
-    width: 355px;
-}
-
-.myPlaygroundClass ul {
-    padding: 0% 5%;
-}
+	.leaguesPage {
+		float: left;
+		margin: 1%;
+		padding: 0.5% 0% 0%;
+		height: 250px;
+		width: 355px;
+	}
 
 }
 
@@ -3085,11 +2997,6 @@ iframe[id^='twitter-widget-']{
 		background-color: rgba(0, 0, 0, 0.25);
 	}
 
-	div#player_page_name_header h1.playerPageLastNameHeader span:not(:first-of-type) {
-		font-size: 40%;
-		margin-left: 5%;
-	}
-
 	div.updateLeagueForm:first-of-type input {
 		/* max-width: 15%; */
 	}
@@ -3235,9 +3142,6 @@ iframe[id^='twitter-widget-']{
 		max-width: 75%;
 		margin: 0% 0% 0% 15%;
 	}
-	.myPlaygroundClass ul {
-		padding: 0% 0%;
-	}
 
 }
 
@@ -3256,10 +3160,6 @@ iframe[id^='twitter-widget-']{
 	.navi {
 		width: 100%;
 		font-size: 155%;
-	}
-
-	.myPlaygroundClass ul {
-		padding: 0% 5%;
 	}
 
 	div.indLeague {

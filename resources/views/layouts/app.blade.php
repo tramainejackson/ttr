@@ -141,6 +141,12 @@
 			</div>
         </nav>
 		
+		@if(session('status'))
+			<!-- Add return message -->
+			<div class="returnMessage">
+				<ul class="flashMessage">{!! session('status') !!}</ul>
+			</div>
+		@endif
         @yield('content')
 
 		@include("modal")
