@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
+use App\PlayerPlayground;
 use Illuminate\Http\Request;
 
 class PlayerProfileController extends Controller
@@ -104,9 +105,107 @@ class PlayerProfileController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+    */
     public function destroy($id)
     {
         //
     }
+	
+	/**
+     * Update the playground for the player object.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+    */
+	public function update_playgrounds(Request $request, PlayerProfile $player) {
+		// dd($player);
+		// Update the existing playground
+		if(isset($request->playground_id)) {
+			$count = count($request->playground_id);
+			foreach($request->playground_id as $key => $playgroundID) {
+				$time = "";
+				$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time[$key]));
+				
+				if(substr_count($request->time[$key], 'PM') > 0) {
+					if($timeArray[0] != 12) {
+						$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+					} else {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					}
+				} else {
+					if($timeArray[0] != 12) {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					} else {
+						$time = '0:' . $timeArray[1];
+					}
+				}
+				
+				$playground = PlayerPlayground::find($playgroundID);
+				$playground->player_profile_id = $player->id;
+				$playground->playground = $request->rec_name[$key];
+				$playground->day = $request->day_name[$key];
+				$playground->time = $time;
+				
+				if($playground->save()) {}
+			}
+			
+			// Add the leftover new playgrounds
+			for($x=$count; $x < count($request->rec_name); $x++) {
+				$time = "";
+				$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time[$x]));
+				
+				if(substr_count($request->time[$x], 'PM') > 0) {
+					if($timeArray[0] != 12) {
+						$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+					} else {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					}
+				} else {
+					if($timeArray[0] != 12) {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					} else {
+						$time = '0:' . $timeArray[1];
+					}
+				}
+				
+				$playground = new PlayerPlayground();
+				$playground->player_profile_id = $player->id;
+				$playground->playground = $request->rec_name[$x];
+				$playground->day = $request->day_name[$x];
+				$playground->time = $time;
+				
+				if($playground->save()) {}
+			}
+		} else {
+			// Add any new playgrounds
+			foreach($request->rec_name as $key => $playground) {
+				$time = "";
+				$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time[$key]));
+				
+				if(substr_count($request->time[$key], 'PM') > 0) {
+					if($timeArray[0] != 12) {
+						$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+					} else {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					}
+				} else {
+					if($timeArray[0] != 12) {
+						$time = $timeArray[0] . ':' . $timeArray[1];
+					} else {
+						$time = '0:' . $timeArray[1];
+					}
+				}
+				
+				$playground = new PlayerPlayground();
+				$playground->player_profile_id = $player->id;
+				$playground->playground = $request->rec_name[$key];
+				$playground->day = $request->day_name[$key];
+				$playground->time = $time;
+				
+				if($playground->save()) {}
+			}
+		}
+		
+		return redirect()->back()->with(['status' => '<li class="">Player playground information updated successfully</li>']);
+	}
 }

@@ -27,4 +27,6 @@ Route::resource('rec_centers', 'RecCenterController');
 
 Route::resource('players', 'PlayerProfileController');
 
+Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
+
 Route::resource('leagues', 'LeagueProfileController');

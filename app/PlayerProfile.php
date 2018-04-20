@@ -91,19 +91,17 @@ class PlayerProfile extends Model
      * @var array
     */
 	public static function get_fire_recs() {
-		$playerPlaygrounds = self::where('player_playground', '<>', 'null')->get();
-
+		$playerPlaygrounds = DB::table('player_playgrounds')->get();
 		if(!empty($playerPlaygrounds)) {
 			$fireRecs = [];
 			$returnArray = [];
+			
 			foreach($playerPlaygrounds as $playground) {
-				$getPlaygrounds = explode("; ", $playground->player_playground);
-				for($i=0; $i < count($getPlaygrounds); $i++) { 
-					$playgrounds = explode(" ", $getPlaygrounds[$i]);
-					array_push($fireRecs, $playgrounds[0]);
+				for($i=0; $i < count($playerPlaygrounds); $i++) { 
+					array_push($fireRecs, $playground->playground);
 				}
 			}
-		
+
 			//Sort the array by rec name and how many times it was selected
 			$orderArray = array_count_values($fireRecs);
 			
