@@ -133,14 +133,16 @@ class PlayerProfile extends Model
 		return $players;
 	}
 	
-	public static function find_recent_added_players() {
+	public function scopeFindRecentAddedPlayers($query) {
 		$date = Carbon::now()->subMonth();
-		$players = self::where('created_date', '>', $date)->orderBy('created_date', 'desc')->get();
+		$players = $query->where('created_at', '>', $date)
+			->orderBy('created_at', 'desc')
+			->get();
 
 		return $players;
 	}
 	
-	public static function find_player_videos_by_id($ID) {
+	public function scopeFindPlayerVideosByID($ID) {
 		$playerVideo = DB::table('videos')->where('player_id', $ID)->get();
 		
 		return $playerVideo;

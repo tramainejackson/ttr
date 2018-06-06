@@ -58,7 +58,7 @@ class HomeController extends Controller
 		$getRecs = RecCenter::all();
 		$getLeagues = LeagueProfile::all();
 		$fireRecs = PlayerProfile::get_fire_recs();
-		
+		// dd($getLeagues);
         return view('welcome', compact('getRecs', 'getLeagues', 'fireRecs'));
     }
 	

@@ -21,7 +21,7 @@
 			<div class="searchesHeader col-12">
 				<h2 class="">Check Out the Leagues and Rec Centers Around the City</h2>
 			</div>
-
+			
 			<!-- City Leagues Section -->
 			<div class="col mb-4" id="leagues_list_div">
 				<div class="card">
@@ -38,35 +38,35 @@
 										<tr class="noLeaguesRow"><td>No Leagues Have Been Added Yet. Click <a class="noLeaguesLink" href="register.php?league_reg=true">here</a> to add your league.</td></tr>
 									@else
 										@foreach($getLeagues as $league)
-											<tr class="{{ str_ireplace(" ", "_", $league->leagues_name) }}">
+											<tr class="{{ str_ireplace('', '_', $league->name) }}">
 												<td class="text-center">
-													<a class="quick_league">{{ ucwords(strtolower($league->leagues_name)) }}</a>
+													<a class="quick_league">{{ ucwords(strtolower($league->name)) }}</a>
 													<div class="leagueDiv">
 														<div class="leagueDivHeader">
-															<h2 class="">{{ ucwords($league->leagues_name) }}</h2>
+															<h2 class="">{{ ucwords($league->name) }}</h2>
 														</div>
 														<div class="leagueDivContent">
 															<div class="leagueProfile">
 																<span class="leagueProfileSub leagueProfileContent">Leagues Owner:</span>
-																<span class="leagueProfileInfo leagueProfileContent"><?php echo $league->leagues_commish != "" ? $league->leagues_commish : "Call or See Website For More Info"; ?></span>
+																<span class="leagueProfileInfo leagueProfileContent">{{ $league->commish == null ? 'Call for more information' : $league->commish }}</span>
 															</div>
 														</div>
 														<div class="leagueDivContent">
 															<div class="leagueProfile">
 																<span class="leagueProfileSub leagueProfileContent">Address:</span>
-																<span class="leagueProfileInfo leagueProfileContent"><?php echo $league->leagues_address != "" ? $league->leagues_address : "Call or See Website For More Info"; ?></span>
+																<span class="leagueProfileInfo leagueProfileContent">{{ $league->address == null ? 'Call for more information' : $league->address }}</span>
 															</div>
 														</div>
 														<div class="leagueDivContent">
 															<div class="leagueProfile">
 																<span class="leagueProfileSub leagueProfileContent">Phone:</span>
-																<span class="leagueProfileInfo leagueProfileContent"><?php echo $league->leagues_phone != "" ? $league->leagues_phone : "Call or See Website For More Info"; ?></span>
+																<span class="leagueProfileInfo leagueProfileContent"></span>
 															</div>
 														</div>
 														<div class="leagueDivContent">
 															<div class="leagueProfile">
 																<span class="leagueProfileSub leagueProfileContent">Email:</span>
-																<span class="leagueProfileInfo leagueProfileContent"><?php echo $league->leagues_email != "" ? $league->leagues_email : "Call or See Website For More Info"; ?></span>
+																<span class="leagueProfileInfo leagueProfileContent"></span>
 															</div>
 														</div>
 														

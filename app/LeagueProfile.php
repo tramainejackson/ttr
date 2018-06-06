@@ -36,6 +36,14 @@ class LeagueProfile extends Model
     ];
 	
 	/**
+	* Get the seasons for the league object.
+	*/
+    public function seasons()
+    {
+        return $this->hasMany('App\LeagueSeason');
+    }
+	
+	/**
 	* Get the players for the league object.
 	*/
     public function players()

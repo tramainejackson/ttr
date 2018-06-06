@@ -5,6 +5,15 @@
 		.view {
 			min-height: initial !important;
 		}
+		
+		#app {
+			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/images/mybackground1.png);
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-position: 100% 0%;
+			background-attachment: fixed;
+			z-index: -1;
+		}
 	</style>
 @endsection
 
@@ -20,7 +29,7 @@
 			<a class="addFilter" href="#">Search</a>
 		</div>
 		<div class="row">
-			@php $recentPlayers = \App\PlayerProfile::find_recent_added_players(); @endphp
+			@php $recentPlayers = $players; @endphp
 			@foreach($recentPlayers as $showPlayer)
 				<div class="col-12 col-sm-6 col-md-3 col-lg-4 mb-2">
 					<div class="card card-cascade narrower">

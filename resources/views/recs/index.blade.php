@@ -1,9 +1,20 @@
 @extends('layouts.app')
 
+@section('addt_style')
+	<style>
+		#app {
+			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-position: 100% 0%;
+			background-attachment: fixed;
+			z-index: -1;
+		}
+	</style>
+@endsection
+
 @section('content')
 	<div class="container-fluid">
-
-		<div id="backgroundImageR"></div>
 		<div class="recsPageContainer">
 			<div class="">
 				<h2 id="rec_page_header" class="page_header">Philly Rec Centers</h2>

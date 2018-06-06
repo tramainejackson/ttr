@@ -16,8 +16,10 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {		
-        return view('players.index', compact(''));
+    {	
+		$players = PlayerProfile::findRecentAddedPlayers();
+		
+        return view('players.index', compact('players'));
     }
 
     /**
