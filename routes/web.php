@@ -29,4 +29,6 @@ Route::resource('players', 'PlayerProfileController');
 
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
+Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
+
 Route::resource('leagues', 'LeagueProfileController');

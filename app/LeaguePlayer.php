@@ -39,15 +39,15 @@ class LeaguePlayer extends Model
 	*/
     public function player_profile()
     {
-        return $this->belongsTo('App\PlayerProfile');
+        return $this->belongsTo('App\PlayerProfile', 'player_profile_id');
     }
 	
 	/**
 	* Get the contact for the media object.
 	*/
-    public function league_team()
+    public function team()
     {
-        return $this->belongsTo('App\PlayerProfile');
+        return $this->belongsTo('App\LeagueTeam', 'league_team_id');
     }
 	
 	/**
@@ -61,8 +61,26 @@ class LeaguePlayer extends Model
 	/**
 	* Get the league for the team object.
 	*/
+    public function season()
+    {
+        return $this->belongsTo('App\LeagueSeason', 'league_season_id');
+    }
+	
+	/**
+	* Get the players stats for the season object.
+	*/
     public function stats()
     {
         return $this->hasMany('App\LeagueStat');
+    }
+	
+	/**
+	* Get the players stats for the season object.
+	*/
+    public function scopeDuplicate($query, $email)
+    {
+        return $query->where([
+			['email', $email],
+		])->get();
     }
 }

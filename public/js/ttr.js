@@ -1,5 +1,11 @@
 $(document).ready(function() {	
-//Common variables
+
+	$.ajaxSetup({
+		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
+		cache: false
+	});
+	
+	//Common variables
 	var windowHeight = window.innerHeight;
 	var windowWidth = window.innerWidth;
 	var documentWidth = document.body.clientWidth;
@@ -188,74 +194,80 @@ $(document).ready(function() {
 		// });
 	// }
 
-// // Add league to players profile when accepted
-	// $("body").on("click", ".linkLeagueOption button", function(e) {
-		// var leagueOption = $(this).parent();
-		
-		// if($(this).attr("class").search("addLeague") > 0) {
-			// var leagueID = $(this).attr("class").substr(25);
+// Add league to players profile when accepted
+	$("body").on("click", ".linkLeagueOption button", function(e) {
+		var playerID = $(this).parent().find('[name="player_id"]').val();
+console.log(playerID);
+		if($(this).hasClass("addLeague")) {
+			$.ajax({
+			  method: "PATCH",
+			  url: "league_player/add_player_profile",
+			  data: { player: playerID },
+			})
 			
-			// $.post("update_player.php", {addPlayerLeague:leagueID}, function(data) {
-				// var returnData = data;
-
-				// if($(returnData).hasClass("okItem")) {
-					// $(leagueOption).slideUp(function() {
-						// $(leagueOption).remove();
-
-						// if($(".linkLeagueOption").length < 1) {
-							// $(".linkLeaguesDiv").fadeOut(function() {
-								// $(".linkLeaguesDiv").remove();
-								// location.reload();
-							// });
-						// }
-					// });
-				// } else if($(returnData).hasClass("errorItem")) {
-					// $(leagueOption).slideUp(function() {
-						// $(leagueOption).remove();
-
-						// if($(".linkLeagueOption").length < 1) {
-							// $(".linkLeaguesDiv").fadeOut(function() {
-								// $(".linkLeaguesDiv").remove();
-								// location.reload();
-							// });
-						// }
-					// });
-				// }
-			// });	
-		// } else if($(this).attr("class").search("declineLeague") > 0) {
-			// var leagueID = $(this).attr("class").substr(28);
+			.fail(function() {	
+				alert("Fail");
+			})
 			
-			// $.post("update_player.php", {declinePlayerLeague:leagueID}, function(data) {
-				// var returnData = data;
+			.done(function(data) {
+				var returnData = data;
+
+				if($(returnData).hasClass("okItem")) {
+					$(leagueOption).slideUp(function() {
+						$(leagueOption).remove();
+
+						if($(".linkLeagueOption").length < 1) {
+							$(".linkLeaguesDiv").fadeOut(function() {
+								$(".linkLeaguesDiv").remove();
+								location.reload();
+							});
+						}
+					});
+				} else if($(returnData).hasClass("errorItem")) {
+					$(leagueOption).slideUp(function() {
+						$(leagueOption).remove();
+
+						if($(".linkLeagueOption").length < 1) {
+							$(".linkLeaguesDiv").fadeOut(function() {
+								$(".linkLeaguesDiv").remove();
+								location.reload();
+							});
+						}
+					});
+				}
+			});
+		} else if($(this).hasClass("declineLeague")) {			
+			$.post("update_player.php", {declinePlayerLeague:leagueID}, function(data) {
+				var returnData = data;
 				
-				// if($(returnData).hasClass("okItem")) {
-					// $(leagueOption).slideUp(function() {
-						// $(leagueOption).remove();
+				if($(returnData).hasClass("okItem")) {
+					$(leagueOption).slideUp(function() {
+						$(leagueOption).remove();
 
-						// if($(".linkLeagueOption").length < 1) {
-							// $(".linkLeaguesDiv").fadeOut(function() {
-								// $(".linkLeaguesDiv").remove();
-								// location.reload();
-							// });
-						// }
-					// });
-				// } else if($(returnData).hasClass("errorItem")) {
-					// $(leagueOption).slideUp(function() {
-						// $(leagueOption).remove();
+						if($(".linkLeagueOption").length < 1) {
+							$(".linkLeaguesDiv").fadeOut(function() {
+								$(".linkLeaguesDiv").remove();
+								location.reload();
+							});
+						}
+					});
+				} else if($(returnData).hasClass("errorItem")) {
+					$(leagueOption).slideUp(function() {
+						$(leagueOption).remove();
 
-						// if($(".linkLeagueOption").length < 1) {
-							// $(".linkLeaguesDiv").fadeOut(function() {
-								// $(".linkLeaguesDiv").remove();
-								// location.reload();
-							// });
-						// }
-					// });
-				// }
-			// });
-		// } else {
-			// alert("Stop with the bafoolery");
-		// }
-	// });
+						if($(".linkLeagueOption").length < 1) {
+							$(".linkLeaguesDiv").fadeOut(function() {
+								$(".linkLeaguesDiv").remove();
+								location.reload();
+							});
+						}
+					});
+				}
+			});
+		} else {
+			alert("Stop with the bafoolery");
+		}
+	});
 	
 // // Bring up calendar day with more information
 	// $("body").on("click", ".weekDayContent", function(e) {

@@ -2,17 +2,17 @@
 
 @section('content')
 	@include('include.functions')
-
+	
 	<div class="container-fluid playerProfileContainer" style="background: black">
 		<div class="row playerBio mb-5 mb-md-0">
 			{!! Form::open(['action' => ['PlayerProfileController@update', $player->id], 'method' => 'PATCH', 'files' => true, 'class' => 'col-12']) !!}
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-center view">
 						<div class="offset-md-1 col-12 col-md-3">
-							<div id="update_pic" class="card card-cascade narrower">
+							<div id="update_pic" class="card">
 								<!-- Card Image -->
 								<div class="view overlay" style="min-height: initial !important;">
-									<img class="mx-auto" id="current_pic" src="{{ $player->image ? $player->image : '/images/emptyface.jpg' }}" alt="Player Card Image">
+									<img class="mx-auto" id="current_pic" src="{{ $player->image ? $player->image : $defaultImg }}" alt="Player Card Image">
 								</div>
 
 								<!-- Card body -->
@@ -177,195 +177,207 @@
 					<h1 class="h1-responsive display-2">My Leagues</h1>
 				</div>
 				
-				@if($leagues->isEmpty())
-				<div class="linkLeague col-12 col-lg-4">
-					<div class="">
-						<div class="">
-							<h2 class="">Add League</h2>
-						</div>
-						<div class="">
-							<p class="">It looks like you've been added to a league that keeps stats and is associated with ToTheRec. Are you playing in any of the following leagues?</p>
-						</div>
-						<div class="linkLeagueOptions">
-							<?php $checkLink = $checkLinks; ?>
-							<?php $linkLeague = League_Profile::get_league_by_id($checkLink->get_league_id()); ?>
-							<div class="linkLeagueOption">
-								<span class="linkLeagueName"><b>League Name:</b> {{ $linkLeague->leagues_name }}</span>
-								<button class="btn btn-success addLeague{{ $linkLeague->get_league_id() }}">Add</button>
-								<button class="btn btn-danger declineLeague{{ $linkLeague->get_league_id() }}">Decline</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				@endif
-				
-				@if($leagues->isNotEmpty())
-				<div class="indProfileLeagues">
-					@foreach($leagues as $playerLeagueProfile)
-					@php 
-						$linkedLeague = $playerLeagueProfile->league_profile;
-						$linkedPlayer = $playerLeagueProfile;
-						$linkedPlayerTeam = $playerLeagueProfile->league_team;
-						$getStandings = $linkedLeague->standings; 
-						$getStats = \App\LeagueStat::get_formatted_stats($playerLeagueProfile->id);
-					@endphp
-					
-					<!-- Rotating card -->
-					<div class="card-wrapper mx-auto mx-md-0">
-						<div id="card-1" class="card-rotating effect__click text-center h-100 w-100">
-						
-							<!-- Front Side -->
-							<div class="face front">
-								<!-- Image-->
-								<div class="card-up">
-									<img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo7.jpg" alt="Image with a photo of clouds.">
-								</div>
-
-								<!-- Content -->
-								<div class="card-body white">
-									<h1 class="coolText1 h1-responsive">{{ $linkedLeague->leagues_name }}</h1>
-									<h3 class="">{{ $linkedLeague->commish }}</h3>
-									<h3 class="">{{ $linkedLeague->address }}</h3>
-									<h3 class=""><a href="#">{{ $linkedLeague->leagues_website }}</a></h3>
-									<!-- Triggering button -->
-									<a class="rotate-btn" data-card="card-1"><i class="fa fa-undo"></i> Click here to rotate back</a>
-								</div>
-							</div>
-							<!--./ Front Side /.-->
-							
-							<!-- Back Side -->
-							<div class="face back">
-								<!-- Triggering button -->
-								<div class="card-body white">
-									<a class="rotate-btn" data-card="card-1"><i class="fa fa-undo"></i> Click here to rotate back</a>
-									<div class="d-flex flex-column flex-md-row align-items-center justify-content-around">
-										<div id="view_standings" class="mr-2">
-											<table class="table table-responsive table-sm table-striped" id="view_standings_table">
-												<thead class="mdb-color darken-3">
-													<tr class="text-white">
-														<th>Team Name</th>
-														<th>Wins</th>
-														<th>Losses</th>
-														<th>Forfeits</th>
-														<th>Win Perc.</th>
-														<th>Total Points</th>
-													</tr>
-												</thead>
+				@if($linkLeague->isNotEmpty())
+					@foreach($linkLeague as $newPlayerLeague)
+						@if($newPlayerLeague->season->players()->duplicate($player->user->email)->count() == 1)
+							<div class="linkLeague row coolText4">
+								<div class="col-12 col-md-4 mx-auto my-3 p-3 white rounded z-depth-2">
+									<div class="text-center">
+										<h2 class="h2-responsive"><i class="fa fa-exclamation red-text" aria-hidden="true"></i>&nbsp;New League Alert&nbsp;<i class="fa fa-exclamation red-text" aria-hidden="true"></i></h2>
+									
+										<p class="">It looks like you've been added to a league that keeps stats and is associated with ToTheRec. Are you playing in the following leagues?</p>
+									</div>
+									
+									<div class="linkLeagueOptions">
+										<div class="">
+											<div class="">
+												<h3 class="linkLeagueName h3-responsive my-1"><b>League Name:</b> {{ $newPlayerLeague->season->league->name }}</h3>
 												
-												@if(empty($getStandings))
-												<tr>
-													<td colspan='5'>No standings to display yet.</td>
-												</tr>
+												<h3 class="linkLeagueName h3-responsive my-1"><b>Season:</b> {{ $newPlayerLeague->season->name . ' ' . $newPlayerLeague->season->season . ' ' . $newPlayerLeague->season->year }}</h3>
 												
-												@else
-												<tbody>
-													@foreach($getStandings as $showStanding)
-													<tr class="linkStandingsTeam">
-														<td>{{ $showStanding->team_name }}</td>
-														<td>{{ $showStanding->team_wins != null ? $showStanding->team_wins : '0' }}</td>
-														<td>{{ $showStanding->team_losses != null ? $showStanding->team_losses : '0' }}</td>
-														<td>{{ $showStanding->team_forfeits != null ? $showStanding->team_forfeits : '0' }}</td>
-														<td>{{ $showStanding->winPERC != null ? $showStanding->winPERC : "0.00" }}</td>
-														<td>{{ $showStanding->team_points != null ? $showStanding->team_points : "TBD" }}</td>
-													</tr>
-													@endforeach
-												</tbody>
-												@endif
-											</table>
-										</div>
-										<div class="indProfileLeaguesTeamStats ml-2">
-											@if(!empty($getStats))
-											<table class="table table-responsive table-sm table-striped" id="view_stats_table">
-												<thead class="mdb-color darken-3">
-													<tr class="text-white">
-														<th class="" colspan='6'>Stats</th>
-													</tr>
-												<thead>
-												<tbody>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="" colspan=''>PPG</th>
-														<td class="" colspan='3'>{{ $getStats->PPG != null ? $getStats->PPG : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">APG</th>
-														<td class="" colspan='3'>{{ $getStats->APG != null ? $getStats->APG : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">RPG</th>
-														<td class="" colspan='3'>{{ $getStats->RPG != null ? $getStats->RPG : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">SPG</th>
-														<td class="" colspan='3'>{{ $getStats->SPG != null ? $getStats->SPG : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">BPG</th>
-														<td class="" colspan='3'>{{ $getStats->BPG != null ? $getStats->BPG : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total PTS</th>
-														<td class="" colspan='3'>{{ $getStats->TPTS != null ? $getStats->TPTS : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total 3's</th>
-														<td class="" colspan='3'>{{ $getStats->TTHR != null ? $getStats->TTHR : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total AST</th>
-														<td class="" colspan='3'>{{ $getStats->TASS != null ? $getStats->TASS : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total RBD</th>
-														<td class="" colspan='3'>{{ $getStats->TRBD != null ? $getStats->TRBD : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total STL</th>
-														<td class="" colspan='3'>{{ $getStats->TSTL != null ? $getStats->TSTL : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-													<tr class="">
-														<th class="">&nbsp;</th>
-														<th class="">Total BLK</th>
-														<td class="" colspan='3'>{{ $getStats->TBLK != null ? $getStats->TBLK : '0' }}</td>
-														<td class="">&nbsp;</td>
-													</tr>
-												</tbody>
-											</table>
-											
-											@else
-											<ul class="">
-												<li class="">No player stats added</li>
-											</ul>
-											@endif
+												<h3 class="linkLeagueName my-1 h3-responsive"><b>Team Name:</b> {{ $newPlayerLeague->team->team_name }}</h3>
+												
+												<h3 class="linkLeagueName my-1 h3-responsive"><b>Player Name:</b> {{ $newPlayerLeague->player_name }}</h3>
+											</div>
+											<div class="d-flex align-items-center jusify-content-around linkLeagueOption">
+												<button class="btn btn-success addLeague">Add</button>
+												
+												<button class="btn btn-danger declineLeague">Decline</button>
+												
+												<input type="number" name="player_id" class="hidden" value="{{ $newPlayerLeague->id }}" hidden />
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!--./ Back Side /.-->
-							
-						</div>
-					</div>
+						@endif
 					@endforeach
-				</div>
+				@endif
+				
+				@if($leagues->isNotEmpty())
+					<div class="indProfileLeagues">
+						@foreach($leagues as $playerLeagueProfile)
+							@php
+								$stats = $playerLeagueProfile->stats()->playerSeasonStats()->first();
+							@endphp
+							<!-- Rotating card -->
+							<div class="card-wrapper mx-auto" style="height: -webkit-fill-available;">
+								<div id="card-{{ $loop->iteration }}" class="card-rotating effect__click text-center h-100 w-100">
+								
+									<!-- Front Side -->
+									<div class="face front">
+										<!-- Image-->
+										<div class="card-up">
+											<img  class="card-img-top" src="{{ $playerLeagueProfile->season->league->picture != null ? asset($playerLeagueProfile->season->league->picture) : $defaultImg }}" alt="League Default Picture.">
+										</div>
+
+										<!-- Content -->
+										<div class="card-body white">
+											<h1 class="coolText1 h1-responsive">{{ $playerLeagueProfile->season->league->name }}</h1>
+											<h3 class="">{{ $playerLeagueProfile->season->league->commish }}</h3>
+											<h3 class="">{{ $playerLeagueProfile->season->league->address }}</h3>
+											<h3 class=""><a href="#">{{ $playerLeagueProfile->season->league->leagues_website }}</a></h3>
+											<!-- Triggering button -->
+											<a class="rotate-btn" data-card="card-{{ $loop->iteration }}"><i class="fa fa-undo"></i> Click here to rotate back</a>
+										</div>
+									</div>
+									<!--./ Front Side /.-->
+									
+									<!-- Back Side -->
+									<div class="face back">
+										<!-- Triggering button -->
+										<div class="card-body white">
+											<a class="rotate-btn" data-card="card-{{ $loop->iteration }}"><i class="fa fa-undo"></i> Click here to rotate back</a>
+											<div class="d-flex flex-column flex-md-row align-items-center justify-content-around">
+												<div id="view_standings" class="mr-2">
+													<table class="table table-responsive table-sm table-striped" id="view_standings_table">
+														<thead class="mdb-color darken-3">
+															<tr class="text-white">
+																<th>Team Name</th>
+																<th>Wins</th>
+																<th>Losses</th>
+																<th>Forfeits</th>
+																<th>Win Perc.</th>
+																<th>Total Points</th>
+															</tr>
+														</thead>
+														
+														@if($playerLeagueProfile->season->standings == null)
+														<tr>
+															<td colspan='5'>No standings to display yet.</td>
+														</tr>
+														
+														@else
+														<tbody>
+															@foreach($playerLeagueProfile->season->standings as $showStanding)
+															<tr class="linkStandingsTeam">
+																<td>{{ $showStanding->team_name }}</td>
+																<td>{{ $showStanding->team_wins != null ? $showStanding->team_wins : '0' }}</td>
+																<td>{{ $showStanding->team_losses != null ? $showStanding->team_losses : '0' }}</td>
+																<td>{{ $showStanding->team_forfeits != null ? $showStanding->team_forfeits : '0' }}</td>
+																<td>{{ $showStanding->winPERC != null ? $showStanding->winPERC : "0.00" }}</td>
+																<td>{{ $showStanding->team_points != null ? $showStanding->team_points : "TBD" }}</td>
+															</tr>
+															@endforeach
+														</tbody>
+														@endif
+													</table>
+												</div>
+												
+												<div class="indProfileLeaguesTeamStats ml-2">
+												
+													@if($stats != null)
+														<table class="table table-responsive table-sm table-striped" id="view_stats_table">
+															<thead class="mdb-color darken-3">
+																<tr class="text-white">
+																	<th class="" colspan='6'>Stats</th>
+																</tr>
+															<thead>
+															<tbody>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="" colspan=''>PPG</th>
+																	<td class="" colspan='3'>{{ $stats->PPG != null ? $stats->PPG : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">APG</th>
+																	<td class="" colspan='3'>{{ $stats->APG != null ? $stats->APG : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">RPG</th>
+																	<td class="" colspan='3'>{{ $stats->RPG != null ? $stats->RPG : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">SPG</th>
+																	<td class="" colspan='3'>{{ $stats->SPG != null ? $stats->SPG : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">BPG</th>
+																	<td class="" colspan='3'>{{ $stats->BPG != null ? $stats->BPG : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total PTS</th>
+																	<td class="" colspan='3'>{{ $stats->TPTS != null ? $stats->TPTS : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total 3's</th>
+																	<td class="" colspan='3'>{{ $stats->TTHR != null ? $stats->TTHR : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total AST</th>
+																	<td class="" colspan='3'>{{ $stats->TASS != null ? $stats->TASS : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total RBD</th>
+																	<td class="" colspan='3'>{{ $stats->TRBD != null ? $stats->TRBD : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total STL</th>
+																	<td class="" colspan='3'>{{ $stats->TSTL != null ? $stats->TSTL : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+																<tr class="">
+																	<th class="">&nbsp;</th>
+																	<th class="">Total BLK</th>
+																	<td class="" colspan='3'>{{ $stats->TBLK != null ? $stats->TBLK : '0' }}</td>
+																	<td class="">&nbsp;</td>
+																</tr>
+															</tbody>
+														</table>
+													
+													@else
+														<ul class="">
+															<li class="">No player stats added</li>
+														</ul>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--./ Back Side /.-->
+									
+								</div>
+							</div>
+						@endforeach
+					</div>
 				@endif
 			</div>
 		</div>			
@@ -407,10 +419,11 @@
 										</div>
 										<div class="col">
 											<div class="md-form white-text">
+												<input type="text" name="" class="" value="" />
 												<select class="" name="day_name[]" id="select_day" disabled>
 													<option class="blank" value="" selected>------- Select A Day -------</option>
 													@foreach($days as $day)
-														<option class="white-text" value="{{ $day->day_name }}">{{ $day->day_name }}</option>
+														<option class="white-text" value="{{ $day }}">{{ $day }}</option>
 													@endforeach
 												</select>
 
@@ -459,9 +472,9 @@
 											<div class="col">
 												<div class="md-form white-text">
 													<select class="mdb-select" name="day_name[]">
-														<option class="blank" value="" selected>------- Select A Day -------</option>
+														<option class="blank" value="" selected disabled>------- Select A Day -------</option>
 														@foreach($days as $day)
-															<option class="white-text" value="{{ $day->day_name }}"{{ $day->day_name == $myPlayground->day ? ' selected' : '' }}>{{ $day->day_name }}</option>
+															<option class="white-text" value="{{ $day }}"{{ $day == $myPlayground->day ? ' selected' : '' }}>{{ $day }}</option>
 														@endforeach
 													</select>
 

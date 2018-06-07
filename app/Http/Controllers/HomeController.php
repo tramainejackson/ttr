@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
+use App\LeaguePlayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class HomeController extends Controller
 {
@@ -28,21 +30,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-		if(PlayerProfile::where('user_id', Auth::id())->first()) {
-			// Get player instance
-			$player = PlayerProfile::where('user_id', Auth::id())->first();
+		$user = Auth::user();
+
+		if($user->player) {
+			$player = $user->player;
+			$recs = RecCenter::all();
 			$playgrounds = $player->playgrounds;
 			$videos = $player->videos;
 			$leagues = $player->leagues;
-			// $checkLinks = League_Player::link_player_accounts($player->email);
-			
-			$recs = RecCenter::all();
-			$times = DB::table('game_times')->get();
-			$days = DB::table('calendar_day')->get();
+			$linkLeague = LeaguePlayer::where([
+				['email', $user->email],
+				['player_profile_id', null]
+			])->get();
 
-			return view('players.edit', compact('player', 'recs', 'times', 'days', 'playgrounds', 'videos', 'leagues'));
+			$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+			// Resize the default image
+			Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+					$constraint->aspectRatio();
+				}
+			)->save(storage_path('app/public/images/lg/default_img.jpg'));
+			$defaultImg = asset('/storage/images/lg/default_img.jpg');
+		
+			return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'defaultImg'));
 		} else {
-			$league = LeagueProfile::where('user_id', Auth::id())->first();
+			$league = $user->league;
 			
 			return view('leagues.edit', compact('league'));			
 		}

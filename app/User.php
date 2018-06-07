@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	
+	/**
+	* Get the player profile for the user object.
+	*/
+    public function player()
+    {
+        return $this->hasOne('App\PlayerProfile');
+    }
+	
+	/**
+	* Get the league profile for the user object.
+	*/
+    public function league()
+    {
+        return $this->hasOne('App\LeagueProfile');
+    }
 }

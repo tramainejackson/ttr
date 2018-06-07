@@ -73,7 +73,7 @@ class PlayerProfile extends Model
 	*/
     public function leagues()
     {
-        return $this->hasMany('App\LeaguePlayer');
+        return $this->hasMany('App\LeaguePlayer', 'player_profile_id');
     }
 	
 	/**

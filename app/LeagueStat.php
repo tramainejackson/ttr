@@ -51,10 +51,20 @@ class LeagueStat extends Model
         return $this->belongsTo('App\LeaguePlayer');
     }
 	
-	public static function get_formatted_stats($playerID) {
-		$players = DB::table('league_stats')
-		->select(DB::raw("
-			FORMAT(SUM(points)/SUM(game_played), 1) AS PPG,
+	/**
+	* Scope a query to get the players formatted stats for the league.
+	*/
+	public function scopePlayerSeasonStats($query) {
+		return $query->select(DB::raw(self::get_formatted_stats()))
+		->groupBy('league_player_id')
+		->orderBy('TPTS', 'desc');
+	}
+	
+	/** 
+	* Format the retrieved stats
+	**/
+	public static function get_formatted_stats() {
+		$format = "*, FORMAT(SUM(points)/SUM(game_played), 1) AS PPG,
 			FORMAT(SUM(threes_made)/SUM(game_played), 1) AS TPG,
 			FORMAT(SUM(ft_made)/SUM(game_played), 1) AS FTPG,
 			FORMAT(SUM(assist)/SUM(game_played), 1) AS APG,
@@ -68,12 +78,8 @@ class LeagueStat extends Model
 			SUM(rebounds) AS TRBD,
 			SUM(steals) AS TSTL,
 			SUM(blocks) AS TBLK
-		"))
-		->where('league_player_id', $playerID)
-		->groupBy('league_player_id')
-		->get()
-		->first();
+		";
 			
-		return $players;
+		return $format;
 	}
 }

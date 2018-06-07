@@ -10,19 +10,35 @@ class LeagueSeason extends Model
     use SoftDeletes;
 	
 	/**
-	* Get the league for the team object.
+	* Get the league for the season object.
 	*/
-    public function league_profile()
+    public function league()
     {
-        return $this->belongsTo('App\LeagueProfile');
+        return $this->belongsTo('App\LeagueProfile', 'league_profile_id');
+    }
+	
+	/**
+	* Get the standings for the season object.
+	*/
+    public function standings()
+    {
+        return $this->hasMany('App\LeagueStanding');
     }
 	
 	/**
 	* Get the contact for the media object.
 	*/
-    public function league_teams()
+    public function teams()
     {
         return $this->hasMany('App\LeagueTeam');
+    }
+	
+	/**
+	* Get the players for the season object.
+	*/
+    public function players()
+    {
+        return $this->hasMany('App\LeaguePlayer');
     }
 
 	/**
@@ -32,4 +48,30 @@ class LeagueSeason extends Model
     {
         return $this->hasMany('App\LeagueStat');
     }
+	
+		/**
+     * Scope a query to only include active seasons.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 'Y');
+    }
+	
+	/**
+     * Scope a query to only include active seasons.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeCompleted($query)
+    {
+        return $query->where([
+			['completed', 'Y'],
+			['active', 'N'],
+		]);
+    }
+	
 }

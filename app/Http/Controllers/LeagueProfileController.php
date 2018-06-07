@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class LeagueProfileController extends Controller
 {
@@ -18,7 +19,14 @@ class LeagueProfileController extends Controller
     {
         $leagues = LeagueProfile::all();
 		
-		return view('leagues.index', compact('leagues'));
+		// Resize the default image
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+			
+		return view('leagues.index', compact('leagues', 'defaultImg'));
     }
 
     /**

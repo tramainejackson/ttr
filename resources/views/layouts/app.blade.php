@@ -78,10 +78,6 @@
 			<div class="d-none d-lg-flex" id="">
 				<!-- Right Side Of Navbar -->
 				<ul class="nav navbar-nav navbar-right">
-					<!-- Authentication Links -->
-					<li  class="nav-item" id="index">
-						<a class="nav-link" href="{{ route('welcome') }}">Home</a>
-					</li>	
 					<li id="rec_li" class="nav-item">
 						<a class="nav-link" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
 					</li>
@@ -118,9 +114,10 @@
 							</a>
 						</li>
 					@else
+						<!-- Authentication Links -->	
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user() }} <span class="caret"></span>
+								{{ Auth::user()->player ? Auth::user()->player->full_name() : Auth::user()->league->commish }} <span class="caret"></span>
 							</a>
 
 							<ul class="dropdown-menu" role="menu">

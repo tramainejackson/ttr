@@ -74,4 +74,28 @@ class LeagueProfile extends Model
     {
         return $this->hasMany('App\LeagueStat');
     }
+	
+	/**
+	* Get the standings for the league object.
+	*/
+    public function comps()
+    {
+		if($this->comp != null) {
+			return explode(' ', $this->comp);
+		} else {
+			return collect();
+		}
+    }
+	
+	/**
+	* Get the standings for the league object.
+	*/
+    public function ages()
+    {
+		if($this->age != null) {
+			return explode(' ', $this->age);
+		} else {
+			return collect();
+		}
+    }
 }
