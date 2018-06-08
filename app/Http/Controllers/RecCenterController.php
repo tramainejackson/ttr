@@ -26,9 +26,9 @@ class RecCenterController extends Controller
      */
     public function index()
     {
-		$getRecs = RecCenter::all();
+		$getRecs = RecCenter::orderBy('name')->get();
 		$fireRecs = PlayerProfile::get_fire_recs();
-		
+
         return view('recs.index', compact('getRecs', 'fireRecs'));
     }
 
@@ -96,5 +96,16 @@ class RecCenterController extends Controller
     public function destroy($id)
     {
         //
+    }
+	
+	/**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+		return redirect()->route('rec_centers.index', ['search' => $request->search]);
     }
 }

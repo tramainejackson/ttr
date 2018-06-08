@@ -489,84 +489,12 @@ console.log(playerID);
 		// }
 	// });
 	
-// // Create a scroll across the screen with the rec centers
-	// var $allRecs = $(".recsPage").toArray();
-	// var $allRecs2 = $($allRecs).clone();
-	// var i = 0; var ii = 1; var iii = 2;
-	// var $showingRecs = [$allRecs[i], $allRecs[ii], $allRecs[iii]];
-	// $($allRecs).detach();
-	// $($showingRecs).appendTo("#all_recs").show();
-	// var timer = setInterval(function() {
-		// $($showingRecs).animate({margin:"0% 0% 0% -32%"}, function(e) {
-			// i++; ii++; iii++;
-			// $showingRecs = [$allRecs[i], $allRecs[ii], $allRecs[iii]];
-			// $("#all_recs").empty();
-			// $($showingRecs).appendTo("#all_recs").fadeIn("slow");
-		// });
-	// }, 5000);
-	
-	// setTimeout(function() {
-		// $("#all_recs").empty();
-		// $("#showAllRecs").fadeOut("slow", function(){ $(this).detach(); });
-		// $($allRecs2).appendTo("#all_recs").each(function(){ $(this).fadeIn("slow"); });
-		// clearInterval(timer);
-	// }, 70000);
-	
-// // Stop scroll on show all recs button on search button click	
-	// $("body").on("click", "#rec_search, #showAllRecs", function(e)	{
-		// clearInterval(timer);
-		// var loginPage2 = $(".loginPage2");
-		// var test1 = $.contains($(".navi2"), $(".loginPage2"));
-		// console.log(loginPage2.length);
-		// $("#showAllRecs").fadeOut("slow", function(){ $(this).detach(); });
-		// $($showingRecs).animate({margin:"0% 0% 0% -32%"}, function() {
-			// if(loginPage2.length == 1)
-			// {
-				// $(login2).css({"top":'0.4%'}); 
-			// }
-			// $("#all_recs").empty();
-			// $($allRecs2).appendTo("#all_recs").each(function() { 
-				// $(this).css({margin:"1.55%"}).fadeIn("slow"); 
-			// });
-		// });
-	// });
-
-// // Close modals
-	// $("body").on("click", ".close_x, .maine_overlay", function() {
-		// $(".maine_overlay").fadeOut("slow");
-		// if($(".calendar_modal:visible")) {
-			// var calendarModalHeight = $(".calendar_modal").height() + 20;
-			// $(".calendar_modal").animate({top:'-'+calendarModalHeight+"px", opacity:"0"}, function() {  
-				// $(".calendar_modal .calendar_modal_content").empty();
-				// $(".calendar_modal").removeClass("awayBox homeBox");
-			// });
-		// } if($(".maine_modal:visible")) {
-			// var maineModalHeight = $(".maine_modal").height() + 20;
-			// $(".maine_modal").animate({top:'-'+maineModalHeight+"px"}, function() { 
-				// $(".maine_overlay, .maine_modal").fadeOut();
-				// $(".maine_modal_content p").remove();
-			// });
-		// } if($(".recs_modal:visible")) {
-			// var recsModalHeight = $(".recs_modal").height() + 20;
-			// $(".recs_modal").animate({top:'-'+recsModalHeight+"px"}, function() { 
-				// $(".maine_overlay, .recs_modal").fadeOut();
-				// $(".recs_modal .append_div div").remove();
-			// });
-		// } if($(".leagues_modal:visible")) {
-			// var leaguesModalHeight = $(".leagues_modal").height() + 20;
-			// $(".leagues_modal").animate({top:'-'+leaguesModalHeight+"px"}, function() { 
-				// $(".maine_overlay, .leagues_modal").fadeOut(function() {
-					// $(".leagues_modal .append_div div").remove();
-				// });
-			// });
-		// }  if($(".video_modal:visible")) {
-			// var videoModalHeight = $(".video_modal").height() + 20;
-			// $(".video_modal").animate({top:'-'+videoModalHeight+"px"}, function() { 
-				// $(".maine_overlay, .video_modal").fadeOut();
-				// $(".video_modal .video_modal_content").empty();
-			// });
-		// }
-	// });
+	// Stop carousel when show all recs button clicked
+	$("body").on("click", "#showAllRecs", function(e)	{
+		$(".carousel-item .col-md-4").unwrap().addClass('my-2');
+		$('.carousel').carousel('pause');
+		$('.carousel .controls-top, .carousel .carousel-indicators').add($(this)).remove();
+	});
 });
 
 // Tooltips Initialization

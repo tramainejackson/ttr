@@ -25,6 +25,8 @@ Route::get('/about_us', 'HomeController@about')->name('about');
 
 Route::resource('rec_centers', 'RecCenterController');
 
+Route::post('rec_centers/search', 'RecCenterController@search');
+
 Route::resource('players', 'PlayerProfileController');
 
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
