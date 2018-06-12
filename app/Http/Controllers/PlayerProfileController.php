@@ -6,7 +6,13 @@ use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
 use App\PlayerPlayground;
+use App\PlayerProfileImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
+use Carbon\Carbon;
 
 class PlayerProfileController extends Controller
 {
@@ -209,5 +215,166 @@ class PlayerProfileController extends Controller
 		}
 		
 		return redirect()->back()->with(['status' => '<li class="">Player playground information updated successfully</li>']);
+	}
+	
+	/**
+     * Update the image for the player object.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+    */
+	public function update_player_image(Request $request, PlayerProfile $player) {
+		if($player->image) {
+			if($request->hasFile('file')) {
+				$newImage = $request->file('file');
+				// Check to see if upload is an image
+				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+					$addImage = $player->image;
+					
+					// Check to see if images is too large
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('file')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$path = $newImage->store('public/images');
+							
+							if($image->save(storage_path('app/'. $path))) {
+								// prevent possible upsizing
+								// Create a larger version of the image
+								// and save to large image folder
+								$image->resize(1700, null, function ($constraint) {
+									$constraint->aspectRatio();
+									// $constraint->upsize();
+								});
+								
+								
+								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
+									// Get the height of the current large image
+									$addImage->lg_height = $image->height();
+									
+									// Create a smaller version of the image
+									// and save to large image folder
+									$image->resize(544, null, function ($constraint) {
+										$constraint->aspectRatio();
+									});
+									
+									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
+										// Get the height of the current small image
+										$addImage->sm_height = $image->height();
+									}
+								}
+							}
+							
+							$addImage->width = $image->width();
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->player_profile_id = $player->id;
+							
+							if($addImage->save()) {
+								return $player->image;
+							}
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							
+							$addImage->width = $image->width();
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->player_profile_id = $player->id;
+							
+							if($addImage->save()) {
+								return $player->image;
+							}
+						}
+					} else {
+						$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			}
+		} else {
+			if($request->hasFile('file')) {
+				$newImage = $request->file('file');
+				// Check to see if upload is an image
+				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+					$addImage = new PlayerProfileImages();
+					
+					// Check to see if images is too large
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('file')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$path = $newImage->store('public/images');
+							
+							if($image->save(storage_path('app/'. $path))) {
+								// prevent possible upsizing
+								// Create a larger version of the image
+								// and save to large image folder
+								$image->resize(1700, null, function ($constraint) {
+									$constraint->aspectRatio();
+									// $constraint->upsize();
+								});
+								
+								
+								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
+									// Get the height of the current large image
+									$addImage->lg_height = $image->height();
+									
+									// Create a smaller version of the image
+									// and save to large image folder
+									$image->resize(544, null, function ($constraint) {
+										$constraint->aspectRatio();
+									});
+									
+									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
+										// Get the height of the current small image
+										$addImage->sm_height = $image->height();
+									}
+								}
+							}
+							
+							$addImage->width = $image->width();
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->player_profile_id = $player->id;
+							
+							if($addImage->save()) {
+								return $player->image;
+							}
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							
+							$addImage->width = $image->width();
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->player_profile_id = $player->id;
+							
+							if($addImage->save()) {
+								return $player->image;
+							}
+						}
+					} else {
+						$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			}
+			
+		}
 	}
 }

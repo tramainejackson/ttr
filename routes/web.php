@@ -12,7 +12,7 @@
 */
 
 // Route::get('/test', function () {
-    // return view('welcome');
+    // return view('home');
 // });
 
 Auth::routes();
@@ -25,12 +25,14 @@ Route::get('/about_us', 'HomeController@about')->name('about');
 
 Route::resource('rec_centers', 'RecCenterController');
 
-Route::post('rec_centers/search', 'RecCenterController@search');
-
 Route::resource('players', 'PlayerProfileController');
+
+Route::resource('leagues', 'LeagueProfileController');
 
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
+Route::post('players/{player}/images', 'PlayerProfileController@update_player_image');
+
 Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
 
-Route::resource('leagues', 'LeagueProfileController');
+Route::post('rec_centers/search', 'RecCenterController@search');

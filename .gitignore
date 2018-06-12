@@ -9,6 +9,9 @@
 /public/videos/*
 /public/storage
 /public/music/*
+/public/addons
+/public/css/mdb*
+/public/js/mdb*
 /storage/*.key
 /vendor
 /.idea

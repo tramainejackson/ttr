@@ -2,17 +2,17 @@
 
 @section('content')
 	@include('include.functions')
-	
+
 	<div class="container-fluid playerProfileContainer" style="background: black">
 		<div class="row playerBio mb-5 mb-md-0">
-			{!! Form::open(['action' => ['PlayerProfileController@update', $player->id], 'method' => 'PATCH', 'files' => true, 'class' => 'col-12']) !!}
+			{!! Form::open(['action' => ['PlayerProfileController@update_player_image', $player->id], 'method' => 'POST', 'files' => true, 'class' => 'col-12', 'id' => 'edit_player_bio_form']) !!}
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-center view">
-						<div class="offset-md-1 col-12 col-md-3">
+						<div class="col-12 col-md-6">
 							<div id="update_pic" class="card">
 								<!-- Card Image -->
 								<div class="view overlay" style="min-height: initial !important;">
-									<img class="mx-auto" id="current_pic" src="{{ $player->image ? $player->image : $defaultImg }}" alt="Player Card Image">
+									<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset($player->image->path) : $defaultImg }}" alt="Player Card Image">
 								</div>
 
 								<!-- Card body -->
@@ -32,6 +32,10 @@
 										<span class=""><b>Weight:</b></span>
 										<span class="text-muted">{{ $player->weight > 0 ? $player->weight . " lbs" : "N/A" }}</span>
 									</h3>
+									
+									<div class="hidden">
+										<input class="hidden indPlayer" value="{{ $player->id }}" hidden />
+									</div>
 								</div>
 								
 								<!-- Card footer -->
@@ -45,12 +49,15 @@
 											<div class="file-path-wrapper">
 												<input class="file-path validate" type="text" placeholder="Upload your file">
 											</div>
-										</div>
+										</div>										
+									</div>
+									<div class="text-center changePlayerImage animated mb-3" data-wow-delay="0.6s">
+										<button class="btn stylish-color changePlayerImageBtn" type="button" disabled>Upload New Photo</button>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="offset-md-2 col-12 col-md-6 updatePlayerForm">
+						<div class="col-12 col-md-6 updatePlayerForm">
 							<div class="row align-items-center justify-content-between">
 								<div class="col-6">
 									<h2 class="coolText2 white-text"><u>Player Bio</u></h2>
@@ -619,5 +626,21 @@
 			</div>
 		</div>
 		<!--./ My Player Videos /.-->
+		
+		<!-- Progress Bar Modal -->
+		<div class="modal fade" id="progress_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header justify-content-around align-items-center">
+						<h2 class="">Uploading....</h2>
+					</div>
+					<div class="modal-body">
+						<div class="progress" style="height: 20px">
+							<div class="progress-bar" id="pro" role="progressbar" style="width: 0%; height: 20px" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 @endsection

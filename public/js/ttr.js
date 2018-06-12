@@ -99,11 +99,11 @@ $(document).ready(function() {
 		}
 	});
 	
-	//Toggle value for leagues ages and competition for leages edit page
+	// Toggle value for leagues ages and competition for leages edit page .
+	// (Will toggle on and off. Not related to sibling option. Does not require a selection)
 	$("body").on("click", ".compBtnSelect, .ageBtnSelect", function(e) {
-		console.log($(this));
 		if($(this).hasClass('compBtnSelect')) {
-			$(this).toggleClass('orange gray active');
+			$(this).toggleClass('orange grey active');
 			
 			if($(this).children().attr('checked') == 'checked') {
 				$(this).children().removeAttr('checked');
@@ -111,7 +111,7 @@ $(document).ready(function() {
 				$(this).children().attr('checked', 'checked');
 			}
 		} else {
-			$(this).toggleClass('blue gray active');
+			$(this).toggleClass('blue grey active');
 			
 			if($(this).children().attr('checked') == 'checked') {
 				$(this).children().removeAttr('checked');
@@ -494,6 +494,46 @@ console.log(playerID);
 		$(".carousel-item .col-md-4").unwrap().addClass('my-2');
 		$('.carousel').carousel('pause');
 		$('.carousel .controls-top, .carousel .carousel-indicators').add($(this)).remove();
+	});
+	
+	$('body').on('change', '#file', function() {
+		$('.changePlayerImage').addClass('pulse');
+		$('.changePlayerImage button').addClass('btn-success').removeClass('stylish-color').removeAttr('disabled');
+	});
+
+	$('body').on('click', '.changePlayerImageBtn', function() {
+		var formData = new FormData($('#edit_player_bio_form')[0]);
+		
+		$.ajax({
+			url: "/players/" + $('#edit_player_bio_form .indPlayer').val() + "/images/",
+			method: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+			cache: false,
+			xhr: function() {
+				var xhr = new XMLHttpRequest();
+				
+				xhr.upload.addEventListener('progress', function(e) {
+					var progressbar = Math.round((e.loaded/e.total) * 100);
+					$('#progress_modal').modal('show');
+					$('#pro').css('width', progressbar + '%').text(progressbar + '%');
+				});
+				
+				return xhr;
+			},
+			success: function(data) {
+				$('#progress_modal').modal('hide');
+				$('.changePlayerImage button').addClass('stylish-color').removeClass('btn-success').attr('disabled', 'disabled');
+				$('#edit_player_bio_form .file-path-wrapper input').val('').text('').removeClass('valid');
+				
+				setTimeout(function() {
+					$('#update_pic img').attr('src', data.path);
+				}, 500);
+			},
+		});
+		
+		return false;
 	});
 });
 
