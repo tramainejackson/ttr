@@ -51,7 +51,7 @@
 			@isset($recentPlayers)
 				@foreach($recentPlayers as $showPlayer)
 					<!-- Recently Added Profiles -->
-					<div class="col-12 col-sm-6 col-md-3 col-lg-4 mb-2">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
 						<div class="card card-cascade narrower">
 
 							<!--Card image-->
@@ -139,7 +139,7 @@
 				@foreach($allPlayers as $player)
 					
 					<!-- Show all the players -->
-					<div class="col-12 col-sm-6 col-md-3 col-lg-4 mb-4">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
 						<div class="card card-cascade narrower">
 
 							<!--Card image-->

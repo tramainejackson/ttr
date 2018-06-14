@@ -24,6 +24,7 @@ $(document).ready(function() {
 		// Escape any “rule” characters with an exclamation mark (!).
 		format: 'mm/dd/yyyy',
 		formatSubmit: 'yyyy/mm/dd',
+		min: new Date(1970,1,01),
 	});
 	
 	// Initialize timepicker
@@ -99,7 +100,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	// Toggle value for leagues ages and competition for leages edit page .
+	// Toggle value for leagues ages and competition on leages edit page .
 	// (Will toggle on and off. Not related to sibling option. Does not require a selection)
 	$("body").on("click", ".compBtnSelect, .ageBtnSelect", function(e) {
 		if($(this).hasClass('compBtnSelect')) {
@@ -118,6 +119,24 @@ $(document).ready(function() {
 			} else {
 				$(this).children().attr('checked', 'checked');
 			}
+		}
+	});
+	
+	//Toggle value for checked item for player profile type
+	$("body").on("click", "button.playerTypeBtn", function(e) {
+		if(!$(this).hasClass('green')) {
+			$(this).siblings()
+				.removeClass('green active')
+				.addClass('grey')
+				.children().removeAttr('checked');
+			$(this)
+				.addClass('green active')
+				.removeClass('grey')
+				.children().attr('checked', 'checked');		
+		} else {
+			$(this).removeClass('green active')
+				.addClass('grey')
+				.children().removeAttr('checked');
 		}
 	});
 	
@@ -489,6 +508,10 @@ console.log(playerID);
 		// }
 	// });
 	
+	$('body').on('click', '.addVideo', function() {
+		$('.uploadNewVideo').slideDown();
+	});
+	
 	// Stop carousel when show all recs button clicked
 	$("body").on("click", "#showAllRecs", function(e)	{
 		$(".carousel-item .col-md-4").unwrap().addClass('my-2');
@@ -496,16 +519,26 @@ console.log(playerID);
 		$('.carousel .controls-top, .carousel .carousel-indicators').add($(this)).remove();
 	});
 	
+	// Make button active once a new file is added for changing 
+	// player profile image
 	$('body').on('change', '#file', function() {
 		$('.changePlayerImage').addClass('pulse');
 		$('.changePlayerImage button').addClass('btn-success').removeClass('stylish-color').removeAttr('disabled');
 	});
+	
+	// Make button active for adding a new highlight on the player 
+	// profile page
+	$('body').on('change', '#new_video_file', function() {
+		$('.addNewVideo').addClass('btn-outline-success active')
+			.removeAttr('btn-outline-warning');
+	});
 
+	// Upload new player profile image
 	$('body').on('click', '.changePlayerImageBtn', function() {
-		var formData = new FormData($('#edit_player_bio_form')[0]);
+		var formData = new FormData($('#edit_player_bio_picture')[0]);
 		
 		$.ajax({
-			url: "/players/" + $('#edit_player_bio_form .indPlayer').val() + "/images/",
+			url: "/players/" + $('#edit_player_bio_picture .indPlayer').val() + "/images/",
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -524,12 +557,53 @@ console.log(playerID);
 			},
 			success: function(data) {
 				$('#progress_modal').modal('hide');
-				$('.changePlayerImage button').addClass('stylish-color').removeClass('btn-success').attr('disabled', 'disabled');
-				$('#edit_player_bio_form .file-path-wrapper input').val('').text('').removeClass('valid');
+				$('.changePlayerImage button').addClass('stylish-color')
+					.removeClass('btn-success')
+					.attr('disabled', 'disabled');
+				$('#edit_player_bio_picture .file-path-wrapper input')
+					.val('')
+					.text('')
+					.removeClass('valid');
 				
 				setTimeout(function() {
 					$('#update_pic img').attr('src', data.path);
 				}, 500);
+			},
+		});
+		
+		return false;
+	});
+	
+	// Upload new player profile highlight
+	$('body').on('click', '.btn-outline-success.addNewVideo.active', function() {
+		var formData = new FormData($('#add_player_highlight')[0]);
+		
+		$.ajax({
+			url: "/players/" + $('#edit_player_bio_picture .indPlayer').val() + "/highlights/",
+			method: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+			cache: false,
+			xhr: function() {
+				var xhr = new XMLHttpRequest();
+				
+				xhr.upload.addEventListener('progress', function(e) {
+					var progressbar = Math.round((e.loaded/e.total) * 100);
+					$('#progress_modal').modal('show');
+					$('#pro').css('width', progressbar + '%').text(progressbar + '%');
+				});
+				
+				return xhr;
+			},
+			success: function(data) {
+				$('#progress_modal').modal('hide');
+				$('.addNewVideo').addClass('btn-outline-warning ')
+					.removeClass('btn-outline-success active');
+				$('#add_player_highlight .file-path-wrapper input')
+					.val('')
+					.text('')
+					.removeClass('valid');
 			},
 		});
 		

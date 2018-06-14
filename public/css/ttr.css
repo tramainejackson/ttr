@@ -50,8 +50,17 @@ button:hover {
     background-color: #4285F4;
 }
 
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    margin-left: -0.5rem;
+}
+
 .twitterHeader {
 	color: #1b95e0;
+}
+
+.hidden {
+	display: none;
 }
 
 #mainBody {
@@ -1020,19 +1029,9 @@ div#updateVids form {
 }
 
 .myVideo {
-    max-width: 25%;
-    height: 275px;
-    max-height: 275px;
-    width: 25%;
-    float: left;
-    margin: 3% 4%;
-    text-align: -webkit-center;
-    text-align: center;
+    margin: 1%;
     position: relative;
-    color: white;
-    /* font-size: 175%; */
-    box-shadow: 0px 0px 10px #f9f9f9;
-    border: solid 2px;
+    border: solid 1px;
     border-radius: 10px;
 }
 
@@ -1118,20 +1117,6 @@ h1.viewClips_btn {
     position: relative;
 }
 
-a#addNewClips_icon {
-    background-image: url("/images/add_icon.png");
-    width: 35px;
-    height: 35px;
-    background-position: center center;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    border-radius: 100px;
-    border: solid forestgreen 2px;
-    position: absolute;
-    top: 25px;
-    left: 10px;
-}
-
 button#viewClips_icon {
     background-image: url("/totherec/public/images/view_icon.png");
     width: 70px;
@@ -1144,20 +1129,6 @@ button#viewClips_icon {
     position: absolute;
     bottom: 2%;
     left: 40%;
-}
-
-a.deleteClip {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    top: 25px;
-    left: 55px;
-    display: inherit;
-    background-image: url("/images/symbol_remove_icon.png");
-    background-position: center center;
-    background-size: 100% 100%;
-    border-radius: 100px;
-    border: solid 2px #d32523;
 }
 
 button.viewClip {

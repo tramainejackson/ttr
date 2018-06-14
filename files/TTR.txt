@@ -1,7 +1,7 @@
 ------------------------------------------------------
 						ToTheRec
 ------------------------------------------------------
-Add a player type: Example: bruiser, high flyer, magician, lock down defender
 Add something to the leagues profile edit page card. And a background. Make font larger
+Done: Add a player type: Example: bruiser, high flyer, magician, lock down defender
 Done: Fix the nav where the logged in user shows
 export HTTP_PROXY="http://155.247.166.25:8080"

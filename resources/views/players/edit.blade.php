@@ -1,20 +1,33 @@
 @extends('layouts.app')
 
+@section('addt_style')
+	<style type="text/css">
+		.view {
+			min-height: initial !important;
+		}
+		
+		#app {
+			background: black;
+			z-index: -1;
+		}
+	</style>
+@endsection
+
 @section('content')
 	@include('include.functions')
 
 	<div class="container-fluid playerProfileContainer" style="background: black">
-		<div class="row playerBio mb-5 mb-md-0">
-			{!! Form::open(['action' => ['PlayerProfileController@update_player_image', $player->id], 'method' => 'POST', 'files' => true, 'class' => 'col-12', 'id' => 'edit_player_bio_form']) !!}
-				<div class="container-fluid">
-					<div class="row align-items-center justify-content-center view">
-						<div class="col-12 col-md-6">
+		<div class="row playerBio mb-5">
+			<div class="container-fluid">
+				<div class="row align-items-center justify-content-center view">
+					<div class="col-12 col-md-6">
+						{!! Form::open(['action' => ['PlayerProfileController@update_player_image', $player->id], 'method' => 'POST', 'files' => true, 'id' => 'edit_player_bio_picture']) !!}
 							<div id="update_pic" class="card">
 								<!-- Card Image -->
 								<div class="view overlay" style="min-height: initial !important;">
 									<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset($player->image->path) : $defaultImg }}" alt="Player Card Image">
 								</div>
-
+								
 								<!-- Card body -->
 								<div id="" class="card-body">
 									<h2 class="card-title text-center">
@@ -47,17 +60,21 @@
 												<input type="file" name="file" id="file">
 											</div>
 											<div class="file-path-wrapper">
-												<input class="file-path validate" type="text" placeholder="Upload your file">
+												<input class="file-path validate" type="text" placeholder="Upload your picture">
 											</div>
-										</div>										
+										</div>									
 									</div>
+									
 									<div class="text-center changePlayerImage animated mb-3" data-wow-delay="0.6s">
 										<button class="btn stylish-color changePlayerImageBtn" type="button" disabled>Upload New Photo</button>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-12 col-md-6 updatePlayerForm">
+						{!! Form::close() !!}
+					</div>
+
+					<div class="col-12 col-md-6 updatePlayerForm">
+						{!! Form::open(['action' => ['PlayerProfileController@update', $player->id], 'method' => 'PATCH', 'files' => true, 'class' => 'col-12', 'id' => 'edit_player_bio_form']) !!}
 							<div class="row align-items-center justify-content-between">
 								<div class="col-6">
 									<h2 class="coolText2 white-text"><u>Player Bio</u></h2>
@@ -174,20 +191,39 @@
 								<div class="col">
 									<div class="md-form">
 										<label class="active" for="type">Player Type:</label>
-									
-										<button class="btn mt-3" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser</button>
+										
+										<div class="d-flex justify-content-between align-items-center">
+											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
+												<input type="checkbox" name="type" class="hidden" value="bruiser" {{ $player->type == 'bruiser' ? 'checked' : '' }} hidden />
+											</button>
+											
+											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
+												<input type="checkbox" name="type" class="hidden" value="high_flyer" {{ $player->type == 'high_flyer' ? 'checked' : '' }} hidden />
+											</button>
+											
+											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
+												<input type="checkbox" name="type" class="hidden" value="magician" {{ $player->type == 'magician' ? 'checked' : '' }} hidden />
+											</button>
+											
+											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
+												<input type="checkbox" name="type" class="hidden" value="warden" {{ $player->type == 'warden' ? 'checked' : '' }} hidden />
+											</button>
+											
+											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
+												<input type="checkbox" name="type" class="hidden" value="sniper" {{ $player->type == 'sniper' ? 'checked' : '' }} hidden />
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						{!! Form::close() !!}
 					</div>
 				</div>
-
-			{!! Form::close() !!}
+			</div>
 		</div>
 		
 		<!-- My player leagues -->
-		<div class="row view playerLeagues mb-5 mb-md-0">
+		<div class="row view playerLeagues mb-5">
 			<div class="myLeagues col-12">
 				<div class="text-center coolText2 white-text">
 					<h1 class="h1-responsive display-2">My Leagues</h1>
@@ -400,7 +436,7 @@
 		<!--/. My player leagues /.-->
 		
 		<!-- My player playgrounds -->
-		<div class="row view playerPlaygrounds mb-5 mb-md-0" id="player_playgrounds" style="overflow:visible">
+		<div class="row view playerPlaygrounds my-5" id="player_playgrounds" style="overflow:visible">
 			<div class="myPlayground col-12">
 				<div class="text-center coolText2 white-text mb-3">
 					<h1 class="indProfileHeader h1-responsive display-2">My Playgrounds</h1>
@@ -552,76 +588,52 @@
 		<!--./ My player playgrounds /.-->
 		
 		<!-- My Player Videos -->
-		<div class="row view playerVideos pb-5 pb-md-0">
+		<div class="row view playerVideos my-5 pb-5 pb-md-0">
 			<div class="col-12">
 				<div class="text-center coolText2 white-text">
 					<h1 class="indProfileHeader h1-responsive display-2">My Highlight Reel</h1>
+
+					<button class="btn btn-floating addVideo" type="button"><i class="fa fa-plus green" aria-hidden="true"></i></button>
 				</div>
-				<?php if(!empty($videos)) { ?>
-					<?php if(isset($_GET["remove_video"])) { ?>
-						<div class="deleteVids">
-							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
-							<a class="deleteClip" href="player_page.php?remove_video=true" title="Delete Video"></a>
-							<div class="editClips_div">
-								<form action="delete_video.php" method="post" enctype="multipart/form-data">
-									<?php while($showVideo = mysqli_fetch_assoc($videos)) { ?>
-										<div class="myVideo">
-											<h2>Uploaded: <?php $date = date_create($showVideo["upload_date"]); echo date_format($date, "m/d/y"); ?><span class="myVideoID"><input type="checkbox" name="remove_video_id" class="" value="{{ $showVideo["upload_id"]; ?>" /></span></h2>
-											<video class="currentVideo">
-												<source src="{{ $showVideo["file"]; ?>" type="video/mp4">
-												<source src="{{ $showVideo["file"]; ?>" type="video/ogg">
-												<source src="{{ $showVideo["file"]; ?>">
-												Your browser does not support the video tag.
-											</video>
-										</div>
-									<?php } ?>
-									<input type="submit" name="submit" id="updateVideo_btn" value="Remove Selected Videos"/>
-								</form>
-							</div>
-						</div>
-					<?php } elseif(isset($_GET["add_video"])) { ?>
-						<div class="addVids">
-							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
-							<a class="deleteClip" href="player_page.php?remove_video=true" title="Delete Video"></a>
-							<form action="video_upload.php" method="post" enctype="multipart/form-data">
-								<div class="addVideoDiv">
-									<span class="">Add New Video</span>
-									<input type="file" name="file" class="" />
-								</div>
-								<input type="submit" name="submit" id="updateVideo_btn" value="Add New Video"/>
-							</form>
-						</div>
-					<?php } else { ?>
-						<div class="updateVids">
-							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
-							<a class="deleteClip" href="player_page.php?remove_video=true" title="Delete Video"></a>
-							<div class="editClips_div">
-								@foreach($videos as $showVideo)
-									<div class="myVideo">
-										<h2>Uploaded: <?php $date = date_create($showVideo["upload_date"]); echo date_format($date, "m/d/y"); ?><span class="myVideoID" hidden></span></h2>
-										<video class="currentVideo">
-											<source src="{{ $showVideo->file }}" type="video/mp4">
-											<source src="{{ $showVideo->file }}" type="video/ogg">
-											Your browser does not support the video tag.
-										</video>
+				
+				<div class="row">
+					<div class="col-12">
+						<div class="md-form my-4 uploadNewVideo{{ $videos->count() > 0 ? ' hidden' : '' }}">
+							{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'add_player_highlight']) !!}
+								<div class="file-field d-flex align-items-center justify-content-between container">
+									<div class="btn btn-primary btn-sm col">
+										<span class="changeSpan">New Highlight</span>
+										
+										<input type="file" name="new_video_file" id="new_video_file">
 									</div>
-								@endforeach
-							</div>	
+									
+									<div class="file-path-wrapper col-6 col-md-7 col-lg-8 col-xl-9">
+										<input class="file-path validate white-text" type="text" placeholder="Upload A New Highlight">
+									</div>
+									
+									<div class="btn btn-outline-warning btn-sm col addNewVideo">
+										<span class="changeSpan addNewVideoBtn">Add Video</span>
+									</div>
+								</div>									
+							{!! Form::close() !!}
 						</div>
-					<?php } ?>
-				<?php }	else { ?>
-					<?php if(isset($_GET["add_video"])) { ?>
-						<div class="addVids">
-							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
-							<form action="video_upload.php" method="post" enctype="multipart/form-data">
-								<div class="addVideoDiv">
-									<span class="">Add New Video</span>
-									<input type="file" name="file" class="" />
+					</div>
+					
+					@if($videos->count() > 0)
+						@foreach($videos as $showVideo)
+							<div class="col-4">
+								<div class="myVideo">
+									<input type="checkbox" name="remove_video_id" class="" value="{{ $showVideo->id }}" /></span></h2>
+									<button class="btn btn-floating position-absolute" type="button"><i class="fa fa-minus red" aria-hidden="true"></i></button>
+									
+									<video class="" width="320" height="240" controls>
+										<source src="{{ asset($showVideo->path) }}">
+										Your browser does not support the video tag.
+									</video>
 								</div>
-								<input type="submit" name="submit" id="updateVideo_btn" value="Add New Video"/>
-							</form>
-						</div>
-					<?php }	else { ?>
+							</div>
+						@endforeach
+					@else
 						<div class="updateVids">
 							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
 							<div class="viewCurrent_clips">
@@ -629,9 +641,9 @@
 									<p>You currently do not have any videos added to your player profile.</p>
 								</div>
 							</div>
-						</div>	
-					<?php } ?>
-				<?php }	 ?>
+						</div>
+					@endif
+				</div>
 			</div>
 		</div>
 		<!--./ My Player Videos /.-->
