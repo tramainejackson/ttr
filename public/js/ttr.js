@@ -535,10 +535,11 @@ console.log(playerID);
 
 	// Upload new player profile image
 	$('body').on('click', '.changePlayerImageBtn', function() {
-		var formData = new FormData($('#edit_player_bio_picture')[0]);
+		var formData = new FormData();
+		formData.append("file", document.getElementById('file').files[0]);
 		
 		$.ajax({
-			url: "/players/" + $('#edit_player_bio_picture .indPlayer').val() + "/images/",
+			url: "/players/" + $('.indPlayer').val() + "/images/",
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -560,7 +561,7 @@ console.log(playerID);
 				$('.changePlayerImage button').addClass('stylish-color')
 					.removeClass('btn-success')
 					.attr('disabled', 'disabled');
-				$('#edit_player_bio_picture .file-path-wrapper input')
+				$('.file-path-wrapper input')
 					.val('')
 					.text('')
 					.removeClass('valid');
@@ -576,10 +577,11 @@ console.log(playerID);
 	
 	// Upload new player profile highlight
 	$('body').on('click', '.btn-outline-success.addNewVideo.active', function() {
-		var formData = new FormData($('#add_player_highlight')[0]);
+		var formData = new FormData();
+		formData.append("new_video_file", document.getElementById('new_video_file').files[0]);
 		
 		$.ajax({
-			url: "/players/" + $('#edit_player_bio_picture .indPlayer').val() + "/highlights/",
+			url: "/players/" + $('.indPlayer').val() + "/highlights/",
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -600,7 +602,7 @@ console.log(playerID);
 				$('#progress_modal').modal('hide');
 				$('.addNewVideo').addClass('btn-outline-warning ')
 					.removeClass('btn-outline-success active');
-				$('#add_player_highlight .file-path-wrapper input')
+				$('.file-path-wrapper input')
 					.val('')
 					.text('')
 					.removeClass('valid');

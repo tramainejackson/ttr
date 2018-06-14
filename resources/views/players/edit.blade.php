@@ -21,56 +21,54 @@
 			<div class="container-fluid">
 				<div class="row align-items-center justify-content-center view">
 					<div class="col-12 col-md-6">
-						{!! Form::open(['action' => ['PlayerProfileController@update_player_image', $player->id], 'method' => 'POST', 'files' => true, 'id' => 'edit_player_bio_picture']) !!}
-							<div id="update_pic" class="card">
-								<!-- Card Image -->
-								<div class="view overlay" style="min-height: initial !important;">
-									<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset($player->image->path) : $defaultImg }}" alt="Player Card Image">
-								</div>
+						<div id="update_pic" class="card">
+							<!-- Card Image -->
+							<div class="view overlay" style="min-height: initial !important;">
+								<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset($player->image->path) : $defaultImg }}" alt="Player Card Image">
+							</div>
+							
+							<!-- Card body -->
+							<div id="" class="card-body">
+								<h2 class="card-title text-center">
+									<span class="">{{ $player->firstname }}</span>
+									<span class="">{{ $player->nickname != null ? $player->nickname : "" }}</span>
+									<span class="">{{ $player->lastname != null ? $player->lastname : '' }}</span>
+								</h2>
 								
-								<!-- Card body -->
-								<div id="" class="card-body">
-									<h2 class="card-title text-center">
-										<span class="">{{ $player->firstname }}</span>
-										<span class="">{{ $player->nickname != null ? $player->nickname : "" }}</span>
-										<span class="">{{ $player->lastname != null ? $player->lastname : '' }}</span>
-									</h2>
-									
-									<h3 id="player_height" class="text-center">
-										<span class=""><b>Height:</b></span>
-										<span class="text-muted">{{ $player->height != "" ? $player->height : "N/A" }}</span>
-									</h3>
-									
-									<h3 id="player_height" class="text-center">
-										<span class=""><b>Weight:</b></span>
-										<span class="text-muted">{{ $player->weight > 0 ? $player->weight . " lbs" : "N/A" }}</span>
-									</h3>
-									
-									<div class="hidden">
-										<input class="hidden indPlayer" value="{{ $player->id }}" hidden />
-									</div>
-								</div>
+								<h3 id="player_height" class="text-center">
+									<span class=""><b>Height:</b></span>
+									<span class="text-muted">{{ $player->height != "" ? $player->height : "N/A" }}</span>
+								</h3>
 								
-								<!-- Card footer -->
-								<div class="rounded-bottom mdb-color lighten-3 text-center">
-									<div class="md-form my-3">
-										<div class="file-field">
-											<div class="btn btn-primary btn-sm float-left">
-												<span class="changeSpan">Change Photo</span>
-												<input type="file" name="file" id="file">
-											</div>
-											<div class="file-path-wrapper">
-												<input class="file-path validate" type="text" placeholder="Upload your picture">
-											</div>
-										</div>									
-									</div>
-									
-									<div class="text-center changePlayerImage animated mb-3" data-wow-delay="0.6s">
-										<button class="btn stylish-color changePlayerImageBtn" type="button" disabled>Upload New Photo</button>
-									</div>
+								<h3 id="player_height" class="text-center">
+									<span class=""><b>Weight:</b></span>
+									<span class="text-muted">{{ $player->weight > 0 ? $player->weight . " lbs" : "N/A" }}</span>
+								</h3>
+								
+								<div class="hidden">
+									<input class="hidden indPlayer" value="{{ $player->id }}" hidden />
 								</div>
 							</div>
-						{!! Form::close() !!}
+							
+							<!-- Card footer -->
+							<div class="rounded-bottom mdb-color lighten-3 text-center">
+								<div class="md-form my-3">
+									<div class="file-field">
+										<div class="btn btn-primary btn-sm float-left">
+											<span class="changeSpan">Change Photo</span>
+											<input type="file" name="file" id="file">
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" placeholder="Upload your picture">
+										</div>
+									</div>									
+								</div>
+								
+								<div class="text-center changePlayerImage animated mb-3" data-wow-delay="0.6s">
+									<button class="btn stylish-color changePlayerImageBtn" type="button" disabled>Upload New Photo</button>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<div class="col-12 col-md-6 updatePlayerForm">
@@ -599,23 +597,21 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="md-form my-4 uploadNewVideo{{ $videos->count() > 0 ? ' hidden' : '' }}">
-							{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'add_player_highlight']) !!}
-								<div class="file-field d-flex align-items-center justify-content-between container">
-									<div class="btn btn-primary btn-sm col">
-										<span class="changeSpan">New Highlight</span>
-										
-										<input type="file" name="new_video_file" id="new_video_file">
-									</div>
+							<div class="file-field d-flex align-items-center justify-content-between container">
+								<div class="btn btn-primary btn-sm col">
+									<span class="changeSpan">New Highlight</span>
 									
-									<div class="file-path-wrapper col-6 col-md-7 col-lg-8 col-xl-9">
-										<input class="file-path validate white-text" type="text" placeholder="Upload A New Highlight">
-									</div>
-									
-									<div class="btn btn-outline-warning btn-sm col addNewVideo">
-										<span class="changeSpan addNewVideoBtn">Add Video</span>
-									</div>
-								</div>									
-							{!! Form::close() !!}
+									<input type="file" name="new_video_file" id="new_video_file">
+								</div>
+								
+								<div class="file-path-wrapper col-6 col-md-7 col-lg-8 col-xl-9">
+									<input class="file-path validate white-text" type="text" placeholder="Upload A New Highlight">
+								</div>
+								
+								<div class="btn btn-outline-warning btn-sm col addNewVideo">
+									<span class="changeSpan addNewVideoBtn">Add Video</span>
+								</div>
+							</div>
 						</div>
 					</div>
 					
