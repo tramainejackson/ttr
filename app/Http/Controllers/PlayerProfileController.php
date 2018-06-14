@@ -23,9 +23,23 @@ class PlayerProfileController extends Controller
      */
     public function index()
     {	
-		$players = PlayerProfile::findRecentAddedPlayers();
+		$allPlayers = PlayerProfile::orderBy('lastname')->get();
+		$recentPlayers = PlayerProfile::findRecentAddedPlayers();
+
+		// Create and Resize the default image
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return view('players.index', compact('players'));
+		if(request()->query('filter')) {
+			$allPlayers = PlayerProfile::filter(request()->query('filter'));
+			
+			return view('players.index', compact('defaultImg', 'allPlayers'));
+		} else {
+			return view('players.index', compact('defaultImg', 'recentPlayers', 'allPlayers'));
+		}
     }
 
     /**
@@ -56,7 +70,14 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(PlayerProfile $player)
-    {		
+    {	
+		// Create and Resize the default image
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+		
         return view('players.show', compact('player'));
     }
 
@@ -377,4 +398,25 @@ class PlayerProfileController extends Controller
 			
 		}
 	}
+
+	/**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+		$allPlayers = PlayerProfile::search($request->search);
+		$searchCriteria = $request->search;
+		
+		// Create and Resize the default image
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+		
+		return view('players.index', compact('searchCriteria', 'defaultImg', 'allPlayers'));
+    }
 }

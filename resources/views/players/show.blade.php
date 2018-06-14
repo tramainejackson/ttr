@@ -4,17 +4,13 @@
 	@include('include.functions')
 	
 	<div class="playerDisplay">
-		<div class="search_box">
-			<input class="player_search" name="search" type="search" placeholder="Search Player"/>				
-			<a class="addFilter" href="#">Search</a>
-		</div>
 		<div class="playerPageInfo" id="player_demographics">
 			<div class="playerPagePic">
-				<img id="playerPic" class="playerPic_class" src="../uploads/{{ $player->picture }}">
+				<img id="playerPic" class="playerPic_class" src="{{ $player->image != null ? asset($player->image->path) : $defaultImg }}">
 			</div>
 			<div class="playerPageBioHeader">
 				<h2 id="contact_header">{{ $player->nickname != "" ? $player->firstname . " \"". $player->nickname ."\" " . $player->lastname : $player->full_name() }}</h2>
-				<h3 id="contact_header2" class="">{{ $player->height != "" ? "<span>Height: " . $player->height . "</span>" : "" . $player->weight > 0 ? "<span>Weight: " . $player->weight . " lbs.</span>" : "" }}</h3>
+				<h3 id="contact_header2" class="">{!! $player->height != "" ? "<span>Height: " . $player->height . "</span>" : "" . $player->weight > 0 ? "<span>Weight: " . $player->weight . " lbs.</span>" : "" !!}</h3>
 			</div>
 			<div class="playerPageBio">
 				<table>
@@ -39,6 +35,7 @@
 				</table>
 			</div>
 		</div>
+		
 		@if($player->ttr_player == "Y")
 			@php $playerLeaguesInfo = explode(";", $player->ttr_player_info); @endphp
 			<div class="playerLeagues">
@@ -151,24 +148,45 @@
 			</div>
 		@endif
 		
-		@if($player->player_playground != NULL || $player->player_playground != "")
+		@if($player->playgrounds->isNotEmpty())
 			<div class="playerPlaygrounds">
-				@php $playgrounds = explode("; ", $player->player_playground) @endphp
-				<h2 class="">Here's where I catch my best games</h2>
-				<ol class="">
-					@for($ii=0; $ii < count($playgrounds); $ii++)
-						@php $counter = $ii + 1; @endphp
-						<li class="">{{ $counter . ". " . str_ireplace("_", " ", $playgrounds[$ii]) }}</li>
-					@endfor
-				</ol>
+				@foreach($player->playgrounds as $myPlayground)
+					@php
+						$time = "";
+						$timeArray = explode(':', $myPlayground->time);
+						
+						if($timeArray[0] > 12) {
+							$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
+						} elseif($timeArray[0] == '0') {
+							$time = '12:' . $timeArray[1] . ' AM';
+						} elseif($timeArray[0] == '12') {
+							$time = '12:' . $timeArray[1] . ' PM';
+						} else {
+							$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
+						}
+					@endphp
+					
+					<div class="row">
+						<div class="col">
+							<h2 class="">{{ str_ireplace('_', ' ', $myPlayground->playground) }}</h2>
+						</div>
+						<div class="col">
+							<h2 class="">{{ ucfirst($myPlayground->playground) }}</h2>
+						</div>
+						<div class="col">
+							<h2 class="">{{ $time }}</h2>
+						</div>
+					</div>
+				@endforeach
 			</div>
 		@endif
+		
 		<div class="playerPageVideos" id="player_videos">
-			@php $getPlayerVideos = DB::table('videos')->where('player_id', $player->id)->get(); @endphp
-			@if(!empty($getPlayerVideos))
+			<h2 class="playerPageVideosHeader">Highlights</h2>
+			
+			@if($player->videos->count() > 0)
 				<div class="">
-					<h2 class="playerPageVideosHeader">Highlights</h2>
-					@foreach($getPlayerVideos as $showVideo)
+					@foreach($player->videos as $showVideo)
 						<div class="playerPageVideo ">
 							<h2>Uploaded:<span class="myVideoID" hidden>{{ $showVideo->id }}</span></h2>
 							<video class="currentVideo">
@@ -181,7 +199,7 @@
 				</div>
 			@else
 				<div class="">
-					<h2 class="playerPageVideosNone">This Player Hasn't Decided To Showcase Their Skills Yet. No Highlights To Show</h2>
+					<h3 class="h3-responsive">This Player Hasn't Decided To Showcase Their Skills Yet. No Highlights To Show</h3>
 				</div>
 			@endif
 		</div>

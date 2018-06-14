@@ -3,7 +3,7 @@
 @section('addt_style')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5)), url(/images/sports_office.jpg);
+			background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.5)), url(/images/sports_office.jpg);
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -82,12 +82,12 @@
 							<label for="leagues_phone">League Phone</label>
 						</div>
 						<div class="md-form">
-							<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ $league->leagues_email }}" />
+							<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ $league->leagues_email }}" placeholder="Enter Leagues Email Address" />
 
 							<label for="leagues_email">League Email</label>
 						</div>
 						<div class="md-form">
-							<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ $league->leagues_website }}" />
+							<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ $league->leagues_website }}" placeholder="Enter League Website" />
 
 							<label for="leagues_website">League Website</label>
 						</div>
@@ -123,7 +123,7 @@
 							<div class="row">
 								@foreach($ages as $age)
 									<div class="col-6 col-md-3">
-										<button type="button" class="btn btn-lg gray mx-0 w-100 ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
+										<button type="button" class="btn btn-lg mx-0 w-100 ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
 											<input type="checkbox" class="hidden" name="age[]" value="{{ $age }}" hidden{{ in_array($age, $ageArray) ? ' checked ' : '' }}/>
 										</button>
 									</div>

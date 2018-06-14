@@ -142,6 +142,21 @@ class PlayerProfile extends Model
 		return $players;
 	}
 	
+	public function scopeFilter($query, $filter) {
+		$players = $query->where('type', $filter)
+			->get();
+
+		return $players;
+	}
+	
+	public function scopeSearch($query, $search) {
+		$players = $query->where('firstname', 'like', '%' . $search . '%')
+			->orWhere('lastname', 'like', '%' . $search . '%')
+			->get();
+
+		return $players;
+	}
+	
 	public function scopeFindPlayerVideosByID($ID) {
 		$playerVideo = DB::table('videos')->where('player_id', $ID)->get();
 		

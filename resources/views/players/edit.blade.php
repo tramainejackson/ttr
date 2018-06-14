@@ -170,6 +170,15 @@
 									@endif
 								</div>
 							</div>
+							<div class="row">
+								<div class="col">
+									<div class="md-form">
+										<label class="active" for="type">Player Type:</label>
+									
+										<button class="btn mt-3" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

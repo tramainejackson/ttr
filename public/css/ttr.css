@@ -68,31 +68,6 @@ button:hover {
 	z-index: 0;
 }
 
-div#players_page, div#backgroundImageL, div#backgroundImageR, div#backgroundImageV {
-    height: 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: 100% 0%;
-    background-attachment: fixed;
-    position: absolute;
-    width: 100%;
-    left: 0%;
-    z-index: -1;
-}
-
-div#players_page {
-    background-image: url(/images/mybackground1.png);
-	position: relative;
-}
-
-#backgroundImageR, #backgroundImageV {
-    background-image: url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
-}
-
-div#backgroundImageL {
-    background-image: url(../images/mybackground1.png);
-}
-
 div[id^="backgroundImage"]::after {
 	content: "";
 	top: 0;
@@ -1765,36 +1740,6 @@ button#scroll_to_top {
     background-image: url("/totherec/public/images/topOfPage.jpg");
     background-position: center center;
     background-size: 100% 100%;
-}
-
-input.player_search {
-    width: 51%;
-    border-radius: 5px;
-    display: -webkit-inline-box;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-input#rec_search {
-}
-
-a.removeFilter, a.addFilter {
-    display: -webkit-inline-box;
-    display: inline-block;
-    vertical-align: middle;
-    border-radius: 5px;
-    padding: 0.5% 1%;
-}
-
-a.addFilter {
-    border: inset 2px #777777;
-    background: bisque;
-}
-
-a.removeFilter {
-    background: darkred;
-    border: inset 2px #777777;
-    color: whitesmoke;
 }
 
 h1.recs_header {

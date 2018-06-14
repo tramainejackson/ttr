@@ -31,10 +31,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg justify-content-between">
+        <nav class="navbar navbar-expand-lg align-items-center justify-content-between">
 
 			<!-- Branding Image -->
-			<a class="navbar-brand" href="{{ route('welcome') }}">{{ config('app.name', 'Laravel') }}</a>
+			<a class="navbar-brand white-text{{ url()->current() == url('/') ? ' active' : '' }}" href="{{ route('welcome') }}">{{ config('app.name', 'Laravel') }}</a>
 	
 			<!-- SideNav slide-out button -->
 			<a href="#" data-activates="slide-out" class="btn btn-primary p-3 button-collapse navbar-toggler" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,30 +77,30 @@
 
 			<div class="d-none d-lg-flex" id="">
 				<!-- Right Side Of Navbar -->
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav md-pills pills-primary">
 					<li id="rec_li" class="nav-item">
-						<a class="nav-link" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+						<a class="nav-link white-text{{ url()->current() == url('rec_centers') ? ' active' : '' }}" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
 					</li>
 					<li id="player_li" class="nav-item">
-						<a class="nav-link" href="{{ route('players.index') }}">Players</a>
+						<a class="nav-link white-text{{ url()->current() == url('players') ? ' active' : '' }}" href="{{ route('players.index') }}">Players</a>
 					</li>
 					<li id="league_li" class="nav-item">
-						<a class="nav-link" href="{{ route('leagues.index') }}">City Leagues</a>
+						<a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}" href="{{ route('leagues.index') }}">City Leagues</a>
 					</li>
 					<li id="news_li" class="nav-item">
-						<a class="nav-link" href="news.php">News</a>
+						<a class="nav-link white-text" href="news.php">News</a>
 					</li>
 					<li id="clips_li" class="nav-item">
-						<a class="nav-link" id="videos_link" href="videos.php">Clips</a>
+						<a class="nav-link white-text" id="videos_link" href="videos.php">Clips</a>
 					</li>
 					<li id="contact_li" class="nav-item">
-						<a class="nav-link" href="{{ route('about') }}">About TTR</a>
+						<a class="nav-link white-text{{ url()->current() == url('about_us') ? ' active' : '' }}" href="{{ route('about') }}">About TTR</a>
 					</li>
 				</ul>
 			</div>
 			
 			<div class="d-none d-lg-flex" id="">
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right flex-md-column">
 					@if(Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">
@@ -116,22 +116,17 @@
 					@else
 						<!-- Authentication Links -->	
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<a href="#" class="dropdown-toggle white-text{{ url()->current() == url('home') ? ' active' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false">
 								{{ Auth::user()->player ? Auth::user()->player->full_name() : Auth::user()->league->commish }} <span class="caret"></span>
 							</a>
 
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="{{ route('logout') }}"
-										onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-										Logout
-									</a>
+							<div class="dropdown-menu" role="menu">
+								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
-									</form>
-								</li>
-							</ul>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
+							</div>
 						</li>				
 					@endif
 				</ul>
@@ -144,6 +139,7 @@
 				<ul class="flashMessage">{!! session('status') !!}</ul>
 			</div>
 		@endif
+		
         @yield('content')
 
 		@include("modal")

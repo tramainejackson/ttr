@@ -33,6 +33,8 @@ Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_play
 
 Route::post('players/{player}/images', 'PlayerProfileController@update_player_image');
 
+Route::post('players/search', 'PlayerProfileController@search')->name('players.search');
+
 Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
 
 Route::post('rec_centers/search', 'RecCenterController@search');
