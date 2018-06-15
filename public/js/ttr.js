@@ -1,5 +1,4 @@
 $(document).ready(function() {	
-
 	$.ajaxSetup({
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
 		cache: false
@@ -567,7 +566,7 @@ $(document).ready(function() {
 					.removeClass('valid');
 				
 				setTimeout(function() {
-					$('#update_pic img').attr('src', data.path);
+					$('#update_pic img').attr('src', window.location.protocol + '//' + window.location.hostname + '/' + data.path);
 				}, 500);
 			},
 		});

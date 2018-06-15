@@ -312,30 +312,28 @@
 															</tr>
 														</thead>
 														
-														@if($playerLeagueProfile->season->standings == null)
-														<tr>
-															<td colspan='5'>No standings to display yet.</td>
-														</tr>
-														
-														@else
 														<tbody>
-															@foreach($playerLeagueProfile->season->standings as $showStanding)
-															<tr class="linkStandingsTeam">
-																<td>{{ $showStanding->team_name }}</td>
-																<td>{{ $showStanding->team_wins != null ? $showStanding->team_wins : '0' }}</td>
-																<td>{{ $showStanding->team_losses != null ? $showStanding->team_losses : '0' }}</td>
-																<td>{{ $showStanding->team_forfeits != null ? $showStanding->team_forfeits : '0' }}</td>
-																<td>{{ $showStanding->winPERC != null ? $showStanding->winPERC : "0.00" }}</td>
-																<td>{{ $showStanding->team_points != null ? $showStanding->team_points : "TBD" }}</td>
-															</tr>
-															@endforeach
+															@if($playerLeagueProfile->season->standings == null)
+																<tr>
+																	<td colspan='5'>No standings to display yet.</td>
+																</tr>
+															@else
+																@foreach($playerLeagueProfile->season->standings as $showStanding)
+																	<tr class="linkStandingsTeam">
+																		<td>{{ $showStanding->team_name }}</td>
+																		<td>{{ $showStanding->team_wins != null ? $showStanding->team_wins : '0' }}</td>
+																		<td>{{ $showStanding->team_losses != null ? $showStanding->team_losses : '0' }}</td>
+																		<td>{{ $showStanding->team_forfeits != null ? $showStanding->team_forfeits : '0' }}</td>
+																		<td>{{ $showStanding->winPERC != null ? $showStanding->winPERC : "0.00" }}</td>
+																		<td>{{ $showStanding->team_points != null ? $showStanding->team_points : "TBD" }}</td>
+																	</tr>
+																@endforeach
+															@endif
 														</tbody>
-														@endif
 													</table>
 												</div>
 												
 												<div class="indProfileLeaguesTeamStats ml-2">
-												
 													@if($stats != null)
 														<table class="table table-responsive table-sm table-striped" id="view_stats_table">
 															<thead class="mdb-color darken-3">
@@ -423,7 +421,6 @@
 										</div>
 									</div>
 									<!--./ Back Side /.-->
-									
 								</div>
 							</div>
 						@endforeach
@@ -643,7 +640,9 @@
 			</div>
 		</div>
 		<!--./ My Player Videos /.-->
-		
+<div class="textLoad">
+	
+</div>
 		<!-- Progress Bar Modal -->
 		<div class="modal fade" id="progress_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="true">
 			<div class="modal-dialog">
