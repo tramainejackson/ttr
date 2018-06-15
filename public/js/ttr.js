@@ -213,10 +213,10 @@ $(document).ready(function() {
 		// });
 	// }
 
-// Add league to players profile when accepted
+	// Add league to players profile when accepted
 	$("body").on("click", ".linkLeagueOption button", function(e) {
 		var playerID = $(this).parent().find('[name="player_id"]').val();
-console.log(playerID);
+
 		if($(this).hasClass("addLeague")) {
 			$.ajax({
 			  method: "PATCH",
@@ -539,7 +539,7 @@ console.log(playerID);
 		formData.append("file", document.getElementById('file').files[0]);
 		
 		$.ajax({
-			url: "/players/" + $('.indPlayer').val() + "/images/",
+			url: "/player_images/" + $('.indPlayer').val(),
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -581,7 +581,7 @@ console.log(playerID);
 		formData.append("new_video_file", document.getElementById('new_video_file').files[0]);
 		
 		$.ajax({
-			url: "/players/" + $('.indPlayer').val() + "/highlights/",
+			url: "/player_highlights/" + $('.indPlayer').val(),
 			method: "POST",
 			data: formData,
 			contentType: false,

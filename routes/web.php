@@ -31,9 +31,9 @@ Route::resource('leagues', 'LeagueProfileController');
 
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
-Route::post('players/{player}/images', 'PlayerProfileController@update_player_image');
+Route::post('player_images/{player}', 'PlayerProfileController@update_player_image');
 
-Route::post('players/{player}/highlights', 'PlayerProfileController@add_player_highlight');
+Route::post('player_highlights/{player}', 'PlayerProfileController@add_player_highlight');
 
 Route::post('players/search', 'PlayerProfileController@search')->name('players.search');
 

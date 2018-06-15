@@ -190,24 +190,24 @@
 									<div class="md-form">
 										<label class="active" for="type">Player Type:</label>
 										
-										<div class="d-flex justify-content-between align-items-center">
-											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
+										<div class="d-flex flex-wrap-reverse justify-content-around align-items-center">
+											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
 												<input type="checkbox" name="type" class="hidden" value="bruiser" {{ $player->type == 'bruiser' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
+											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
 												<input type="checkbox" name="type" class="hidden" value="high_flyer" {{ $player->type == 'high_flyer' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
+											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
 												<input type="checkbox" name="type" class="hidden" value="magician" {{ $player->type == 'magician' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
+											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
 												<input type="checkbox" name="type" class="hidden" value="warden" {{ $player->type == 'warden' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
+											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
 												<input type="checkbox" name="type" class="hidden" value="sniper" {{ $player->type == 'sniper' ? 'checked' : '' }} hidden />
 											</button>
 										</div>
@@ -630,11 +630,11 @@
 							</div>
 						@endforeach
 					@else
-						<div class="updateVids">
+						<div class="col-12 updateVids">
 							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
 							<div class="viewCurrent_clips">
 								<div id="noVideos_message">
-									<p>You currently do not have any videos added to your player profile.</p>
+									<p class="text-center">You currently do not have any videos added to your player profile.</p>
 								</div>
 							</div>
 						</div>
