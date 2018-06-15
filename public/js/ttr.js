@@ -138,21 +138,6 @@ $(document).ready(function() {
 				.children().removeAttr('checked');
 		}
 	});
-	
-// // Player filter
-	// $("body").on("click", ".addFilter", function(e) {
-		// e.preventDefault();
-		// var searchCriteria = $(".player_search").val();
-		// window.open("players.php?filter_search="+searchCriteria, "_self");
-	// });
-	
-// // Add and remove loading gif when making ajax call
-	// $(document).ajaxStart(function(){
-		// $("#loading_image, .maine_overlay").show("fast");
-	// });
-	// $(document).ajaxComplete(function(){
-		// $("#loading_image, .maine_overlay").hide("fast");
-	// });
 
 // // Remove session messages
 	// if($(".message").length > 0 || $(".errors").length > 0) {
@@ -160,9 +145,6 @@ $(document).ready(function() {
 			// $(".message, .errors").fadeOut();
 		// }, 7000);
 	// }	
-	
-// // Make body and container min height same as screen
-	// $("body, #loginPageContainer, #leaguesProfileContainer, #playerProfileContainer").css({minHeight:windowHeight});
 	
 // // Scroll page to the bottom where selected league is
 	// if($(".indLeague, .addVideoDiv").length > 0) {
@@ -535,10 +517,11 @@ $(document).ready(function() {
 	// Upload new player profile image
 	$('body').on('click', '.changePlayerImageBtn', function() {
 		var formData = new FormData();
+		var playerID = $('.indPlayer').val();
 		formData.append("file", document.getElementById('file').files[0]);
 		
 		$.ajax({
-			url: "/player_images/" + $('.indPlayer').val(),
+			url: "/player_images/" + playerID,
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -567,6 +550,7 @@ $(document).ready(function() {
 				
 				setTimeout(function() {
 					$('#update_pic img').attr('src', window.location.protocol + '//' + window.location.hostname + '/' + data.path);
+					$('.textLoad').load('/home');
 				}, 500);
 			},
 		});
@@ -577,10 +561,11 @@ $(document).ready(function() {
 	// Upload new player profile highlight
 	$('body').on('click', '.btn-outline-success.addNewVideo.active', function() {
 		var formData = new FormData();
+		var playerID = $('.indPlayer').val();
 		formData.append("new_video_file", document.getElementById('new_video_file').files[0]);
 		
 		$.ajax({
-			url: "/player_highlights/" + $('.indPlayer').val(),
+			url: "/player_highlights/" + playerID,
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -605,7 +590,20 @@ $(document).ready(function() {
 					.val('')
 					.text('')
 					.removeClass('valid');
+				$('.textLoad').load('/home .playerVideos', function(response, status, xhr) {
+					if(status == 'success') {
+						$('.playerProfileContainer .playerVideos').remove();
+						$('.textLoad .playerVideos').insertAfter('.playerPlaygrounds');
+					} else {
+						
+					}
+				});
 			},
+			error: function(xhr, status, error) {
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			}
 		});
 		
 		return false;

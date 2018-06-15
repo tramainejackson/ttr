@@ -424,8 +424,6 @@ class PlayerProfileController extends Controller
 				$addVideo->player_profile_id = $player->id;
 				
 				$addVideo->save();
-				
-				return view('players.edit', compact('player'));
 			}
 		}
 	}

@@ -640,9 +640,7 @@
 			</div>
 		</div>
 		<!--./ My Player Videos /.-->
-<div class="textLoad">
-	
-</div>
+		
 		<!-- Progress Bar Modal -->
 		<div class="modal fade" id="progress_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="true">
 			<div class="modal-dialog">
@@ -659,4 +657,5 @@
 			</div>
 		</div>
 	</div>
+	<div class="textLoad hidden" hidden></div>
 @endsection
