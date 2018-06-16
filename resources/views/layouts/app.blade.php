@@ -46,13 +46,27 @@
 			<div id="slide-out" class="side-nav fixed">
 				<ul class="custom-scrollbar">
 					<!--/. Side navigation links -->
-					<li id="index"><a href="{{ route('welcome') }}">Home</a></li>	
-					<li id="rec_li"><a href="{{ route('rec_centers.index') }}">Parks N Recs</a></li>
-					<li id="player_li"><a href="{{ route('players.index') }}">Players</a></li>
-					<li id="league_li"><a href="{{ route('leagues.index') }}">City Leagues</a></li>			
-					<li id="news_li"><a href="news.php">News</a></li>
-					<li id="clips_li"><a id="videos_link" href="videos.php">Clips</a></li>
-					<li id="contact_li"><a href="{{ route('about') }}">About TTR</a></li>
+					<li id="index">
+						<a href="{{ route('welcome') }}">Home</a>
+					</li>	
+					<li id="rec_li">
+						<a href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+					</li>
+					<li id="player_li">
+						<a href="{{ route('players.index') }}">Players</a>
+					</li>
+					<li id="league_li">
+						<a href="{{ route('leagues.index') }}">City Leagues</a>
+					</li>			
+					<li id="news_li">
+						<a href="news.php">News</a>
+					</li>
+					<li id="clips_li">
+						<a href="{{ route('videos.index') }}">Clips</a>
+					</li>
+					<li id="contact_li">
+						<a href="{{ route('about') }}">About TTR</a>
+					</li>
 					
 					@if (Auth::guest())
 						<li><a href="{{ route('login') }}">Login</a></li>
@@ -91,7 +105,7 @@
 						<a class="nav-link white-text" href="news.php">News</a>
 					</li>
 					<li id="clips_li" class="nav-item">
-						<a class="nav-link white-text" id="videos_link" href="videos.php">Clips</a>
+						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('videos.index') }}">Clips</a>
 					</li>
 					<li id="contact_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('about_us') ? ' active' : '' }}" href="{{ route('about') }}">About TTR</a>

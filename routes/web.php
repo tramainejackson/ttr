@@ -29,6 +29,8 @@ Route::resource('players', 'PlayerProfileController');
 
 Route::resource('leagues', 'LeagueProfileController');
 
+Route::resource('videos', 'VideoController');
+
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
 Route::post('player_images/{player}', 'PlayerProfileController@update_player_image');
