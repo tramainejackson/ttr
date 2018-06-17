@@ -24,7 +24,7 @@
 						<div id="update_pic" class="card">
 							<!-- Card Image -->
 							<div class="view overlay" style="min-height: initial !important;">
-								<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset($player->image->path) : $defaultImg }}" alt="Player Card Image">
+								<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset(str_ireplace('images/', 'images/sm/', $player->image->path)) : $defaultImg }}" alt="Player Card Image">
 							</div>
 							
 							<!-- Card body -->
@@ -191,7 +191,7 @@
 										<label class="active" for="type">Player Type:</label>
 										
 										<div class="d-flex flex-wrap-reverse justify-content-around align-items-center">
-											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
+											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
 												<input type="checkbox" name="type" class="hidden" value="bruiser" {{ $player->type == 'bruiser' ? 'checked' : '' }} hidden />
 											</button>
 											
@@ -199,15 +199,15 @@
 												<input type="checkbox" name="type" class="hidden" value="high_flyer" {{ $player->type == 'high_flyer' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
+											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
 												<input type="checkbox" name="type" class="hidden" value="magician" {{ $player->type == 'magician' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
+											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
 												<input type="checkbox" name="type" class="hidden" value="warden" {{ $player->type == 'warden' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
+											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
 												<input type="checkbox" name="type" class="hidden" value="sniper" {{ $player->type == 'sniper' ? 'checked' : '' }} hidden />
 											</button>
 										</div>
@@ -614,7 +614,7 @@
 					
 					@if($videos->count() > 0)
 						@foreach($videos as $showVideo)
-							<div class="col-4">
+							<div class="col-12 col-md-4">
 								<div class="myVideo">
 									<input type="checkbox" name="remove_video_id" class="" value="{{ $showVideo->id }}" /></span></h2>
 									<button class="btn btn-floating position-absolute" type="button"><i class="fa fa-minus red" aria-hidden="true"></i></button>
