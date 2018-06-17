@@ -299,6 +299,4 @@
 			@endif
 		</div>
 	</div>
-	
-	@include("modal")
 @endsection

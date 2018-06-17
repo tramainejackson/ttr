@@ -11,7 +11,7 @@
 		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-12 col-md-8 mt-5 mt-md-0">
 						<div class="card wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="card-body">
 								<div class="text-center">
@@ -50,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-4">
+					<div class="col-12 col-md-4 mt-3 mt-md-0">
 						<div class="wow fadeInRight" data-wow-delay="0.3s">
 							<div class="forgotPassword text-center">
 								<h1 class="white-text">Welcome Back!</h1>

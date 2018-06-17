@@ -191,23 +191,23 @@
 										<label class="active" for="type">Player Type:</label>
 										
 										<div class="d-flex flex-wrap-reverse justify-content-around align-items-center">
-											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
+											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
 												<input type="checkbox" name="type" class="hidden" value="bruiser" {{ $player->type == 'bruiser' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
+											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
 												<input type="checkbox" name="type" class="hidden" value="high_flyer" {{ $player->type == 'high_flyer' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
+											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
 												<input type="checkbox" name="type" class="hidden" value="magician" {{ $player->type == 'magician' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
+											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
 												<input type="checkbox" name="type" class="hidden" value="warden" {{ $player->type == 'warden' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
+											<button class="btn col-12 col-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
 												<input type="checkbox" name="type" class="hidden" value="sniper" {{ $player->type == 'sniper' ? 'checked' : '' }} hidden />
 											</button>
 										</div>
