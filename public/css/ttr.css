@@ -63,6 +63,10 @@ button:hover {
 	display: none;
 }
 
+.md-form .prefix.active, .md-form label.active {
+    color: #4285f4 !important;
+}
+
 #mainBody {
 	background-image:url("/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg");
 	background-repeat:no-repeat;
@@ -1352,28 +1356,12 @@ table#leagues_validate_form select {/* width: 63%; *//* max-width: 63%; */}
 div#about_ttr {}
 
 .contactPage {
-	font-size: 135%;
-	background-color: #feae46;
-	border: solid 5px green;
-	border-radius: 5px;
-	position: fixed;
-	top: -21.6%;
-	z-index: 10;
 }
 
 .contactPage {
-    right: 1%;
-    width: 32%;
 }
 
 .contactPage table {
-    text-align: center;
-    margin: 1.5% 0% 1.5% 10%;
-    width: 90%;
-}
-
-.md-form .prefix.active, .md-form label.active {
-    color: #4285f4 !important;
 }
 
 .forgotPassword {

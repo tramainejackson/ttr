@@ -29,7 +29,7 @@ Route::resource('players', 'PlayerProfileController');
 
 Route::resource('leagues', 'LeagueProfileController');
 
-Route::resource('videos', 'VideoController');
+Route::resource('clips', 'VideoController');
 
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 

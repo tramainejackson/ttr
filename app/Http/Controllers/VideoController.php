@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+use App\PlayerProfileVideos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
+use Carbon\Carbon;
 
 class VideoController extends Controller
 {
@@ -14,7 +20,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('videos.index');
+		$videos = PlayerProfileVideos::orderBy('created_at', 'desc')->get();
+		
+        return view('videos.index', compact('videos'));
     }
 
     /**
@@ -24,6 +32,7 @@ class VideoController extends Controller
      */
     public function create()
     {
+        return view('videos.index');
         //
     }
 

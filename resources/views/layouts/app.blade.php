@@ -62,7 +62,7 @@
 						<a href="news.php">News</a>
 					</li>
 					<li id="clips_li">
-						<a href="{{ route('videos.index') }}">Clips</a>
+						<a href="{{ route('clips.index') }}">Clips</a>
 					</li>
 					<li id="contact_li">
 						<a href="{{ route('about') }}">About TTR</a>
@@ -105,7 +105,7 @@
 						<a class="nav-link white-text" href="news.php">News</a>
 					</li>
 					<li id="clips_li" class="nav-item">
-						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('videos.index') }}">Clips</a>
+						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('clips.index') }}">Clips</a>
 					</li>
 					<li id="contact_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('about_us') ? ' active' : '' }}" href="{{ route('about') }}">About TTR</a>
