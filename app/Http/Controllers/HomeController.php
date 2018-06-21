@@ -30,33 +30,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$user = Auth::user();
+		if(session()->has('user')) {
+			if(session()->has('player')) {
+				$player = PlayerProfile::where('user_id', session()->get('player'))->first();
+				$recs = RecCenter::all();
+				$playgrounds = $player->playgrounds;
+				$videos = $player->videos;
+				$leagues = $player->leagues;
+				$linkLeague = LeaguePlayer::where([
+					['email', $user->email],
+					['player_profile_id', null]
+				])->get();
 
-		if($user->player) {
-			$player = $user->player;
-			$recs = RecCenter::all();
-			$playgrounds = $player->playgrounds;
-			$videos = $player->videos;
-			$leagues = $player->leagues;
-			$linkLeague = LeaguePlayer::where([
-				['email', $user->email],
-				['player_profile_id', null]
-			])->get();
+				$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-			$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-			// Resize the default image
-			Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
-					$constraint->aspectRatio();
-				}
-			)->save(storage_path('app/public/images/lg/default_img.jpg'));
-			$defaultImg = asset('/storage/images/lg/default_img.jpg');
-		
-			return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'defaultImg'));
-		} else {
-			$league = $user->league;
+				// Resize the default image
+				Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+						$constraint->aspectRatio();
+					}
+				)->save(storage_path('app/public/images/lg/default_img.jpg'));
+				$defaultImg = asset('/storage/images/lg/default_img.jpg');
 			
-			return view('leagues.edit', compact('league'));			
+				return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'defaultImg'));
+			} elseif(session()->has('commish')) {
+				$league = LeagueProfile::where('user_id', session()->get('commish'))->first();
+
+				return view('leagues.edit', compact('league'));			
+			}
 		}
     }
 	
