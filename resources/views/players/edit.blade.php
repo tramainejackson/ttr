@@ -278,7 +278,7 @@
 									<div class="face front">
 										<!-- Image-->
 										<div class="card-up">
-											<img  class="card-img-top" src="{{ $playerLeagueProfile->season->league->picture != null ? asset(str_ireplace('storage', 'leagues/storage', $playerLeagueProfile->season->league->picture)) : $defaultImg }}" alt="League Default Picture.">
+											<img  class="card-img-top" src="{{ $playerLeagueProfile->season->league->picture != null ? asset(str_ireplace('totherec', 'leagues.totherec', $playerLeagueProfile->season->league->picture)) : $defaultImg }}" alt="League Default Picture.">
 										</div>
 
 										<!-- Content -->
