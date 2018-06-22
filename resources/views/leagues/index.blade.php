@@ -18,7 +18,7 @@
 		@foreach($leagues as $league)
 			<div class="row position-relative my-5 white-text">
 				<div class="col-12 col-md-8 mx-auto">
-					<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? $league->picture : $defaultImg }});">
+					<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? asset($league->picture) : $defaultImg }});">
 						<div class="text-white text-center d-flex flex-column align-items-center rgba-black-strong py-5 px-4">
 							<div class="">
 								<h2 class="h2-responsive">League Name {{ $league->name }}</h2>

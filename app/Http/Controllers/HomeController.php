@@ -38,7 +38,7 @@ class HomeController extends Controller
 				$videos = $player->videos;
 				$leagues = $player->leagues;
 				$linkLeague = LeaguePlayer::where([
-					['email', $user->email],
+					['email', $player->email],
 					['player_profile_id', null]
 				])->get();
 
