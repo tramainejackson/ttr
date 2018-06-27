@@ -101,8 +101,13 @@
 					<li id="league_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}" href="{{ route('leagues.index') }}">City Leagues</a>
 					</li>
-					<li id="news_li" class="nav-item">
-						<a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}" href="{{ route('news.index') }}">News</a>
+					<li id="news_li" class="nav-item{{ session('writer') !== null ? ' dropdown' : '' }}">
+						<a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null ? '#' : route('news.index') }}"{!! session('writer') !== null ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" href="{{ route('writers.create') }}">Add Article</a>
+							<a class="dropdown-item" href="{{ route('writers.index') }}">View Articles</a>
+						</div>
 					</li>
 					<li id="clips_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('clips.index') }}">Clips</a>
@@ -131,7 +136,14 @@
 						<!-- Authentication Links -->	
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle white-text{{ url()->current() == url('home') ? ' active' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user()->player ? Auth::user()->player->full_name() : Auth::user()->league->commish }} <span class="caret"></span>
+								@if(Auth::user()->player)
+									{{ Auth::user()->player->full_name() }}
+								@elseif(Auth::user()->league)
+									{{ Auth::user()->league->commish }}
+								@else
+									{{ Auth::user()->writer->full_name() }}
+								@endif
+								<span class="caret"></span>
 							</a>
 
 							<div class="dropdown-menu" role="menu">
@@ -143,7 +155,7 @@
 									{{ csrf_field() }}
 								</form>
 							</div>
-						</li>				
+						</li>			
 					@endif
 				</ul>
 			</div>

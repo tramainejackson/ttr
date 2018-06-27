@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
+use App\WriterProfile;
 use App\LeaguePlayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +57,10 @@ class HomeController extends Controller
 				$league = LeagueProfile::where('user_id', session()->get('commish'))->first();
 
 				return view('leagues.edit', compact('league'));			
+			} elseif(session()->has('writer')) {
+				$writer = WriterProfile::where('user_id', session()->get('writer'))->first();
+
+				return view('writer.edit', compact('writer'));	
 			}
 		}
     }

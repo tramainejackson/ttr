@@ -12,6 +12,7 @@
 /public/addons
 /public/css/mdb*
 /public/js/mdb*
+/public/js/modules
 /storage/*.key
 /vendor
 /.idea

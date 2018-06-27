@@ -29,6 +29,8 @@ Route::resource('players', 'PlayerProfileController');
 
 Route::resource('leagues', 'LeagueProfileController');
 
+Route::resource('writers', 'WriterProfileController');
+
 Route::resource('clips', 'VideoController');
 
 Route::resource('news', 'NewsController');
