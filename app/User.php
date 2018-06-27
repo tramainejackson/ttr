@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\LeagueProfile');
     }
+	
+	/**
+	* Get the league writer for the user object.
+	*/
+    public function writer()
+    {
+        return $this->hasOne('App\WriterProfile');
+    }
 }

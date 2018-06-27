@@ -59,7 +59,7 @@
 						<a href="{{ route('leagues.index') }}">City Leagues</a>
 					</li>			
 					<li id="news_li">
-						<a href="news.php">News</a>
+						<a href="{{ route('news.index') }}">News</a>
 					</li>
 					<li id="clips_li">
 						<a href="{{ route('clips.index') }}">Clips</a>
@@ -102,7 +102,7 @@
 						<a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}" href="{{ route('leagues.index') }}">City Leagues</a>
 					</li>
 					<li id="news_li" class="nav-item">
-						<a class="nav-link white-text" href="news.php">News</a>
+						<a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}" href="{{ route('news.index') }}">News</a>
 					</li>
 					<li id="clips_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('clips.index') }}">Clips</a>

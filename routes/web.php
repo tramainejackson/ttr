@@ -31,6 +31,8 @@ Route::resource('leagues', 'LeagueProfileController');
 
 Route::resource('clips', 'VideoController');
 
+Route::resource('news', 'NewsController');
+
 Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
 Route::post('player_images/{player}', 'PlayerProfileController@update_player_image');
