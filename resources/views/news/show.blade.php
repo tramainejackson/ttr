@@ -25,7 +25,7 @@
 				<!--Featured image-->
 				<div class="card card-cascade wider reverse">
 					<div class="view overlay">
-						<img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(134).jpg" alt="Wide sample post image">
+						<img class="card-img-top img-fluid" src="{{ $article->picture !== null ? asset(str_ireplace('public/images', 'storage/images/lg', $article->picture)) : $defaultImg }}" alt="Wide sample post image">
 						<a>
 							<div class=""></div>
 						</a>
@@ -34,7 +34,8 @@
 					<!--Post data-->
 					<div class="card-body text-center">
 						<h2><a><strong>{{ $article->title }}</strong></a></h2>
-						<p>Written by <a>{{ $article->writer->full_name() }}</a>, 26/08/2016</p>
+						<p>Written by {{ $article->writer->full_name() }}</p>
+						<p class="text-muted m-0">{{ $article->publish_date }}</p>
 					</div>
 					<!--Post data-->
 				</div>
@@ -63,6 +64,7 @@
 		<div class="row">
 
 			@if($recentPost->count() > 0)
+				
 				@foreach($recentPost as $post)
 				
 					<!--Grid column-->
@@ -72,7 +74,7 @@
 						<div class="card">
 							<!--Card image-->
 							<div class="view overlay">
-								<img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20%28147%29.jpg" alt="">
+								<img  class="card-img-top img-fluid" src="{{ $post->picture !== null ? asset(str_ireplace('public/images', 'storage/images/lg', $post->picture)) : $defaultImg }}" alt="">
 								<a>
 									<div class="mask rgba-white-slight"></div>
 								</a>
@@ -127,8 +129,7 @@
 					<div class="personal-sm pb-3">
 						<a class="pr-2 fb-ic"><i class="fa fa-facebook"> </i></a>
 						<a class="pr-2 tw-ic"><i class="fa fa-twitter"> </i></a>
-						<a class="pr-2 gplus-ic"><i class="fa fa-google-plus"> </i></a>
-						<a class="pr-2 li-ic"><i class="fa fa-linkedin"> </i></a>
+						<a class="pr-2 ins-ic"><i class="fa fa-instagram" aria-hidden="true"></i></a>
 					</div>
 					<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
 					<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint esse nulla quia quam veniam commodi dicta, iusto inventore. Voluptatum pariatur eveniet ea, officiis vitae praesentium beatae quas libero, esse facere.

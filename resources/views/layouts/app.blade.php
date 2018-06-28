@@ -104,10 +104,13 @@
 					<li id="news_li" class="nav-item{{ session('writer') !== null ? ' dropdown' : '' }}">
 						<a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null ? '#' : route('news.index') }}"{!! session('writer') !== null ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
 
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" href="{{ route('writers.create') }}">Add Article</a>
-							<a class="dropdown-item" href="{{ route('writers.index') }}">View Articles</a>
-						</div>
+						@if(Auth::user()->writer)
+							<div class="dropdown-menu" role="menu">
+								<a class="dropdown-item" href="{{ route('news.index') }}">View Articles</a>
+								<a class="dropdown-item" href="{{ route('news.create') }}">Add Article</a>
+								<a class="dropdown-item" href="{{ route('writers.show', ['writer' => Auth::user()->writer->id]) }}">My Articles</a>
+							</div>
+						@endif
 					</li>
 					<li id="clips_li" class="nav-item">
 						<a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('clips.index') }}">Clips</a>
@@ -119,7 +122,7 @@
 			</div>
 			
 			<div class="d-none d-lg-flex" id="">
-				<ul class="nav navbar-nav navbar-right flex-md-column">
+				<ul class="nav navbar-nav navbar-right flex-column flex-xl-row">
 					@if(Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">

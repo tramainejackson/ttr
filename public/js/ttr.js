@@ -86,6 +86,19 @@ $(document).ready(function() {
 		// $('.mdb-select').material_select();
 	});
 	
+	// Button toggle for writers article publish switch
+	$('body').on("click", "button.publishBtn", function(e) {
+		if(!$(this).hasClass('btn-danger')) {
+			if($(this).children().val() == "Y") {
+				$(this).addClass('active btn-success').removeClass('grey').children().attr("checked", true);
+				$(this).siblings().addClass('grey').removeClass('active btn-danger').children().removeAttr("checked");
+			} else if($(this).children().val() == 'N') {
+				$(this).addClass('active btn-danger').removeClass('grey').children().attr("checked", true);
+				$(this).siblings().addClass('grey').removeClass('active btn-success').children().removeAttr("checked");
+			}
+		}	
+	});
+	
 	//Toggle value for checked item
 	$("body").on("click", ".registrationFormCard .profileSelection button", function(e) {
 		$(this).add($(this).siblings()).toggleClass('green grey active');

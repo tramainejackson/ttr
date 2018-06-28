@@ -14,76 +14,93 @@
 @endsection
 
 @section('content')
-<div class="container">
-		<div class="container-fluid" id="leaguesProfileContainer">
-		<div class="row">
-			<div class="col-12 col-md-12 mx-auto">
-				{!! Form::open(['action' => ['WriterProfileController@update', $writer->id], 'method' => 'PATCH', 'files' => true]) !!}
-					<div class="row">
-						<div class="col-5 my-3 mx-auto">
-							<div id="update_pic" class="card card-cascade mx-auto">
-								<!--Card Image-->
-									<div class="view" style="min-height: initial !important;">
-										<img id="current_pic" class="card-img-top" src="{{ $writer->picture != null ? asset($writer->picture) : '/images/commissioner.jpg' }}">
-									</div>
-								<!--./Card Image/.-->
-								
-								<!--Card Body-->
-									<div class="card-body">
-										<!--Title-->
-										<h1 class="card-title coolText1 text-center">{{ $writer->full_name() }}</h1>
-									</div>
-								<!--./Card Body/.-->
-								
-								<!--Card Footer/.-->
-									<div class="card-footer grey">
-										<div class="md-form">
-											<div class="file-field">
-												<div class="btn btn-primary btn-sm float-left">
-													<span class="changeSpan">Change Photo</span>
-													<input type="file" name="file" id="file">
-												</div>
-												<div class="file-path-wrapper">
-													<input class="file-path validate" type="text" placeholder="Upload your file">
-												</div>
-											</div>
-										</div>
-									</div>
-								<!--./Card Footer/.-->
+	<div class="container" id="">
+		@if($writer->post()->unpublished()->count() > 0)
+			<div class="row">
+				<!-- All unpublished articles -->
+				<div class="col-12 coolText4">
+					<h1 class="p-1 text-center yellow lighten-3 rounded z-depth-3"><i class="fa fa-exclamation-triangle orange-text" aria-hidden="true"></i>&nbsp;You have unpublished articles &nbsp;<i class="fa fa-exclamation-triangle orange-text" aria-hidden="true"></i></h1>
+				</div>
+				
+				@foreach($writer->post()->unpublished() as $article)
+				
+					<!--Grid column-->
+					<div class="col-lg-4 col-md-12 mb-4">
+
+						<!--Card Light-->
+						<div class="card">
+							<!--Card image-->
+							<div class="view overlay">
+								<img  class="card-img-top img-fluid" src="{{ $article->picture !== null ? asset(str_ireplace('public/images', 'storage/images/lg', $article->picture)) : $defaultImg }}" alt="">
+								<a>
+									<div class="mask rgba-white-slight"></div>
+								</a>
 							</div>
+							<!--/.Card image-->
+							<!--Card content-->
+							<div class="card-body">
+								<!--Title-->
+								<h4 class="card-title">{{ $article->title }}</h4>
+								<hr>
+								<!--Text-->
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<a href="{{ route('news.edit', ['news' => $article->id]) }}" class="link-text"><h5>Edit <i class="fa fa-chevron-right"></i></h5></a>
+							</div>
+							<!--/.Card content-->
 						</div>
+						<!--/.Card Light-->
+
 					</div>
-					<div class="updateLeagueForm">
-						<div class="row">
-							<div class="col">
-								<div class="md-form">
-									<input type="text" name="firstname" class="form-control white-text" id="firstname" value="{{ $writer->firstname }}" placeholder="Firstname" />
-									
-									<label for="firstname">Firstname</label>
-								</div>
-							</div>
-							<div class="col">
-								<div class="md-form">
-									<input type="text" name="lastname" class="form-control white-text" id="lastname" placeholder="Lastname" value="{{ $writer->lastname }}" />
-
-									<label for="lastname">Lastname</label>
-								</div>
-							</div>
-						</div>
-						
-						<div class="md-form">
-							<textarea type="text" name="about" class="md-textarea form-control white-text" id="about" placeholder="About Me" >{{ $writer->about }}</textarea>
-
-							<label for="about">About Me</label>
-						</div>
-
-						<div class="md-form">
-							<button type="submit" name="submit" class="btn btn-lg green m-0" id="" value="">Update Profile</button>
-						</div>
-					</div>
-				{!! Form::close() !!}
+					<!--Grid column-->
+				@endforeach
+				<!--./All unpublished articles-->
 			</div>
-		</div>
+			
+			<hr/>
+		@endif
+			
+		@if($writer->post()->published()->count() > 0)
+			<div class="row">
+				<!-- All published articles -->
+				@if($writer->post()->unpublished()->count() > 0)
+					<div class="col-12 coolText4">
+						<h1 class="p-1 text-center white rounded z-depth-3">Published Articles</h1>
+					</div>
+				@endif
+				
+				@foreach($writer->post()->published() as $article)
+					<!--Grid column-->
+					<div class="col-lg-4 col-md-12 mb-4">
+
+						<!--Card Light-->
+						<div class="card">
+							<!--Card image-->
+							<div class="view overlay">
+								<img  class="card-img-top img-fluid" src="{{ $article->picture !== null ? asset(str_ireplace('public/images', 'storage/images/lg', $article->picture)) : $defaultImg }}" alt="">
+								<a>
+									<div class="mask rgba-white-slight"></div>
+								</a>
+							</div>
+							<!--/.Card image-->
+							<!--Card content-->
+							<div class="card-body">
+								<!--Title-->
+								<h4 class="card-title">{{ $article->title }} - <span class="text-muted">{{ $article->publish_date() }}</span></h4>
+								<hr>
+								<!--Text-->
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<a href="{{ route('news.edit', ['news' => $article->id]) }}" class="link-text"><h5>Edit <i class="fa fa-chevron-right"></i></h5></a>
+							</div>
+							<!--/.Card content-->
+						</div>
+						<!--/.Card Light-->
+
+					</div>
+					<!--Grid column-->
+					
+				@endforeach
+				<!--./All published articles-->
+			</div>
+		@endif
 	</div>
-</div>
 @endsection

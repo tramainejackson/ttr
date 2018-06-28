@@ -57,9 +57,16 @@ class WriterProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(WriterProfile $writer)
     {
-        //
+		// Create and Resize the default image
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+        return view('writer.show', compact('writer', 'defaultImg'));
     }
 
     /**

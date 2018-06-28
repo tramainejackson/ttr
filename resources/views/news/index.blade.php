@@ -32,7 +32,7 @@
 					<div class="card">
 						<!--Card image-->
 						<div class="view overlay">
-							<img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20%28147%29.jpg" alt="">
+							<img  class="card-img-top" src="{{ $article->picture !== null ? asset(str_ireplace('public/images', 'storage/images/lg', $article->picture)) : $defaultImg }}" alt="">
 							<a>
 								<div class="mask rgba-white-slight"></div>
 							</a>

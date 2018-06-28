@@ -15,39 +15,42 @@
 
 @section('content')
 <div class="container">
-	{!! Form::open(['action' => ['NewsController@update', 'news' => $article->id], 'method' => 'PATCH', 'files' => true]) !!}
+	<div class="row">
+		<div class="col">
+			<h2 class="">Total Articles: {{ $totalArticles }}</h2>
+		</div>
+		<div class="col">
+			<h2 class="">Published Articles: {{ $publishedArticles }}</h2>
+		</div>
+	</div>
+	
+	{!! Form::open(['action' => ['NewsController@store'], 'method' => 'POST', 'files' => true]) !!}
 		<div class="row p-2 pb-4 m-3 white rounded z-depth-2 coolText4">
 			<div class="col-12 d-flex justify-content-between align-items-center">
-				<h3 class="p-1 h3-responsive align-self-start">Edit Article</h3>
+				<h3 class="p-1 h3-responsive">Create New Article</h3>
 				
-				<div class="col-6 col-xl-4">
-					<div class="col-12">
-						<img src="{{ $article->picture !== null ? asset(str_ireplace('public/images', 'storage/images/sm', $article->picture)) : $defaultImg }}" class="img-fluid img-thumbnail" />
-					</div>
-					
-					<div class="md-form col-12">
-						<div class="file-field">
-							<div class="btn btn-primary btn-sm float-left">
-								<span>Choose file</span>
-								<input type="file" name="picture">
-							</div>
-							<div class="file-path-wrapper">
-							   <input class="file-path validate" type="text" placeholder="Change article picture">
-							</div>
+				<div class="md-form col-6 col-xl-4">
+					<div class="file-field">
+						<div class="btn btn-primary btn-sm float-left">
+							<span>Choose file</span>
+							<input type="file" name="picture">
+						</div>
+						<div class="file-path-wrapper">
+						   <input class="file-path validate" type="text" placeholder="Upload your article picture">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-12 col-md-10 mx-auto">
 				<div class="md-form">
-					<input type="text" name="title" class="form-control" value="{{ $article->title }}" />
+					<input type="text" name="title" class="form-control" value="{{ old('title') }}" />
 					
 					<label for="title">Title</label>
 				</div>
 			</div>
 			<div class="col-12 col-md-10 mx-auto mb-3">
 				<div class="md-form">
-					<textarea type="text" name="article" class="md-textarea form-control" rows="3">{{ $article->article }}</textarea>
+					<textarea type="text" name="article" class="md-textarea form-control" rows="3">{{ old('article') }}</textarea>
 					
 					<label for="article">Article</label>
 				</div>
@@ -67,21 +70,21 @@
 					</div>
 					
 					<div class="col-6 d-flex flex-column align-items-center justify-content-center">
-						<h4 class="h4-responsive text-center">Publish</h4>
+						<h4 class="h4-responsive text-center">Publish Now</h4>
 						
 						<div class="btn-group">
-							<button type="button" class="btn publishBtn{{ $article->publish == 'Y' ? ' btn-success active' : ' grey' }}">
-								<input type="checkbox" name="publish" value="Y" hidden{{ $article->publish == 'Y' ? ' checked' : '' }} />Yes
+							<button type="button" class="btn grey publishBtn">
+								<input type="checkbox" name="publish" value="Y" hidden />Yes
 							</button>
-							<button type="button" class="btn publishBtn{{ $article->publish == 'N' ? ' btn-danger active' : ' grey' }}">
-								<input type="checkbox" name="publish" value="N" hidden{{ $article->publish == 'N' ? ' checked' : '' }} />No
+							<button type="button" class="btn publishBtn btn-danger">
+								<input type="checkbox" name="publish" value="N" hidden checked />No
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-12 col-md-10 my-4 mx-auto">
-				<button class="btn btn-success mx-0" type="submit">Update Article</button>
+				<button class="btn btn-success mx-0" type="submit">Submit Article</button>
 			</div>
 		</div>
 	{!! Form::close() !!}

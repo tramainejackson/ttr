@@ -397,7 +397,6 @@ class PlayerProfileController extends Controller
 					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
 				}
 			}
-			
 		}
 	}
 	
