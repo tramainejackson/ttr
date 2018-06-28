@@ -59,7 +59,7 @@
 				
 				@endforeach
 			@else
-				<div class="col text-center my-4">
+				<div class="col text-center my-4 white-text coolText4">
 					<h1 class="h1-responsive">There aren't any post at this time.</h1>
 					<h3 class="h3-responsive">We are currently looking for journalist who love the game of basketball and who follows the sport for all ages to write articles. If this sounds like something you're interest in, please reach out to us.</h3>
 				</div>
