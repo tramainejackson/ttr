@@ -104,12 +104,14 @@
 					<li id="news_li" class="nav-item{{ session('writer') !== null ? ' dropdown' : '' }}">
 						<a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null ? '#' : route('news.index') }}"{!! session('writer') !== null ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
 
-						@if(Auth::user()->writer)
-							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" href="{{ route('news.index') }}">View Articles</a>
-								<a class="dropdown-item" href="{{ route('news.create') }}">Add Article</a>
-								<a class="dropdown-item" href="{{ route('writers.show', ['writer' => Auth::user()->writer->id]) }}">My Articles</a>
-							</div>
+						@if(Auth::check())
+							@if(Auth::user()->writer)
+								<div class="dropdown-menu" role="menu">
+									<a class="dropdown-item" href="{{ route('news.index') }}">View Articles</a>
+									<a class="dropdown-item" href="{{ route('news.create') }}">Add Article</a>
+									<a class="dropdown-item" href="{{ route('writers.show', ['writer' => Auth::user()->writer->id]) }}">My Articles</a>
+								</div>
+							@endif
 						@endif
 					</li>
 					<li id="clips_li" class="nav-item">

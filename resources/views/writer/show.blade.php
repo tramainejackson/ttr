@@ -15,6 +15,15 @@
 
 @section('content')
 	<div class="container" id="">
+		<div class="row my-3">
+			<div class="col text-right">
+				<button class="btn btn-primary">Total Articles <span class="white rounded-circle px-1 text-dark">{{ $totalArticles }}</span></button>
+			</div>
+			<div class="col">
+				<button class="btn btn-primary">Published Articles <span class="white rounded-circle px-1 text-dark">{{ $publishedArticles }}</span></button>
+			</div>
+		</div>
+		
 		@if($writer->post()->unpublished()->count() > 0)
 			<div class="row">
 				<!-- All unpublished articles -->

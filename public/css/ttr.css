@@ -9,6 +9,10 @@ html, body, header, .view {
 	height: 100%;
 }
 
+#app {
+	font-size: 120%;
+}
+
 .wow {
     visibility: hidden;
 }
@@ -20,6 +24,12 @@ html, body, header, .view {
 .coolText4 {font-family: 'Fanwood Text', cursive;}
 .coolText5 {font-family: 'Germania One', cursive;}
 /** .Different Text **/
+
+/** Opacity Level **/
+.op25 {opacity: 0.25;}
+.op50 {opacity: 0.5;}
+.op75 {opacity: 0.75;}
+/** .Opacity Level **/
 
 .card .view {
     height: initial;
@@ -1900,16 +1910,9 @@ span.leagues_age_header {
 	/* display: none; */
 }
 
-#about_header, #contact_header, #contact_header2 {
-	text-align: center;
-	max-height: 70px;
-	color: white;
-	opacity: 0.9;
-	margin: 0%;
-}
+#about_header, #contact_header, #contact_header2 {}
 
-#contact_header {
-}
+#contact_header {}
 
 #contact_header2 {padding-bottom: 20px;}
 
@@ -2736,19 +2739,15 @@ iframe[id^='twitter-widget-']{
 		opacity: 0.9;
 	}
 
-	#about_header, #contact_header, .update_profile_header {
-	  font-size: 200%;
-	}
+	#about_header, #contact_header, .update_profile_header {}
 
 	#player_demographics h2#contact_header {
 		font-size: 375%;
 	}
 
-	 .recs_header {
-	}
+	 .recs_header {}
 
-	.recsPage {
-	}
+	.recsPage {}
 
 	.recsPage .recsPageList {
 		color: black;

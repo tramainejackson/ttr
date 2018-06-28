@@ -35,7 +35,7 @@
 					<div class="card-body text-center">
 						<h2><a><strong>{{ $article->title }}</strong></a></h2>
 						<p>Written by {{ $article->writer->full_name() }}</p>
-						<p class="text-muted m-0">{{ $article->publish_date }}</p>
+						<p class="text-muted m-0">Published: {{ $article->publish_date() }}</p>
 					</div>
 					<!--Post data-->
 				</div>
@@ -127,13 +127,19 @@
 				<div class=" col-12 col-sm-10 text-left">
 					<p><strong>{{ $article->writer->full_name() }}</strong></p>
 					<div class="personal-sm pb-3">
-						<a class="pr-2 fb-ic"><i class="fa fa-facebook"> </i></a>
-						<a class="pr-2 tw-ic"><i class="fa fa-twitter"> </i></a>
-						<a class="pr-2 ins-ic"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+						@if($article->writer->fb !== null)
+							<a href="{{ $article->writer->fb }}" class="pr-2 fb-ic" target="_blank"><i class="fa fa-facebook"></i></a>
+						@endif
+						
+						@if($article->writer->twitter !== null)
+							<a href="{{ $article->writer->twitter }}" class="pr-2 tw-ic" target="_blank"><i class="fa fa-twitter"></i></a>
+						@endif
+						
+						@if($article->writer->instagram !== null)
+							<a href="{{ $article->writer->instagram }}" class="pr-2 ins-ic" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+						@endif
 					</div>
-					<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
-					<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint esse nulla quia quam veniam commodi dicta, iusto inventore. Voluptatum pariatur eveniet ea, officiis vitae praesentium beatae quas libero, esse facere.
-					</p>
+					<p>{{ $article->writer->about }}</p>
 				</div>
 			</div>
 		</div>

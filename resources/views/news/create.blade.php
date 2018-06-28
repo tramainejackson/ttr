@@ -15,12 +15,12 @@
 
 @section('content')
 <div class="container">
-	<div class="row">
-		<div class="col">
-			<h2 class="">Total Articles: {{ $totalArticles }}</h2>
+	<div class="row my-3">
+		<div class="col text-right">
+			<button class="btn btn-primary">Total Articles <span class="white rounded-circle px-1 text-dark">{{ $totalArticles }}</span></button>
 		</div>
 		<div class="col">
-			<h2 class="">Published Articles: {{ $publishedArticles }}</h2>
+			<button class="btn btn-primary">Published Articles <span class="white rounded-circle px-1 text-dark">{{ $publishedArticles }}</span></button>
 		</div>
 	</div>
 	

@@ -34,32 +34,34 @@
 			</div>
 					
 			<!--  Player Videos -->
-			<div class="row">						
-				@if($videos->count() > 0)
-					@foreach($videos as $showVideo)
-						<div class="col-12 col-md-4 mb-4">
-							<div class="myVideo">
-								<div class="white">
-									<p class="">Uploaded: {{ $showVideo->uploaded() }}</h2>
-									<h2 class="h2-responsive">{{ $showVideo->player->firstname }}</p>
+			<div class="container">
+				<div class="row">		
+					@if($videos->count() > 0)
+						@foreach($videos as $showVideo)
+							<div class="col-12 col-md-6 mb-4">
+								<div class="myVideo">
+									<div class="white">
+										<p class="">Uploaded: {{ $showVideo->uploaded() }}</h2>
+										<h2 class="h2-responsive">{{ $showVideo->player->firstname }}</p>
+									</div>
+									<video class="" width="320" height="240" controls>
+										<source src="{{ asset($showVideo->path) }}">
+										Your browser does not support the video tag.
+									</video>
 								</div>
-								<video class="" width="320" height="240" controls>
-									<source src="{{ asset($showVideo->path) }}">
-									Your browser does not support the video tag.
-								</video>
+							</div>
+						@endforeach
+					@else
+						<div class="col-12 updateVids">
+							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
+							<div class="viewCurrent_clips">
+								<div id="noVideos_message">
+									<p class="text-center">No Videos Have Been Added Yet.</p>
+								</div>
 							</div>
 						</div>
-					@endforeach
-				@else
-					<div class="col-12 updateVids">
-						<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
-						<div class="viewCurrent_clips">
-							<div id="noVideos_message">
-								<p class="text-center">No Videos Have Been Added Yet.</p>
-							</div>
-						</div>
-					</div>
-				@endif
+					@endif
+				</div>
 			</div>
 			<!--./ Player Videos /.-->
 		</div>
