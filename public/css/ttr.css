@@ -31,6 +31,10 @@ html, body, header, .view {
 .op75 {opacity: 0.75;}
 /** .Opacity Level **/
 
+.text-underline {
+	text-decoration: underline;
+}
+
 .card .view {
     height: initial;
     min-height: initial;

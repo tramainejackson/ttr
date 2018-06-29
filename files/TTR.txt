@@ -4,9 +4,11 @@
 
 Add deletions of articles and player videos
 Add searches to leagues index page and news index page
-Add more text to the about page
+Add pagination to leagues index and news and vidoes
 Fix the issue with the leagues photo and players photo on subdomain/domain
-Done: Add something to the leagues profile edit page card. And a background. Make font larger
+Done: Add more text to the about page
+Done: Add something to the leagues profile edit page card. And a background.
+Done: Make font larger
 Done: Add a player type: Example: bruiser, high flyer, magician, lock down defender
 Done: Fix the nav where the logged in user shows
 export HTTP_PROXY="http://155.247.166.25:8080"

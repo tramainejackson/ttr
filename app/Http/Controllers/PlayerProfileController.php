@@ -447,4 +447,17 @@ class PlayerProfileController extends Controller
 		
 		return view('players.index', compact('searchCriteria', 'defaultImg', 'allPlayers'));
     }
+	
+	/**
+     * Delete the specified video resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_video(Request $request, PlayerProfileVideos $video)
+    {
+		if($video->delete()) {
+			return redirect()->back()->with('status', 'Video Removed Successfully');			
+		}
+    }
 }

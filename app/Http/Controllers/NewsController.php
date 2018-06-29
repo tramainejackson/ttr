@@ -119,7 +119,7 @@ class NewsController extends Controller
 
 			
 		if($news->save()) {
-			return redirect()->action('NewsController@index')->with('status', 'New Article Added Successfully');
+			return redirect()->route('writers.show', ['writer' => $news->writer->id])->with('status', 'New Article Added Successfully');
 		}
     }
 
@@ -247,6 +247,8 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        if($news->delete()) {
+			return redirect()->route('writers.show', ['writer' => $news->writer->id])->with('status', 'Article Deleted Successfully');
+		}
     }
 }

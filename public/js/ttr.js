@@ -478,32 +478,16 @@ $(document).ready(function() {
 		// }).css({top:window.pageYOffset+"px"});
 	// });
 	
-// // Bring up no recent news message
-	// $('body').on("click", "#news_li", function(e) {
-		// e.preventDefault();
-		// $('.maine_modal_header').text("Recent News");
-		// $(".maine_modal_content").append("<p id='noNewsArticles'>There is no news currently. I am looking for writers that keeps up with Philly HS Basketball, College Basketball and the NBA to write articles for the site. Please contact me with your information. Email: <a href='mailto:administrator@totherec.com?subject=News%20Articles'>administrator@totherec.com</a></p>");
-		// $('.maine_overlay').fadeIn(function() {
-			// $('.maine_modal').show().animate({top:"15px"});
-		// });
-	// });	
-	
-// // Filter rec centers
-	// var findRec;
-	// $("input#rec_search").keyup(function(e) {
-		// findRec = $("input#rec_search").val();
-		// if(findRec != "") {
-			// var filterRecs = $("h3").filter(":not([id*='"+findRec+"'])", function(index){});
-			// var filterRecs2 = $("h3").filter("[id*='"+findRec+"']", function(index){});
-			// filterRecs.parent().fadeOut();
-			// filterRecs2.parent().fadeIn();
-		// } else {
-			// $(".recsPage").fadeIn();
-		// }
-	// });
-	
+	// Bring up new video form to add a new video
 	$('body').on('click', '.addVideo', function() {
 		$('.uploadNewVideo').slideDown();
+	});
+	
+	// Bring up delete modal for player video
+	$('body').on('click', '.deletePlayerVideo', function() {
+		var videoID = $(this).children('input').val();
+		
+		$('#modalConfirmDelete form').attr('action', window.location.protocol + '//' + window.location.hostname + '/highlight_remove/' + videoID);
 	});
 	
 	// Stop carousel when show all recs button clicked

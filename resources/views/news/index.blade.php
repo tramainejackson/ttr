@@ -47,7 +47,8 @@
 								<h4 class="card-title">{{ $article->title }}</h4>
 								<hr>
 								<!--Text-->
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">{{ $article->article }}</p>
+								
 								<a href="{{ route('news.show', ['news' => $article->id]) }}" class="link-text"><h5>Read more <i class="fa fa-chevron-right"></i></h5></a>
 							</div>
 							<!--/.Card content-->

@@ -111,5 +111,13 @@
 				<!--./All published articles-->
 			</div>
 		@endif
+		
+		@if($writer->post()->published()->count() < 1 && $writer->post()->unpublished()->count() < 1)
+			<div class="row">
+				<div class="col text-center white-text my-3">
+					<h2 class="coolText4">You don't have any published or pending articles. Click <a href="{{ route('news.create') }}" class="text-underline white-text">here</a> to create an article</h2>
+				</div>
+			</div>
+		@endif
 	</div>
 @endsection

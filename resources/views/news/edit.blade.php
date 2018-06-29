@@ -80,10 +80,41 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-10 my-4 mx-auto">
+			<div class="col-12 col-md-10 mt-4 mx-auto">
 				<button class="btn btn-success mx-0" type="submit">Update Article</button>
+			</div>
+			<div class="col-12 col-md-10 mb-4 mx-auto">
+				<button class="btn btn-danger mx-0" type="button" data-toggle="modal" data-target="#modalConfirmDelete">Delete Article</button>
 			</div>
 		</div>
 	{!! Form::close() !!}
+	
+	<!-- Delete confirmation modal -->
+	<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Are you sure?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                    <i class="fa fa-times fa-4x animated rotateIn"></i>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+					{!! Form::open(['action' => ['NewsController@destroy', 'news' => $article->id], 'method' => 'DELETE']) !!}
+						<button type="submit" class="btn btn-outline-danger">Yes</button>
+                   
+						<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>
+					{!! Form::close() !!}
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
 </div>
 @endsection

@@ -17,17 +17,21 @@
 	<div class="container white-text" id="about_ttr">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="h2-responsive">About ToTheRec</h2>
+				<h1 class="h1-responsive">About ToTheRec</h1>
 			</div>
 			
 			<div class="col-12">
-				<p>To all the basketball players in the Philly, South Jersey or Deleware area! This site is going to be for you.
-				Let me know what you want to see from the site.</p>
+				<h4 class="h4-responsive p-2">To all the basketball players in the Philly, South Jersey or Deleware area! This site is going to be for you.
+				Let me know what you want to see from the site.</h4>
 			</div>
 			
 			<div class="col-12">
-				<p>Shoot me some ideas of what else you would like to see. If you know a rec center that has open gym, or where the real players play, shoot me the information
-				and well get it added so you know where others are playing.</p>
+				<h4 class="h4-responsive p-2">Shoot me some ideas of what else you would like to see. If you know a rec center that has open gym, or where the real players play, shoot me the information
+				and we'll get it added so you know where others are playing.</h4>
+			</div>
+			
+			<div class="col-12">
+				<h4 class="h4-responsive p-2">If you're playing in a basketball league, no matter the age, and they aren't keeping stats online. Let them know to check out the site. They can keeps stats and schedules on the leagues site.</h4>
 			</div>
 		</div>	
 		
@@ -35,7 +39,7 @@
 		
 		<div class="row mb-4">
 			<div class="col-12">
-				<h2 class="h2-responsive">Contact Us</h2>
+				<h1 class="h1-responsive">Contact Us</h1>
 			</div>
 			<div class="col-12 d-flex align-items-center justify-content-around">
 				<div class="phoneContact">

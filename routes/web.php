@@ -41,6 +41,8 @@ Route::post('player_images/{player}', 'PlayerProfileController@update_player_ima
 
 Route::post('player_highlights/{player}', 'PlayerProfileController@add_player_highlight');
 
+Route::delete('highlight_remove/{video}', 'PlayerProfileController@remove_video');
+
 Route::post('players/search', 'PlayerProfileController@search')->name('players.search');
 
 Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');

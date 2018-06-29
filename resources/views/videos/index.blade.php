@@ -41,8 +41,25 @@
 							<div class="col-12 col-md-6 mb-4">
 								<div class="myVideo">
 									<div class="white">
-										<p class="">Uploaded: {{ $showVideo->uploaded() }}</h2>
-										<h2 class="h2-responsive">{{ $showVideo->player->firstname }}</p>
+										<p class="text-center p-1 rgba-blue-grey-strong white-text coolText4">Uploaded: {{ $showVideo->uploaded() }}</p>
+										
+										<h2 class="h2-responsive">
+											<a href="{{ route('players.show', ['player' => $showVideo->player->id]) }}">{{ $showVideo->player->full_name() }}</a>
+											
+											@if($showVideo->player->type !== null)
+												@if($showVideo->player->type == 'magician')
+													<span class="float-right"><i class="fa fa-magic" aria-hidden="true"></i></span>
+												@elseif($showVideo->player->type == 'bruiser')
+													<span class="float-right"><i class="fa fa-bomb" aria-hidden="true"></i></span>
+												@elseif($showVideo->player->type == 'warden')
+													<span class="float-right"><i class="fa fa-lock" aria-hidden="true"></i></span>
+												@elseif($showVideo->player->type == 'high_flyer')
+													<span class="float-right"><i class="fa fa-rocket" aria-hidden="true"></i></span>
+												@elseif($showVideo->player->type == 'sniper')
+													<span class="float-right"><i class="fa fa-bullseye" aria-hidden="true"></i></span>
+												@endif
+											@endif
+										</h2>
 									</div>
 									<video class="" width="320" height="240" controls>
 										<source src="{{ asset($showVideo->path) }}">

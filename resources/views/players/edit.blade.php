@@ -616,8 +616,11 @@
 						@foreach($videos as $showVideo)
 							<div class="col-12 col-md-4">
 								<div class="myVideo">
-									<input type="checkbox" name="remove_video_id" class="" value="{{ $showVideo->id }}" /></span></h2>
-									<button class="btn btn-floating position-absolute" type="button"><i class="fa fa-minus red" aria-hidden="true"></i></button>
+									<button class="btn btn-floating position-absolute deletePlayerVideo" type="button" data-toggle="modal" data-target="#modalConfirmDelete">
+										<i class="fa fa-minus red" aria-hidden="true"></i>
+										
+										<input type="checkbox" name="remove_video_id" class="hidden" value="{{ $showVideo->id }}" hidden />
+									</button>
 									
 									<video class="" width="320" height="240" controls>
 										<source src="{{ asset($showVideo->path) }}">
@@ -657,5 +660,34 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--Modal: modalConfirmDelete-->
+	<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Are you sure you want to delete this video?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                    <i class="fa fa-times fa-4x animated rotateIn"></i>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+					{!! Form::open(['action' => ['PlayerProfileController@remove_video', 'video' => null], 'method' => 'DELETE']) !!}
+						<button type="submit" class="btn btn-outline-danger">Yes</a>
+						
+						<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>
+					{!! Form::close() !!}
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+	
 	<div class="textLoad hidden" hidden></div>
 @endsection
