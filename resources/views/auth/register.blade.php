@@ -3,15 +3,16 @@
 @section('additional_scripts')
 	<script type="text/javascript">
 		$('nav.navbar').addClass('fixed-top scrolling-navbar');
+		$('.registerContainer').css({'paddingTop' : ($('nav.navbar').height() + 20) + 'px'});
 	</script>
 @endsection
 
 @section('content')
-	<div class="view" style="background-image: url('/images/login_page_pic.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-			<div class="container">
+	<div class="" style="background-image: url('/images/login_page_pic.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center py-4">
+			<div class="container registerContainer">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-12 col-xl-8 mx-auto">
 						<div class="card wow fadeInLeft registrationFormCard" data-wow-delay="0.3s">
 							<div class="card-body">
 								<div class="text-center">
@@ -94,7 +95,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-4">
+					<div class="col-12 col-xl-4 mx-auto mt-xl-0 mt-4">
 						<div class="wow fadeInRight" data-wow-delay="0.3s">
 							<div class="forgotPassword text-center">
 								<h1 class="white-text">New user!</h1>

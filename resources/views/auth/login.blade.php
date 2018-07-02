@@ -3,15 +3,16 @@
 @section('additional_scripts')
 	<script type="text/javascript">
 		$('nav.navbar').addClass('fixed-top scrolling-navbar');
+		$('.loginContainer').css({'paddingTop' : ($('nav.navbar').height() + 20) + 'px'});
 	</script>
 @endsection
 
 @section('content')
-	<div class="view" style="background-image: url('/images/login_page_pic.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-			<div class="container">
+	<div class="" style="background-image: url('/images/login_page_pic.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center py-5">
+			<div class="container loginContainer">
 				<div class="row">
-					<div class="col-12 col-md-8 mt-5 mt-md-0">
+					<div class="col-12 col-xl-8 mt-5 mt-xl-0">
 						<div class="card wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="card-body">
 								<div class="text-center">
@@ -50,7 +51,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-md-4 mt-3 mt-md-0">
+					<div class="col-12 col-xl-4 mt-3 mt-xl-0">
 						<div class="wow fadeInRight" data-wow-delay="0.3s">
 							<div class="forgotPassword text-center">
 								<h1 class="white-text">Welcome Back!</h1>
