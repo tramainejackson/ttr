@@ -14,58 +14,140 @@
 @endsection
 
 @section('content')
+	@include('include.functions')
+	
 	<div class="container-fluid">
-		@foreach($leagues as $league)
-			<div class="row position-relative my-5 white-text">
-				<div class="col-12 col-md-8 mx-auto">
-					<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? asset($league->picture) : $defaultImg }});">
-						<div class="text-white text-center d-flex flex-column align-items-center rgba-black-strong py-5 px-4">
-							<div class="">
-								<h2 class="h2-responsive">League Name {{ $league->name }}</h2>
-								<h2 class="h2-responsive">Commission Name{{ $league->commish }}</h2>
-								<h2 class="h2-responsive">League Address{{ $league->address }}</h2>
-								<h2 class="h2-responsive">League Phone {{ $league->phone }}</h2>
-								<h2 class="h2-responsive">League Email Address{{ $league->leagues_email }} <button class="btn black white-text" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;Send Email</button></h2>
-							</div>
+		<div class="search_box container mx-auto">
+			{!! Form::open(['action' => ['LeagueProfileController@search'], 'method' => 'POST']) !!}
+				 <div class="md-form input-group">
+					<span class="input-group-btn">
+						<a href="{{ route('leagues.index') }}" class="btn btn-outline-success waves-effect my-0 addFilter" type="button">All!</a>
+					</span>
+					
+					<input id="leagues_search" class="leagueSearch form-control added-padding-2 white-text" type="search" name="search" placeholder="Search Leagues" />
+					
+					<span class="input-group-btn">
+						<button class="btn btn-outline-warning waves-effect my-0" type="submit">Go!</button>
+					</span>
+				</div>
+			{!! Form::close() !!}
+		</div>
+		
+		<div class="row">
+			<div class="col text-center white-text">
+				<h3 class="h3-responsive">Filter By League Ages</h3>
+			</div>
+		</div>
+		
+		<div class="league_type_filter mb-5 d-flex justify-content-around align-items-center">
+			<a href="{{ route('leagues.index', ['filter' => '10_and_under']) }}" class="btn{{ request()->query('filter') == '10_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">10&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '12_and_under']) }}" class="btn{{ request()->query('filter') == '12_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">12&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '14_and_under']) }}" class="btn{{ request()->query('filter') == '14_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">14&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '16_and_under']) }}" class="btn{{ request()->query('filter') == '16_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">16&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '18_and_under']) }}" class="btn{{ request()->query('filter') == '18_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">18&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => 'unlimited']) }}" class="btn{{ request()->query('filter') == 'unlimited' ? ' red lighten-1' : ' blue-grey' }}" type="button">Unlimited</a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '30_and_over']) }}" class="btn{{ request()->query('filter') == '30_and_over' ? ' red lighten-1' : ' blue-grey' }}" type="button">30&nbsp;&nbsp;<i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
+			
+			<a href="{{ route('leagues.index', ['filter' => '50_and_over']) }}" class="btn{{ request()->query('filter') == '50_and_over' ? ' red lighten-1' : ' blue-grey' }}" type="button">50&nbsp;&nbsp;<i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
+		</div>
+		
+		@isset($searchCriteria)
+			<div class="col-12">
+				<h2 class="white-text text-center"><i class="fa fa-exclamation" aria-hidden="true"></i>&nbsp;Search results for '{{ $searchCriteria }}'&nbsp;<i class="fa fa-exclamation" aria-hidden="true"></i></h2>
+			</div>
+		@endisset
+		
+		@if(request()->query('filter'))
+			<div class="col-12">
+				<h2 class="white-text text-center"><i class="fa fa-exclamation" aria-hidden="true"></i>&nbsp;Showing {{ ucwords(str_ireplace('_', ' ', request()->query('filter'))) }} Leagues&nbsp;<i class="fa fa-exclamation" aria-hidden="true"></i></h2>
+			</div>
+		@endif
+		
+		@if($leagues->count() > 0)
+			@foreach($leagues as $league)
+				<div class="row position-relative my-5 white-text">
+					<div class="col-12 col-md-8 mx-auto">
+						<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? asset($league->picture) : $defaultImg }});">
+							<div class="text-white text-left d-flex flex-column align-items-center rgba-black-strong p-5">
+								<div class="mt-3 p-2 rgba-black-light coolText3 rounded z-depth-1-half">
+									<h2 class="h2-responsive">League Name: {{ $league->name }}</h2>
+									
+									<h2 class="h2-responsive">Commission Name: {{ $league->commish }}</h2>
+									
+									@if($league->address !== null)
+										<h2 class="h2-responsive">Address: {{ $league->address }}</h2>
+									@endif
+									
+									@if($league->phone !== null)
+										<h2 class="h2-responsive">Phone: {{ $league->phone }}</h2>
+									@endif
+									
+									@if($league->leagues_email !== null)
+										<h2 class="h2-responsive">Email: {{ $league->leagues_email }} <button class="btn black white-text" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;Send Email</button></h2>
+									@endif
+								</div>
 
-							<div class="">
-								@if($league->seasons()->active()->get()->isNotEmpty())
-									<h2 class="h2-responsive">Active Seasons</h2>
-									@foreach($league->seasons()->active()->get() as $season)
-										<button class="btn btn-lg success-color" type="button">{{ $season->name }}</button>
-									@endforeach
-								@else
-									<h2 class="h2-responsive">No Active Seasons</h2>
-								@endif
-							</div>
-							
-							<div class="d-flex justify-content-between my-4">
-								<div class="col">
-									<h1 class="">Age Levels</h1>
-									<ul class="list-unstyled">
-										@foreach($league->ages() as $age)
-											<li class="list-inline-item"><button class="btn btn rounded default-color" type="button">{{ str_ireplace('_', ' ', $age) }}</button></li>
+								<div class="">
+									@if($league->seasons()->active()->get()->isNotEmpty())
+										@foreach($league->seasons()->active()->get() as $season)
+											<button class="btn success-color position-absolute top left" type="button">{{ $season->name }}</button>
 										@endforeach
-									</ul>
+									@endif
 								</div>
 								
-								<div class="col">
-									<h1 class="">Competition Levels</h1>
-									<ul class="list-unstyled">
-										@foreach($league->comps() as $comp)
-											<li class="list-inline-item"><button class="btn btn rounded primary-color" type="button">{{ str_ireplace('_', ' ', $comp) }}</button></li>
-										@endforeach
-									</ul>
+								<hr/>
+								
+								<div class="d-flex justify-content-between my-4">
+									<div class="col">
+										<h1 class="">Age Levels</h1>
+										<div class="row">
+											@foreach(find_ages() as $age)
+												<div class="col-6 my-1">
+													<button class="btn btn rounded btn-block{{  str_contains($league->age, $age) ? ' default-color' : ' grey' }}" type="button">{{ str_ireplace('_', ' ', $age) }}</button>
+												</div>
+											@endforeach
+										</div>
+									</div>
+									
+									<div class="col">
+										<h1 class="">Competition Levels</h1>
+										
+										<div class="row">
+											@foreach(find_competitions() as $comp)
+												<div class="col-6 my-1">
+													<button class="btn btn rounded btn-block{{  str_contains($league->comp, $comp) ? ' primary-color' : ' grey' }}" type="button">{{ str_ireplace('_', ' ', $comp) }}</button>
+												</div>
+											@endforeach
+										</div>
+									</div>
 								</div>
+								
+								@if($league->leagues_website != null)
+									<a href="{{ $league->leagues_website }}" class="btn btn-lg secondary-color">View Website</a>
+								@endif
 							</div>
-							
-							@if($league->leagues_website != null)
-								<a href="{{ $league->leagues_website }}" class="btn btn-lg secondary-color">View Website</a>
-							@endif
 						</div>
 					</div>
 				</div>
-			</div>
-		@endforeach
+			@endforeach
+		@else
+			@isset($searchCriteria)
+				<div class="col-12">
+					<h2 class="white-text text-center">0 Results Found</h2>
+				</div>
+			@endisset
+			
+			@if(request()->query('filter'))
+				<div class="col-12">
+					<h2 class="white-text text-center">0 Results Found</h2>
+				</div>
+			@endif
+		@endif
 	</div>
 @endsection

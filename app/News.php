@@ -66,4 +66,15 @@ class News extends Model
 
 		return $post;
 	}
+	
+	/**
+	* Search news article.
+	*/
+	public function scopeSearch($query, $search) {
+		$news = $query->where('title', 'like', '%' . $search . '%')
+			->orWhere('article', 'like', '%' . $search . '%')
+			->get();
+
+		return $news;
+	}
 }

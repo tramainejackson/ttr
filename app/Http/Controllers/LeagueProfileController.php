@@ -20,13 +20,19 @@ class LeagueProfileController extends Controller
         $leagues = LeagueProfile::all();
 		
 		// Resize the default image
-		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+		Image::make(public_path('images/commissioner.jpg'))->resize(350, null, 	function ($constraint) {
 				$constraint->aspectRatio();
 			}
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
-			
-		return view('leagues.index', compact('leagues', 'defaultImg'));
+		
+		if(request()->query('filter')) {
+			$leagues = LeagueProfile::filter(request()->query('filter'));
+
+			return view('leagues.index', compact('leagues', 'defaultImg'));
+		} else {
+			return view('leagues.index', compact('leagues', 'defaultImg'));
+		}
     }
 
     /**
@@ -114,5 +120,26 @@ class LeagueProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+	/**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+		$leagues = LeagueProfile::search(str_ireplace(' ', '', str_ireplace('_', '', $request->search)));
+		$searchCriteria = $request->search;
+		
+		// Create and Resize the default image
+		Image::make(public_path('images/commissioner.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+		
+		return view('leagues.index', compact('searchCriteria', 'defaultImg', 'leagues'));
     }
 }

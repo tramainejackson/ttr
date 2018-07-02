@@ -98,4 +98,21 @@ class LeagueProfile extends Model
 			return collect();
 		}
     }
+
+	public function scopeSearch($query, $search) {
+		$players = $query->where('name', 'like', '%' . $search . '%')
+			->orWhere('commish', 'like', '%' . $search . '%')
+			->orWhere('address', 'like', '%' . $search . '%')
+			->orWhere('phone', 'like', '%' . $search . '%')
+			->get();
+
+		return $players;
+	}
+
+	public function scopeFilter($query, $filter) {
+		$leagues = $query->where('age', 'like', '%'. $filter . '%')
+			->get();
+
+		return $leagues;
+	}
 }

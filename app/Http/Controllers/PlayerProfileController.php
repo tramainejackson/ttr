@@ -435,7 +435,7 @@ class PlayerProfileController extends Controller
      */
     public function search(Request $request)
     {
-		$allPlayers = PlayerProfile::search($request->search);
+		$allPlayers = PlayerProfile::search(str_ireplace(' ', '', str_ireplace('_', '', $request->search)));
 		$searchCriteria = $request->search;
 		
 		// Create and Resize the default image

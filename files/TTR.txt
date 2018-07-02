@@ -2,10 +2,10 @@
 						ToTheRec
 ------------------------------------------------------
 
-Add deletions of articles and player videos
-Add searches to leagues index page and news index page
 Add pagination to leagues index and news and vidoes
 Fix the issue with the leagues photo and players photo on subdomain/domain
+Done: Add searches to leagues index page and news index page
+Done: Add deletions of articles and player videos
 Done: Add more text to the about page
 Done: Add something to the leagues profile edit page card. And a background.
 Done: Make font larger

@@ -47,4 +47,8 @@ Route::post('players/search', 'PlayerProfileController@search')->name('players.s
 
 Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
 
+Route::post('leagues/search', 'LeagueProfileController@search')->name('leagues.search');
+
+Route::post('news/search', 'NewsController@search')->name('news.search');
+
 Route::post('rec_centers/search', 'RecCenterController@search');

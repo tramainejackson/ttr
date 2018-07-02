@@ -251,4 +251,25 @@ class NewsController extends Controller
 			return redirect()->route('writers.show', ['writer' => $news->writer->id])->with('status', 'Article Deleted Successfully');
 		}
     }
+
+	/**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+		$articles = News::search(str_ireplace(' ', '', str_ireplace('_', '', $request->search)));
+		$searchCriteria = $request->search;
+		
+		// Create and Resize the default image
+		Image::make(public_path('images/commissioner.jpg'))->resize(350, null, 	function ($constraint) {
+				$constraint->aspectRatio();
+			}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+		
+		return view('news.index', compact('searchCriteria', 'defaultImg', 'articles'));
+    }
 }

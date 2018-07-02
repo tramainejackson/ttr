@@ -31,6 +31,13 @@ html, body, header, .view {
 .op75 {opacity: 0.75;}
 /** .Opacity Level **/
 
+/** Absolute Helpers **/
+.top {top:0px;}
+.bottom {bottom:0px;}
+.left {left:0px;}
+.right {right:0px;}
+/** .Absolute Helpers **/
+
 .text-underline {
 	text-decoration: underline;
 }

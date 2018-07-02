@@ -149,6 +149,9 @@ class PlayerProfile extends Model
 		return $players;
 	}
 	
+	/**
+	* Search news article.
+	*/
 	public function scopeSearch($query, $search) {
 		$players = $query->where('firstname', 'like', '%' . $search . '%')
 			->orWhere('lastname', 'like', '%' . $search . '%')
