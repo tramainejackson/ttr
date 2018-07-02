@@ -34,12 +34,12 @@
 		</div>
 		
 		<div class="row">
-			<div class="col text-center white-text">
+			<div class="col text-center white-text d-none d-lg-block">
 				<h3 class="h3-responsive">Filter By League Ages</h3>
 			</div>
 		</div>
 		
-		<div class="league_type_filter mb-5 d-flex justify-content-around align-items-center">
+		<div class="league_type_filter mb-5 d-none d-lg-flex justify-content-around align-items-center">
 			<a href="{{ route('leagues.index', ['filter' => '10_and_under']) }}" class="btn{{ request()->query('filter') == '10_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">10&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
 			
 			<a href="{{ route('leagues.index', ['filter' => '12_and_under']) }}" class="btn{{ request()->query('filter') == '12_and_under' ? ' red lighten-1' : ' blue-grey' }}" type="button">12&nbsp;&nbsp;<i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
@@ -74,8 +74,16 @@
 				<div class="row position-relative my-5 white-text">
 					<div class="col-12 col-md-8 mx-auto">
 						<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? asset($league->picture) : $defaultImg }});">
-							<div class="text-white text-left d-flex flex-column align-items-center rgba-black-strong p-5">
-								<div class="mt-3 p-2 rgba-black-light coolText3 rounded z-depth-1-half">
+							<div class="text-white text-left d-flex flex-column align-items-center rgba-black-strong p-2 p-lg-5">
+								<div class="">
+									@if($league->seasons()->active()->get()->isNotEmpty())
+										@foreach($league->seasons()->active()->get() as $season)
+											<button class="btn success-color" type="button">{{ $season->name }}</button>
+										@endforeach
+									@endif
+								</div>
+								
+								<div class="mt-3 p-lg-2 rgba-black-light coolText3 rounded z-depth-1-half">
 									<h2 class="h2-responsive">League Name: {{ $league->name }}</h2>
 									
 									<h2 class="h2-responsive">Commission Name: {{ $league->commish }}</h2>
@@ -93,19 +101,12 @@
 									@endif
 								</div>
 
-								<div class="">
-									@if($league->seasons()->active()->get()->isNotEmpty())
-										@foreach($league->seasons()->active()->get() as $season)
-											<button class="btn success-color position-absolute top left" type="button">{{ $season->name }}</button>
-										@endforeach
-									@endif
-								</div>
 								
 								<hr/>
 								
-								<div class="d-flex justify-content-between my-4">
-									<div class="col">
-										<h1 class="">Age Levels</h1>
+								<div class="d-flex justify-content-between flex-column flex-lg-row my-4">
+									<div class="col-12">
+										<h1 class="h1-responsive">Age Levels</h1>
 										<div class="row">
 											@foreach(find_ages() as $age)
 												<div class="col-6 my-1">
@@ -115,8 +116,8 @@
 										</div>
 									</div>
 									
-									<div class="col">
-										<h1 class="">Competition Levels</h1>
+									<div class="col-12">
+										<h1 class="h1-responsive">Competition Levels</h1>
 										
 										<div class="row">
 											@foreach(find_competitions() as $comp)

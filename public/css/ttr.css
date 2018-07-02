@@ -2109,14 +2109,6 @@ table.currentMonth {
 /*Smartphones portrait*/
 @media only screen and (max-device-width:575.99px){
 
-body {
-	min-height: 1750px;
-}
-
-.maine_overlay {
-	height: 1750px;
-}
-
 .maine_modal_player, .maine_modal_league, .maine_modal {
 	width: 34em;
 	top: 7%;
