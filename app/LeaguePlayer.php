@@ -83,4 +83,14 @@ class LeaguePlayer extends Model
 			['email', $email],
 		])->get();
     }
+	
+	/**
+	* Get the players stats for the season object.
+	*/
+    public function scopeAcceptedProfile($query)
+    {
+        return $query->where([
+			['player_profile_accepted', 'Y'],
+		])->get();
+    }
 }

@@ -104,8 +104,8 @@
 								
 								<hr/>
 								
-								<div class="d-flex justify-content-between flex-column flex-lg-row my-4">
-									<div class="col-12">
+								<div class="d-flex justify-content-between flex-column flex-xl-row my-4">
+									<div class="col-12 col-xl-6">
 										<h1 class="h1-responsive">Age Levels</h1>
 										<div class="row">
 											@foreach(find_ages() as $age)
@@ -116,7 +116,7 @@
 										</div>
 									</div>
 									
-									<div class="col-12">
+									<div class="col-12 col-xl-6">
 										<h1 class="h1-responsive">Competition Levels</h1>
 										
 										<div class="row">

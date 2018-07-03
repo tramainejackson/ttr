@@ -22,7 +22,7 @@ class LeagueSeason extends Model
 	*/
     public function standings()
     {
-        return $this->hasMany('App\LeagueStanding');
+        return $this->hasMany('App\LeagueStanding')->orderBy('team_wins', 'desc');
     }
 	
 	/**

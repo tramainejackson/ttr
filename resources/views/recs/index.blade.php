@@ -13,6 +13,9 @@
 	</style>
 @endsection
 
+@section('additional_scripts')
+@endsection
+
 @section('content')
 	<div class="container-fluid">
 		<div class="recsPageContainer">
@@ -60,14 +63,18 @@
 						@for($x=0; $x < count($getRecs); $x+=3)
 							<div class="carousel-item{{ $x == 0 ? ' active' : '' }}">
 								@isset($getRecs[$x])	
-									<div class="col-md-4">
+									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
 										<div class="card mb-2">
 											<div class="view gradient-card-header blue-gradient py-5">
 												@if($getRecs[$x]->name != "")
 													@if($getRecs[$x]->nickname != "")
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}"><b>"{{ $getRecs[$x]->nickname }}"</b>&nbsp;{{ $getRecs[$x]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}"><b>
+															<a href="#" class="white-text">"{{ $getRecs[$x]->nickname }}"</b>&nbsp;{{ $getRecs[$x]->name }}</a>
+														</h1>
 													@else
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}">{{ $getRecs[$x]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}">
+															<a href="#" class="white-text text-underline">{{ $getRecs[$x]->name }}</a>
+														</h1>
 													@endif
 												@endif
 											</div>
@@ -114,14 +121,16 @@
 								@endisset
 								
 								@isset($getRecs[$x+1])
-									<div class="col-md-4">
+									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
 										<div class="card mb-2">
 											<div class="view gradient-card-header blue-gradient py-5">
 												@if($getRecs[$x+1]->name != "")
 													@if($getRecs[$x+1]->nickname != "")
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><b>"{{ $getRecs[$x+1]->nickname }}"</b>&nbsp;{{ $getRecs[$x+1]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><b>
+															<a href="#" class="white-text text-underline">"{{ $getRecs[$x+1]->nickname }}"</b>&nbsp;{{ $getRecs[$x+1]->name }}</a>
+														</h1>
 													@else
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}">{{ $getRecs[$x+1]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><a href="#" class="white-text text-underline">{{ $getRecs[$x+1]->name }}</a></h1>
 													@endif
 												@endif
 											</div>
@@ -168,14 +177,18 @@
 								@endisset
 								
 								@isset($getRecs[$x+2])
-									<div class="col-md-4">
+									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
 										<div class="card mb-2">
 											<div class="view gradient-card-header blue-gradient py-5">
 												@if($getRecs[$x+2]->name != "")
 													@if($getRecs[$x+2]->nickname != "")
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}"><b>"{{ $getRecs[$x+2]->nickname }}"</b>&nbsp;{{ $getRecs[$x+2]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}"><b>
+															<a href="#" class="white-text text-underline">"{{ $getRecs[$x+2]->nickname }}"</b>&nbsp;{{ $getRecs[$x+2]->name }}</a>
+														</h1>
 													@else
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}">{{ $getRecs[$x+2]->name }}</h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}">
+															<a href="#" class="white-text text-underline">{{ $getRecs[$x+2]->name }}</a>
+														</h1>
 													@endif
 												@endif
 											</div>

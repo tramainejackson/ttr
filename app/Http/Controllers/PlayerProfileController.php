@@ -79,7 +79,7 @@ class PlayerProfileController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return view('players.show', compact('player'));
+        return view('players.show', compact('player', 'defaultImg'));
     }
 
     /**

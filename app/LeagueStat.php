@@ -48,7 +48,7 @@ class LeagueStat extends Model
 	*/
     public function player()
     {
-        return $this->belongsTo('App\LeaguePlayer');
+        return $this->belongsTo('App\LeaguePlayer', 'league_player_id');
     }
 	
 	/**

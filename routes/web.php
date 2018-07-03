@@ -52,3 +52,13 @@ Route::post('leagues/search', 'LeagueProfileController@search')->name('leagues.s
 Route::post('news/search', 'NewsController@search')->name('news.search');
 
 Route::post('rec_centers/search', 'RecCenterController@search');
+
+Route::domain('leagues.totherec.com')->group(function () {
+    Route::get('/{league}', function ($league) {
+        //
+    })->name('league.index');
+	
+	Route::get('/{league}/{season}', function ($league, $season) {
+        //
+    })->name('season.show');
+});

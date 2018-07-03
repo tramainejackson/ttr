@@ -83,8 +83,6 @@ $(document).ready(function() {
 		} else {
 			toastr["info"]("You have reached the max amount of playgrounds to add");
 		}
-		
-		// $('.mdb-select').material_select();
 	});
 	
 	// Button toggle for writers article publish switch
@@ -493,7 +491,7 @@ $(document).ready(function() {
 	
 	// Stop carousel when show all recs button clicked
 	$("body").on("click", "#showAllRecs", function(e)	{
-		$(".carousel-item .col-md-4").unwrap().addClass('my-2');
+		$(".carousel-item div[class*='col']").unwrap().addClass('my-2');
 		$('.carousel').carousel('pause');
 		$('.carousel .controls-top, .carousel .carousel-indicators').add($(this)).remove();
 	});
