@@ -54,7 +54,7 @@ Route::post('news/search', 'NewsController@search')->name('news.search');
 Route::post('rec_centers/search', 'RecCenterController@search');
 
 Route::domain('leagues.totherec.com')->group(function () {
-    Route::get('/{league}', function ($league) {
+    Route::get('league_profile/{league}', function ($league) {
         //
     })->name('league.index');
 	

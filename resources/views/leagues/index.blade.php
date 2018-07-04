@@ -78,7 +78,7 @@
 								<div class="">
 									@if($league->seasons()->active()->get()->isNotEmpty())
 										@foreach($league->seasons()->active()->get() as $season)
-											<button class="btn success-color" type="button">{{ $season->name }}</button>
+											<a href="{{ route('season.show', ['league' => str_ireplace(" ", "", strtolower($season->league->name)), 'season' => str_ireplace(" ", "", strtolower($season->name))]) }}" class="btn success-color">{{ $season->name }}</a>
 										@endforeach
 									@endif
 								</div>
@@ -106,7 +106,7 @@
 								
 								<div class="d-flex justify-content-between flex-column flex-xl-row my-4">
 									<div class="col-12 col-xl-6">
-										<h1 class="h1-responsive">Age Levels</h1>
+										<h1 class="h1-responsive">Ages</h1>
 										<div class="row">
 											@foreach(find_ages() as $age)
 												<div class="col-6 my-1">
@@ -117,7 +117,7 @@
 									</div>
 									
 									<div class="col-12 col-xl-6">
-										<h1 class="h1-responsive">Competition Levels</h1>
+										<h1 class="h1-responsive">Competition</h1>
 										
 										<div class="row">
 											@foreach(find_competitions() as $comp)

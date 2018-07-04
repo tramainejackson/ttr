@@ -69,11 +69,11 @@
 												@if($getRecs[$x]->name != "")
 													@if($getRecs[$x]->nickname != "")
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}"><b>
-															<a href="#" class="white-text">"{{ $getRecs[$x]->nickname }}"</b>&nbsp;{{ $getRecs[$x]->name }}</a>
+															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x]->id]) }}" class="white-text">"{{ $getRecs[$x]->nickname }}"</b>&nbsp;{{ $getRecs[$x]->name }}</a>
 														</h1>
 													@else
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}">
-															<a href="#" class="white-text text-underline">{{ $getRecs[$x]->name }}</a>
+															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x]->id]) }}" class="white-text text-underline">{{ $getRecs[$x]->name }}</a>
 														</h1>
 													@endif
 												@endif
@@ -127,10 +127,10 @@
 												@if($getRecs[$x+1]->name != "")
 													@if($getRecs[$x+1]->nickname != "")
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><b>
-															<a href="#" class="white-text text-underline">"{{ $getRecs[$x+1]->nickname }}"</b>&nbsp;{{ $getRecs[$x+1]->name }}</a>
+															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+1]->id]) }}" class="white-text text-underline">"{{ $getRecs[$x+1]->nickname }}"</b>&nbsp;{{ $getRecs[$x+1]->name }}</a>
 														</h1>
 													@else
-														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><a href="#" class="white-text text-underline">{{ $getRecs[$x+1]->name }}</a></h1>
+														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+1]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+1]->name }}"><a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+1]->id]) }}" class="white-text text-underline">{{ $getRecs[$x+1]->name }}</a></h1>
 													@endif
 												@endif
 											</div>
@@ -183,11 +183,11 @@
 												@if($getRecs[$x+2]->name != "")
 													@if($getRecs[$x+2]->nickname != "")
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}"><b>
-															<a href="#" class="white-text text-underline">"{{ $getRecs[$x+2]->nickname }}"</b>&nbsp;{{ $getRecs[$x+2]->name }}</a>
+															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+2]->id]) }}" class="white-text text-underline">"{{ $getRecs[$x+2]->nickname }}"</b>&nbsp;{{ $getRecs[$x+2]->name }}</a>
 														</h1>
 													@else
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}">
-															<a href="#" class="white-text text-underline">{{ $getRecs[$x+2]->name }}</a>
+															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+2]->id]) }}" class="white-text text-underline">{{ $getRecs[$x+2]->name }}</a>
 														</h1>
 													@endif
 												@endif

@@ -16,7 +16,7 @@ class RecCenterController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth')->except('index'); 
+       $this->middleware('auth')->except(['index', 'show']); 
     }
 	
     /**
@@ -59,9 +59,10 @@ class RecCenterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RecCenter $rec_center)
     {
-        //
+        // dd($rec_center);
+		return view('recs.show', compact('rec_center'));
     }
 
     /**

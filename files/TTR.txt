@@ -2,12 +2,12 @@
 						ToTheRec
 ------------------------------------------------------
 
-Create player show page
 Create league show page
-Create parks and rec show page
 Add pagination to leagues index and news and vidoes
 Fix footer
 Fix the issue with the leagues photo and players photo on subdomain/domain
+Done: Create parks and rec show page
+Done: Create player show page
 Done: Add searches to leagues index page and news index page
 Done: Add deletions of articles and player videos
 Done: Add more text to the about page
