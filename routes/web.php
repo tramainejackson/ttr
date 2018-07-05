@@ -66,7 +66,7 @@ Route::domain('leagues.totherec.com')->group(function () {
         //
     })->name('sub_photo');
 	
-	Route::get('/{user}', function ($user) {
+	Route::get('login/{user}', function ($user) {
         return Auth::user();
     })->name('sub_profile');
 });
