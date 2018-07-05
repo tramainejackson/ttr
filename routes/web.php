@@ -58,7 +58,7 @@ Route::domain('leagues.totherec.com')->group(function () {
         //
     })->name('league.index');
 	
-	Route::get('/{league}/{season}', function ($league, $season) {
+	Route::get('league_profile/{league}/{season}', function ($league, $season) {
         //
     })->name('season.show');
 	
