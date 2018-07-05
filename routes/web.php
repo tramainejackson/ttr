@@ -55,7 +55,7 @@ Route::post('rec_centers/search', 'RecCenterController@search');
 
 Route::domain('leagues.totherec.com')->group(function () {
     Route::get('league_profile/{league}', function ($league) {
-        //
+		
     })->name('league.index');
 	
 	Route::get('league_profile/{league}/{season}', function ($league, $season) {
@@ -65,4 +65,8 @@ Route::domain('leagues.totherec.com')->group(function () {
 	Route::get('/{picture}', function ($picture) {
         //
     })->name('sub_photo');
+	
+	Route::get('/{user}', function ($user) {
+        return Auth::user();
+    })->name('sub_profile');
 });

@@ -21,7 +21,7 @@
 
 @section('content')
 	@include('include.functions')
-	
+	<a href="{{ route('sub_profile', ['user' => Auth::user()]) }}" target="_blank" class="btn btn-primary">Test Link</a>
 	<div class="container-fluid" id="leaguesProfileContainer">
 		<div class="row">
 			<div class="col-12 col-md-12 mx-auto">
@@ -60,95 +60,100 @@
 							</div>
 						</div>
 					</div>
-					<div class="updateLeagueForm">
-						<div class="md-form">
-							<input type="text" name="leagues_name" class="form-control white-text" id="leagues_name" value="{{ $league->name }}" />
-							
-							<label for="leagues_name">League Name</label>
-						</div>
-						<div class="md-form">
-							<input type="text" name="leagues_commish" class="form-control white-text" id="leagues_commish" placeholder="Commissioner" value="{{ $league->commish }}" />
+					
+					<div class="container pb-4">
+						<div class="row">
+							<div class="col">
+								<div class="md-form">
+									<input type="text" name="leagues_name" class="form-control white-text" id="leagues_name" value="{{ $league->name }}" />
+									
+									<label for="leagues_name">League Name</label>
+								</div>
+								<div class="md-form">
+									<input type="text" name="leagues_commish" class="form-control white-text" id="leagues_commish" placeholder="Commissioner" value="{{ $league->commish }}" />
 
-							<label for="leagues_commish">Commissioner</label>
-						</div>
-						<div class="md-form">
-							<input type="text" name="leagues_address" class="form-control white-text" id="leagues_address" placeholder="Address" value="{{ $league->address }}" />
+									<label for="leagues_commish">Commissioner</label>
+								</div>
+								<div class="md-form">
+									<input type="text" name="leagues_address" class="form-control white-text" id="leagues_address" placeholder="Address" value="{{ $league->address }}" />
 
-							<label for="leagues_address">League Address</label>
-						</div>
-						<div class="md-form">
-							<input type="text" name="leagues_phone" class="form-control white-text" id="leagues_phone" placeholder="Phone" value="{{ $league->phone }}" />
+									<label for="leagues_address">League Address</label>
+								</div>
+								<div class="md-form">
+									<input type="text" name="leagues_phone" class="form-control white-text" id="leagues_phone" placeholder="Phone" value="{{ $league->phone }}" />
 
-							<label for="leagues_phone">League Phone</label>
-						</div>
-						<div class="md-form">
-							<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ $league->leagues_email }}" placeholder="Enter Leagues Email Address" />
+									<label for="leagues_phone">League Phone</label>
+								</div>
+								<div class="md-form">
+									<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ $league->leagues_email }}" placeholder="Enter Leagues Email Address" />
 
-							<label for="leagues_email">League Email</label>
-						</div>
-						<div class="md-form">
-							<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ $league->leagues_website }}" placeholder="Enter League Website" />
+									<label for="leagues_email">League Email</label>
+								</div>
+								<div class="md-form">
+									<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ $league->leagues_website }}" placeholder="Enter League Website" />
 
-							<label for="leagues_website">League Website</label>
-						</div>
-						<div class="md-form input-group">
-							<div class="input-group-prepend">
-								<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
-							</div>
-							
-							<input type="number" name="leagues_fee" class="form-control white-text" id="league_fee" value="{{ $league->leagues_fee }}"  step="0.01" />
-							
-							<div class="input-group-prepend">
-								<span class="input-group-text">Per Team</span>
-							</div>
-							
-							<label for="leagues_fee">Entry Fee</label>
-						</div>
-						<div class="md-form input-group mb-5">
-							<div class="input-group-prepend">
-								<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
-							</div>
-							
-							<input type="number" class="form-control white-text" name="ref_fee" id="ref_fee" value="{{ $league->ref_fee }}" step="0.01" />
-							
-							<div class="input-group-prepend">
-								<span class="input-group-text">Per Game</span>
-							</div>
-							
-							<label for="ref_fee">Ref Fee</label>
-						</div>
-						<div class="md-form mb-5">
-							@php $ages = find_all_ages(); @endphp
-							@php $ageArray =  explode(" ", $league->age); @endphp
-							<div class="row">
-								@foreach($ages as $age)
-									<div class="col-6 col-md-3">
-										<button type="button" class="btn btn-lg mx-0 w-100 ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
-											<input type="checkbox" class="hidden" name="age[]" value="{{ $age }}" hidden{{ in_array($age, $ageArray) ? ' checked ' : '' }}/>
-										</button>
+									<label for="leagues_website">League Website</label>
+								</div>
+								<div class="md-form input-group">
+									<div class="input-group-prepend">
+										<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
 									</div>
-								@endforeach
-							</div>
-
-							<label for="leagues_ages">League Ages</label>
-						</div>
-						<div class="md-form">
-							@php $getComp = find_competitions(); @endphp
-							@php $compArray =  explode(" ", $league->comp); @endphp
-							<div class="row">
-								@foreach($getComp as $comp)
-									<div class="col-6 col-lg-3">
-										<button class="btn btn-lg gray mx-0 w-100 compBtnSelect{{ in_array($comp, $compArray) ? ' orange' : ' grey' }}" type="button">{{ str_ireplace("_", " ", ucwords($comp)) }}
-											<input type="checkbox" class="hidden" name="leagues_comp[]" value="{{ $comp }}" hidden{{ in_array($comp, $compArray) ? ' checked ' : '' }}/>
-										</button>
+									
+									<input type="number" name="leagues_fee" class="form-control white-text" id="league_fee" value="{{ $league->leagues_fee }}"  step="0.01" />
+									
+									<div class="input-group-prepend">
+										<span class="input-group-text">Per Team</span>
 									</div>
-								@endforeach
+									
+									<label for="leagues_fee">Entry Fee</label>
+								</div>
+								<div class="md-form input-group mb-5">
+									<div class="input-group-prepend">
+										<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
+									</div>
+									
+									<input type="number" class="form-control white-text" name="ref_fee" id="ref_fee" value="{{ $league->ref_fee }}" step="0.01" />
+									
+									<div class="input-group-prepend">
+										<span class="input-group-text">Per Game</span>
+									</div>
+									
+									<label for="ref_fee">Ref Fee</label>
+								</div>
+								<div class="md-form mb-5">
+									@php $ages = find_ages(); @endphp
+									@php $ageArray =  explode(" ", $league->age); @endphp
+									<div class="row">
+										@foreach($ages as $age)
+											<div class="col-6 col-md-3">
+												<button type="button" class="btn btn-lg mx-0 w-100 ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
+													<input type="checkbox" class="hidden" name="age[]" value="{{ $age }}" hidden{{ in_array($age, $ageArray) ? ' checked ' : '' }}/>
+												</button>
+											</div>
+										@endforeach
+									</div>
+
+									<label for="leagues_ages">League Ages</label>
+								</div>
+								<div class="md-form">
+									@php $getComp = find_competitions(); @endphp
+									@php $compArray =  explode(" ", $league->comp); @endphp
+									<div class="row">
+										@foreach($getComp as $comp)
+											<div class="col-6 col-lg-3">
+												<button class="btn btn-lg gray mx-0 w-100 compBtnSelect{{ in_array($comp, $compArray) ? ' orange' : ' grey' }}" type="button">{{ str_ireplace("_", " ", ucwords($comp)) }}
+													<input type="checkbox" class="hidden" name="leagues_comp[]" value="{{ $comp }}" hidden{{ in_array($comp, $compArray) ? ' checked ' : '' }}/>
+												</button>
+											</div>
+										@endforeach
+									</div>
+									
+									<label for="leagues_comp">League Competition</label>
+								</div>
+								<div class="md-form">
+									<button type="submit" name="submit" class="btn btn-lg green m-0" id="" value="">Update League</button>
+								</div>
 							</div>
-							
-							<label for="leagues_comp">League Competition</label>
-						</div>
-						<div class="md-form">
-							<button type="submit" name="submit" class="btn btn-lg green m-0" id="" value="">Update League</button>
 						</div>
 					</div>
 				{!! Form::close() !!}
