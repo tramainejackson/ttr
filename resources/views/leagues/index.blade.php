@@ -73,7 +73,7 @@
 			@foreach($leagues as $league)
 				<div class="row position-relative my-5 white-text">
 					<div class="col-12 col-md-8 mx-auto">
-						<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? asset($league->picture) : $defaultImg }});">
+						<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? route('sub_photo', ['picture' => $league->picture]) : $defaultImg }});">
 							<div class="text-white text-left d-flex flex-column align-items-center rgba-black-strong p-2 p-lg-5">
 								<div class="">
 									@if($league->seasons()->active()->get()->isNotEmpty())

@@ -61,4 +61,8 @@ Route::domain('leagues.totherec.com')->group(function () {
 	Route::get('/{league}/{season}', function ($league, $season) {
         //
     })->name('season.show');
+	
+	Route::get('storage/images/{picture}', function ($picture) {
+        //
+    })->name('sub_photo');
 });
