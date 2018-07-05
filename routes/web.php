@@ -62,7 +62,7 @@ Route::domain('leagues.totherec.com')->group(function () {
         //
     })->name('season.show');
 	
-	Route::get('storage/images/{picture}', function ($picture) {
+	Route::get('/{picture}', function ($picture) {
         //
     })->name('sub_photo');
 });
