@@ -19,7 +19,7 @@
 		</div>
 		<div class="searches row py-5">
 			<div class="searchesHeader col-12">
-				<h2 class="coolText4 h2-responsive mx-2 p-sm-4 rgba-stylish-strong text-center white-text">Check Out the Leagues and Rec Centers Around the City</h2>
+				<h2 class="coolText4 h2-responsive mx-2 p-4 rgba-stylish-strong text-center white-text">Check Out the Leagues and Rec Centers Around the City</h2>
 			</div>
 			
 			<!-- City Leagues Section -->

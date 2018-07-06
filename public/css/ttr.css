@@ -2206,14 +2206,6 @@ a.search_list_link {
     width: 100%;
 }
 
-.searches {
-  background-color: #feae46;
-  opacity: 0.8;
-  font-size: 200%;
-}
-
-#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay {}
-
 .playerPageInfo {
     font-size: 170%;
     min-width: 100%;

@@ -46,34 +46,49 @@
 			<div id="slide-out" class="side-nav fixed">
 				<ul class="custom-scrollbar">
 					<!--/. Side navigation links -->
-					<li id="index">
-						<a href="{{ route('welcome') }}">Home</a>
+					<li class="nav-item">
+						@if (Auth::guest())
+							<img src="{{ asset('/images/commissioner.jpg') }}" class="mx-auto img-fluid" height="300px" width="250" />
+						@else
+							@if(Auth::user()->league)
+								<img src="{{ Auth::user()->league->picture != null ? route('sub_photo', ['picture' => Auth::user()->league->picture]) : asset('/images/commissioner.jpg') }}" class="mx-auto img-fluid" height="300px" width="250" />
+							@elseif(Auth::user()->player)
+								<img src="{{ Auth::user()->player->image ? asset(Auth::user()->player->image->path) : asset('/images/commissioner.jpg') }}" class="mx-auto img-fluid" height="300px" width="250" />
+							@endif
+						@endif
+					</li>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('welcome') }}">Home</a>
 					</li>	
-					<li id="rec_li">
-						<a href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
 					</li>
-					<li id="player_li">
-						<a href="{{ route('players.index') }}">Players</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('players.index') }}">Players</a>
 					</li>
-					<li id="league_li">
-						<a href="{{ route('leagues.index') }}">City Leagues</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('leagues.index') }}">City Leagues</a>
 					</li>			
-					<li id="news_li">
-						<a href="{{ route('news.index') }}">News</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('news.index') }}">News</a>
 					</li>
-					<li id="clips_li">
-						<a href="{{ route('clips.index') }}">Clips</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('clips.index') }}">Clips</a>
 					</li>
-					<li id="contact_li">
-						<a href="{{ route('about') }}">About TTR</a>
+					<li class="nav-item border-bottom mr-3" id="">
+						<a class="nav-link white-text" href="{{ route('about') }}">About TTR</a>
 					</li>
 					
 					@if (Auth::guest())
-						<li><a href="{{ route('login') }}">Login</a></li>
-						<li><a href="{{ route('register') }}">Register</a></li>
+						<li class="nav-item border-bottom mr-3">
+							<a class="nav-link white-text" href="{{ route('login') }}">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link white-text" href="{{ route('register') }}">Register</a>
+						</li>
 					@else
-						<li class="">
-							<a href="{{ route('logout') }}"
+						<li class="nav-item">
+							<a class="nav-link white-text" href="{{ route('logout') }}"
 								onclick="event.preventDefault();
 										 document.getElementById('logout-form').submit();">
 								Logout
