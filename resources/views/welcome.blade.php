@@ -19,15 +19,15 @@
 		</div>
 		<div class="searches row py-5">
 			<div class="searchesHeader col-12">
-				<h2 class="">Check Out the Leagues and Rec Centers Around the City</h2>
+				<h2 class="coolText4 h2-responsive mx-2 p-sm-4 rgba-stylish-strong text-center white-text">Check Out the Leagues and Rec Centers Around the City</h2>
 			</div>
 			
 			<!-- City Leagues Section -->
-			<div class="col mb-4" id="leagues_list_div">
+			<div class="col-12 col-md mb-4" id="leagues_list_div">
 				<div class="card">
 					<div class="card-body">
 						<div class="table-wrapper-2">
-							<table class="table table-responsive-md table-striped table-hover">
+							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
 										<th class="search_list_header"><a class="search_list_link text-center d-block coolText1 display-4 white-text" href="{{ route('leagues.index') }}">City Leagues</a></th>
@@ -40,86 +40,7 @@
 										@foreach($getLeagues as $league)
 											<tr class="{{ str_ireplace('', '_', $league->name) }}">
 												<td class="text-center">
-													<a class="quick_league">{{ ucwords(strtolower($league->name)) }}</a>
-													<div class="leagueDiv">
-														<div class="leagueDivHeader">
-															<h2 class="">{{ ucwords($league->name) }}</h2>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Leagues Owner:</span>
-																<span class="leagueProfileInfo leagueProfileContent">{{ $league->commish == null ? 'Call for more information' : $league->commish }}</span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Address:</span>
-																<span class="leagueProfileInfo leagueProfileContent">{{ $league->address == null ? 'Call for more information' : $league->address }}</span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Phone:</span>
-																<span class="leagueProfileInfo leagueProfileContent"></span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Email:</span>
-																<span class="leagueProfileInfo leagueProfileContent"></span>
-															</div>
-														</div>
-														
-														@if($league->leagues_website != "")
-															<div class="leagueDivContent">
-																<div class="leagueProfile">
-																	<span class="leagueProfileSub leagueProfileContent">Website:</span>
-																	<span class="leagueProfileInfo leagueProfileContent">{{ $league->leagues_website }}</span>
-																</div>
-															</div>
-														@endif
-														
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Competition:</span>
-																<span class="leagueProfileInfo leagueProfileContent"></span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Ages:</span>
-																<span class="leagueProfileInfo leagueProfileContent"></span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Entry Fee:</span>
-																<span class='leagueProfileInfo leagueProfileContent'></span>
-															</div>
-														</div>
-														<div class="leagueDivContent">
-															<div class="leagueProfile">
-																<span class="leagueProfileSub leagueProfileContent">Referee Fee:</span>
-																<span class="leagueProfileInfo leagueProfileContent"></span>
-															</div>
-														</div>
-														@if($league->ttr_league_site != "")
-															<div class="leagueDivContent">
-																<div class="leagueProfile">
-																	<span class="leagueProfileSub leagueProfileContent">TTR Site:</span>
-																	<span class="leagueProfileInfo leagueProfileContent"></span>
-																</div>
-															</div>
-														@endif
-														@if($league->ttr_email != "")
-															<div class="leagueDivContent">
-																<div class="leagueProfile">
-																	<span class="leagueProfileSub leagueProfileContent">TTR Email:</span>
-																	<span class="leagueProfileInfo leagueProfileContent"></span>
-																</div>
-															</div>
-														@endif
-													</div>	
+													<a href="{{ route('league.index', ['league' => str_ireplace(" ", "", strtolower($league->name))]) }}" class="quick_league">{{ ucwords(strtolower($league->name)) }}</a>
 												</td>
 											</tr>
 										@endforeach
@@ -133,11 +54,11 @@
 			<!-- /City Leagues Section -->
 			
 			<!-- City Rec Centers Section -->
-			<div class="col mb-4" id="recs_list_div">
+			<div class="col-12 col-md mb-4" id="recs_list_div">
 				<div class="card">
 					<div class="card-body">
 						<div class="table-wrapper-2">
-							<table class="table table-responsive-md table-striped table-hover">
+							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
 										<th class="search_list_header"><a class="search_list_link text-center d-block coolText1 display-4 white-text" id="recs_link" href="recs.php">Rec Centers</a></th>
@@ -151,7 +72,7 @@
 													<span><img src="/images/fire.png" class="fireIcon1" /></span>
 												@endif
 												
-												<a class="quick_rec">{{ $showRec->name }}</a>
+												<a href="{{ route('rec_centers.show', ['rec_center' => $showRec->id]) }}" class="quick_rec">{{ $showRec->name }}</a>
 												
 												@if(in_array(str_ireplace(" ", "_", $showRec->name), $fireRecs))
 													<span><img src="/images/fire.png" class="fireIcon2" /></span>
@@ -159,47 +80,7 @@
 												
 												<div class="recDiv">
 													<div class="recDivHeader">
-														<h2 class=""><?php echo $showRec->recs_name; ?><span><?php echo $showRec->nickname != "" ? $showRec->nickname : ""; ?><span></h2>
-													</div>
-													<div class="recDivContent">
-														<div class="recProfile">
-															<span class="recProfileSub recProfileContent">Rec Owner:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->owner == "" ? $showRec->owner : "Call or See Website For More Info"; ?></span>
-														</div>
-														<div class="recProfile">
-															<span class="recProfileSub recProfileContent">Address:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->address == "" ? $showRec->address : "Call or See Website For More Info"; ?></span>
-														</div>
-														<div class="recProfile">
-															<span class="recProfileSub recProfileContent">Phone:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->phone; ?></span>
-														</div>
-														
-														@if($showRec->website != "")
-															<div class="recProfile">
-																<span class="recProfileSub recProfileContent">Website:</span>
-																<span class="recProfileInfo recProfileContent"><?php echo $showRec->website == "" ? $showRec->website : "No Website"; ?></span>
-															</div>
-														@endif
-														
-														<div class="recProfile">
-															<span class="recProfileSub recProfileContent">Indoor/Outdoor Court:</span>
-															<span class="recProfileInfo recProfileContent">
-																<?php if($showRec->indoor == 1 && $showRec->outdoor == 1) { ?>
-																	<?php echo "Yes/Yes"; ?>
-																<?php } elseif($showRec->indoor == 1 && $showRec->outdoor == 0) { ?>
-																	<?php echo "Yes/No"; ?>
-																<?php } elseif($showRec->indoor == 0 && $showRec->outdoor == 1) { ?>
-																	<?php echo "No/Yes"; ?>
-																<?php } else { ?>
-																	<?php echo "No/No"; ?>
-																<?php } ?>
-															</span>
-														</div>
-														<div class="recProfile">
-															<span class="recProfileSub recProfileContent">Entry Fee:</span>
-															<span class="recProfileInfo recProfileContent"><?php echo $showRec->fee; ?></span>
-														</div>
+														<h2 class="">{{ $showRec->recs_name }}<span>{{ $showRec->nickname != "" ? $showRec->nickname : "" }}<span></h2>
 													</div>
 												</div>
 											</td>
@@ -220,16 +101,17 @@
 				<h2 class="coolText1 display-3 twitterHeader">Tweetted</h2>
 				<h4 class="">Join the conversation #sixers, #phillyhoops, #totherec</h4>
 			</div>
-			<div class="d-flex align-items-center justify-content-around">
-				<div class="feed col-md-4 col-sm-3">
+			
+			<div class="d-flex flex-column flex-md-row align-items-center justify-content-around text-center">
+				<div class="feed col-12 col-md-4">
 					<a class="twitter-timeline"  href="https://twitter.com/hashtag/Phillyhoops" data-widget-id="784071520561881088">#Phillyhoops Tweets</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				</div>
-				<div class="feed col-md-4 col-sm-3">
+				<div class="feed col-12 col-md-4">
 					<a class="twitter-timeline"  href="https://twitter.com/hashtag/sixers" data-widget-id="784069581954551808">#sixers Tweets</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				</div>
-				<div class="feed col-md-4 col-sm-3">
+				<div class="feed col-12 col-md-4">
 					<a class="twitter-timeline"  href="https://twitter.com/hashtag/ToTheRec" data-widget-id="784071799776616448">#ToTheRec Tweets</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				</div>
@@ -237,6 +119,4 @@
 		</div>
 		<!-- /Social Media Section -->
 	</div>
-	
-	@include("modal")
 @endsection

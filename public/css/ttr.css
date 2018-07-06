@@ -38,6 +38,31 @@ html, body, header, .view {
 .right {right:0px;}
 /** .Absolute Helpers **/
 
+/** MDB Helpers **/
+.w-auto {
+    width: auto;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.table-wrapper {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table-wrapper-2 {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+/** .MDB Helpers **/
+
 .text-underline {
 	text-decoration: underline;
 }
@@ -297,13 +322,6 @@ text-align: -webkit-center;
 
 .homeBox {
     box-shadow: 0px 0px 10px #3091E5 !important;
-}
-
-.table-wrapper-2 {
-    display: block;
-    max-height: 300px;
-    overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .maine_modal, .leagues_modal, .recs_modal {
@@ -865,41 +883,11 @@ span.menuLiSpan {
     padding: 1% 0% 5%;
 }
 
-.searchesHeader h2 {
-    margin: 0% 18%;
-    padding: 2.5% 0%;
-    border-radius: 5px;
-    background: linear-gradient(rgba(240,255,255,0.80), rgba(240,255,255,0.80), rgba(240,255,255,0.80), transparent);
-    font-size: 200%;
-}
-
-.list {}
-
-.list2, .list1 {}
-
-.list2 td {}
-
-.list2 a:not(.noLeaguesLink), .list1 a {}
-
-.list1 td a:hover, .list2 td a:not(.noLeaguesLink):hover {}
-
-.list2 td a:hover {}
-
-table.list1 td {}
-
 img.fireIcon1, img.fireIcon2 {
     /* height: 65px; */
     max-height: 100%;
     width: 120px;
     max-width: 20%;
-}
-
-img.fireIcon1 {}
-
-img.fireIcon2 {}
-
-#recs_list_div td, #leagues_list_div td {
-    font-size: 125%;
 }
 
 #recs_list_div td:hover, #leagues_list_div td:hover {
@@ -1078,18 +1066,9 @@ div#updateVids form {
 }
 
 .playerPageVideo {
-    max-width: 25%;
     height: 225px;
     max-height: 275px;
-    width: 25%;
-    display: -webkit-inline-box;
-    display: inline-block;
-    margin: 3% 4%;
-    text-align: -webkit-center;
-    text-align: center;
     position: relative;
-    /* color: white; */
-    /* font-size: 175%; */
     box-shadow: 0px 0px 10px #f9f9f9;
     border: solid 2px;
     border-radius: 10px;
@@ -1646,18 +1625,7 @@ div.search_box {
     text-align: center;
 }
 
-button#showAllRecs {
-    max-width: 50%;
-    min-width: 50%;
-    margin: 0% 25%;
-    padding: 2% 0%;
-    border-radius: 10px;
-    border: outset 3px forestgreen;
-    background-color: green;
-    color: white;
-    font-size: 135%;
-    z-index: 2;
-}
+button#showAllRecs {}
 
 button#scroll_to_top {
     position: fixed;
@@ -2187,6 +2155,16 @@ a.search_list_link {
     font-size: 150%;
 }
 
+.recsPage .recsPageList {
+    font-size: 80%;
+}
+
+.display-2 {
+    font-size: 3.5rem;
+}
+
+.showRecRow {}
+
 .media img {
     padding: 0 1%;
     width: 96%;
@@ -2349,65 +2327,12 @@ footer {
 	font-size: 200%;
 }
 
-iframe[id^='twitter-widget-']{
-	width: 80% !important;
-	padding: 0% !important;
-	height: 60em !important;
+iframe[id^='twitter-widget-']{}
 
-}
 }
 
 /*Coverage between iPad and Smartphone*/
 @media only screen and (min-device-width:576px) {
-
-	.menu {
-		font-size:125%;
-	}
-
-	.menu li {
-		margin:0;
-	}
-
-	.menu li a {
-		width:105px;
-	}
-
-	.content {
-		font-size: 13px;
-	}
-
-	.list {}
-
-	.list2 {}
-
-	.champs {
-		overflow-y:hidden;
-	}
-
-	.media img {
-		padding: 1% 5%;
-		width:90%;
-	}
-
-	iframe[id^='twitter-widget-']{
-		width:100% !important;
-		padding:1% 0% 0% 0% !important;
-	}
-
-	#profilePic {
-		padding: 5% 0% 0% 35%;
-		float: none;
-	}
-
-	.playerPageInfo {
-		min-width: 100%;
-		padding-left:19%;
-	}
-
-	.playerDisplay {}
-
-	#profileSetup, .player_setup, .league_setup, .loginPage, .playersPage, .leaguesPage, .contactPage, .playerDisplay {}
-
 	.leaguesPage {
 		float: left;
 		margin: 1%;
@@ -2415,7 +2340,6 @@ iframe[id^='twitter-widget-']{
 		height: 250px;
 		width: 355px;
 	}
-
 }
 
 /*Coverage between iPad and Smartphone*/

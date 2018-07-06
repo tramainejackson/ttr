@@ -80,7 +80,7 @@
 											</div>
 											<div class="card-body">
 												<div class="recsPage">
-													<ul class="recsPageList">
+													<ul class="recsPageList list-unstyled">
 														<li>
 															<span class="listLabel">Rec Advisor:</span>
 															<span class="listContent" title="{{ $getRecs[$x]->recs_owner }}">{{ $getRecs[$x]->owner != "" ? $getRecs[$x]->owner : "None Available" }}</span>
@@ -88,10 +88,6 @@
 														<li>
 															<span class="listLabel">Address:</span>
 															<span class="listContent" title="{{ $getRecs[$x]->address }}">{{ $getRecs[$x]->address != "" ? $getRecs[$x]->address : "None Available" }}</span>
-														</li>
-														<li>
-															<span class="listLabel">Website:</span>
-															<span class="listContent" title="{{ $getRecs[$x]->website }}">{{ $getRecs[$x]->website != "" ? $getRecs[$x]->website : "None Available" }}</span>
 														</li>
 														<li>
 															<span class="listLabel">Indoor Gym:</span>
@@ -107,8 +103,14 @@
 														</li>
 														<li>
 															<span class="listLabel">More Info:</span>
-															<span class="listContent" title="{{ $getRecs[$x]->recs_phone }}">{{ $getRecs[$x]->recs_phone }}</span>
+															<span class="listContent" title="{{ $getRecs[$x]->recs_phone }}">{{ $getRecs[$x]->recs_phone != null ? $getRecs[$x]->recs_phone : 'N/A' }}</span>
 														</li>
+														
+														@if($getRecs[$x]->website != null)
+															<li class="text-center">
+																<a href="{{ $getRecs[$x]->website }}" class="btn blue-grey">Website</a>
+															</li>
+														@endif
 													</ul>
 													@if(in_array(str_ireplace(" ", "_", $getRecs[$x]->recs_name), $fireRecs))
 														<span><img src="images/fire.png" class="fireIcon2" /></span>
@@ -136,7 +138,7 @@
 											</div>
 											<div class="card-body">
 												<div class="recsPage">
-													<ul class="recsPageList">
+													<ul class="recsPageList list-unstyled">
 														<li>
 															<span class="listLabel">Rec Advisor:</span>
 															<span class="listContent" title="{{ $getRecs[$x+1]->recs_owner }}">{{ $getRecs[$x+1]->owner != "" ? $getRecs[$x+1]->owner : "None Available" }}</span>
@@ -144,10 +146,6 @@
 														<li>
 															<span class="listLabel">Address:</span>
 															<span class="listContent" title="{{ $getRecs[$x+1]->address }}">{{ $getRecs[$x+1]->address != "" ? $getRecs[$x+1]->address : "None Available" }}</span>
-														</li>
-														<li>
-															<span class="listLabel">Website:</span>
-															<span class="listContent" title="{{ $getRecs[$x+1]->website }}">{{ $getRecs[$x+1]->website != "" ? $getRecs[$x+1]->website : "None Available" }}</span>
 														</li>
 														<li>
 															<span class="listLabel">Indoor Gym:</span>
@@ -163,8 +161,14 @@
 														</li>
 														<li>
 															<span class="listLabel">More Info:</span>
-															<span class="listContent" title="{{ $getRecs[$x+1]->recs_phone }}">{{ $getRecs[$x+1]->recs_phone }}</span>
+															<span class="listContent" title="{{ $getRecs[$x+1]->recs_phone }}">{{ $getRecs[$x+1]->recs_phone != null ? $getRecs[$x+1]->recs_phone : 'N/A' }}</span>
 														</li>
+														
+														@if($getRecs[$x+1]->website != null)
+															<li class="text-center">
+																<a href="{{ $getRecs[$x+1]->website }}" class="btn blue-grey">Website</a>
+															</li>
+														@endif
 													</ul>
 													@if(in_array(str_ireplace(" ", "_", $getRecs[$x+1]->recs_name), $fireRecs))
 														<span><img src="images/fire.png" class="fireIcon2" /></span>
@@ -194,7 +198,7 @@
 											</div>
 											<div class="card-body">
 												<div class="recsPage">
-													<ul class="recsPageList">
+													<ul class="recsPageList list-unstyled">
 														<li>
 															<span class="listLabel">Rec Advisor:</span>
 															<span class="listContent" title="{{ $getRecs[$x+2]->recs_owner }}">{{ $getRecs[$x+2]->owner != "" ? $getRecs[$x+2]->owner : "None Available" }}</span>
@@ -202,10 +206,6 @@
 														<li>
 															<span class="listLabel">Address:</span>
 															<span class="listContent" title="{{ $getRecs[$x+2]->address }}">{{ $getRecs[$x+2]->address != "" ? $getRecs[$x+2]->address : "None Available" }}</span>
-														</li>
-														<li>
-															<span class="listLabel">Website:</span>
-															<span class="listContent" title="{{ $getRecs[$x+2]->website }}">{{ $getRecs[$x+2]->website != "" ? $getRecs[$x+2]->website : "None Available" }}</span>
 														</li>
 														<li>
 															<span class="listLabel">Indoor Gym:</span>
@@ -221,8 +221,14 @@
 														</li>
 														<li>
 															<span class="listLabel">More Info:</span>
-															<span class="listContent" title="{{ $getRecs[$x+2]->recs_phone }}">{{ $getRecs[$x+2]->recs_phone }}</span>
+															<span class="listContent" title="{{ $getRecs[$x+2]->recs_phone }}">{{ $getRecs[$x+2]->recs_phone != null ? $getRecs[$x+2]->recs_phone : 'N/A' }}</span>
 														</li>
+														
+														@if($getRecs[$x+2]->website != null)
+															<li class="text-center">
+																<a href="{{ $getRecs[$x+2]->website }}" class="btn blue-grey">Website</a>
+															</li>
+														@endif
 													</ul>
 													@if(in_array(str_ireplace(" ", "_", $getRecs[$x+2]->recs_name), $fireRecs))
 														<span><img src="images/fire.png" class="fireIcon2" /></span>
@@ -242,7 +248,12 @@
 				</div>
 				<!--/.Carousel Wrapper-->
 				
-				<button id="showAllRecs" class="btn btn-lg mb-4">Show All Rec Centers</button>
+				<div class="row">
+					<div class="col text-center">
+						<button id="showAllRecs" class="btn btn-lg mb-4 blue lighten-2 z-depth-3">Show All Rec Centers</button>
+					</div>
+				</div>
+				
 				<button id="scroll_to_top"></button>
 			@else
 				@php $searchResult = 
@@ -269,7 +280,7 @@
 								</div>
 								<div class="card-body">
 									<div class="recsPage">
-										<ul class="recsPageList">
+										<ul class="recsPageList list-unstyled">
 											<li>
 												<span class="listLabel">Rec Advisor:</span>
 												<span class="listContent" title="{{ $result->recs_owner }}">{{ $result->owner != "" ? $result->owner : "None Available" }}</span>

@@ -40,7 +40,7 @@
 			{!! Form::close() !!}
 		</div>
 		
-		<div class="player_type_filter mb-5 d-flex justify-content-around align-items-center">
+		<div class="player_type_filter mb-5 d-flex flex-column flex-md-row justify-content-around align-items-center">
 			<a href="{{ route('players.index', ['filter' => 'bruiser']) }}" class="btn{{ request()->query('filter') == 'bruiser' ? ' red lighten-1' : ' blue-grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser</a>
 			<a href="{{ route('players.index', ['filter' => 'high_flyer']) }}" class="btn{{ request()->query('filter') == 'high_flyer' ? ' red lighten-1' : ' blue-grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer</a>
 			<a href="{{ route('players.index', ['filter' => 'magician']) }}" class="btn{{ request()->query('filter') == 'magician' ? ' red lighten-1' : ' blue-grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician</a>
@@ -130,7 +130,7 @@
 			@endisset
 			
 			@if(request()->query('filter'))
-				<div class="col-12">
+				<div class="col-12 my-3">
 					<h2 class="white-text text-center"><i class="fa fa-exclamation" aria-hidden="true"></i>&nbsp;Showing {{ ucwords(str_ireplace('_', ' ', request()->query('filter'))) }} Players&nbsp;<i class="fa fa-exclamation" aria-hidden="true"></i></h2>
 				</div>
 			@endif

@@ -90,8 +90,8 @@
 							<h2 class="col-12">Leagues I'm Playing In</h2>
 
 							@foreach($player->leagues()->acceptedProfile() as $playerSeasonInfo)
-								<div class="playerProfileLeaguesInfo col-12 col-md-6">
-									<div class="p-2 rounded border z-depth-2 rgba-mdb-color-strong">
+								<div class="playerProfileLeaguesInfo col-12 col-lg-6">
+									<div class="p-2 rounded border z-depth-2 rgba-mdb-color-strong my-2">
 										<a href="{{ route('league.index', ['league' => str_ireplace(" ", "", strtolower($playerSeasonInfo->season->league->name))]) }}" class="indProfileLeaguesLink d-block text-center p-3 rgba-white-strong rounded-top"><b>League:</b> {{ $playerSeasonInfo->season->league->name }}</a>
 
 									
@@ -102,7 +102,7 @@
 											<h3 class="h3-responsive text-center text-underline">Team Records</h3>
 											
 											<div id="view_standings" class="playerProfileLeaguesTeamStandings">
-												<table class="table" id="">
+												<table class="table table-responsive-sm" id="">
 													<thead>
 														<tr>
 															<th>Team Name</th>
@@ -210,9 +210,9 @@
 						<h2 class="playerPageVideosHeader">Highlights</h2>
 			
 						@if($player->videos->count() > 0)
-							<div class="">
+							<div class="row">
 								@foreach($player->videos as $showVideo)
-									<div class="playerPageVideo ">
+									<div class="playerPageVideo col-12 col-md-7 col-lg-5 col-xl-5 my-1 mx-auto">
 										<h2>Uploaded:<span class="myVideoID" hidden>{{ $showVideo->id }}</span></h2>
 										<video class="currentVideo">
 											<source src="{{ $showVideo->file }}" type="video/mp4">

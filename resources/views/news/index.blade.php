@@ -39,7 +39,7 @@
 		<div class="row">
 			@if($articles->count() > 0)
 				<!--Section heading-->
-				<h3 class="text-center font-weight-bold h3 pb-5 pt-3 white-text">Recent posts</h3>
+				<h3 class="col-12 text-center font-weight-bold h3 pb-5 pt-3 white-text">Recent posts</h3>
 
 				@foreach($articles as $article)
 					<!--Grid column-->
@@ -59,11 +59,13 @@
 							<div class="card-body">
 								<!--Social shares button-->
 								<a class="activator p-3 mr-2"><i class="fa fa-share-alt"></i></a>
+								
 								<!--Title-->
-								<h4 class="card-title">{{ $article->title }}</h4>
+								<h4 class="card-title">{{ str_limit($article->title, 50) }}</h4>
 								<hr>
+								
 								<!--Text-->
-								<p class="card-text">{{ $article->article }}</p>
+								<p class="card-text">{{ str_limit($article->article, 125) }}</p>
 								
 								<a href="{{ route('news.show', ['news' => $article->id]) }}" class="link-text"><h5>Read more <i class="fa fa-chevron-right"></i></h5></a>
 							</div>
