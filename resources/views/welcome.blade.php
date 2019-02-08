@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('additional_scripts')
+@section('scripts')
 	<script type="text/javascript">
 		$('nav.navbar').addClass('fixed-top scrolling-navbar');
 	</script>
@@ -80,7 +80,7 @@
 												
 												<div class="recDiv">
 													<div class="recDivHeader">
-														<h2 class="">{{ $showRec->recs_name }}<span>{{ $showRec->nickname != "" ? $showRec->nickname : "" }}<span></h2>
+														<h2 class="">{{ $showRec->recs_name }}<span>{{ $showRec->nickname != "" ? $showRec->nickname : "" }}</span></h2>
 													</div>
 												</div>
 											</td>

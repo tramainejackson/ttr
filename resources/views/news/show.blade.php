@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style>
 		#app {
 			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url(/images/newspaper.gif);

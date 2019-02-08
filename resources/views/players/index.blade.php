@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style type="text/css">
 		.view {
 			min-height: initial !important;
 		}
 		
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/images/mybackground1.png);
+			background: url('/images/basketball_background4.jpg');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -17,10 +17,17 @@
 	</style>
 @endsection
 
+@section('scripts')
+	<script type="text/javascript">
+        $('nav').addClass('rgba-stylish-strong');
+	</script>
+@endsection
+
 @section('content')
+
 	@include('include.functions')
-	
-	<div class="container-fluid" id="players_page">
+
+	<div class="container-fluid rgba-stylish-strong" id="players_page">
 
 		<h2 id="player_page_header" class="page_header">ToTheRec Players</h2>
 
@@ -49,7 +56,9 @@
 		</div>
 		<div class="row">
 			@isset($recentPlayers)
+
 				@foreach($recentPlayers as $showPlayer)
+
 					<!-- Recently Added Profiles -->
 					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
 						<div class="card card-cascade narrower">
@@ -136,15 +145,27 @@
 			@endif
 				
 			@if($allPlayers->count() > 0)
+
 				@foreach($allPlayers as $player)
-					
+					@php $playerImage; @endphp
+
+					@if($player->image != null)
+						@if(Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path)))
+							@php $playerImage = asset($player->image->path); @endphp
+						@else
+							@php $playerImage = $defaultImg; @endphp
+						@endif
+					@else
+						@php $playerImage = $defaultImg; @endphp
+					@endif
+
 					<!-- Show all the players -->
 					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
 						<div class="card card-cascade narrower">
 
 							<!--Card image-->
 							<div class="view">
-								<img class="mx-auto img-fluid" src="{{ $player->image != null ? asset($player->image->path) : $defaultImg }}" class="" />
+								<img class="mx-auto img-fluid" src="{{ $playerImage }}" class="" />
 
 								<div class="mask rgba-white-slight d-flex align-items-end justify-content-center">
 									<a class="btn btn-primary" href="{{ route('players.show', ['player' => $player->id]) }}">See Profile</a>

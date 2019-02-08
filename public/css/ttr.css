@@ -88,10 +88,6 @@ button:hover {
     padding: 0px;
 }
 
-.navbar {
-    background-color: transparent;
-}
-
 .top-nav-collapse {
     background-color: #4285F4;
 }
@@ -114,7 +110,7 @@ button:hover {
 }
 
 #mainBody {
-	background-image:url("/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg");
+	background-image:url('/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg');
 	background-repeat:no-repeat;
 	background-size: 100% 80%;
 	background-position: 100% 49%;
@@ -410,6 +406,7 @@ div.indLeague div.indLeaguesInfo {
 
 div.indLeague div.indLeaguesInfo span:nth-of-type(1) {
     width: 25%;
+    /*noinspection CssInvalidPropertyValue*/
     display: -webkit-inline-box;
     display: inline-block;
 }
@@ -437,6 +434,7 @@ div.indLeague div.indLeaguesInfo ul {
 }
 
 div.indLeague div.indLeaguesInfo ul li {
+    /*noinspection CssInvalidPropertyValue*/
     display:-webkit-inline-box;
     display:inline-block;
 }
@@ -872,7 +870,7 @@ span.menuLiSpan {
 }
 
 .searches{
-	background-image: url('/images/dunk_bcgrd.jpg');
+	background-image: url('/images/baskball_background5.jpg');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1576,7 +1574,7 @@ div#all_recs_frame {
 }
 
 .recsPageContainer {
-    margin-top: 75px;
+    padding-top: 75px;
 }
 
 .recsPage {
@@ -1620,7 +1618,7 @@ div#all_recs_frame {
 
 div.search_box {
     position: relative;
-    margin: 1% 20% 4%;
+    padding: 1% 20% 4%;
     text-align: -webkit-center;
     text-align: center;
 }
@@ -2392,10 +2390,6 @@ iframe[id^='twitter-widget-']{}
 		background: initial;
 	}
 
-	.list {}
-
-	.searchesBgrd {}	
-
 	#champs, #twitter {
 		margin: 2% 25% 0.5%;
 	}
@@ -2524,7 +2518,7 @@ iframe[id^='twitter-widget-']{}
 	}
 
 	div.search_box {
-		margin: 1% 5% 4%;
+		padding: 1% 5% 4%;
 	}
 
 	input.player_search {

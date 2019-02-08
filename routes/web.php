@@ -23,35 +23,35 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about_us', 'HomeController@about')->name('about');
 
-Route::resource('rec_centers', 'RecCenterController');
+Route::resource('/rec_centers', 'RecCenterController');
 
-Route::resource('players', 'PlayerProfileController');
+Route::resource('/players', 'PlayerProfileController');
 
-Route::resource('leagues', 'LeagueProfileController');
+Route::resource('/leagues', 'LeagueProfileController');
 
-Route::resource('writers', 'WriterProfileController');
+Route::resource('/writers', 'WriterProfileController');
 
-Route::resource('clips', 'VideoController');
+Route::resource('/clips', 'VideoController');
 
-Route::resource('news', 'NewsController');
+Route::resource('/news', 'NewsController');
 
-Route::patch('players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
+Route::patch('/players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
-Route::post('player_images/{player}', 'PlayerProfileController@update_player_image');
+Route::post('/player_images/{player}', 'PlayerProfileController@update_player_image');
 
-Route::post('player_highlights/{player}', 'PlayerProfileController@add_player_highlight');
+Route::post('/player_highlights/{player}', 'PlayerProfileController@add_player_highlight');
 
-Route::delete('highlight_remove/{video}', 'PlayerProfileController@remove_video');
+Route::delete('/highlight_remove/{video}', 'PlayerProfileController@remove_video');
 
-Route::post('players/search', 'PlayerProfileController@search')->name('players.search');
+Route::post('/players/search', 'PlayerProfileController@search')->name('players.search');
 
-Route::patch('league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
+Route::patch('/league_player/add_player_profile', 'LeaguePlayerController@add_player_profile');
 
-Route::post('leagues/search', 'LeagueProfileController@search')->name('leagues.search');
+Route::post('/leagues/search', 'LeagueProfileController@search')->name('leagues.search');
 
-Route::post('news/search', 'NewsController@search')->name('news.search');
+Route::post('/news/search', 'NewsController@search')->name('news.search');
 
-Route::post('rec_centers/search', 'RecCenterController@search');
+Route::post('/rec_centers/search', 'RecCenterController@search');
 
 Route::domain('leagues.totherec.com')->group(function () {
     Route::get('league_profile/{league}', function ($league) {

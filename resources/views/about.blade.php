@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style>
 		#app {
 			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");

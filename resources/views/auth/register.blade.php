@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('additional_scripts')
+@section('scripts')
 	<script type="text/javascript">
 		$('nav.navbar').addClass('fixed-top scrolling-navbar');
 		$('.registerContainer').css({'paddingTop' : ($('nav.navbar').height() + 20) + 'px'});

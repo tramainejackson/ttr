@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style>
 		#app {
 			background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.5)), url(/images/sports_office.jpg);
@@ -13,7 +13,7 @@
 	</style>
 @endsection
 
-@section('additional_scripts')
+@section('scripts')
 	<script type="text/javascript">
 		$('.md-form label[for="leagues_comp"], .md-form label[for="leagues_ages"]').addClass('active');
 	</script>

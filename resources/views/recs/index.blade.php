@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
+			background: url("/images/basketball_background5.jpg");
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -13,15 +13,21 @@
 	</style>
 @endsection
 
-@section('additional_scripts')
+@section('scripts')
+    <script type="text/javascript">
+        $('nav').addClass('rgba-stylish-strong');
+    </script>
 @endsection
 
 @section('content')
-	<div class="container-fluid">
+	<div class="container-fluid rgba-stylish-strong">
+
 		<div class="recsPageContainer">
+
 			<div class="">
 				<h2 id="rec_page_header" class="page_header">Philly Rec Centers</h2>
 			</div>
+
 			<div class="search_box container mx-auto">
 				{!! Form::open(['action' => ['RecCenterController@search'], 'method' => 'POST']) !!}
 					 <div class="md-form input-group">
@@ -59,13 +65,18 @@
 
 					<!--Slides-->
 					<div class="carousel-inner" role="listbox">
+
 						<!--First slide-->
 						@for($x=0; $x < count($getRecs); $x+=3)
+
 							<div class="carousel-item{{ $x == 0 ? ' active' : '' }}">
-								@isset($getRecs[$x])	
+
+								@isset($getRecs[$x])
+
 									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
 										<div class="card mb-2">
 											<div class="view gradient-card-header blue-gradient py-5">
+
 												@if($getRecs[$x]->name != "")
 													@if($getRecs[$x]->nickname != "")
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x]->name }}"><b>
@@ -77,7 +88,9 @@
 														</h1>
 													@endif
 												@endif
+
 											</div>
+
 											<div class="card-body">
 												<div class="recsPage">
 													<ul class="recsPageList list-unstyled">
@@ -120,9 +133,11 @@
 											</div>
 										</div>
 									</div>
+
 								@endisset
 								
 								@isset($getRecs[$x+1])
+
 									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
 										<div class="card mb-2">
 											<div class="view gradient-card-header blue-gradient py-5">
@@ -178,13 +193,19 @@
 											</div>
 										</div>
 									</div>
+
 								@endisset
 								
 								@isset($getRecs[$x+2])
+
 									<div class="col-12 col-md-8 col-lg-6 col-xl-4 float-lg-left mx-auto">
+
 										<div class="card mb-2">
+
 											<div class="view gradient-card-header blue-gradient py-5">
+
 												@if($getRecs[$x+2]->name != "")
+
 													@if($getRecs[$x+2]->nickname != "")
 														<h1 id="{{ strtolower(str_ireplace(" ", "", $getRecs[$x+2]->name)) }}" class="recs_header white-text h1-responsive" title="{{ $getRecs[$x+2]->name }}"><b>
 															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+2]->id]) }}" class="white-text text-underline">"{{ $getRecs[$x+2]->nickname }}"</b>&nbsp;{{ $getRecs[$x+2]->name }}</a>
@@ -194,10 +215,15 @@
 															<a href="{{ route('rec_centers.show', ['rec_center' => $getRecs[$x+2]->id]) }}" class="white-text text-underline">{{ $getRecs[$x+2]->name }}</a>
 														</h1>
 													@endif
+
 												@endif
+
 											</div>
+
 											<div class="card-body">
+
 												<div class="recsPage">
+
 													<ul class="recsPageList list-unstyled">
 														<li>
 															<span class="listLabel">Rec Advisor:</span>
@@ -229,17 +255,25 @@
 																<a href="{{ $getRecs[$x+2]->website }}" class="btn blue-grey">Website</a>
 															</li>
 														@endif
+
 													</ul>
+
 													@if(in_array(str_ireplace(" ", "_", $getRecs[$x+2]->recs_name), $fireRecs))
 														<span><img src="images/fire.png" class="fireIcon2" /></span>
 													@endif
+
 												</div>
 
 											</div>
+
 										</div>
+
 									</div>
+
 								@endisset
+
 							</div>
+
 						@endfor
 						<!--/.First slide-->
 					</div>
@@ -256,6 +290,7 @@
 				
 				<button id="scroll_to_top"></button>
 			@else
+
 				@php $searchResult = 
 					App\RecCenter::search(request()->query('search'))->get();
 				@endphp
@@ -265,11 +300,17 @@
 						<h2 class="h2-responsive">{{ $searchResult->count() }} Results Found</h2>
 					</div>
 				</div>
+
 				<div class="row my-5">
+
 					@foreach($searchResult as $result)
+
 						<div class="col-md-4">
+
 							<div class="card mb-2">
+
 								<div class="view gradient-card-header blue-gradient py-5">
+
 									@if($result->name != "")
 										@if($result->nickname != "")
 											<h1 id="{{ strtolower(str_ireplace(" ", "", $result->name)) }}" class="recs_header white-text h1-responsive" title="{{ $result->name }}"><b>"{{ $result->nickname }}"</b>&nbsp;{{ $result->name }}</h1>
@@ -277,7 +318,9 @@
 											<h1 id="{{ strtolower(str_ireplace(" ", "", $result->name)) }}" class="recs_header white-text h1-responsive" title="{{ $result->name }}">{{ $result->name }}</h1>
 										@endif
 									@endif
+
 								</div>
+
 								<div class="card-body">
 									<div class="recsPage">
 										<ul class="recsPageList list-unstyled">
@@ -310,19 +353,27 @@
 												<span class="listContent" title="{{ $result->recs_phone }}">{{ $result->recs_phone }}</span>
 											</li>
 										</ul>
+
 										@if(in_array(str_ireplace(" ", "_", $result->recs_name), $fireRecs))
 											<span><img src="images/fire.png" class="fireIcon2" /></span>
 										@endif
+
 									</div>
 
 								</div>
+
 							</div>
+
 						</div>
+
 					@endforeach
+
 				</div>
+
 			@endif
+
 		</div>
+
 	</div>
-	
-	@include("modal")
+
 @endsection

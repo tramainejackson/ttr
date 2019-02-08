@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('styles')
 	<style>
 		#app {
 			background-color: grey;
@@ -14,7 +14,7 @@
 	</style>
 @endsection
 
-@section('additional_scripts')
+@section('scripts')
 	<script type="text/javascript">
 		$('nav.navbar').addClass('fixed-top scrolling-navbar');
 	</script>

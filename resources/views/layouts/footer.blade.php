@@ -1,4 +1,4 @@
-<footer class="black d-flex justify-content-center align-items-center">
+<footer class="black d-flex justify-content-center align-items-center py-3">
 	<!-- Contact form -->
 	{!! Form::open(['action' => ['PlayerProfileController@store'], 'method' => 'POST']) !!}
 		<p class="h4 text-center mb-4">Wite to us</p>
