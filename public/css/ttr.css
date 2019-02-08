@@ -86,6 +86,7 @@ button:hover {
 
 .welcomeVideo .col .jumbotron {
     padding: 0px;
+    margin-bottom: 0px;
 }
 
 .top-nav-collapse {
@@ -870,7 +871,7 @@ span.menuLiSpan {
 }
 
 .searches{
-	background-image: url('/images/baskball_background5.jpg');
+	background-image: url('/images/basketball_background10.jpg');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;

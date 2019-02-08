@@ -59,13 +59,25 @@
 
 				@foreach($recentPlayers as $showPlayer)
 
+					@php $playerImage; @endphp
+
+					@if($showPlayer->image != null)
+						@if(Storage::disk('public')->exists(str_ireplace('storage', '', $showPlayer->image->path)))
+							@php $playerImage = asset($showPlayer->image->path); @endphp
+						@else
+							@php $playerImage = $defaultImg; @endphp
+						@endif
+					@else
+						@php $playerImage = $defaultImg; @endphp
+					@endif
+
 					<!-- Recently Added Profiles -->
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2 d-flex align-items-stretch justify-content-around">
 						<div class="card card-cascade narrower">
 
 							<!--Card image-->
 							<div class="view overlay">
-								<img src="{{ $showPlayer->image != null ? asset($showPlayer->image->path) : $defaultImg }}" class="" />
+								<img src="{{ $playerImage }}" class="" />
 								<a href="#!">
 									<div class="mask rgba-white-slight"></div>
 								</a>
@@ -160,7 +172,7 @@
 					@endif
 
 					<!-- Show all the players -->
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch justify-content-around">
 						<div class="card card-cascade narrower">
 
 							<!--Card image-->
@@ -170,6 +182,20 @@
 								<div class="mask rgba-white-slight d-flex align-items-end justify-content-center">
 									<a class="btn btn-primary" href="{{ route('players.show', ['player' => $player->id]) }}">See Profile</a>
 								</div>
+
+								@if($player->type !== null)
+									@if($player->type == 'magician')
+										<span class="position-absolute font-small left mt-2 pl-2 position-absolute position-top top"><i class="fa fa-magic" aria-hidden="true"></i></span>
+									@elseif($player->type == 'bruiser')
+										<span class="position-absolute font-small left mt-2 pl-2 position-absolute position-top top"><i class="fa fa-bomb" aria-hidden="true"></i></span>
+									@elseif($player->type == 'warden')
+										<span class="position-absolute font-small left mt-2 pl-2 position-absolute position-top top"><i class="fa fa-lock" aria-hidden="true"></i></span>
+									@elseif($player->type == 'high_flyer')
+										<span class="position-absolute font-small left mt-2 pl-2 position-absolute position-top top"><i class="fa fa-rocket" aria-hidden="true"></i></span>
+									@elseif($player->type == 'sniper')
+										<span class="position-absolute font-small left mt-2 pl-2 position-absolute position-top top"><i class="fa fa-bullseye" aria-hidden="true"></i></span>
+									@endif
+								@endif
 							</div>
 							<!--/.Card image-->
 

@@ -20,7 +20,7 @@ class LeagueProfileController extends Controller
         $leagues = LeagueProfile::all();
 		
 		// Resize the default image
-		Image::make(public_path('images/baskball_background1.jpg'))->save(storage_path('app/public/images/lg/default_img.jpg'));
+		Image::make(public_path('/images/basketball_background1.jpg'))->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
 		if(request()->query('filter')) {

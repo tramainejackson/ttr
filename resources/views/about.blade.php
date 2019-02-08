@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
+			background:  url("/images/philadelphia_background1.jpg");
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -13,9 +13,15 @@
 	</style>
 @endsection
 
+@section('scripts')
+	<script type="text/javascript">
+        $('nav').addClass('rgba-stylish-strong');
+	</script>
+@endsection
+
 @section('content')
-	<div class="container white-text" id="about_ttr">
-		<div class="row">
+	<div class="container-fluid white-text rgba-stylish-strong p-5" id="about_ttr">
+		<div class="row mx-5 px-5">
 			<div class="col-12">
 				<h1 class="h1-responsive">About ToTheRec</h1>
 			</div>
@@ -37,7 +43,7 @@
 		
 		<hr/>
 		
-		<div class="row mb-4">
+		<div class="row mx-5 p-5">
 			<div class="col-12">
 				<h1 class="h1-responsive">Contact Us</h1>
 			</div>

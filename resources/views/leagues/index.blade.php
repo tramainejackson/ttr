@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: url('/images/baskball_background3.jpg');
+			background: url('/images/basketball_background3.jpg');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;

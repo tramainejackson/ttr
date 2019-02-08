@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
+			background: url("../images/Basketball-Wallpapers-HD-Pictures2.jpg");
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -13,11 +13,17 @@
 	</style>
 @endsection
 
+@section('scripts')
+	<script type="text/javascript">
+        $('nav').addClass('rgba-stylish-strong');
+	</script>
+@endsection
+
 @section('content')
-	<div class="container-fluid">
+	<div class="container-fluid rgba-stylish-strong">
 		<div class="videosPageContainer">
 			
-			<div class="row playerVideos my-3">
+			<div class="row playerVideos py-3">
 				<div class="col-12">
 					<div class="text-center coolText2 white-text">
 						<h1 class="indProfileHeader h1-responsive display-2">The Highlight Reel</h1>
@@ -34,39 +40,65 @@
 			</div>
 					
 			<!--  Player Videos -->
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">		
 					@if($videos->count() > 0)
+
 						@foreach($videos as $showVideo)
-							<div class="col-12 col-md-6 mb-4">
+
+							@php $playerVideo; @endphp
+
+							@if($showVideo->path != null)
+								@if(Storage::disk('public')->exists(str_ireplace('storage', '', $showVideo->path)))
+									@php $playerVideo = asset($showVideo->path); @endphp
+								@else
+									@php $playerVideo = asset('/images/video_not_found.png'); @endphp
+								@endif
+							@else
+								@php $playerVideo = asset('/images/video_not_found.png'); @endphp
+							@endif
+
+							<div class="col-12 col-md-6 col-xl-3 mb-4 d-flex align-items-stretch justify-content-around">
 								<div class="myVideo">
 									<div class="white">
 										<p class="text-center p-1 rgba-blue-grey-strong white-text coolText4">Uploaded: {{ $showVideo->uploaded() }}</p>
 										
 										<h2 class="h2-responsive">
 											<a href="{{ route('players.show', ['player' => $showVideo->player->id]) }}">{{ $showVideo->player->full_name() }}</a>
-											
+
 											@if($showVideo->player->type !== null)
 												@if($showVideo->player->type == 'magician')
-													<span class="float-right"><i class="fa fa-magic" aria-hidden="true"></i></span>
+													<span class="position-absolute font-small left mt-n2 pl-2 position-absolute position-top top"><i class="fa fa-magic" aria-hidden="true"></i></span>
 												@elseif($showVideo->player->type == 'bruiser')
-													<span class="float-right"><i class="fa fa-bomb" aria-hidden="true"></i></span>
+													<span class="position-absolute font-small left mt-n2 pl-2 position-absolute position-top top"><i class="fa fa-bomb" aria-hidden="true"></i></span>
 												@elseif($showVideo->player->type == 'warden')
-													<span class="float-right"><i class="fa fa-lock" aria-hidden="true"></i></span>
+													<span class="position-absolute font-small left mt-n2 pl-2 position-absolute position-top top"><i class="fa fa-lock" aria-hidden="true"></i></span>
 												@elseif($showVideo->player->type == 'high_flyer')
-													<span class="float-right"><i class="fa fa-rocket" aria-hidden="true"></i></span>
+													<span class="position-absolute font-small left mt-n2 pl-2 position-absolute position-top top"><i class="fa fa-rocket" aria-hidden="true"></i></span>
 												@elseif($showVideo->player->type == 'sniper')
-													<span class="float-right"><i class="fa fa-bullseye" aria-hidden="true"></i></span>
+													<span class="position-absolute font-small left mt-n2 pl-2 position-absolute position-top top"><i class="fa fa-bullseye" aria-hidden="true"></i></span>
 												@endif
 											@endif
+
 										</h2>
 									</div>
-									<video class="" width="320" height="240" controls>
-										<source src="{{ asset($showVideo->path) }}">
-										Your browser does not support the video tag.
-									</video>
+
+									@if($playerVideo == asset('/images/video_not_found.png'))
+										<video class="" width="320" height="240" poster="{{ $playerVideo }}" controls>
+											<source src="">
+											Your browser does not support the video tag.
+										</video>
+									@else
+										<video class="" width="320" height="240" controls>
+											<source src="{{ $playerVideo }}">
+											Your browser does not support the video tag.
+										</video>
+									@endif
+
 								</div>
+
 							</div>
+
 						@endforeach
 					@else
 						<div class="col-12 updateVids">
