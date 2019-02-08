@@ -17,10 +17,11 @@ $(document).ready(function() {
 	new WOW().init();
 	
 	// Initialize MDB select
-	$('.mdb-select').material_select();
+	$('.mdb-select').materialSelect();
 	
 	// Initialize datetimepicker
-	$('.datetimepicker').pickadate({
+	// noinspection JSAnnotator
+    $('.datetimepicker').pickadate({
 		// Escape any “rule” characters with an exclamation mark (!).
 		format: 'mm/dd/yyyy',
 		formatSubmit: 'yyyy/mm/dd',

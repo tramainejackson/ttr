@@ -17,14 +17,18 @@
 	@include('include.functions')
 
 	<div class="container-fluid playerProfileContainer" style="background: black">
+
 		<div class="row playerBio mb-5">
+
 			<div class="container-fluid">
+
 				<div class="row align-items-center justify-content-center view">
+
 					<div class="col-12 col-md-6">
 						<div id="update_pic" class="card">
 							<!-- Card Image -->
 							<div class="view overlay" style="min-height: initial !important;">
-								<img class="mx-auto img-fluid" id="current_pic" src="{{ $player->image ? asset(str_ireplace('images/', 'images/sm/', $player->image->path)) : $defaultImg }}" alt="Player Card Image">
+								<img class="mx-auto img-fluid" id="current_pic" src="{{ $playerImage }}" alt="Player Card Image">
 							</div>
 							
 							<!-- Card body -->
@@ -228,8 +232,11 @@
 				</div>
 				
 				@if($linkLeague->isNotEmpty())
+
 					@foreach($linkLeague as $newPlayerLeague)
+
 						@if($newPlayerLeague->season->players()->duplicate($player->user->email)->count() == 1)
+
 							<div class="linkLeague row coolText4">
 								<div class="col-12 col-md-4 mx-auto my-3 p-3 white rounded z-depth-2">
 									<div class="text-center">
@@ -261,24 +268,41 @@
 								</div>
 							</div>
 						@endif
+
 					@endforeach
+
 				@endif
-				
+
 				@if($leagues->isNotEmpty())
+
 					<div class="indProfileLeagues">
+
 						@foreach($leagues as $playerLeagueProfile)
-							@php
-								$stats = $playerLeagueProfile->stats()->playerSeasonStats()->first();
-							@endphp
+
+							@php $stats = $playerLeagueProfile->stats()->playerSeasonStats()->first();	@endphp
+
+							@php $playerLeagueImage; @endphp
+
+							@if($playerLeagueProfile->image != null)
+								@if(Storage::disk('public')->exists(str_ireplace('storage', '', $playerLeagueProfile->image->path)))
+									@php $playerLeagueImage = asset($playerLeagueProfile->image->path); @endphp
+								@else
+									@php $playerLeagueImage = $defaultImg; @endphp
+								@endif
+							@else
+								@php $playerLeagueImage = $defaultImg; @endphp
+							@endif
+
 							<!-- Rotating card -->
-							<div class="card-wrapper mx-auto" style="height: -webkit-fill-available;">
+							<!--suppress CssInvalidPropertyValue -->
+								<div class="card-wrapper mx-auto" style="height: -webkit-fill-available;">
 								<div id="card-{{ $loop->iteration }}" class="card-rotating effect__click text-center h-100 w-100">
 								
 									<!-- Front Side -->
 									<div class="face front">
 										<!-- Image-->
 										<div class="card-up">
-											<img  class="card-img-top" src="{{ $playerLeagueProfile->season->league->picture != null ? route('sub_photo', ['picture' => $playerLeagueProfile->season->league->picture]) : $defaultImg }}" alt="League Default Picture.">
+											<img  class="card-img-top" src="{{ $playerLeagueImage }}" alt="League Default Picture.">
 										</div>
 
 										<!-- Content -->
@@ -426,6 +450,14 @@
 						@endforeach
 					</div>
 				@endif
+
+				@if($leagues->isEmpty() && $linkLeague->isEmpty())
+					<div class="row">
+						<div class="col" id="">
+							<p>No Current Leagues</p>
+						</div>
+					</div>
+				@endif
 			</div>
 		</div>			
 		<!--/. My player leagues /.-->
@@ -446,24 +478,28 @@
 							<button type="submit" class="btn btn-lg green darken-3 white-text">Update Playgrounds</button>
 						</div>
 					</div>
+
 					<div class="myPlaygroundClass">
 						@if($player->playgrounds->isNotEmpty())
+
 							<ol class="white-text myPlaygroundsList">
 								<!-- Hidden default list item -->
 								<li class="hidden defaultPlaygroundItem" hidden>
 									<div class="row">
+
 										<div class="col">
 											<div class="md-form">
-												<select class="" name="rec_name[]" id="select_rec" disabled>
+												<select class="mdb-select" name="rec_name[]" id="select_rec" disabled>
 													<option class="blank" value="" selected>------- Select A Rec -------</option>
 													@foreach($recs as $rec)
 														<option value="{{ str_ireplace(" ", "_", $rec->name) }}">{{ str_ireplace("_", " ", $rec->name) }}</option>
 													@endforeach
 												</select>
 												
-												<label for="rec_name" class="blue-text">Select A Location</label>
+												<label for="rec_name" class="">Select A Location</label>
 											</div>
 										</div>
+
 										<div class="col">
 											<div class="md-form white-text">
 												<input type="text" name="" class="" value="" />
@@ -502,8 +538,11 @@
 											$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
 										}
 									@endphp
+
 									<li class="">
+
 										<div class="row">
+
 											<div class="col">
 												<div class="md-form">
 													<select class="mdb-select" name="rec_name[]">
@@ -513,9 +552,10 @@
 														@endforeach
 													</select>
 													
-													<label for="rec_name" class="blue-text">Select A Location</label>
+													<label for="rec_name" class="blue-text active">Select A Location</label>
 												</div>
 											</div>
+
 											<div class="col">
 												<div class="md-form white-text">
 													<select class="mdb-select" name="day_name[]">
@@ -525,22 +565,28 @@
 														@endforeach
 													</select>
 
-													<label for="day_name" class="blue-text">Select A Day</label>
+													<label for="day_name" class="blue-text active">Select A Day</label>
 												</div>
 											</div>
+
 											<div class="col">
 												<div class="md-form">
 													<input type="text" name="time[]" class="timepicker form-control white-text" value="{{ $time }}" style="padding: 12px 0px;" />
 													
-													<label for="rec_name" class="white-text">Select A Time</label>
+													<label for="rec_name" class="">Select A Time</label>
 												</div>
 												
 												<input type="text" name="playground_id[]" class="hidden" value="{{ $myPlayground->id }}" hidden />
 											</div>
+
 										</div>
+
 									</li>
+
 								@endforeach
+
 							</ol>
+
 						@else
 							<ul class="">
 								@for($i=0; $i < 3; $i++)
@@ -552,6 +598,7 @@
 												<option value="3"{{ $i == "2" ? " selected" : "" }}>3</option>
 											</select>
 										</span>
+
 										<span class="myPlaygroundRank col-md-4">
 											<select class="browser-default" name="rec_name[]">
 												<option class="blank" value="" selected>------- Select A Rec -------</option>
@@ -577,8 +624,11 @@
 							</ul>
 						@endif
 					</div>
+
 				{!! Form::close() !!}
+
 			</div>
+
 		</div>
 		<!--./ My player playgrounds /.-->
 		
@@ -613,7 +663,21 @@
 					</div>
 					
 					@if($videos->count() > 0)
+
 						@foreach($videos as $showVideo)
+
+							@php $playerVideo; @endphp
+
+							@if($showVideo->path != null)
+								@if(Storage::disk('public')->exists(str_ireplace('storage', '', $showVideo->path)))
+									@php $playerVideo = asset($showVideo->path); @endphp
+								@else
+									@php $playerVideo = asset('/images/video_not_found.png'); @endphp
+								@endif
+							@else
+								@php $playerVideo = asset('/images/video_not_found.png'); @endphp
+							@endif
+
 							<div class="col-12 col-md-4">
 								<div class="myVideo">
 									<button class="btn btn-floating position-absolute deletePlayerVideo" type="button" data-toggle="modal" data-target="#modalConfirmDelete">
@@ -621,15 +685,24 @@
 										
 										<input type="checkbox" name="remove_video_id" class="hidden" value="{{ $showVideo->id }}" hidden />
 									</button>
-									
-									<video class="" width="320" height="240" controls>
-										<source src="{{ asset($showVideo->path) }}">
-										Your browser does not support the video tag.
-									</video>
+
+									@if($playerVideo == asset('/images/video_not_found.png'))
+										<video class="" width="320" height="240" poster="{{ $playerVideo }}" controls>
+											<source src="">
+											Your browser does not support the video tag.
+										</video>
+									@else
+										<video class="" width="320" height="240" controls>
+											<source src="{{ $playerVideo }}">
+											Your browser does not support the video tag.
+										</video>
+									@endif
 								</div>
 							</div>
 						@endforeach
+
 					@else
+
 						<div class="col-12 updateVids">
 							<a id="addNewClips_icon" href="player_page.php?add_video=true" title="Add Video"></a>
 							<div class="viewCurrent_clips">
@@ -638,7 +711,9 @@
 								</div>
 							</div>
 						</div>
+
 					@endif
+
 				</div>
 			</div>
 		</div>
@@ -679,7 +754,7 @@
                 <!--Footer-->
                 <div class="modal-footer flex-center">
 					{!! Form::open(['action' => ['PlayerProfileController@remove_video', 'video' => null], 'method' => 'DELETE']) !!}
-						<button type="submit" class="btn btn-outline-danger">Yes</a>
+						<button type="submit" class="btn btn-outline-danger">Yes</button>
 						
 						<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>
 					{!! Form::close() !!}

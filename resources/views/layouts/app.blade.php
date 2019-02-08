@@ -39,7 +39,7 @@
 
 		@if(session('status'))
 			<!-- Add return message -->
-			<div class="returnMessage">
+			<div class="returnMessage d-none">
 				<ul class="flashMessage">{!! session('status') !!}</ul>
 			</div>
 		@endif
@@ -68,5 +68,12 @@
 	<script type="text/javascript" src="/js/ttr.js"></script>
 	
 	@yield('scripts')
+
+	@if(session('status'))
+		<!-- Add return message -->
+		<script type="text/javascript">
+            toastr.success($('.returnMessage .flashMessage').text());
+		</script>
+	@endif
 </body>
 </html>

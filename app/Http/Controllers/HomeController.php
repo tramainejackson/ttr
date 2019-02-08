@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -31,8 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+    	session(['user' => Auth::user()]);
+    	session(['commish' => 1]);
+//    	dd(session()->has('user'));
 		if(session()->has('user')) {
-			if(session()->has('player')) {
+			if (session()->has('player')) {
 				$player = PlayerProfile::where('user_id', session()->get('player'))->first();
 				$recs = RecCenter::all();
 				$playgrounds = $player->playgrounds;
@@ -51,8 +55,20 @@ class HomeController extends Controller
 					}
 				)->save(storage_path('app/public/images/lg/default_img.jpg'));
 				$defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+				if ($player->image != null) {
+
+					if (Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path))) {
+						$playerImage = asset($player->image->path);
+					} else {
+						$playerImage = $defaultImg;
+					}
+
+				} else {
+					$playerImage = $defaultImg;
+				}
 			
-				return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'defaultImg'));
+				return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'playerImage', 'defaultImg'));
 			} elseif(session()->has('commish')) {
 				$league = LeagueProfile::where('user_id', session()->get('commish'))->first();
 

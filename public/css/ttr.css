@@ -111,7 +111,8 @@ button:hover {
 }
 
 #mainBody {
-	background-image:url('/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg');
+    /*noinspection CssUnknownTarget*/
+    background-image:url('/totherec/public/images/Basketball-Wallpapers-HD-Pictures2.jpg');
 	background-repeat:no-repeat;
 	background-size: 100% 80%;
 	background-position: 100% 49%;
@@ -141,6 +142,7 @@ div[id^="backgroundImage"]::after {
 
 .leaguesFilterOption {
     /* max-width: 50%; */
+    /*noinspection CssInvalidPropertyValue*/
     display: -webkit-inline-box;
     display: inline-block;
     /* width: 49.94%; */
@@ -503,8 +505,7 @@ div.container#registrationPageContainer::after {
 div.container#recsPageContainer::after {
     position: absolute;
     content: "";
-    background-image: url("/images/blacktop_pic.jpg");
-    background-repeat: no-repeat;
+    background: url("/images/blacktop_pic.jpg") no-repeat;
     background-size: 100% 100%;
     left: 10px;
     bottom: 0;
@@ -863,6 +864,7 @@ button.addMoreVideos, button.noMoreVideos {
 }
 
 span.menuLiSpan {
+    /*noinspection CssInvalidPropertyValue*/
     display: -webkit-inline-box;
     display: inline-block;
     vertical-align: text-top;
@@ -871,11 +873,8 @@ span.menuLiSpan {
 }
 
 .searches{
-	background-image: url('/images/basketball_background10.jpg');
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
+    background-size: cover;
+    background: url('/images/basketball_background10.jpg') no-repeat fixed center center;
 }
 
 .searchesHeader {
@@ -1121,12 +1120,10 @@ h1.viewClips_btn {
 }
 
 button#viewClips_icon {
-    background-image: url("/totherec/public/images/view_icon.png");
     width: 70px;
     height: 70px;
-    background-position: center center;
     background-size: 80% 80%;
-    background-repeat: no-repeat;
+    background: url("/totherec/public/images/view_icon.png") no-repeat center center;
     border-radius: 77%;
     border: solid 1px forestgreen;
     position: absolute;
