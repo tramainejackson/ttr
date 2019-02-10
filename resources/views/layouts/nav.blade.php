@@ -39,7 +39,7 @@
             <li class="nav-item border-bottom mr-3" id="">
                 <a class="nav-link white-text" href="{{ route('news.index') }}">News</a>
             </li>
-            <li class="nav-item border-bottom mr-3" id="">
+            <li class="nav-item border-bottom mr-3{{ session('admin') !== null ? ' dropdown' : '' }}" id="">
                 <a class="nav-link white-text" href="{{ route('clips.index') }}">Clips</a>
             </li>
             <li class="nav-item border-bottom mr-3" id="">
@@ -74,17 +74,42 @@
     <div class="d-none d-lg-flex" id="">
         <!-- Right Side Of Navbar -->
         <ul class="nav md-pills pills-primary">
-            <li id="rec_li" class="nav-item">
-                <a class="nav-link white-text{{ url()->current() == url('rec_centers') ? ' active' : '' }}" href="{{ route('rec_centers.index') }}">Parks N Recs</a>
+            <li id="rec_li" class="nav-item{{ session('admin') ? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('rec_centers') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('rec_centers.index') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>Parks N Recs{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+
+                @if(Auth::check())
+                    @if(session('admin'))
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('admin.recs.create') }}">Add Rec Centers</a>
+                            <a class="dropdown-item" href="{{ route('admin.recs.edit') }}">Edit Rec Centers</a>
+                        </div>
+                    @endif
+                @endif
             </li>
-            <li id="player_li" class="nav-item">
-                <a class="nav-link white-text{{ url()->current() == url('players') ? ' active' : '' }}" href="{{ route('players.index') }}">Players</a>
+            <li id="player_li" class="nav-item{{ session('admin') ? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('players') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('players.index') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>Players{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+
+                @if(Auth::check())
+                    @if(session('admin'))
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('admin.videos.index') }}">Edit Players</a>
+                        </div>
+                    @endif
+                @endif
             </li>
-            <li id="league_li" class="nav-item">
-                <a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}" href="{{ route('leagues.index') }}">City Leagues</a>
+            <li id="league_li" class="nav-item{{ session('admin') ? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('leagues.index') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>City Leagues{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+
+                @if(Auth::check())
+                    @if(session('admin'))
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('admin.videos.index') }}">Edit Leagues</a>
+                        </div>
+                    @endif
+                @endif
             </li>
-            <li id="news_li" class="nav-item{{ session('writer') !== null ? ' dropdown' : '' }}">
-                <a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null ? '#' : route('news.index') }}"{!! session('writer') !== null ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+            <li id="news_li" class="nav-item{{ session('writer') !== null || session('admin')? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null || session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null || session('admin') ? '#' : route('news.index') }}"{!! session('writer') !== null || session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null || session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
 
                 @if(Auth::check())
                     @if(Auth::user()->writer)
@@ -93,11 +118,26 @@
                             <a class="dropdown-item" href="{{ route('news.create') }}">Add Article</a>
                             <a class="dropdown-item" href="{{ route('writers.show', ['writer' => Auth::user()->writer->id]) }}">My Articles</a>
                         </div>
+                    @elseif(session('admin'))
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('admin.news.index') }}">Edit Articles</a>
+                            <a class="dropdown-item" href="{{ route('admin.news.index') }}">Add Writer</a>
+                            <a class="dropdown-item" href="{{ route('admin.news.index') }}">Edit Writers</a>
+                        </div>
                     @endif
                 @endif
             </li>
-            <li id="clips_li" class="nav-item">
-                <a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}" href="{{ route('clips.index') }}">Clips</a>
+            <li id="clips_li" class="nav-item{{ session('admin') ? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('videos') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('clips.index') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>Clips{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+
+                @if(Auth::check())
+                    @if(session('admin'))
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('admin.videos.index') }}">View Clips</a>
+                            <a class="dropdown-item" href="{{ route('admin.videos.delete') }}">Remove Clips</a>
+                        </div>
+                    @endif
+                @endif
             </li>
             <li id="contact_li" class="nav-item">
                 <a class="nav-link white-text{{ url()->current() == url('about_us') ? ' active' : '' }}" href="{{ route('about') }}">About TTR</a>
@@ -127,14 +167,20 @@
                             {{ Auth::user()->player->full_name() }}
                         @elseif(Auth::user()->league)
                             {{ Auth::user()->league->commish }}
-                        @else
+                        @elseif(Auth::user()->writer)
                             {{ Auth::user()->writer->full_name() }}
+                        @else
+                            {{ 'Admin' }}
                         @endif
                         <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu" role="menu">
                         <a class="dropdown-item" href="{{ route('home') }}">Profile</a>
+
+                        @if(session('admin'))
+                            <a class="dropdown-item" href="{{ route('about') }}">Settings</a>
+                        @endif
 
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 

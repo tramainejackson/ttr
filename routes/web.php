@@ -37,6 +37,22 @@ Route::resource('/news', 'NewsController');
 
 Route::resource('/messages', 'MessageController');
 
+Route::namespace('Admin')->prefix('admin')->group(function () {
+	Route::get('videos/index', 'PlayerProfileController@index')->name('admin.videos.index');
+	Route::post('videos/delete', 'PlayerProfileController@index')->name('admin.videos.delete');
+	Route::get('recs/index', 'RecCenterController@index')->name('admin.recs.edit');
+	Route::get('recs/create', 'RecCenterController@create')->name('admin.recs.create');
+	Route::post('recs/delete', 'RecCenterController@destroy');
+	Route::get('players/index', 'PlayerProfileController@index')->name('admin.players.index');
+	Route::post('players/destroy', 'PlayerProfileController@destroy')->name('admin.players.destroy');
+	Route::get('leagues/index', 'PlayerProfileController@index')->name('admin.leagues.index');
+	Route::post('leagues/destroy', 'PlayerProfileController@destroy')->name('admin.leagues.destroy');
+	Route::get('writers/index', 'PlayerProfileController@index')->name('admin.writers.index');
+	Route::post('writers/destroy', 'PlayerProfileController@destroy')->name('admin.writers.destroy');
+	Route::get('news/index', 'PlayerProfileController@index')->name('admin.news.index');
+	Route::post('news/destroy', 'PlayerProfileController@destroy')->name('admin.news.destroy');
+});
+
 Route::patch('/players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
 Route::post('/player_images/{player}', 'PlayerProfileController@update_player_image');

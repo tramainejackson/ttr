@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
+use App\News;
+use App\PlayerProfileVideos;
 use App\RecCenter;
 use App\PlayerProfile;
 use App\LeagueProfile;
+use App\Video;
 use App\WriterProfile;
 use App\LeaguePlayer;
 use Illuminate\Http\Request;
@@ -35,7 +39,8 @@ class HomeController extends Controller
     	session(['user' => Auth::user()]);
 //    	session(['commish' => 12]);
 //    	session(['player' => 1]);
-    	session(['writer' => 5]);
+//    	session(['writer' => 5]);
+    	session(['admin' => 2]);
 //    	dd(session()->has('user'));
 		if(session()->has('user')) {
 			if (session()->has('player')) {
@@ -74,11 +79,22 @@ class HomeController extends Controller
 			} elseif(session()->has('commish')) {
 				$league = LeagueProfile::where('user_id', session()->get('commish'))->first();
 
-				return view('leagues.edit', compact('league'));			
+				return view('leagues.edit', compact('league'));
 			} elseif(session()->has('writer')) {
 				$writer = WriterProfile::where('user_id', session()->get('writer'))->first();
 
-				return view('writer.edit', compact('writer'));	
+				return view('writer.edit', compact('writer'));
+			} elseif(session()->has('admin')) {
+				$admin      = Auth::user();
+				$recs       = RecCenter::all();
+				$players    = PlayerProfile::all();
+				$videos     = PlayerProfileVideos::all();
+				$leagues    = LeagueProfile::all();
+				$articles   = News::all();
+				$writers    = WriterProfile::all();
+				$messages   = Message::all();
+
+				return view('admin.index', compact('admin', 'messages', 'recs', 'players', 'videos', 'leagues', 'articles', 'writers'));
 			}
 		}
     }
