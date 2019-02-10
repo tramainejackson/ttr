@@ -61,7 +61,7 @@
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
-										<th class="search_list_header"><a class="search_list_link text-center d-block coolText1 display-4 white-text" id="recs_link" href="recs.php">Rec Centers</a></th>
+										<th class="search_list_header"><a class="search_list_link text-center d-block coolText1 display-4 white-text" id="recs_link" href="{{ route('rec_centers.index') }}">Rec Centers</a></th>
 									</tr>
 								</thead>
 								<tbody>

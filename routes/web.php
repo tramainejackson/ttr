@@ -35,6 +35,8 @@ Route::resource('/clips', 'VideoController');
 
 Route::resource('/news', 'NewsController');
 
+Route::resource('/messages', 'MessageController');
+
 Route::patch('/players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 
 Route::post('/player_images/{player}', 'PlayerProfileController@update_player_image');

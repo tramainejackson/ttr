@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url(/images/newspaper.gif);
+			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url('/images/newspaper.gif');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -57,7 +57,7 @@
 			</div>
 			<div class="col-12 col-md-10 mx-auto">
 				<div class="row">
-					<div class="md-form input-group col-6">
+					<div class="md-form input-group col-6 m-0">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 						</div>

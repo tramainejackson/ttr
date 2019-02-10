@@ -19,10 +19,5 @@ class RecCenter extends Model
 	public function scopeSearch($query, $search) {
 		return $query->where('name', 'like', '%' . $search . '%');
 	}
-	
-	public static function get_rec_centers() {
-		$recs = self::all();
 
-		return $recs;
-	}
 }

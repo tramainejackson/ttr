@@ -33,7 +33,9 @@ class HomeController extends Controller
     public function index()
     {
     	session(['user' => Auth::user()]);
-    	session(['commish' => 1]);
+//    	session(['commish' => 12]);
+//    	session(['player' => 1]);
+    	session(['writer' => 5]);
 //    	dd(session()->has('user'));
 		if(session()->has('user')) {
 			if (session()->has('player')) {
@@ -88,7 +90,7 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-		$getRecs = RecCenter::all();
+		$getRecs = RecCenter::orderBy('name')->get();
 		$getLeagues = LeagueProfile::all();
 		$fireRecs = PlayerProfile::get_fire_recs();
 		// dd($getLeagues);

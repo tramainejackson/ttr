@@ -3,26 +3,41 @@
 @section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.5)), url(/images/sports_office.jpg);
+			background: url('/images/basketball_office.jpg');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
 			background-attachment: fixed;
 			z-index: -1;
 		}
+
+		.md-form .prefix.active, .md-form label.active {
+			color: whitesmoke !important;
+		}
 	</style>
 @endsection
 
 @section('scripts')
 	<script type="text/javascript">
+		// Add baground color to navigation
+        $('nav').addClass('rgba-stylish-strong');
+
+        // Add the active class for the select item labels
 		$('.md-form label[for="leagues_comp"], .md-form label[for="leagues_ages"]').addClass('active');
 	</script>
 @endsection
 
 @section('content')
+
 	@include('include.functions')
-	<a href="{{ route('sub_profile', ['user' => Auth::user()]) }}" target="_blank" class="btn btn-primary">Test Link</a>
-	<div class="container-fluid" id="leaguesProfileContainer">
+
+
+	<div class="container-fluid rgba-stylish-strong" id="leaguesProfileContainer">
+
+		<div class="row" id="">
+			{{--	<a href="{{ route('sub_profile', ['user' => Auth::user()]) }}" target="_blank" class="btn btn-primary">Test Link</a>--}}
+		</div>
+
 		<div class="row">
 			<div class="col-12 col-md-12 mx-auto">
 				{!! Form::open(['action' => ['LeagueProfileController@update', $league->id], 'method' => 'PATCH', 'files' => true]) !!}
@@ -94,30 +109,30 @@
 
 									<label for="leagues_website">League Website</label>
 								</div>
-								<div class="md-form input-group">
+								<div class="md-form input-group my-5">
 									<div class="input-group-prepend">
-										<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
+										<i class="fas fa-dollar-sign"></i>
 									</div>
-									
+
 									<input type="number" name="leagues_fee" class="form-control white-text" id="league_fee" value="{{ $league->leagues_fee }}"  step="0.01" />
-									
-									<div class="input-group-prepend">
+
+									<div class="input-group-append">
 										<span class="input-group-text">Per Team</span>
 									</div>
-									
+
 									<label for="leagues_fee">Entry Fee</label>
 								</div>
 								<div class="md-form input-group mb-5">
 									<div class="input-group-prepend">
-										<i class="fa fa-dollar input-group-text" aria-hidden="true"></i>
+										<i class="fas fa-dollar-sign"></i>
 									</div>
-									
+
 									<input type="number" class="form-control white-text" name="ref_fee" id="ref_fee" value="{{ $league->ref_fee }}" step="0.01" />
-									
-									<div class="input-group-prepend">
+
+									<div class="input-group-append">
 										<span class="input-group-text">Per Game</span>
 									</div>
-									
+
 									<label for="ref_fee">Ref Fee</label>
 								</div>
 								<div class="md-form mb-5">

@@ -92,10 +92,10 @@ class LeagueProfileController extends Controller
 			'ref_fee' => 'numeric|nullable',
 		]);
 		
-		$league->leagues_name = $request->leagues_name;
+		$league->name = $request->leagues_name;
 		$league->commish = $request->leagues_commish;
 		$league->address = $request->leagues_address;
-		$league->leagues_phone = $request->leagues_phone;
+		$league->phone = $request->leagues_phone;
 		$league->leagues_email = $request->leagues_email;
 		$league->leagues_website = $request->leagues_website;
 		$league->leagues_fee = $request->leagues_fee;

@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url(/images/newspaper.gif);
+			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url('/images/newspaper.gif');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -14,9 +14,13 @@
 @endsection
 
 @section('content')
+
 <div class="container">
-		<div class="container-fluid" id="">
+
+	<div class="container-fluid" id="">
+
 		<div class="row">
+
 			<div class="col-12 col-md-12 mx-auto">
 				{!! Form::open(['action' => ['WriterProfileController@update', $writer->id], 'method' => 'PATCH', 'files' => true]) !!}
 					<div class="row">
@@ -75,21 +79,21 @@
 						<div class="row">
 							<div class="col">
 								<div class="md-form">
-									<i class="fa fa-facebook prefix fb-ic"></i>
+									<i class="fab fa-facebook prefix fb-ic"></i>
 									<input type="text" name="fb" class="form-control white-text" value="{{ $writer->fb }}" placeholder="Enter Facebook Profile" />
 									<label for="">Facebook</label>
 								</div>
 							</div>
 							<div class="col">
 								<div class="md-form">
-									<i class="fa fa-twitter prefix tw-ic"></i>
+									<i class="fab fa-twitter prefix tw-ic"></i>
 									<input type="text" name="twitter" class="form-control white-text" value="{{ $writer->twitter }}" placeholder="Enter Twitter Handle" />
 									<label for="">Twitter</label>
 								</div>
 							</div>
 							<div class="col">
 								<div class="md-form">
-									<i class="fa fa-instagram prefix ins-ic"></i>
+									<i class="fab fa-instagram prefix ins-ic"></i>
 									<input type="text" name="instagram" class="form-control white-text" value="{{ $writer->instagram }}"  placeholder="Enter Instagram Handle"/>
 									<label for="">Instagram</label>
 								</div>
