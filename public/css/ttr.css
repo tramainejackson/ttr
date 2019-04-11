@@ -1094,23 +1094,9 @@ h1.addNewClips_btn {
     position: relative;
 }
 
-.linkLeaguesDiv {}
-
-.linkLeaguesDiv h2 {}
-
-.linkLeaguesDiv p {}
-
-.linkLeagueOption:nth-of-type(odd) {}
-
-.linkLeagueOption {}
-
-.linkLeagueOption {}
-
-.linkLeagueName {}
-
-.linkLeagueOption:last-of-type {}
-
-.linkLeagueOption button {}
+.dropdown-menu.show {
+    margin-left: .5rem;
+}
 
 h1.viewClips_btn {
     background: linear-gradient(to right, white, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick, firebrick);

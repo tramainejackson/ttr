@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\RecCenter;
-use App\PlayerProfile;
-use App\LeagueProfile;
 
 class RecCenterController extends Controller
 {
@@ -17,7 +15,7 @@ class RecCenterController extends Controller
      */
     public function __construct()
     {
-
+	    $this->middleware('auth');
     }
 	
     /**
@@ -27,7 +25,9 @@ class RecCenterController extends Controller
      */
     public function index()
     {
+    	$recs = RecCenter::all();
 
+	    return view('admin.recs.index', compact('recs'));
     }
 
     /**
@@ -48,7 +48,29 @@ class RecCenterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+	    // Validate incoming data
+	    $this->validate($request, [
+		    'name'            => 'required|max:50',
+		    'nickname'        => 'nullable|max:50',
+		    'owner'           => 'nullable|max:50',
+		    'address'         => 'required|max:50',
+		    'recs_phone'      => 'numeric|nullable|digits_between:10,15',
+		    'indoor'          => 'numeric|nullable',
+		    'outdoor'         => 'numeric|nullable',
+		    'additional_info' => 'nullable',
+	    ]);
+
+	    $rec = new RecCenter();
+
+	    foreach($request->all() as $key => $req) {
+	    	if($key != '_token') {
+			    $rec->$key = $req;
+		    }
+	    }
+
+	    if($rec->save()) {
+	    	return redirect()->action('\RecCenterController@index')->with('status', 'New Rec Center Saved Successfully');
+	    }
     }
 
     /**
@@ -57,7 +79,7 @@ class RecCenterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(RecCenter $rec_center)
+    public function show(RecCenter $rec)
     {
         // dd($rec_center);
 		return view('recs.show', compact('rec_center'));
@@ -66,10 +88,10 @@ class RecCenterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $rec
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RecCenter $rec)
     {
         //
     }
@@ -78,10 +100,10 @@ class RecCenterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $rec
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RecCenter $rec)
     {
         //
     }
@@ -92,19 +114,9 @@ class RecCenterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RecCenter $rec)
     {
         //
     }
-	
-	/**
-     * Search the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-		return redirect()->route('rec_centers.index', ['search' => $request->search]);
-    }
+
 }

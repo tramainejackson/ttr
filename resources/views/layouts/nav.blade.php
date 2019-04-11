@@ -81,7 +81,7 @@
                     @if(session('admin'))
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="{{ route('admin.recs.create') }}">Add Rec Centers</a>
-                            <a class="dropdown-item" href="{{ route('admin.recs.edit') }}">Edit Rec Centers</a>
+                            <a class="dropdown-item" href="{{ route('admin.recs.index') }}">Edit Rec Centers</a>
                         </div>
                     @endif
                 @endif

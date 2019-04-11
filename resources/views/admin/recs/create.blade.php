@@ -17,7 +17,7 @@
 
 	<div class="container">
 
-		{!! Form::open(['action' => ['NewsController@store'], 'method' => 'POST', 'files' => true]) !!}
+		{!! Form::open(['action' => ['Admin\RecCenterController@store'], 'method' => 'POST', 'files' => true]) !!}
 
 			<div class="row p-2 pb-4 m-3 white rounded z-depth-2 coolText4">
 
@@ -31,7 +31,14 @@
 					<div class="md-form">
 						<input type="text" name="name" class="form-control" value="{{ old('name') }}" />
 
-						<label for="title">Name</label>
+						<label for="name">Name</label>
+
+						@if($errors->has('name'))
+						<!-- Return error message for name -->
+							<div class="returnError">
+								<p class="red-text">{{ $errors->first('name') }}</p>
+							</div>
+						@endif
 					</div>
 				</div>
 
@@ -39,40 +46,75 @@
 					<div class="md-form">
 						<input type="text" name="nickname" class="form-control" value="{{ old('nickname') }}" />
 
-						<label for="title">NickName</label>
+						<label for="nickname">NickName</label>
 					</div>
+
+					@if($errors->has('nickname'))
+					<!-- Return error message for nickname -->
+						<div class="returnError">
+							<p class="red-text">{{ $errors->first('nickname') }}</p>
+						</div>
+					@endif
 				</div>
 
 				<div class="col-12 col-md-10 mx-auto">
 					<div class="md-form">
 						<input type="text" name="owner" class="form-control" value="{{ old('owner') }}" />
 
-						<label for="title">Owner</label>
+						<label for="owner">Owner</label>
 					</div>
+
+					@if($errors->has('owner'))
+					<!-- Return error message for owner -->
+						<div class="returnError">
+							<p class="red-text">{{ $errors->first('owner') }}</p>
+						</div>
+					@endif
 				</div>
 
 				<div class="col-12 col-md-10 mx-auto">
 					<div class="md-form">
 						<input type="text" name="address" class="form-control" value="{{ old('address') }}" />
 
-						<label for="title">Address</label>
+						<label for="address">Address</label>
 					</div>
+
+					@if($errors->has('address'))
+					<!-- Return error message for address -->
+						<div class="returnError">
+							<p class="red-text">{{ $errors->first('address') }}</p>
+						</div>
+					@endif
 				</div>
 
 				<div class="col-12 col-md-10 mx-auto">
 					<div class="md-form">
-						<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" />
+						<input type="text" name="recs_phone" class="form-control" value="{{ old('phone') }}" />
 
-						<label for="title">Phone Number</label>
+						<label for="recs_phone">Phone Number</label>
 					</div>
+
+					@if($errors->has('recs_phone'))
+					<!-- Return error message for recs_phone -->
+						<div class="returnError">
+							<p class="red-text">{{ $errors->first('recs_phone') }}</p>
+						</div>
+					@endif
 				</div>
 
 				<div class="col-12 col-md-10 mx-auto mb-3">
 					<div class="md-form">
-						<textarea type="text" name="article" class="md-textarea form-control" rows="3">{{ old('additional_info') }}</textarea>
+						<textarea type="text" name="additional_info" class="md-textarea form-control" rows="3">{{ old('additional_info') }}</textarea>
 
 						<label for="additional_info">Addt Info</label>
 					</div>
+
+					@if($errors->has('additional_info'))
+					<!-- Return error message for additional_info -->
+						<div class="returnError">
+							<p class="red-text">{{ $errors->first('additional_info') }}</p>
+						</div>
+					@endif
 				</div>
 
 				<div class="col-12 col-md-10 mx-auto">
@@ -84,6 +126,12 @@
 
 							<input type="number" name="fee" class="form-control" step="0.01" value="{{ old('fee') }}" placeholder="0.00" />
 
+							@if($errors->has('fee'))
+							<!-- Return error message for fee -->
+								<div class="returnError">
+									<p class="red-text">{{ $errors->first('fee') }}</p>
+								</div>
+							@endif
 						</div>
 					</div>
 				</div>

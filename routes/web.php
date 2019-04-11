@@ -11,6 +11,9 @@
 |
 */
 
+// Sub Domain
+$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
+
 // Route::get('/test', function () {
     // return view('home');
 // });
@@ -38,17 +41,31 @@ Route::resource('/news', 'NewsController');
 Route::resource('/messages', 'MessageController');
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
+	// Player Videos Resources
 	Route::get('videos/index', 'PlayerProfileController@index')->name('admin.videos.index');
 	Route::post('videos/delete', 'PlayerProfileController@index')->name('admin.videos.delete');
-	Route::get('recs/index', 'RecCenterController@index')->name('admin.recs.edit');
+
+	// Rec Centers Resources
+	Route::get('recs/index', 'RecCenterController@index')->name('admin.recs.index');
 	Route::get('recs/create', 'RecCenterController@create')->name('admin.recs.create');
+	Route::get('recs/{rec}/edit', 'RecCenterController@edit')->name('admin.recs.edit');
 	Route::post('recs/delete', 'RecCenterController@destroy');
+	Route::post('recs/', 'RecCenterController@store');
+	Route::patch('recs/{rec}', 'RecCenterController@update');
+
+	// Players Resources
 	Route::get('players/index', 'PlayerProfileController@index')->name('admin.players.index');
 	Route::post('players/destroy', 'PlayerProfileController@destroy')->name('admin.players.destroy');
+
+	// Leagues Resources
 	Route::get('leagues/index', 'PlayerProfileController@index')->name('admin.leagues.index');
 	Route::post('leagues/destroy', 'PlayerProfileController@destroy')->name('admin.leagues.destroy');
+
+	// Writers Resources
 	Route::get('writers/index', 'PlayerProfileController@index')->name('admin.writers.index');
 	Route::post('writers/destroy', 'PlayerProfileController@destroy')->name('admin.writers.destroy');
+
+	// News Resources
 	Route::get('news/index', 'PlayerProfileController@index')->name('admin.news.index');
 	Route::post('news/destroy', 'PlayerProfileController@destroy')->name('admin.news.destroy');
 });
@@ -71,10 +88,8 @@ Route::post('/news/search', 'NewsController@search')->name('news.search');
 
 Route::post('/rec_centers/search', 'RecCenterController@search');
 
-Route::domain('leagues.totherec.com')->group(function () {
-    Route::get('league_profile/{league}', function ($league) {
-		
-    })->name('league.index');
+Route::domain($domain)->group(function () {
+    Route::get('league_profile/{league}', 'LeagueProfileController@show')->name('league.index');
 	
 	Route::get('league_profile/{league}/{season}', function ($league, $season) {
         //
