@@ -89,8 +89,10 @@ Route::post('/news/search', 'NewsController@search')->name('news.search');
 Route::post('/rec_centers/search', 'RecCenterController@search');
 
 Route::domain($domain)->group(function () {
+    Route::get('/', 'LeagueProfileController@show')->name('league.index');
+
     Route::get('league_profile/{league}', 'LeagueProfileController@show')->name('league.index');
-	
+
 	Route::get('league_profile/{league}/{season}', function ($league, $season) {
         //
     })->name('season.show');
