@@ -18,6 +18,73 @@ $domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
     // return view('home');
 // });
 
+Route::domain($domain)->namespace('Leagues')->group(function () {
+	/* Overwrite the default login controller */
+	Route::post('/login', 'Auth\LoginController@authenticate');
+	Route::get('/login/{user}', 'Auth\LoginController@ttr_user');
+	/* Overwrite the default login controller */
+
+	Route::get('/', 'HomeController@about')->name('leagues_home');
+
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	Route::get('/test_drive', 'HomeController@test_drive')->name('test_drive');
+
+	Route::post('/remove_test_drive', 'HomeController@remove_test_drive')->name('remove_test_drive');
+
+	Route::post('/home', 'HomeController@store');
+
+	Route::get('/archives/{season}', 'HomeController@archive')->name('archives');
+
+	Route::get('/league_standings', 'HomeController@standings')->name('league_standings');
+
+	Route::get('/league_info', 'HomeController@info')->name('league_info');
+
+	Route::post('/league_schedule/add_game/', 'LeagueScheduleController@add_game');
+
+	Route::post('/league_schedule/add_week/', 'LeagueScheduleController@add_week');
+
+	Route::patch('/league_schedule/{week}/', 'LeagueScheduleController@update_week');
+
+	Route::delete('/league_schedule/{week}/', 'LeagueScheduleController@delete_week');
+
+	Route::get('/edit_playoffs/playins/', 'LeagueScheduleController@edit_playins')->name('edit_playins');
+
+	Route::get('/edit_playoffs/round/{round}', 'LeagueScheduleController@edit_round')->name('edit_round');
+
+	Route::post('/edit_playoffs/', 'LeagueScheduleController@update_playoff_week')->name('update_playoff_week');
+
+	Route::delete('/delete_game/{league_schedule}/', 'LeagueScheduleController@delete_game');
+
+	Route::patch('/update_game/', 'LeagueScheduleController@update_game');
+
+	Route::get('/league_stat', 'LeagueStatController@index')->name('league_stat.index');
+
+	Route::get('league_stat/edit_week/{week}', 'LeagueStatController@edit_week')->name('league_stat.edit_week');
+
+	Route::get('league_stat/edit_round/{round}', 'LeagueStatController@edit_round')->name('league_stat.edit_round');
+
+	Route::patch('league_stat/edit_week/{week}', 'LeagueStatController@update');
+
+	Route::resource('league_schedule', 'LeagueScheduleController');
+
+	Route::resource('league_players', 'LeaguePlayerController');
+
+	Route::resource('league_teams', 'LeagueTeamController');
+
+	Route::resource('league_pictures', 'LeaguePictureController');
+
+	Route::resource('league_profile', 'LeagueProfileController');
+
+	Route::resource('league_season', 'LeagueSeasonController');
+
+	Route::post('create_playoffs', 'LeagueSeasonController@create_playoffs');
+
+	Route::post('complete_season', 'LeagueSeasonController@complete_season');
+
+	Route::get('league_profile/{league}/{season}', 'LeagueProfileController@show_season')->name('league_profile.season');
+});
+
 Auth::routes();
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
@@ -87,21 +154,3 @@ Route::post('/leagues/search', 'LeagueProfileController@search')->name('leagues.
 Route::post('/news/search', 'NewsController@search')->name('news.search');
 
 Route::post('/rec_centers/search', 'RecCenterController@search');
-
-Route::domain($domain)->group(function () {
-    Route::get('/', 'LeagueProfileController@show')->name('league.index');
-
-    Route::get('league_profile/{league}', 'LeagueProfileController@show')->name('league.index');
-
-	Route::get('league_profile/{league}/{season}', function ($league, $season) {
-        //
-    })->name('season.show');
-	
-	Route::get('/{picture}', function ($picture) {
-        //
-    })->name('sub_photo');
-	
-	Route::get('login/{user}', function ($user) {
-        return Auth::user();
-    })->name('sub_profile');
-});

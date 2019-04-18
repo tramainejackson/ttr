@@ -40,7 +40,7 @@
 										@foreach($getLeagues as $league)
 											<tr class="{{ str_ireplace('', '_', $league->name) }}">
 												<td class="text-center">
-													<a href="{{ route('league.index', ['league' => str_ireplace(" ", "", strtolower($league->name))]) }}" class="quick_league">{{ ucwords(strtolower($league->name)) }}</a>
+													<a href="{{ route('league_profile.index', ['league' => str_ireplace(" ", "", strtolower($league->name))]) }}" class="quick_league">{{ ucwords(strtolower($league->name)) }}</a>
 												</td>
 											</tr>
 										@endforeach
