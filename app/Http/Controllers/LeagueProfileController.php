@@ -70,9 +70,9 @@ class LeagueProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(LeagueProfile $league)
     {
-        //
+	    return view('leagues.edit', compact('league'));
     }
 
     /**

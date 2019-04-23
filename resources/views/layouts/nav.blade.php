@@ -108,8 +108,8 @@
                     @endif
                 @endif
             </li>
-            <li id="news_li" class="nav-item{{ session('writer') !== null || session('admin')? ' dropdown' : '' }}">
-                <a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ session('writer') !== null || session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('writer') !== null || session('admin') ? '#' : route('news.index') }}"{!! session('writer') !== null || session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! session('writer') !== null || session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+            <li id="news_li" class="nav-item{{ isset(Auth::user()->writer) || session('admin') ? ' dropdown' : '' }}">
+                <a class="nav-link white-text{{ url()->current() == url('news') ? ' active' : '' }}{{ isset(Auth::user()->writer) || session('admin') ? ' dropdown-toggle' : '' }}" href="{{ isset(Auth::user()->writer) || session('admin') ? '#' : route('news.index') }}"{!! isset(Auth::user()->writer) || session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>News{!! isset(Auth::user()->writer) || session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
 
                 @if(Auth::check())
                     @if(Auth::user()->writer)

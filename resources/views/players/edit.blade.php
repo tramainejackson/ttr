@@ -157,6 +157,7 @@
 										<label for="highschool">High School:</label>
 									</div>
 								</div>
+
 								<div class="col">
 									<div class="md-form">
 										<input type="text" name="college" class="white-text form-control" id="college" value="{{ $player->college }}" />
@@ -167,6 +168,7 @@
 							</div>
 							
 							<div class="row">
+
 								<div class="col">
 									<div class="md-form">
 										<input type="text" name="height" class="white-text form-control" id="height" value="{{ $player->height }}" />
@@ -174,6 +176,7 @@
 										<label for="height">Height:</label>
 									</div>
 								</div>
+
 								<div class="col">
 									<div class="md-form">
 										<input type="number" name="weight" class="white-text form-control" id="weight" value="{{ $player->weight }}" min="0" max="999"/>
@@ -189,6 +192,7 @@
 									@endif
 								</div>
 							</div>
+
 							<div class="row">
 								<div class="col">
 									<div class="md-form">
@@ -226,11 +230,13 @@
 		
 		<!-- My player leagues -->
 		<div class="row view playerLeagues mb-5">
+
 			<div class="myLeagues col-12">
+
 				<div class="text-center coolText2 white-text">
 					<h1 class="h1-responsive display-2">My Leagues</h1>
 				</div>
-				
+
 				@if($linkLeague->isNotEmpty())
 
 					@foreach($linkLeague as $newPlayerLeague)
@@ -270,6 +276,15 @@
 						@endif
 
 					@endforeach
+
+				@else
+
+					<div class="linkLeague row coolText4">
+
+						<div class="col-12" id="">
+							<h2 class="">There aren't any leagues that you are currently participating in.</h2>
+						</div>
+					</div>
 
 				@endif
 

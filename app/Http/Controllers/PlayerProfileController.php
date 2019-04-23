@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\RecCenter;
 use App\PlayerProfile;
-use App\LeagueProfile;
+use App\LeaguePlayer;
 use App\PlayerPlayground;
 use App\PlayerProfileImages;
 use App\PlayerProfileVideos;
+use App\LeagueProfile;
+use App\Message;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
@@ -71,9 +74,9 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(PlayerProfile $player)
-    {	
+    {
 		// Create and Resize the default image
-		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, function ($constraint) {
 				$constraint->aspectRatio();
 			}
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
@@ -88,9 +91,39 @@ class PlayerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PlayerProfile $player)
     {
-        //
+	    $recs = RecCenter::all();
+	    $playgrounds = $player->playgrounds;
+	    $videos = $player->videos;
+	    $leagues = $player->leagues;
+	    $linkLeague = LeaguePlayer::where([
+		    ['email', $player->email],
+		    ['player_profile_id', null]
+	    ])->get();
+
+	    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+	    // Resize the default image
+	    Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+		    $constraint->aspectRatio();
+	    }
+	    )->save(storage_path('app/public/images/lg/default_img.jpg'));
+	    $defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+	    if ($player->image != null) {
+
+		    if (Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path))) {
+			    $playerImage = asset($player->image->path);
+		    } else {
+			    $playerImage = $defaultImg;
+		    }
+
+	    } else {
+		    $playerImage = $defaultImg;
+	    }
+
+	    return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'playerImage', 'defaultImg'));
     }
 
     /**

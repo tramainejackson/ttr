@@ -1,5 +1,7 @@
 <?php
 
+$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
+
 return [
 
     /*
@@ -148,7 +150,7 @@ return [
     |
     */
 
-    'domain' => '.totherec.com',
+    'domain' => null,
 
     /*
     |--------------------------------------------------------------------------

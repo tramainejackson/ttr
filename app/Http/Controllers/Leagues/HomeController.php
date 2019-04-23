@@ -28,6 +28,15 @@ class HomeController extends Controller
         $this->middleware('guest')->only('about');
     }
 
+	/**
+	 * Send email from public contact request.
+	 *
+	 * @return email
+	 */
+	public function store(Request $request) {
+
+	}
+
     /**
      * Show the application dashboard.
      *

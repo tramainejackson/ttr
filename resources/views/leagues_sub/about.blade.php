@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('additional_scripts')
 	<script type="text/javascript">
@@ -51,7 +51,8 @@
 						<!--Card content-->
 						<div class="card-body">
 							<!-- Contact form -->
-							{!! Form::open(['action' => ['HomeController@store'], 'method' => 'POST']) !!}
+							{!! Form::open(['route' => ['register'], 'method' => 'POST']) !!}
+
 								<div class="col-12 col-md-8 mx-auto">
 									<!-- input text -->
 									<div class="md-form">
@@ -102,7 +103,7 @@
 										<button class="btn btn-outline-secondary w-100" type="submit">Register<i class="fa fa-paper-plane-o ml-2"></i></button>
 									</div>
 								</div>
-							{!! Form::close() !!} }}
+							{!! Form::close() !!}
 						</div>
 					</div>
 					<!--/.Card-->
@@ -138,7 +139,7 @@
 				<div id="map-container-8" class="z-depth-1-half map-container mb-4" style="height: 200px"></div>
 
 				<!-- Contact form -->
-				{!! Form::open(['action' => ['HomeController@store'], 'class' => 'w-100', 'method' => 'POST']) !!}
+				{!! Form::open(['action' => ['Leagues\HomeController@store'], 'class' => 'w-100', 'method' => 'POST']) !!}
 					<div class="row align-items-stretch d-flex justify-content-center">
 						<div class="col-12 col-md-6">
 							<!-- input text -->

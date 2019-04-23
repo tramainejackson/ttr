@@ -18,6 +18,15 @@ $domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
     // return view('home');
 // });
 
+Auth::routes();
+
+/* Overwrite the default login controller */
+Route::post('/login', 'Auth\LoginController@authenticate');
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::get('/login/{user}', 'Auth\LoginController@ttr_user');
+Route::get('/register', 'Auth\RegisterController@index')->name('register');
+/* Overwrite the default login controller */
+
 Route::domain($domain)->namespace('Leagues')->group(function () {
 	/* Overwrite the default login controller */
 	Route::post('/login', 'Auth\LoginController@authenticate');
@@ -85,28 +94,6 @@ Route::domain($domain)->namespace('Leagues')->group(function () {
 	Route::get('league_profile/{league}/{season}', 'LeagueProfileController@show_season')->name('league_profile.season');
 });
 
-Auth::routes();
-
-Route::get('/', 'HomeController@welcome')->name('welcome');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/about_us', 'HomeController@about')->name('about');
-
-Route::resource('/rec_centers', 'RecCenterController');
-
-Route::resource('/players', 'PlayerProfileController');
-
-Route::resource('/leagues', 'LeagueProfileController');
-
-Route::resource('/writers', 'WriterProfileController');
-
-Route::resource('/clips', 'VideoController');
-
-Route::resource('/news', 'NewsController');
-
-Route::resource('/messages', 'MessageController');
-
 Route::namespace('Admin')->prefix('admin')->group(function () {
 	// Player Videos Resources
 	Route::get('videos/index', 'PlayerProfileController@index')->name('admin.videos.index');
@@ -136,6 +123,26 @@ Route::namespace('Admin')->prefix('admin')->group(function () {
 	Route::get('news/index', 'PlayerProfileController@index')->name('admin.news.index');
 	Route::post('news/destroy', 'PlayerProfileController@destroy')->name('admin.news.destroy');
 });
+
+Route::get('/', 'HomeController@welcome')->name('welcome');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/about_us', 'HomeController@about')->name('about');
+
+Route::resource('/rec_centers', 'RecCenterController');
+
+Route::resource('/players', 'PlayerProfileController');
+
+Route::resource('/leagues', 'LeagueProfileController');
+
+Route::resource('/writers', 'WriterProfileController');
+
+Route::resource('/clips', 'VideoController');
+
+Route::resource('/news', 'NewsController');
+
+Route::resource('/messages', 'MessageController');
 
 Route::patch('/players/{player}/playgounds', 'PlayerProfileController@update_playgrounds');
 

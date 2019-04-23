@@ -37,65 +37,57 @@ class HomeController extends Controller
     public function index()
     {
     	session(['user' => Auth::user()]);
-//    	session(['commish' => 12]);
-//    	session(['player' => 1]);
-//    	session(['writer' => 5]);
-    	session(['admin' => 2]);
-//    	dd(session()->has('user'));
-		if(session()->has('user')) {
-			if (session()->has('player')) {
-				$player = PlayerProfile::where('user_id', session()->get('player'))->first();
-				$recs = RecCenter::all();
-				$playgrounds = $player->playgrounds;
-				$videos = $player->videos;
-				$leagues = $player->leagues;
-				$linkLeague = LeaguePlayer::where([
-					['email', $player->email],
-					['player_profile_id', null]
-				])->get();
+    	$league  = isset(Auth::user()->league) ? Auth::user()->league : false;
+    	$player  = isset(Auth::user()->player) ? Auth::user()->player : false;
+    	$writer  = isset(Auth::user()->writer) ? Auth::user()->writer : false;
 
-				$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		if ($player) {
+			$recs = RecCenter::all();
+			$playgrounds = $player->playgrounds;
+			$videos = $player->videos;
+			$leagues = $player->leagues;
+			$linkLeague = LeaguePlayer::where([
+				['email', $player->email],
+				['player_profile_id', null]
+			])->get();
 
-				// Resize the default image
-				Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
-						$constraint->aspectRatio();
-					}
-				)->save(storage_path('app/public/images/lg/default_img.jpg'));
-				$defaultImg = asset('/storage/images/lg/default_img.jpg');
+			$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-				if ($player->image != null) {
+			// Resize the default image
+			Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+					$constraint->aspectRatio();
+				}
+			)->save(storage_path('app/public/images/lg/default_img.jpg'));
+			$defaultImg = asset('/storage/images/lg/default_img.jpg');
 
-					if (Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path))) {
-						$playerImage = asset($player->image->path);
-					} else {
-						$playerImage = $defaultImg;
-					}
+			if ($player->image != null) {
 
+				if (Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path))) {
+					$playerImage = asset($player->image->path);
 				} else {
 					$playerImage = $defaultImg;
 				}
-			
-				return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'playerImage', 'defaultImg'));
-			} elseif(session()->has('commish')) {
-				$league = LeagueProfile::where('user_id', session()->get('commish'))->first();
 
-				return view('leagues.edit', compact('league'));
-			} elseif(session()->has('writer')) {
-				$writer = WriterProfile::where('user_id', session()->get('writer'))->first();
-
-				return view('writer.edit', compact('writer'));
-			} elseif(session()->has('admin')) {
-				$admin      = Auth::user();
-				$recs       = RecCenter::all();
-				$players    = PlayerProfile::all();
-				$videos     = PlayerProfileVideos::all();
-				$leagues    = LeagueProfile::all();
-				$articles   = News::all();
-				$writers    = WriterProfile::all();
-				$messages   = Message::all();
-
-				return view('admin.index', compact('admin', 'messages', 'recs', 'players', 'videos', 'leagues', 'articles', 'writers'));
+			} else {
+				$playerImage = $defaultImg;
 			}
+
+			return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'playerImage', 'defaultImg'));
+		} elseif($league) {
+			return view('leagues.edit', compact('league'));
+		} elseif($writer) {
+			return view('writer.edit', compact('writer'));
+		} elseif(Auth::user()->type == 'admin') {
+			$admin      = Auth::user();
+			$recs       = RecCenter::all();
+			$players    = PlayerProfile::all();
+			$videos     = PlayerProfileVideos::all();
+			$leagues    = LeagueProfile::all();
+			$articles   = News::all();
+			$writers    = WriterProfile::all();
+			$messages   = Message::all();
+
+			return view('admin.index', compact('admin', 'messages', 'recs', 'players', 'videos', 'leagues', 'articles', 'writers'));
 		}
     }
 	

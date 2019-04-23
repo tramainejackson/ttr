@@ -87,7 +87,7 @@ class WriterProfileController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return redirect()->action('HomeController@index');
+        return view('writer.edit', compact('writer', 'defaultImg'));
     }
 
     /**

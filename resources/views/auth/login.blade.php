@@ -20,7 +20,7 @@
 								</div>
 
 								<div class="">
-									{!! Form::open(['route' => ['login'], 'method' => 'POST']) !!}
+									{!! Form::open(['action' => ['Auth\LoginController@authenticate'], 'method' => 'POST']) !!}
 										<div class="md-form">
 											<i class="fa fa-user prefix grey-text"></i>
 											
@@ -28,14 +28,17 @@
 											
 											<label for="username">Username</label>
 										</div>
-										
-										@if($errors->has('username') || $errors->has('password'))
-											<!--Username/Password Combination error message-->
-											<div class="m-3">
-												<span class="red-text">That username/password combination was not found. Please try again.</span>
-											</div>
+
+										@if(isset($error))
+											{{ dd($error) }}
+											@if($error != null || $error != '')
+												<!--Username/Password Combination error message-->
+												<div class="m-3">
+													<span class="red-text">{{ $error }}</span>
+												</div>
+											@endif
 										@endif
-										
+
 										<div class="md-form">
 											<i class="fa fa-lock prefix grey-text"></i>
 											
