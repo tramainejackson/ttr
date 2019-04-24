@@ -80,41 +80,57 @@
 						<div class="row">
 							<div class="col">
 								<div class="md-form">
-									<input type="text" name="leagues_name" class="form-control white-text" id="leagues_name" value="{{ $league->name }}" />
+									<input type="text" name="leagues_name" class="form-control white-text" id="leagues_name" placeholder="League Name" value="{{ old('leagues_name') ? old('leagues_name') : $league->name }}" />
 									
 									<label for="leagues_name">League Name</label>
 								</div>
+
+								@if($errors->has('leagues_name'))
+									<!-- Return error message for leagues_name -->
+									<div class="returnError">
+										<p class="red-text">{{ $errors->first('leagues_name') }}</p>
+									</div>
+								@endif
+
 								<div class="md-form">
-									<input type="text" name="leagues_commish" class="form-control white-text" id="leagues_commish" placeholder="Commissioner" value="{{ $league->commish }}" />
+									<input type="text" name="leagues_commish" class="form-control white-text" id="leagues_commish" placeholder="Commissioner" value="{{ old('commish') ? old('commish') : $league->commish }}" />
 
 									<label for="leagues_commish">Commissioner</label>
 								</div>
+
+								@if($errors->has('leagues_commish'))
+									<!-- Return error message for leagues_commish -->
+									<div class="returnError">
+										<p class="red-text">{{ $errors->first('leagues_commish') }}</p>
+									</div>
+								@endif
+
 								<div class="md-form">
-									<input type="text" name="leagues_address" class="form-control white-text" id="leagues_address" placeholder="Address" value="{{ $league->address }}" />
+									<input type="text" name="leagues_address" class="form-control white-text" id="leagues_address" placeholder="Address" value="{{ old('address') ? old('address') : $league->address }}" />
 
 									<label for="leagues_address">League Address</label>
 								</div>
 								<div class="md-form">
-									<input type="text" name="leagues_phone" class="form-control white-text" id="leagues_phone" placeholder="Phone" value="{{ $league->phone }}" />
+									<input type="text" name="leagues_phone" class="form-control white-text" id="leagues_phone" placeholder="Phone" value="{{ old('leagues_phone') ? old('leagues_phone') : $league->phone }}" />
 
 									<label for="leagues_phone">League Phone</label>
 								</div>
 								<div class="md-form">
-									<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ $league->leagues_email }}" placeholder="Enter Leagues Email Address" />
+									<input type="text" name="leagues_email" class="form-control white-text" id="leagues_email" value="{{ old('leagues_email') ? old('leagues_email') : $league->leagues_email }}" placeholder="Enter Leagues Email Address" />
 
 									<label for="leagues_email">League Email</label>
 								</div>
 								<div class="md-form">
-									<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ $league->leagues_website }}" placeholder="Enter League Website" />
+									<input type="text" name="leagues_website" class="form-control white-text" id="leagues_website" value="{{ old('leagues_website') ? old('leagues_website') : $league->leagues_website }}" placeholder="Enter League Website" />
 
 									<label for="leagues_website">League Website</label>
 								</div>
 								<div class="md-form input-group my-5">
 									<div class="input-group-prepend">
-										<i class="fas fa-dollar-sign"></i>
+										<span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
 									</div>
 
-									<input type="number" name="leagues_fee" class="form-control white-text" id="league_fee" value="{{ $league->leagues_fee }}"  step="0.01" />
+									<input type="number" name="leagues_fee" class="form-control white-text" id="league_fee" value="{{ old('leagues_fee') ? old('leagues_fee') : $league->leagues_fee }}" placeholder="Enter League Entry Fee" step="0.01" />
 
 									<div class="input-group-append">
 										<span class="input-group-text">Per Team</span>
@@ -122,12 +138,20 @@
 
 									<label for="leagues_fee">Entry Fee</label>
 								</div>
+
+								@if($errors->has('leagues_fee'))
+									<!-- Return error message for leagues_fee -->
+									<div class="returnError">
+										<p class="red-text">{{ $errors->first('leagues_fee') }}</p>
+									</div>
+								@endif
+
 								<div class="md-form input-group mb-5">
 									<div class="input-group-prepend">
-										<i class="fas fa-dollar-sign"></i>
+										<span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
 									</div>
 
-									<input type="number" class="form-control white-text" name="ref_fee" id="ref_fee" value="{{ $league->ref_fee }}" step="0.01" />
+									<input type="number" class="form-control white-text" name="ref_fee" id="ref_fee" value="{{ old('ref_fee') ? old('ref_fee') : $league->ref_fee }}" placeholder="Enter League Ref Fee"  step="0.01" />
 
 									<div class="input-group-append">
 										<span class="input-group-text">Per Game</span>
@@ -135,13 +159,21 @@
 
 									<label for="ref_fee">Ref Fee</label>
 								</div>
+
+								@if($errors->has('ref_fee'))
+									<!-- Return error message for ref_fee -->
+									<div class="returnError">
+										<p class="red-text">{{ $errors->first('ref_fee') }}</p>
+									</div>
+								@endif
+
 								<div class="md-form mb-5">
 									@php $ages = find_ages(); @endphp
 									@php $ageArray =  explode(" ", $league->age); @endphp
 									<div class="row">
 										@foreach($ages as $age)
 											<div class="col-6 col-md-3">
-												<button type="button" class="btn btn-lg mx-0 w-100 ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
+												<button type="button" class="btn btn-lg mx-0 w-100 white-text ageBtnSelect{{ in_array($age, $ageArray) ? ' blue ' : ' grey' }}">{{ str_ireplace("_", " ", ucwords($age)) }}
 													<input type="checkbox" class="hidden" name="age[]" value="{{ $age }}" hidden{{ in_array($age, $ageArray) ? ' checked ' : '' }}/>
 												</button>
 											</div>
@@ -156,7 +188,7 @@
 									<div class="row">
 										@foreach($getComp as $comp)
 											<div class="col-6 col-lg-3">
-												<button class="btn btn-lg gray mx-0 w-100 compBtnSelect{{ in_array($comp, $compArray) ? ' orange' : ' grey' }}" type="button">{{ str_ireplace("_", " ", ucwords($comp)) }}
+												<button class="btn btn-lg gray mx-0 w-100 white-text compBtnSelect{{ in_array($comp, $compArray) ? ' orange' : ' grey' }}" type="button">{{ str_ireplace("_", " ", ucwords($comp)) }}
 													<input type="checkbox" class="hidden" name="leagues_comp[]" value="{{ $comp }}" hidden{{ in_array($comp, $compArray) ? ' checked ' : '' }}/>
 												</button>
 											</div>
@@ -166,7 +198,7 @@
 									<label for="leagues_comp">League Competition</label>
 								</div>
 								<div class="md-form">
-									<button type="submit" name="submit" class="btn btn-lg green m-0" id="" value="">Update League</button>
+									<button type="submit" name="submit" class="btn btn-lg green m-0 white-text" id="" value="">Update League</button>
 								</div>
 							</div>
 						</div>

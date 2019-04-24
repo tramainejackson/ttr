@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -61,6 +62,9 @@ class LoginController extends Controller
 			// Once authenticated, make sure this is a
 			// league account with totherec
 			$user = Auth::user();
+			$user->last_login = Carbon::now();
+
+			$user->save();
 
 			if($user->type == 'commish') {
 

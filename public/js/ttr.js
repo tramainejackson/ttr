@@ -38,15 +38,15 @@ $(document).ready(function() {
 	
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
-	
-	// SideNav Scrollbar Initialization
-	var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-	Ps.initialize(sideNavScrollbar);
-	// SideNav Button Initialization
-	$(".button-collapse").sideNav({
-		edge: 'left', // Choose the horizontal origin
-		closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+
+    // SideNav Button Initialization
+    $(".button-collapse").sideNav({
+        edge: 'left', // Choose the horizontal origin
+        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	});
+	// SideNav Scrollbar Initialization
+    var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(sideNavScrollbar);
 
 	// Remove flash message if there is one after 8 seconds
 	if($('.flashMessage').length == 1) {
@@ -57,34 +57,6 @@ $(document).ready(function() {
 			});
 		}, 8000);
 	}
-	
-	// Add playground to DOM after cloning default list item
-	$('body').on('click', '.addPlayground', function(e) {
-		var newItem = $(this).parents('.myPlayground').find('.defaultPlaygroundItem').clone();
-
-		// Only add a max of 3 list items
-		if($('ol.myPlaygroundsList').children().length < 4) {
-			$(newItem).removeClass('defaultPlaygroundItem hidden')
-				.removeAttr('hidden')
-				.appendTo('ol.myPlaygroundsList')
-				.find('select')
-				.removeAttr('disabled')
-				.addClass('mdb-select')
-				.material_select();
-			$(newItem).find('input').removeAttr('disabled');
-			
-			// Initialize timepicker
-			$('.timepicker').pickatime({
-				// 12 or 24 hour 
-				twelvehour: true,
-				autoclose: true,
-				default: '18:00',
-			});
-			
-		} else {
-			toastr["info"]("You have reached the max amount of playgrounds to add");
-		}
-	});
 	
 	// Button toggle for writers article publish switch
 	$('body').on("click", "button.publishBtn", function(e) {

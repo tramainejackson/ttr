@@ -64,6 +64,10 @@ class WriterProfile extends Model
 	* Get the players full name.
 	*/
 	public function full_name() {
-		return $this->firstname . " " . $this->lastname;
+		if($this->firstname != '' & $this->lastname != '') {
+			return $this->firstname . " " . $this->lastname;
+		} else {
+			return null;
+		}
 	}
 }

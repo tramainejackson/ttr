@@ -9,9 +9,13 @@
 
 @section('content')
 	<div class="" style="background-image: url('/images/login_page_pic.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
 		<div class="mask rgba-black-strong d-flex justify-content-center align-items-center py-5">
+
 			<div class="container loginContainer">
+
 				<div class="row">
+
 					<div class="col-12 col-xl-8 mt-5 mt-xl-0">
 						<div class="card wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="card-body">
@@ -29,12 +33,11 @@
 											<label for="username">Username</label>
 										</div>
 
-										@if(isset($error))
-											{{ dd($error) }}
-											@if($error != null || $error != '')
+										@if(session('error'))
+											@if(session('error') != null || session('error') != '')
 												<!--Username/Password Combination error message-->
 												<div class="m-3">
-													<span class="red-text">{{ $error }}</span>
+													<span class="red-text">{{ session('error') }}</span>
 												</div>
 											@endif
 										@endif
@@ -54,6 +57,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-12 col-xl-4 mt-3 mt-xl-0">
 						<div class="wow fadeInRight" data-wow-delay="0.3s">
 							<div class="forgotPassword text-center">

@@ -15,7 +15,7 @@
 $domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
 
 // Route::get('/test', function () {
-    // return view('home');
+// 	return view('auth.passwords.reset', compact('token'));
 // });
 
 Auth::routes();

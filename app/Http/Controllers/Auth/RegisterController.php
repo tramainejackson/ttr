@@ -74,7 +74,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-		// dd(isset($data['league_profile']));
+//		 dd($data);
 		$user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
@@ -82,15 +82,21 @@ class RegisterController extends Controller
         ]);
 		
 		if(isset($data['player_profile'])) {
+			$user->type = 'player';
+
 			PlayerProfile::create([
 				'user_id' => $user->id
 			]);
 		} else {
+			$user->type = 'commish';
+
 			LeagueProfile::create([
 				'user_id' => $user->id
 			]);
 		}
 
-		return $user;
+		if($user->save()) {
+			return $user;
+		}
     }
 }

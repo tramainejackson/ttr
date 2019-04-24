@@ -135,14 +135,13 @@ class PlayerProfileController extends Controller
      */
     public function update(Request $request, PlayerProfile $player)
     {
-		// dd($request);
         // Validate incoming data
 		$this->validate($request, [
 			'firstname' => 'required|max:50',
 			'lastname' => 'nullable|max:50',
 			'nickname' => 'nullable|max:50',
 			'email' => 'required|max:50:unique',
-			'weight' => 'numeric|min:0|max:999',
+			'weight' => 'nullable|numeric|min:0|max:999',
 			'dob_submit' => 'nullable',
 			'highschool' => 'nullable',
 			'college' => 'nullable',
@@ -182,7 +181,6 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
     */
 	public function update_playgrounds(Request $request, PlayerProfile $player) {
-		// dd($player);
 		// Update the existing playground
 		if(isset($request->playground_id)) {
 			$count = count($request->playground_id);

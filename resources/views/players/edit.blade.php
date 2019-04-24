@@ -14,7 +14,6 @@
 @endsection
 
 @section('content')
-	@include('include.functions')
 
 	<div class="container-fluid playerProfileContainer" style="background: black">
 
@@ -82,7 +81,7 @@
 									<h2 class="coolText2 white-text"><u>Player Bio</u></h2>
 								</div>
 								<div class="col-6 text-right">
-									<button type="submit" id="editProfile_btn" class="btn btn-lg indigo mx-0 my-3" value="">Update Profile</button>
+									<button type="submit" id="editProfile_btn" class="btn btn-lg indigo mx-0 my-3 white-text" value="">Update Profile</button>
 								</div>
 							</div>
 							<div class="row">
@@ -199,23 +198,23 @@
 										<label class="active" for="type">Player Type:</label>
 										
 										<div class="d-flex flex-wrap-reverse justify-content-around align-items-center">
-											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
+											<button class="btn col-12 col-md-4 mt-3 white-text playerTypeBtn{{ $player->type == 'bruiser' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bomb" aria-hidden="true"></i>&nbsp;Bruiser
 												<input type="checkbox" name="type" class="hidden" value="bruiser" {{ $player->type == 'bruiser' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
+											<button class="btn col-12 col-md-4 mt-3 white-text playerTypeBtn{{ $player->type == 'high_flyer' ? ' green' : ' grey' }}" type="button"><i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;High Flyer
 												<input type="checkbox" name="type" class="hidden" value="high_flyer" {{ $player->type == 'high_flyer' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
+											<button class="btn col-12 col-md-4 mt-3 white-text playerTypeBtn{{ $player->type == 'magician' ? ' green' : ' grey' }}" type="button"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Magician
 												<input type="checkbox" name="type" class="hidden" value="magician" {{ $player->type == 'magician' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
+											<button class="btn col-12 col-md-4 mt-3 white-text playerTypeBtn{{ $player->type == 'warden' ? ' green' : ' grey' }}" type="button"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Warden
 												<input type="checkbox" name="type" class="hidden" value="warden" {{ $player->type == 'warden' ? 'checked' : '' }} hidden />
 											</button>
 											
-											<button class="btn col-12 col-md-4 mt-3 playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
+											<button class="btn col-12 col-md-4 mt-3 white-text playerTypeBtn{{ $player->type == 'sniper' ? ' green' : ' grey' }}" type="button"><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp;Sniper
 												<input type="checkbox" name="type" class="hidden" value="sniper" {{ $player->type == 'sniper' ? 'checked' : '' }} hidden />
 											</button>
 										</div>
@@ -263,9 +262,9 @@
 												<h3 class="linkLeagueName my-1 h3-responsive"><b>Player Name:</b> {{ $newPlayerLeague->player_name }}</h3>
 											</div>
 											<div class="d-flex align-items-center jusify-content-around linkLeagueOption">
-												<button class="btn btn-success addLeague">Add</button>
+												<button class="btn btn-success white-text addLeague">Add</button>
 												
-												<button class="btn btn-danger declineLeague">Decline</button>
+												<button class="btn btn-danger white-text declineLeague">Decline</button>
 												
 												<input type="number" name="player_id" class="hidden" value="{{ $newPlayerLeague->id }}" hidden />
 											</div>
@@ -489,7 +488,6 @@
 						<p class="white-text">List up to 3 of your top places to play for the best runs.</p>
 						
 						<div class="">
-							<button type="button" class="btn btn-lg indigo addPlayground">Add Another Playground</button>
 							<button type="submit" class="btn btn-lg green darken-3 white-text">Update Playgrounds</button>
 						</div>
 					</div>
@@ -504,14 +502,12 @@
 
 										<div class="col">
 											<div class="md-form">
-												<select class="mdb-select" name="rec_name[]" id="select_rec" disabled>
-													<option class="blank" value="" selected>------- Select A Rec -------</option>
+												<select class="mdb-select md-form" name="rec_name[]" id="select_rec" disabled>
+													<option class="blank" disabled selected>------- Select A Rec -------</option>
 													@foreach($recs as $rec)
 														<option value="{{ str_ireplace(" ", "_", $rec->name) }}">{{ str_ireplace("_", " ", $rec->name) }}</option>
 													@endforeach
 												</select>
-												
-												<label for="rec_name" class="">Select A Location</label>
 											</div>
 										</div>
 
@@ -607,32 +603,39 @@
 								@for($i=0; $i < 3; $i++)
 									<li class="row">
 										<span class="myPlaygroundRank col-md-1">
-											<select class="browser-default" name="" disabled>
-												<option value="1"{{ $i == "0" ? " selected" : "" }}>1</option>
-												<option value="2"{{ $i == "1" ? " selected" : "" }}>2</option>
-												<option value="3"{{ $i == "2" ? " selected" : "" }}>3</option>
+											<select class="mdb-select md-form" name="">
+												<option value="1"{{ $i == "0" ? " selected" : "" }} disabled>1</option>
+												<option value="2"{{ $i == "1" ? " selected" : "" }} disabled>2</option>
+												<option value="3"{{ $i == "2" ? " selected" : "" }} disabled>3</option>
 											</select>
 										</span>
 
 										<span class="myPlaygroundRank col-md-4">
-											<select class="browser-default" name="rec_name[]">
-												<option class="blank" value="" selected>------- Select A Rec -------</option>
+											<select class="mdb-select md-form" name="rec_name[]">
+												<option class="blank" disabled selected>------- Select A Rec -------</option>
+
 												@foreach($recs as $rec)
 													<option value="{{ str_ireplace(" ", "_", $rec->name) }}">{{ str_ireplace("_", " ", $rec->name) }}</option>
 												@endforeach
 											</select>
 										</span>
+
 										<span class="myPlaygroundRank col-md-4">
-											<select class="browser-default" name="day_name[]">
-												<option class="blank" value="">------- Select A Day -------</option>
+											<select class="mdb-select md-form" name="day_name[]">
+												<option class="blank" disabled selected>------- Select A Day -------</option>
 
 												@foreach($days as $day)
-													<option value="{{ $day->id }}">{{ $day->day_name }}</option>
+													<option class="white-text" value="{{ $day }}">{{ $day }}</option>
 												@endforeach
 											</select>
 										</span>
+
 										<span class="myPlaygroundRank col-md-2">
-											<input type="text" name="time_name[]" class="timepicker" value="" />
+											<div class="md-form white-text">
+												<input type="text" name="time_name[]" class="form-control timepicker" value="" />
+
+												<label for="input_starttime">------- Select A Time -------</label>
+											</div>
 										</span>
 									</li>
 								@endfor
@@ -653,7 +656,7 @@
 				<div class="text-center coolText2 white-text">
 					<h1 class="indProfileHeader h1-responsive display-2">My Highlight Reel</h1>
 
-					<button class="btn btn-floating addVideo" type="button"><i class="fa fa-plus green" aria-hidden="true"></i></button>
+					<button class="btn btn-floating addVideo white-text" type="button"><i class="fa fa-plus green" aria-hidden="true"></i></button>
 				</div>
 				
 				<div class="row">
@@ -695,7 +698,7 @@
 
 							<div class="col-12 col-md-4">
 								<div class="myVideo">
-									<button class="btn btn-floating position-absolute deletePlayerVideo" type="button" data-toggle="modal" data-target="#modalConfirmDelete">
+									<button class="btn btn-floating position-absolute deletePlayerVideo white-text" type="button" data-toggle="modal" data-target="#modalConfirmDelete">
 										<i class="fa fa-minus red" aria-hidden="true"></i>
 										
 										<input type="checkbox" name="remove_video_id" class="hidden" value="{{ $showVideo->id }}" hidden />

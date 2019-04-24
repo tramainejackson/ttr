@@ -147,28 +147,29 @@
 
     <div class="d-none d-lg-flex" id="">
         <ul class="nav navbar-nav navbar-right flex-column flex-xl-row">
-        @if(Auth::guest())
-            <!-- Logins -->
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link btn indigo">Login
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('register') }}" class="nav-link btn indigo lighten-1">Register
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </a>
-                </li>
-        @else
-            <!-- Authentication Links -->
+            @if(Auth::guest())
+                <!-- Logins -->
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link btn indigo white-text">Login
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link btn indigo lighten-1 white-text">Register
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </li>
+            @else
+
+                <!-- Authentication Links -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle white-text{{ url()->current() == url('home') ? ' active' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false">
                         @if(Auth::user()->player)
-                            {{ Auth::user()->player->full_name() }}
+                            {{ Auth::user()->player->full_name() != null ? Auth::user()->player->full_name() : 'No Name' }}
                         @elseif(Auth::user()->league)
-                            {{ Auth::user()->league->commish }}
+                            {{ Auth::user()->league->commish != '' ? Auth::user()->league->commish : 'No Name' }}
                         @elseif(Auth::user()->writer)
-                            {{ Auth::user()->writer->full_name() }}
+                            {{ Auth::user()->writer->full_name() != null ? Auth::user()->writer->full_name() : 'No Name' }}
                         @else
                             {{ 'Admin' }}
                         @endif

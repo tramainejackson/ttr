@@ -42,6 +42,7 @@ class HomeController extends Controller
     	$writer  = isset(Auth::user()->writer) ? Auth::user()->writer : false;
 
 		if ($player) {
+			dd(Auth::user());
 			$recs = RecCenter::all();
 			$playgrounds = $player->playgrounds;
 			$videos = $player->videos;
