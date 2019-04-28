@@ -280,8 +280,8 @@
 
 					<div class="linkLeague row coolText4">
 
-						<div class="col-12" id="">
-							<h2 class="">There aren't any leagues that you are currently participating in.</h2>
+						<div class="col-12 text-center" id="">
+							<h2 class="white-text">There aren't any leagues that you are currently participating in.</h2>
 						</div>
 					</div>
 
@@ -464,14 +464,6 @@
 						@endforeach
 					</div>
 				@endif
-
-				@if($leagues->isEmpty() && $linkLeague->isEmpty())
-					<div class="row">
-						<div class="col" id="">
-							<p>No Current Leagues</p>
-						</div>
-					</div>
-				@endif
 			</div>
 		</div>			
 		<!--/. My player leagues /.-->
@@ -508,6 +500,8 @@
 														<option value="{{ str_ireplace(" ", "_", $rec->name) }}">{{ str_ireplace("_", " ", $rec->name) }}</option>
 													@endforeach
 												</select>
+
+												<label class="mdb-main-label">Blue select</label>
 											</div>
 										</div>
 
@@ -563,7 +557,7 @@
 														@endforeach
 													</select>
 													
-													<label for="rec_name" class="blue-text active">Select A Location</label>
+													<label for="rec_name" class="blue-text active">Select A Gym</label>
 												</div>
 											</div>
 
@@ -576,7 +570,7 @@
 														@endforeach
 													</select>
 
-													<label for="day_name" class="blue-text active">Select A Day</label>
+													<label for="day_name" class="mdb-main-label">Select A Day</label>
 												</div>
 											</div>
 

@@ -42,13 +42,12 @@ class HomeController extends Controller
     	$writer  = isset(Auth::user()->writer) ? Auth::user()->writer : false;
 
 		if ($player) {
-			dd(Auth::user());
 			$recs = RecCenter::all();
 			$playgrounds = $player->playgrounds;
 			$videos = $player->videos;
 			$leagues = $player->leagues;
 			$linkLeague = LeaguePlayer::where([
-				['email', $player->email],
+				['email', $player->user->email],
 				['player_profile_id', null]
 			])->get();
 

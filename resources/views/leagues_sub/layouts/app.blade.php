@@ -92,7 +92,7 @@
 					@if (Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">
-							<a href="{{ route('login') }}" class="nav-link btn indigo white-text">Login
+							<a href="{{ route('sub_login') }}" class="nav-link btn indigo white-text">Login
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</a>
 						</li>
@@ -216,7 +216,7 @@
 					@if(Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">
-							<a href="{{ route('login') }}" class="nav-link btn indigo white-text">Login
+							<a href="{{ route('sub_login') }}" class="nav-link btn indigo white-text">Login
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</a>
 						</li>

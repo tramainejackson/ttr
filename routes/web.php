@@ -29,6 +29,7 @@ Route::get('/register', 'Auth\RegisterController@index')->name('register');
 
 Route::domain($domain)->namespace('Leagues')->group(function () {
 	/* Overwrite the default login controller */
+	Route::get('/login', 'Auth\LoginController@index')->name('sub_login');
 	Route::post('/login', 'Auth\LoginController@authenticate');
 	Route::get('/login/{user}', 'Auth\LoginController@ttr_user');
 	/* Overwrite the default login controller */
