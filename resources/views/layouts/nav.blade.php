@@ -34,7 +34,7 @@
                 <a class="nav-link white-text" href="{{ route('players.index') }}">Players</a>
             </li>
             <li class="nav-item border-bottom mr-3" id="">
-                <a class="nav-link white-text" href="{{ route('leagues_home') }}">City Leagues</a>
+                <a class="nav-link white-text" href="{{ route('leagues.index') }}">City Leagues</a>
             </li>
             <li class="nav-item border-bottom mr-3" id="">
                 <a class="nav-link white-text" href="{{ route('news.index') }}">News</a>
@@ -98,7 +98,7 @@
                 @endif
             </li>
             <li id="league_li" class="nav-item{{ session('admin') ? ' dropdown' : '' }}">
-                <a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('leagues_home') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>City Leagues{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
+                <a class="nav-link white-text{{ url()->current() == url('leagues') ? ' active' : '' }}{{ session('admin') ? ' dropdown-toggle' : '' }}" href="{{ session('admin') ? '#' : route('leagues.index') }}"{!! session('admin') ? ' data-toggle="dropdown" role="button" aria-expanded="false"' : '' !!}>City Leagues{!! session('admin') ? '&nbsp;<span class="caret"></span>' : '' !!}</a>
 
                 @if(Auth::check())
                     @if(session('admin'))
@@ -134,7 +134,7 @@
                     @if(session('admin'))
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="{{ route('admin.videos.index') }}">View Clips</a>
-                            <a class="dropdown-item" href="{{ route('admin.videos.delete') }}">Remove Clips</a>
+                            <a class="dropdown-item" href="{{ route('admin.videos.index') }}">Remove Clips</a>
                         </div>
                     @endif
                 @endif

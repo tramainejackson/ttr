@@ -1,6 +1,6 @@
 <?php
 
-$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
+$domain = '*' . parse_url(config('app.url'), PHP_URL_HOST);
 
 return [
 

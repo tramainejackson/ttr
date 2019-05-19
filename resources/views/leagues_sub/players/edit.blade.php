@@ -6,7 +6,7 @@
 
 	<div class="container-fluid playerProfileContainer" style="background: black">
 		<div class="row playerBio mb-5 mb-md-0">
-			{!! Form::open(['action' => ['PlayerProfileController@update', $player->id], 'method' => 'PATCH', 'files' => true, 'class' => 'col-12']) !!}
+			{!! Form::open(['action' => ['PlayerProfilesController@update', $player->id], 'method' => 'PATCH', 'files' => true, 'class' => 'col-12']) !!}
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-center view">
 						<div class="offset-md-1 col-12 col-md-3">
@@ -382,7 +382,7 @@
 					<h1 class="indProfileHeader h1-responsive display-2">My Playgrounds</h1>
 				</div>
 				
-				{!! Form::open(['action' => ['PlayerProfileController@update_playgrounds', $player->id], 'method' => 'PATCH']) !!}
+				{!! Form::open(['action' => ['PlayerProfilesController@update_playgrounds', $player->id], 'method' => 'PATCH']) !!}
 
 				<div class="myPlaygroundClass d-flex flex-column flex-lg-row align-items-center justify-content-between">
 						<p class="white-text">List up to 3 of your top places to play for the best runs.</p>

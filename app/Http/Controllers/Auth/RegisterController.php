@@ -48,7 +48,14 @@ class RegisterController extends Controller
 	 */
 	public function index()
 	{
-		return view('auth.register');
+		// Sub Domain
+		$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
+
+		if(strpos(request()->header('host'), $domain) !== false) {
+			return view('leagues_sub.auth.register');
+		} else {
+			return view('auth.register');
+		}
 	}
 
     /**

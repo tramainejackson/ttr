@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Video;
 use App\PlayerProfileVideos;
@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class VideoController extends Controller
+class VideosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class VideoController extends Controller
     {
 		$videos = PlayerProfileVideos::orderBy('created_at', 'desc')->get();
 		
-        return view('videos.index', compact('videos'));
+        return view('admin.videos.index', compact('videos'));
     }
 
     /**
@@ -32,7 +32,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return view('videos.index');
+        return view('admin.videos.index');
         //
     }
 

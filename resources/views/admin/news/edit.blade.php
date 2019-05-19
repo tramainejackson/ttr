@@ -15,7 +15,7 @@
 
 @section('content')
 <div class="container">
-	{!! Form::open(['action' => ['NewsController@update', 'news' => $article->id], 'method' => 'PATCH', 'files' => true]) !!}
+	{!! Form::open(['action' => ['NewsArticleController@update', 'news' => $article->id], 'method' => 'PATCH', 'files' => true]) !!}
 		<div class="row p-2 pb-4 m-3 white rounded z-depth-2 coolText4">
 			<div class="col-12 d-flex justify-content-between align-items-center">
 				<h3 class="p-1 h3-responsive align-self-start">Edit Article</h3>
@@ -106,7 +106,7 @@
 
                 <!--Footer-->
                 <div class="modal-footer flex-center">
-					{!! Form::open(['action' => ['NewsController@destroy', 'news' => $article->id], 'method' => 'DELETE']) !!}
+					{!! Form::open(['action' => ['NewsArticleController@destroy', 'news' => $article->id], 'method' => 'DELETE']) !!}
 						<button type="submit" class="btn btn-outline-danger">Yes</button>
                    
 						<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>

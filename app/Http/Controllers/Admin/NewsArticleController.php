@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\News;
 use App\WriterProfile;
@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class NewsController extends Controller
+class NewsArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class NewsController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return view('news.index', compact('articles', 'defaultImg'));
+        return view('admin.news.index', compact('articles', 'defaultImg'));
     }
 
     /**
@@ -39,11 +39,11 @@ class NewsController extends Controller
      */
     public function create()
     {
-		$writer = Auth::user()->writer;
-		$totalArticles = $writer->post->count();
-		$publishedArticles = $writer->post()->published()->count();
+//		$writer = Auth::user()->writer;
+//		$totalArticles = $writer->post->count();
+//		$publishedArticles = $writer->post()->published()->count();
 		
-        return view('news.create', compact('totalArticles', 'publishedArticles'));
+        return view('admin.news.create', compact('totalArticles', 'publishedArticles'));
     }
 
     /**

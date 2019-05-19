@@ -3,7 +3,7 @@
 @section('styles')
 	<style>
 		#app {
-			background: url("/images/Basketball-Wallpapers-HD-Pictures2.jpg");
+			background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)), url('/images/newspaper.gif');
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: 100% 0%;
@@ -13,78 +13,80 @@
 	</style>
 @endsection
 
-@section('scripts')
-	<script type="text/javascript">
-        $('nav').addClass('rgba-stylish-strong');
-	</script>
-@endsection
-
 @section('content')
-	<div class="container-fluid rgba-stylish-strong">
 
-		<div class="">
-			
-			<div class="row playerVideos py-3">
-				<div class="col-12">
-					<div class="text-center coolText2 white-text">
-						<h1 class="indProfileHeader h1-responsive display-2">Recreation Centers</h1>
-					</div>
-				</div>
-			</div>
-					
-			<!--  Rec Centers -->
-			<div class="container-fluid">
+<div class="container">
 
-				<div class="row">
+	<!--Section: Messages-->
+	<section class="pb-3 wow fadeIn white-text" data-wow-delay="0.3s">
 
-					@foreach($recs as $rec)
+		<!--Grid row-->
+		<div class="row my-4">
+			<!--Section heading-->
+			<h2 class="col-4 font-weight-bold h2-responsive text-underline">Recreation Centers</h2>
 
-						<div class="col-12 col-md-6 col-xl-3 mb-4 d-flex align-items-stretch justify-content-around">
-
-							<!-- Card -->
-							<div class="card card-cascade w-100">
-
-								<!-- Card image -->
-								<div class="view view-cascade gradient-card-header blue-gradient">
-
-									<h2 class="card-header-title mb-3">{{ $rec->name }}</h2>
-
-								</div>
-
-								<!-- Card content -->
-								<div class="card-body card-body-cascade text-center">
-
-									<!-- Text -->
-									<p class="card-text">{{ $rec->name }}</p>
-									<p class="card-text">{{ $rec->nickname }}</p>
-									<p class="card-text">{{ $rec->owner }}</p>
-									<p class="card-text">{{ $rec->address }}</p>
-									<p class="card-text">{{ $rec->website }}</p>
-									<p class="card-text">{{ $rec->recs_phone }}</p>
-									<p class="card-text">{{ $rec->indoor }}</p>
-									<p class="card-text">{{ $rec->outdoor }}</p>
-									<p class="card-text">{{ $rec->fee }}</p>
-									<p class="card-text">{{ $rec->additional_info }}</p>
-
-									<!-- Link -->
-									<a href="{{ route('admin.recs.edit', ['rec' => $rec->id]) }}" class="orange-text d-flex flex-row-reverse p-2">
-										<h5 class="waves-effect waves-light">Edit<i class="fas fa-angle-double-right ml-2"></i></h5>
-									</a>
-
-								</div>
-
-							</div>
-
-						</div>
-
-					@endforeach
-
+			@if($recs->count() > 0)
+				<div class="col-8 coolText4">
+					<h3 class="h3-responsive">Total Rec Centers: {{ $recs->count() }}</h3>
 				</div>
 
-			</div>
-			<!--./ Rec Centers /.-->
+				<div class="col-12" id="">
+					<table class="table table-striped table-responsive-md btn-table white-text">
 
+						<thead>
+							<tr>
+								<th></th>
+								<th>Name</th>
+								<th>Nickname</th>
+								<th>Owner</th>
+								<th>Address</th>
+								<th>Website</th>
+								<th>Phone Number</th>
+								<th>Addt Info</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							@foreach($recs as $rec)
+
+								<tr>
+									<td>
+										<!-- Thumbnail-->
+										<img src="{{ $defaultImg }}" class="img-fluid z-depth-1 rounded-circle" style="max-height: 150px;" />
+									</td>
+									<td>{{ $rec->name }}</td>
+									<td>{{ $rec->nickname }}</td>
+									<td>{{ $rec->owner }}</td>
+									<td>{{ $rec->address }}</td>
+									<td><a class="blue-text" href="{{ $rec->website }}">Click Here</a></td>
+									<td>{{ $rec->recs_phone }}</td>
+									<td>{{ $rec->additional_info }}</td>
+									<td>
+										<button type="button" class="btn btn-warning btn-sm m-0">Edit</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-red btn-sm m-0">Delete</button>
+									</td>
+								</tr>
+							@endforeach
+
+						</tbody>
+					</table>
+				</div>
+
+			@else
+				<div class="col-8 coolText4">
+					<h3 class="h3-responsive">There aren't any players at this time.</h3>
+				</div>
+			@endif
 		</div>
+		<!--Grid row-->
 
-	</div>
+	</section>
+	<!--Section: Messages-->
+
+</div>
 @endsection

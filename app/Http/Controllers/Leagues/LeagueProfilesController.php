@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class LeagueProfileController extends Controller
+class LeagueProfilesController extends Controller
 {
 	/**
      * Create a new controller instance.

@@ -47,7 +47,14 @@ class LoginController extends Controller
 	 */
 	public function index()
 	{
-		return view('auth.login');
+		// Sub Domain
+		$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
+
+		if(strpos(request()->header('host'), $domain) !== false) {
+			return view('leagues_sub.auth.login');
+		} else {
+			return view('auth.login');
+		}
 	}
 
 	/**
@@ -57,7 +64,7 @@ class LoginController extends Controller
 	 */
 	public function authenticate(Request $request)
 	{
-
+//dd('Test Login');
 		if(Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
 			// Once authenticated, make sure this is a
 			// league account with totherec
@@ -69,7 +76,7 @@ class LoginController extends Controller
 			if($user->type == 'commish') {
 
 				// This needs to redirect the commish to the regular totherec site
-				return redirect()->action('LeagueProfileController@edit', ['league' => $user->league->id]);
+				return redirect()->action('LeagueProfilesController@edit', ['league' => $user->league->id]);
 
 			} elseif($user->type == 'writer') {
 
@@ -79,7 +86,7 @@ class LoginController extends Controller
 			} elseif($user->type == 'player') {
 
 				// This needs to redirect the player to the regular totherec site
-				return redirect()->action('PlayerProfileController@edit', ['player' => $user->player->id]);
+				return redirect()->action('PlayerProfilesController@edit', ['player' => $user->player->id]);
 
 			} else {
 

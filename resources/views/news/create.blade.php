@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	
-	{!! Form::open(['action' => ['NewsController@store'], 'method' => 'POST', 'files' => true]) !!}
+	{!! Form::open(['action' => ['NewsArticleController@store'], 'method' => 'POST', 'files' => true]) !!}
 		<div class="row p-2 pb-4 m-3 white rounded z-depth-2 coolText4">
 			<div class="col-12 d-flex justify-content-between align-items-center">
 				<h3 class="p-1 h3-responsive">Create New Article</h3>
@@ -61,17 +61,17 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
 						</div>
-						
+
 						<input type="text" name="publish_date" class="form-control" value="{{ \Carbon\Carbon::now()->format('F jS\\, Y') }}" disabled />
-						
+
 						<div class="input-group-append">
 							<span class="input-group-text">Publish Date</span>
 						</div>
 					</div>
-					
+
 					<div class="col-6 d-flex flex-column align-items-center justify-content-center">
 						<h4 class="h4-responsive text-center">Publish Now</h4>
-						
+
 						<div class="btn-group">
 							<button type="button" class="btn grey publishBtn">
 								<input type="checkbox" name="publish" value="Y" hidden />Yes

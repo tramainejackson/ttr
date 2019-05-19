@@ -12,8 +12,10 @@ use App\LeagueStat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
-class LeaguePlayerController extends Controller
+class LeaguePlayersController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,7 +24,7 @@ class LeaguePlayerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only('index');
+        $this->middleware('auth')->only('index', 'team_edit');
     }
 
     /**
@@ -51,10 +53,11 @@ class LeaguePlayerController extends Controller
     public function add_player_profile(Request $request)
     {
 		$player = LeaguePlayer::find($request->player);
-		
+		$link = LeaguePlayer::find($request->link);
+
 		if($player != null) {
 			$player->player_profile_id = Auth::id();
-			$player->player_profile_accepted = 'Y';
+			$player->player_profile_accepted = $request->link;
 			
 			if($player->save()) {
 				return 'Linked!';
@@ -71,9 +74,33 @@ class LeaguePlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function about()
+    public function team_edit(LeagueTeam $league_team)
     {
-        return view('about', compact(''));
+	    // Get the season to show
+	    $showSeason = $this->find_season($league_team->id);
+
+	    if($showSeason->teams->contains('id', $league_team->id)) {
+
+		    // Resize the default image
+		    Image::make(public_path('images/commissioner.jpg'))->resize(600, null, 	function ($constraint) {
+			    $constraint->aspectRatio();
+		    }
+		    )->save(storage_path('app/public/images/lg/default_img.jpg'));
+		    $defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+		    if (Storage::disk('public')->exists(str_ireplace('storage', '', $league_team->team_picture))) {
+			    $teamImage = $league_team->lg_photo();
+		    } else {
+			    $teamImage = $defaultImg;
+		    }
+
+		    return view('leagues_sub.teams.edit', compact('league_team', 'showSeason', 'teamImage'));
+
+	    } else {
+
+		    abort(404);
+
+	    }
     }
 	
 	/**
@@ -98,27 +125,29 @@ class LeaguePlayerController extends Controller
 	/**
      * Check for a query string and get the current season.
      *
-     * @return seaon
+     * @return season
     */
-	public function find_season(Request $request) {
-		$league = Auth::user()->leagues_profiles->first();
-		
-		$showSeason = '';
-		
-		if($request->query('season') != null && $request->query('year') != null) {
-			$showSeason = $league->seasons()->active()->find($request->query('season'));
-		} else {
-			if($league->seasons()->get()->count() == 1) {
-				if($league->seasons()->active()->first()) {
-					$showSeason = $league->seasons()->active()->first();
-				} else {
-					$showSeason = $league->seasons()->first();
-				}
+	public function find_season($team_id) {
+		if(Auth::check()) {
+
+			$league_season = Auth::user()->player->leagues->where('league_team_id', $team_id)->first()->season;
+			$showSeason = '';
+
+			if($league_season->active == 'N' && $league_season->completed->completed == 'Y') {
+				$showSeason = $league_season;
 			} else {
-				$showSeason = $league->seasons()->active()->first();
+				if($league_season->active == 'Y') {
+					$showSeason = $league_season;
+				} else {
+					if($league_season->first()) {
+						$showSeason = $league_season->first();
+					} else {
+						$showSeason = $league_season;
+					}
+				}
 			}
+
+			return $showSeason;
 		}
-		
-		return $showSeason;
 	}
 }

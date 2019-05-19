@@ -13,6 +13,8 @@ use App\LeagueSeason;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class LeagueSeasonController extends Controller
 {
@@ -23,7 +25,7 @@ class LeagueSeasonController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
 
     /**
@@ -129,6 +131,30 @@ class LeagueSeasonController extends Controller
     {
         
     }
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(LeagueProfile $league)
+	{
+		// Resize the default image
+		Image::make(public_path('images/commissioner.jpg'))->resize(600, null, 	function ($constraint) {
+			$constraint->aspectRatio();
+		}
+		)->save(storage_path('app/public/images/lg/default_img.jpg'));
+		$defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+		if (Storage::disk('public')->exists(str_ireplace('storage', '', $league->picture))) {
+			$leagueImage = $league->picture;
+		} else {
+			$leagueImage = $defaultImg;
+		}
+
+		return view('leagues_sub.leagues.show', compact('league', 'leagueImage'));
+	}
 	
 	/**
      * Check for a query string and get the current season.

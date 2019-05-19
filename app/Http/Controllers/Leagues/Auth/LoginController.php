@@ -46,10 +46,10 @@ class LoginController extends Controller
      */
     public function index()
     {
+//    	dd('test');
         return view('leagues_sub.auth.login');
     }
-	
-	
+
 	/**
      * Handle an authentication attempt.
      *

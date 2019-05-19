@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
+
 	@include('include.functions')
 	
 	<div class="container-fluid bgrd4">
@@ -18,7 +19,7 @@
 			@endif
 			
 			<div class="col-8 text-center white-text mx-auto">
-				<img src="{{ $league->picture !== null ? asset($league->picture) : $defaultImg }}" class="img-fluid z-depth-1 rounded-circle" />
+				<img src="{{ $leagueImage }}" class="img-fluid z-depth-1 rounded-circle" />
 				<h1 class="h1-responsive">{{ ucwords($league->name) }}</h1>
 				
 				<div class="indLeaguesInfo">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\RecCenter;
@@ -8,7 +8,7 @@ use App\PlayerProfile;
 use App\LeagueProfile;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class LeagueProfileController extends Controller
+class LeagueProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,14 +22,8 @@ class LeagueProfileController extends Controller
 		// Resize the default image
 		Image::make(public_path('/images/basketball_background1.jpg'))->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
-		
-		if(request()->query('filter')) {
-			$leagues = LeagueProfile::filter(request()->query('filter'));
 
-			return view('leagues.index', compact('leagues', 'defaultImg'));
-		} else {
-			return view('leagues.index', compact('leagues', 'defaultImg'));
-		}
+		return view('admin.leagues.index', compact('leagues', 'defaultImg'));
     }
 
     /**
@@ -39,7 +33,7 @@ class LeagueProfileController extends Controller
      */
     public function create()
     {
-        //
+	    return view('admin.leagues.create');
     }
 
     /**
@@ -50,7 +44,19 @@ class LeagueProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+	    $user = new User();
+	    $player = new LeagueProfile();
+
+	    $user->username = $request->username;
+	    $user->email    = $request->email;
+	    $user->password = bcrypt($request->password);
+	    $user->type     = 'commish';
+
+	    if($user->save()) {
+		    $player->user_id = $user->id;
+
+		    if($player->save()) {}
+	    }
     }
 
     /**
@@ -70,9 +76,9 @@ class LeagueProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(LeagueProfile $league)
+    public function edit($id)
     {
-	    return view('leagues.edit', compact('league'));
+        //
     }
 
     /**

@@ -25,7 +25,7 @@
 	
 	<div class="container-fluid rgba-mdb-color-strong backgroundImageDef">
 		<div class="search_box container mx-auto">
-			{!! Form::open(['action' => ['LeagueProfileController@search'], 'method' => 'POST']) !!}
+			{!! Form::open(['action' => ['LeagueProfilesController@search'], 'method' => 'POST']) !!}
 				 <div class="md-form input-group">
 					<span class="input-group-btn">
 						<a href="{{ route('leagues.index') }}" class="btn btn-outline-success waves-effect my-0 addFilter" type="button">All!</a>
@@ -77,18 +77,28 @@
 		@endif
 
 		@if($leagues->count() > 0)
+
 			@foreach($leagues as $league)
+
 				<div class="row position-relative py-5 white-text">
+
 					<div class="col-12 col-md-8 mx-auto">
+
 						<div class="card card-image mb-3" style="background-image: url({{ $league->picture != null ? route('sub_photo', ['picture' => $league->picture]) : $defaultImg }});">
+
 							<div class="text-white text-left d-flex flex-column align-items-center rgba-black-strong p-2 p-lg-5">
-								<div class="">
-									@if($league->seasons()->active()->get()->isNotEmpty())
+
+								@if($league->seasons()->active()->get()->isNotEmpty())
+									<div class="" id="">
+										<h3 class="coolText1">This league is currently running. Check out the league(s) schedules, scores and stats by selecting the seasons name</h3>
+									</div>
+
+									<div class="">
 										@foreach($league->seasons()->active()->get() as $season)
-											<a href="{{ route('season.show', ['league' => str_ireplace(" ", "", strtolower($season->league->name)), 'season' => str_ireplace(" ", "", strtolower($season->name))]) }}" class="btn success-color">{{ $season->name }}</a>
+											<a href="{{ route('league_season.show', ['league' => str_ireplace(" ", "", strtolower($season->league->name)), 'season' => str_ireplace(" ", "", strtolower($season->name))]) }}" target="_blank" class="btn success-color">{{ $season->name }}</a>
 										@endforeach
-									@endif
-								</div>
+									</div>
+								@endif
 
 								<div class="mt-3 p-lg-2 rgba-black-light coolText3 rounded z-depth-1-half">
 									<h2 class="h2-responsive">League Name: {{ $league->name }}</h2>

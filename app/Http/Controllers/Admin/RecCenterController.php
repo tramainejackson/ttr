@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\RecCenter;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class RecCenterController extends Controller
 {
@@ -27,7 +28,11 @@ class RecCenterController extends Controller
     {
     	$recs = RecCenter::all();
 
-	    return view('admin.recs.index', compact('recs'));
+	    // Resize the default image
+	    Image::make(public_path('/images/basketball_background1.jpg'))->save(storage_path('app/public/images/lg/default_img.jpg'));
+	    $defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+	    return view('admin.recs.index', compact('recs', 'defaultImg'));
     }
 
     /**

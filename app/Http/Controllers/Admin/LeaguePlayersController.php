@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\PlayerProfile;
 use App\LeagueProfile;
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class LeaguePlayerController extends Controller
+class LeaguePlayersController extends Controller
 {
     /**
      * Create a new controller instance.

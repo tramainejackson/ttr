@@ -8,7 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class WriterProfileController extends Controller
+class WritersProfileController extends Controller
 {
 	/**
      * Create a new controller instance.
@@ -87,7 +87,7 @@ class WriterProfileController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return redirect()->action('HomeController@index');
+        return view('writer.edit', compact('writer', 'defaultImg'));
     }
 
     /**

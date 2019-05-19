@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Message;
+use App\Video;
+use App\PlayerProfileVideos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
+use Carbon\Carbon;
 
-class MessageController extends Controller
+class VideosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +20,9 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+		$videos = PlayerProfileVideos::orderBy('created_at', 'desc')->get();
+		
+        return view('videos.index', compact('videos'));
     }
 
     /**
@@ -24,6 +32,7 @@ class MessageController extends Controller
      */
     public function create()
     {
+        return view('videos.index');
         //
     }
 
@@ -35,25 +44,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-		$message = new Message();
-
-	    $message->name      = $request->contact_name;
-	    $message->email     = $request->contact_email;
-	    $message->subject   = $request->contact_subject;
-	    $message->message   = $request->contact_message;
-
-	    if($message->save()) {
-	    	return redirect()->back()->with('status', 'Message sent successfully');
-	    }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message $message
+     * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show(Video $video)
     {
         //
     }
@@ -61,10 +61,10 @@ class MessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Message $message
+     * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function edit(Video $video)
     {
         //
     }
@@ -73,10 +73,10 @@ class MessageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message $message
+     * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request, Video $video)
     {
         //
     }
@@ -84,10 +84,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message $message
+     * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(Video $video)
     {
         //
     }

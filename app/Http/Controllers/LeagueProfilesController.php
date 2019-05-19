@@ -8,7 +8,7 @@ use App\PlayerProfile;
 use App\LeagueProfile;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class LeagueProfileController extends Controller
+class LeagueProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -70,9 +70,9 @@ class LeagueProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(LeagueProfile $league)
     {
-        //
+	    return view('leagues.edit', compact('league'));
     }
 
     /**

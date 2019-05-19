@@ -3,7 +3,7 @@
 	<div class="col-12 col-md-8 col-xl-6" id="">
 
 		<!-- Contact form -->
-		{!! Form::open(['action' => ['MessageController@store'], 'method' => 'POST']) !!}
+		{!! Form::open(['action' => ['MessagesController@store'], 'method' => 'POST']) !!}
 			<p class="h4 text-center mb-4 white-text">Write to us</p>
 
 			<!-- input text -->

@@ -77,6 +77,18 @@ class LeaguePlayer extends Model
 	/**
 	* Get the players stats for the season object.
 	*/
+    public function scopeLeagueLink($query, $email, $player_id)
+    {
+        return $query->where([
+	        ['email', $email],
+	        ['player_profile_id', $player_id],
+	        ['player_profile_accepted', null]
+        ])->get();
+    }
+
+	/**
+	* Get the players stats for the season object.
+	*/
     public function scopeDuplicate($query, $email)
     {
         return $query->where([
@@ -87,7 +99,7 @@ class LeaguePlayer extends Model
 	/**
 	* Get the players stats for the season object.
 	*/
-    public function scopeAcceptedProfile($query)
+    public function scopeAcceptedLeague($query)
     {
         return $query->where([
 			['player_profile_accepted', 'Y'],

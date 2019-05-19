@@ -12,7 +12,7 @@
 	<div class="container-fluid" id="leaguesProfileContainer">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				{!! Form::open(['action' => ['LeagueProfileController@update', $league->id], 'method' => 'PATCH', 'files' => true]) !!}
+				{!! Form::open(['action' => ['LeagueProfilesController@update', $league->id], 'method' => 'PATCH', 'files' => true]) !!}
 					<div class="row">
 						<div class="col-5 my-3 mx-auto">
 							<div id="update_pic" class="card card-cascade mx-auto">

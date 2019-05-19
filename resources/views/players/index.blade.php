@@ -32,7 +32,7 @@
 		<h2 id="player_page_header" class="page_header">ToTheRec Players</h2>
 
 		<div class="search_box container mx-auto">
-			{!! Form::open(['action' => ['PlayerProfileController@search'], 'method' => 'POST']) !!}
+			{!! Form::open(['action' => ['PlayerProfilesController@search'], 'method' => 'POST']) !!}
 				 <div class="md-form input-group">
 					<span class="input-group-btn">
 						<a href="{{ route('players.index') }}" class="btn btn-outline-success waves-effect my-0 addFilter" type="button">All!</a>

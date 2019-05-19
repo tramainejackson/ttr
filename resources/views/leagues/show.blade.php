@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 	@include('include.functions')
 	
 		<div class="indLeague" style="background-image:url('images/{{ $league->leagues_picture }}');">

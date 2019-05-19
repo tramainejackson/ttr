@@ -31,7 +31,6 @@
 
 	@include('include.functions')
 
-
 	<div class="container-fluid rgba-stylish-strong" id="leaguesProfileContainer">
 
 		<div class="row" id="">
@@ -40,7 +39,7 @@
 
 		<div class="row">
 			<div class="col-12 col-md-12 mx-auto">
-				{!! Form::open(['action' => ['LeagueProfileController@update', $league->id], 'method' => 'PATCH', 'files' => true]) !!}
+				{!! Form::open(['action' => ['LeagueProfilesController@update', $league->id], 'method' => 'PATCH', 'files' => true]) !!}
 					<div class="row">
 						<div class="col-5 my-3 mx-auto">
 							<div id="update_pic" class="card card-cascade mx-auto">

@@ -6,7 +6,7 @@
 	<div class="container-fluid bgrd3">
 		<div class="row">
 			<div class="col-12 col-md-10 mx-auto leagueContactInfo">
-				{!! Form::open(['action' => ['LeagueProfileController@update', 'league' => $league->id], 'method' => 'PATCH', 'files' => true]) !!}
+				{!! Form::open(['action' => ['LeagueProfilesController@update', 'league' => $league->id], 'method' => 'PATCH', 'files' => true]) !!}
 					<div class="row">
 						<div class="col-12 col-md-10 col-lg-8 col-xl-6 my-3 mx-auto">
 							<div id="update_pic" class="card card-cascade mx-auto">

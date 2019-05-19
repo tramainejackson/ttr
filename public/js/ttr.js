@@ -182,12 +182,15 @@ $(document).ready(function() {
 	// Add league to players profile when accepted
 	$("body").on("click", ".linkLeagueOption button", function(e) {
 		var playerID = $(this).parent().find('[name="player_id"]').val();
+		var linkResponse = null;
 
 		if($(this).hasClass("addLeague")) {
+            linkResponse = "Y";
+
 			$.ajax({
 			  method: "PATCH",
-			  url: "league_player/add_player_profile",
-			  data: { player: playerID },
+			  url: "/league_player/add_player_profile",
+			  data: { player:playerID, link:linkResponse },
 			})
 			
 			.fail(function() {	
@@ -197,58 +200,38 @@ $(document).ready(function() {
 			.done(function(data) {
 				var returnData = data;
 
-				if($(returnData).hasClass("okItem")) {
-					$(leagueOption).slideUp(function() {
-						$(leagueOption).remove();
-
-						if($(".linkLeagueOption").length < 1) {
-							$(".linkLeaguesDiv").fadeOut(function() {
-								$(".linkLeaguesDiv").remove();
-								location.reload();
-							});
-						}
-					});
-				} else if($(returnData).hasClass("errorItem")) {
-					$(leagueOption).slideUp(function() {
-						$(leagueOption).remove();
-
-						if($(".linkLeagueOption").length < 1) {
-							$(".linkLeaguesDiv").fadeOut(function() {
-								$(".linkLeaguesDiv").remove();
-								location.reload();
-							});
-						}
-					});
+				if(returnData == "Linked!") {
+					// Display a success toast
+                    toastr.success('Your player profile has been linked to the league your playing in.')
+				} else {
+                    // Display a success toast
+                    toastr.error('There was a problem Your player profile has not been linked to the league.')
 				}
 			});
-		} else if($(this).hasClass("declineLeague")) {			
-			$.post("update_player.php", {declinePlayerLeague:leagueID}, function(data) {
-				var returnData = data;
-				
-				if($(returnData).hasClass("okItem")) {
-					$(leagueOption).slideUp(function() {
-						$(leagueOption).remove();
+		} else if($(this).hasClass("declineLeague")) {
+            linkResponse = "N";
 
-						if($(".linkLeagueOption").length < 1) {
-							$(".linkLeaguesDiv").fadeOut(function() {
-								$(".linkLeaguesDiv").remove();
-								location.reload();
-							});
-						}
-					});
-				} else if($(returnData).hasClass("errorItem")) {
-					$(leagueOption).slideUp(function() {
-						$(leagueOption).remove();
+            $.ajax({
+                method: "PATCH",
+                url: "/league_player/add_player_profile",
+                data: { player:playerID, link:linkResponse },
+            })
 
-						if($(".linkLeagueOption").length < 1) {
-							$(".linkLeaguesDiv").fadeOut(function() {
-								$(".linkLeaguesDiv").remove();
-								location.reload();
-							});
-						}
-					});
-				}
-			});
+                .fail(function() {
+                    alert("Fail");
+                })
+
+                .done(function(data) {
+                    var returnData = data;
+
+                    if(returnData == "Linked!") {
+                        // Display a success toast
+                        toastr.success('Declined! Your player profile was not linked.')
+                    } else {
+                        // Display a success toast
+                        toastr.error('There was a problem Your player profile has not been linked to the league.')
+                    }
+                });
 		} else {
 			alert("Stop with the bafoolery");
 		}

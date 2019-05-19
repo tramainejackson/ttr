@@ -128,7 +128,6 @@ class HomeController extends Controller
 
 			}
 		} else {
-
 			return view('leagues_sub.about', compact('showSeason'));
 			
 		}

@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
+@section('styles')
+	<link href="{{ asset('/css/ttr_leagues.css') }}" rel="stylesheet">
+
+	<style>
+		nav {background: #4285F4 !important;}
+	</style>
+@endsection
+
 @section('content')
+
 	<div class="container-fluid bgrd3">
+
 		<div class="row">
 			<!--Column will include buttons for creating a new season-->
 			<div class="col mt-3 d-none d-xl-block"></div>
@@ -14,7 +24,7 @@
 				<div class="card card-cascade mb-4 reverse wider">
 					<!--Card image-->
 					<div class="view">
-						<img src="{{ $league_team->team_picture != null ? $league_team->lg_photo() : $defaultImg }}" class="img-fluid mx-auto" alt="photo" style="max-width: 75%;">
+						<img src="{{ $teamImage }}" class="img-fluid mx-auto" alt="photo" style="max-width: 75%;">
 					</div>
 					<!--Card content-->
 					<div class="card-body rgba-white-strong rounded z-depth-1-half">
@@ -22,7 +32,7 @@
 						<h2 class="card-title h2-responsive text-center">{{ $league_team->team_name }}</h2>
 						
 						<!-- Create Form -->
-						{!! Form::open(['action' => ['LeagueTeamController@update', $league_team->id], 'id' => 'update_team_form', 'method' => 'PATCH', 'files' => true]) !!}
+						{!! Form::open(['action' => ['LeagueTeamsController@update', $league_team->id], 'id' => 'update_team_form', 'method' => 'PATCH', 'files' => true]) !!}
 							<!-- Team Info -->
 							<div class="">
 								<div class="row">
@@ -152,42 +162,15 @@
 							</div>
 							<div class="md-form">
 								<button class="btn blue lighten-1 white-text" type="submit">Update Team Information</button>
-								<button class="btn red darken-1 white-text" type="button" data-toggle="modal" data-target="#delete_team">Delete Team</button>
 							</div>
 						{!! Form::close() !!}
 					</div>
 				</div>
 				<!--/.Card-->
 			</div>
-			<div class="col mt-3 text-center text-xl-right order-first order-xl-0">
-				<a href="{{ request()->query() == null ? route('league_teams.index') : route('league_teams.index', ['season' => request()->query('season'), 'year' => request()->query('year')]) }}" class="btn btn-lg btn-rounded mdb-color darken-3 white-text" type="button">All Teams</a>
-				
-				<a href="{{ request()->query() == null ? route('league_teams.create') : route('league_teams.create', ['season' => request()->query('season'), 'year' => request()->query('year')]) }}" class="btn btn-lg btn-rounded mdb-color darken-3 white-text" type="button">Add New Team</a>
-			</div>
+			<div class="col mt-3 text-center text-xl-right order-first order-xl-0"></div>
 		</div>
 		<div class="row">
-			<div class="modal fade" id="delete_team" tabindex="-1" role="dialog" aria-labelledby="deleteTeam" aria-hidden="true" data-backdrop="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h2 class="h2-responsive">Delete Team</h2>
-						</div>
-						<div class="modal-body">
-							<!-- Delete Form -->
-							{!! Form::open(['action' => ['LeagueTeamController@destroy', $league_team->id], 'method' => 'DELETE']) !!}
-								<div class="">
-									<h4 class="h4-responsive">Deleting this team will delete all of it's games on the schedule and remove all the stats already entered.<br/><br/>Are you sure you want to delete this team?</h4>
-									
-									<div class="d-flex justify-content-between align-items-center">
-										<button type="submit" class="btn btn-success">Confirm</button>
-										<button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
-									</div>
-								</div>
-							{!! Form::close() !!}
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="modal fade" id="delete_player" tabindex="-2" role="dialog" aria-labelledby="deletePlayer" aria-hidden="true" data-backdrop="true">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -196,7 +179,7 @@
 						</div>
 						<div class="modal-body">
 							<!-- Delete Form -->
-							{!! Form::open(['action' => ['LeaguePlayerController@destroy', null], 'method' => 'DELETE']) !!}
+							{!! Form::open(['action' => ['LeaguePlayersController@destroy', null], 'method' => 'DELETE']) !!}
 								<div class="">
 									<h4 class="h4-responsive">Deleting this player will delete all of his/her stats already entered.<br/><br/>Are you sure you want to delete this player?</h4>
 									

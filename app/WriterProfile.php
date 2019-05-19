@@ -45,14 +45,6 @@ class WriterProfile extends Model
     }
 	
 	/**
-	* Get the players profile photo.
-	*/
-    public function image()
-    {
-        return $this->hasOne('App\PlayerProfileImages');
-    }
-	
-	/**
 	* Get the writers post.
 	*/
     public function post()

@@ -20,7 +20,7 @@
 	<section class="extra-margins pb-3 wow fadeIn" data-wow-delay="0.3s">
 		
 		<div class="search_box container mx-auto rgba-black-strong pt-1 pb-3 rounded z-depth-2">
-			{!! Form::open(['action' => ['NewsController@search'], 'method' => 'POST']) !!}
+			{!! Form::open(['action' => ['NewsArticleController@search'], 'method' => 'POST']) !!}
 				 <div class="md-form input-group">
 					<span class="input-group-btn">
 						<a href="{{ route('news.index') }}" class="btn btn-outline-success waves-effect my-0 addFilter" type="button">All!</a>

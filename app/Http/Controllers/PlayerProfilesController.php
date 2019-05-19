@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\RecCenter;
 use App\PlayerProfile;
-use App\LeagueProfile;
+use App\LeaguePlayer;
 use App\PlayerPlayground;
 use App\PlayerProfileImages;
 use App\PlayerProfileVideos;
+use App\LeagueProfile;
+use App\Message;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class PlayerProfileController extends Controller
+class PlayerProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -72,9 +74,9 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(PlayerProfile $player)
-    {	
+    {
 		// Create and Resize the default image
-		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, 	function ($constraint) {
+		Image::make(public_path('images/emptyface.jpg'))->resize(350, null, function ($constraint) {
 				$constraint->aspectRatio();
 			}
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
@@ -89,9 +91,34 @@ class PlayerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PlayerProfile $player)
     {
-        //
+	    $recs = RecCenter::all();
+	    $playgrounds = $player->playgrounds;
+	    $videos = $player->videos;
+	    $leagues = $player->leagues;
+	    $linkLeague = LeaguePlayer::leagueLink($player->user->email, $player->id);
+	    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+	    // Resize the default image
+	    Image::make(public_path('images/emptyface.jpg'))->resize(350, null, function ($constraint) {
+		    $constraint->aspectRatio();
+	    })->save(storage_path('app/public/images/lg/default_img.jpg'));
+	    $defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+	    if ($player->image != null) {
+
+		    if (Storage::disk('public')->exists(str_ireplace('storage', '', $player->image->path))) {
+			    $playerImage = asset($player->image->path);
+		    } else {
+			    $playerImage = $defaultImg;
+		    }
+
+	    } else {
+		    $playerImage = $defaultImg;
+	    }
+
+	    return view('players.edit', compact('player', 'recs', 'playgrounds', 'videos', 'leagues', 'days', 'linkLeague', 'playerImage', 'defaultImg'));
     }
 
     /**
@@ -103,14 +130,13 @@ class PlayerProfileController extends Controller
      */
     public function update(Request $request, PlayerProfile $player)
     {
-		// dd($request);
         // Validate incoming data
 		$this->validate($request, [
 			'firstname' => 'required|max:50',
 			'lastname' => 'nullable|max:50',
 			'nickname' => 'nullable|max:50',
 			'email' => 'required|max:50:unique',
-			'weight' => 'numeric|min:0|max:999',
+			'weight' => 'nullable|numeric|min:0|max:999',
 			'dob_submit' => 'nullable',
 			'highschool' => 'nullable',
 			'college' => 'nullable',
@@ -150,7 +176,6 @@ class PlayerProfileController extends Controller
      * @return \Illuminate\Http\Response
     */
 	public function update_playgrounds(Request $request, PlayerProfile $player) {
-		// dd($player);
 		// Update the existing playground
 		if(isset($request->playground_id)) {
 			$count = count($request->playground_id);

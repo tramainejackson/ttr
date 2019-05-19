@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\WriterProfile;
@@ -8,7 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class WriterProfileController extends Controller
+class WritersProfileController extends Controller
 {
 	/**
      * Create a new controller instance.
@@ -27,7 +27,13 @@ class WriterProfileController extends Controller
      */
     public function index()
     {
-        //
+        $writers = WriterProfile::all();
+
+	    // Resize the default image
+	    Image::make(public_path('/images/basketball_background1.jpg'))->save(storage_path('app/public/images/lg/default_img.jpg'));
+	    $defaultImg = asset('/storage/images/lg/default_img.jpg');
+
+        return view('admin.writers.index', compact('writers', 'defaultImg'));
     }
 
     /**
@@ -37,7 +43,7 @@ class WriterProfileController extends Controller
      */
     public function create()
     {
-        //
+	    return view('admin.writers.create');
     }
 
     /**
@@ -87,7 +93,7 @@ class WriterProfileController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return view('writer.edit', compact('writer', 'defaultImg'));
+        return redirect()->action('HomeController@index');
     }
 
     /**

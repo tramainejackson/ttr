@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 use Carbon\Carbon;
 
-class NewsController extends Controller
+class NewsArticleController extends Controller
 {
     /**
      * Display a listing of the resource.

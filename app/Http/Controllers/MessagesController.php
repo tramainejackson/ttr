@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Message;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class MessagesController extends Controller
 {
     /**
      * Display a listing of the resource.

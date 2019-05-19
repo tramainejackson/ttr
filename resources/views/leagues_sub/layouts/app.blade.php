@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'ToTheRec') }}</title>
+    <title>{{ 'ToTheRec Leagues' }}</title>
 
     <!-- Styles -->
 	<!-- Font Awesome -->
@@ -92,7 +92,7 @@
 					@if (Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">
-							<a href="{{ route('sub_login') }}" class="nav-link btn indigo white-text">Login
+							<a href="{{ route('login') }}" class="nav-link btn indigo white-text">Login
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</a>
 						</li>
@@ -216,7 +216,7 @@
 					@if(Auth::guest())
 						<!-- Logins -->
 						<li class="nav-item">
-							<a href="{{ route('sub_login') }}" class="nav-link btn indigo white-text">Login
+							<a href="{{ route('login') }}" class="nav-link btn indigo white-text">Login
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</a>
 						</li>
