@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
 	<div class="container-fluid bgrd3">
@@ -24,7 +24,7 @@
 					<a href="{{ request()->query() == null ? route('league_stat.edit_week', ['week' => $weekGames->first()->season_week]) : route('league_stat.edit_week', ['week' => $weekGames->first()->season_week, 'season' => request()->query('season'), 'year' => request()->query('year')]) }}" class="btn btn-rounded cyan darken-1 white-text" type="button">Edit Week Stats</a>
 				</div>
 
-				{!! Form::open(['action' => ['LeagueScheduleController@update_week', $weekGames->first()->season_week], 'class' => 'updateWeekForm', 'name' => 'edit_week_form', 'method' => 'PATCH']) !!}
+				{!! Form::open(['action' => ['Leagues\LeagueScheduleController@update_week', $weekGames->first()->season_week], 'class' => 'updateWeekForm', 'name' => 'edit_week_form', 'method' => 'PATCH']) !!}
 					@if($weekGames->count() > 0)
 						@foreach($weekGames as $game)
 							<!--Card-->
@@ -246,7 +246,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								{!! Form::open(['action' => ['LeagueScheduleController@delete_week', $weekGames->first()->season_week], 'method' => 'DELETE']) !!}
+								{!! Form::open(['action' => ['Leagues\LeagueScheduleController@delete_week', $weekGames->first()->season_week], 'method' => 'DELETE']) !!}
 									<h3 class="h3-responsive">Removing this week will delete all of the games from the calendar and any player stats for the games.<br/><br/>Are you sure you want to delete this whole week?</h3>
 									
 									<div class="d-flex align-items-center justify-content-between">

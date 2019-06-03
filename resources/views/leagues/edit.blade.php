@@ -14,6 +14,10 @@
 		.md-form .prefix.active, .md-form label.active {
 			color: whitesmoke !important;
 		}
+
+		.md-form label.active[for="leagues_fee"], .md-form label.active[for="ref_fee"] {
+			top: -15px;
+		}
 	</style>
 @endsection
 
@@ -167,6 +171,9 @@
 								@endif
 
 								<div class="md-form mb-5">
+
+									<h2 class="h2 text-underline white-text">League Ages</h2>
+
 									@php $ages = find_ages(); @endphp
 									@php $ageArray =  explode(" ", $league->age); @endphp
 									<div class="row">
@@ -178,10 +185,12 @@
 											</div>
 										@endforeach
 									</div>
-
-									<label for="leagues_ages">League Ages</label>
 								</div>
+
 								<div class="md-form">
+
+									<h2 class="h2 text-underline white-text">League Competition</h2>
+
 									@php $getComp = find_competitions(); @endphp
 									@php $compArray =  explode(" ", $league->comp); @endphp
 									<div class="row">
@@ -193,8 +202,6 @@
 											</div>
 										@endforeach
 									</div>
-									
-									<label for="leagues_comp">League Competition</label>
 								</div>
 								<div class="md-form">
 									<button type="submit" name="submit" class="btn btn-lg green m-0 white-text" id="" value="">Update League</button>

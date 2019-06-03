@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('additional_scripts')
 	<script type="text/javascript">
@@ -11,6 +11,7 @@
 @endsection
 
 @section('content')
+
 	@include('include.functions')
 	
 	<div class="container-fluid bgrd3">
@@ -24,7 +25,7 @@
 					@if($activeSeasons->isNotEmpty())
 						<div class="col d-none d-lg-block">
 							@foreach($activeSeasons as $activeSeason)
-								<a href="{{ route('home', ['season' => $activeSeason->id, 'year' => $activeSeason->year]) }}" class="btn btn-lg btn-rounded deep-orange white-text d-block{{ $activeSeason->id == $showSeason->id ? ' lighten-2' : '' }}" type="button">{{ $activeSeason->name }}</a>
+								<a href="{{ route('league_season.index', ['season' => $activeSeason->id, 'year' => $activeSeason->year]) }}" class="btn btn-lg btn-rounded deep-orange white-text d-block{{ $activeSeason->id == $showSeason->id ? ' lighten-2' : '' }}" type="button">{{ $activeSeason->name }}</a>
 							@endforeach
 						</div>
 					@else
@@ -33,7 +34,9 @@
 			</div>
 
 			<div class="col-12 col-lg-7 pb-3{{ $showSeason->league_profile ? '': ' d-flex align-items-center justify-content-center' }}">
+
 				@if(!isset($allComplete))
+
 					<!-- Show league season info -->
 					@if($showSeason->paid == 'Y')
 						<div class="text-center coolText1 d-flex align-items-center justify-content-center seasonName">
@@ -42,11 +45,14 @@
 
 						<!--Card-->
 						<div class="card">
+
 							<!--Card content-->
 							<div class="card-body">
+
 								<!-- League season info -->
 								<div class="">
-									{!! Form::open(['action' => ['LeagueSeasonController@update', $showSeason->league_profile->id, 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'PATCH', 'files' => true]) !!}
+
+									{!! Form::open(['action' => ['Leagues\LeagueSeasonsController@update', $showSeason->league_profile->id, 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'PATCH', 'files' => true]) !!}
 										<div class="updateLeagueForm">
 
 											<div class="row">
@@ -125,7 +131,45 @@
 												</div>
 
 											</div>
-											
+
+											<div class="row" id="new_season_court_description">
+												<div class="col-12" id="">
+													<p class="text-center text-muted">Add additional courts/locations, please click <span class="btn-link">here</span>.</p>
+												</div>
+											</div>
+
+											@if($showSeason->courts()->count() > 0)
+
+												@foreach($showSeason->courts as $court)
+
+													<div class="row" id="">
+														<div class="md-form col-6" id="">
+															<label for="court_description">Court Description</label>
+															<textarea name="court_description[]" class="md-textarea form-control" id="" placeholder="Example: Court 1 or Court A">{{ $court->court_description }}</textarea>
+														</div>
+
+														<div class="md-form col-6" id="">
+															<label for="court_location">Court Location</label>
+															<textarea name="court_location[]" class="md-textarea form-control" id="" placeholder="Enter Court Location">{{ $court->court_location }}</textarea>
+														</div>
+
+														<input type="number" class="hidden" name="court_id[]" value="{{ $court->id }}" hidden/>
+													</div>
+												@endforeach
+											@endif
+
+											<div class="row hidden" id="new_season_court_row">
+												<div class="md-form col-6" id="">
+													<label for="court_description">Court Description</label>
+													<textarea name="new_court_description[]" class="md-textarea form-control" id="" placeholder="Example: Court 1 or Court A" disabled></textarea>
+												</div>
+
+												<div class="md-form col-6" id="">
+													<label for="court_location">Court Location</label>
+													<textarea name="new_court_location[]" class="md-textarea form-control" id="" placeholder="Enter Court Location" disabled></textarea>
+												</div>
+											</div>
+
 											<div class="md-form">
 												<button type="submit" class="btn btn-lg white-text green m-0" id="">Update League</button>
 												<button type="button" class="btn btn-lg white-text cyan darken-2" id="" data-toggle="modal" data-target="#start_playoffs">Start Playoffs</button>
@@ -363,7 +407,7 @@
 		<div class="modal fade" id="newSeasonForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
-					{!! Form::open(['action' => 'LeagueSeasonController@store', 'method' => 'POST', 'name' => 'newSeasonForm']) !!}
+					{!! Form::open(['action' => 'Leagues\LeagueSeasonsController@store', 'method' => 'POST', 'name' => 'newSeasonForm']) !!}
 						<div class="modal-header text-center">
 							<h4 class="modal-title w-100 font-weight-bold">New Season</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -576,7 +620,7 @@
 													toastr.success(returnData[1], 'Successful');
 													
 													setTimeout(function() {
-														window.open('/home?season=' + returnData[0] + '&year=' + $('.newSeasonInfo select[name="year"]').val(), '_self');
+														window.open('/league_season?season=' + returnData[0] + '&year=' + $('.newSeasonInfo select[name="year"]').val(), '_self');
 													}, 2000);
 												});
 											});
@@ -620,7 +664,7 @@
 						
 						<div class="d-flex align-items-center justify-content-between">
 							<button class="btn btn-lg green" type="button" onclick="event.preventDefault(); document.getElementById('create_playoff_form').submit();">Yes</button>
-								{!! Form::open(['action' => ['LeagueSeasonController@create_playoffs', 'season' => $showSeason->id, 'year' => $showSeason->year], 'id' => 'create_playoff_form', 'method' => 'POST']) !!}
+								{!! Form::open(['action' => ['Leagues\LeagueSeasonsController@create_playoffs', 'season' => $showSeason->id, 'year' => $showSeason->year], 'id' => 'create_playoff_form', 'method' => 'POST']) !!}
 								{!! Form::close() !!}
 							<button class="btn btn-lg btn-warning" type="button" data-dismiss="modal" aria-label="Close">No</button>
 						</div>

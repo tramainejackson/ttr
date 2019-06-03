@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('styles')
 	<style type="text/css">

@@ -41,11 +41,7 @@
 			<div class="d-flex align-items-center">
 				
 				<!-- Branding Image -->
-				@if(Auth::guest())
-					<a class="navbar-brand indigo-text" href="{{ route('welcome') }}">{{ config('app.name', 'ToTheRec') }}</a>
-				@else
-					<a class="navbar-brand indigo-text" href="{{ $queryStrCheck == null ? route('home') : route('home', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']]) }}">{{ config('app.name', 'ToTheRec') }}</a>
-				@endif
+				<a class="navbar-brand indigo-text" href="{{ route('welcome') }}">{{ config('app.name', 'ToTheRec') }}</a>
 				
 				<ul class="nav navbar-nav" id=''>
 					<li class="nav-item">
@@ -76,7 +72,7 @@
 						@endif
 					
 						<div class="mask">
-							<a class='league_home position-absolute bottom btn btn-light-blue' href="{{ $queryStrCheck == null ? route('home') : route('home', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']]) }}">
+							<a class='league_home position-absolute bottom btn btn-light-blue' href="">
 								@if($showSeason->league_profile)
 									{{ !isset($allComplete) ? $showSeason->league_profile->name : $showSeason->name }}
 								@else
@@ -102,6 +98,9 @@
 							</a>
 						</li>
 					@else
+						<li class="nav-item">
+							<a class="nav-link white-text" href="{{ $queryStrCheck == null ? route('league_season.index') : route('league_season.index', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']]) }}">Seasons</a>
+						</li>
 						<li class="nav-item">
 							<a class='nav-link white-text' href="{{ $queryStrCheck == null ? route('league_schedule.index') : route('league_schedule.index', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']])  }}">Schedule</a>
 						</li>
@@ -132,7 +131,7 @@
 												
 												@foreach($activeSeasons as $activeSeason)
 													<li class="">
-														<a href="{{ route('home', ['season' => $activeSeason->id, 'year' => $activeSeason->year]) }}" class="" type="button">{{ $activeSeason->name }}</a>
+
 													</li>
 												@endforeach
 											</ul>
@@ -184,13 +183,16 @@
 				</ul>
 			</div>
 			<!--/. Sidebar navigation -->
-			
+
 			<div class="d-none d-lg-flex" id="">
 				<!-- Right Side Of Navbar -->
 				<ul class="nav navbar-nav navbar-right" id='leagues_menu'>
 					@if(!Auth::guest())
 						<li class="nav-item">
 							<a id="" class='league_home nav-link indigo-text' href="{{ $queryStrCheck == null ? route('league_info') : route('league_info', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']]) }}">{{ $showSeason->league_profile ? $showSeason->league_profile->name : $showSeason->name }}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link indigo-text" href="{{ $queryStrCheck == null ? route('league_season.index') : route('league_season.index', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']]) }}">Seasons</a>
 						</li>
 						<li class="nav-item">
 							<a id="leagues_schedule_link" class='nav-link indigo-text' href="{{ $queryStrCheck == null ? route('league_schedule.index') : route('league_schedule.index', ['season' => $queryStrCheck['season'], 'year' => $queryStrCheck['year']])  }}">Schedule</a>
@@ -262,7 +264,7 @@
 
 	<!-- SCRIPTS -->
 	<!-- JQuery -->
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="/js/popper.min.js"></script>
 	<!-- Bootstrap core JavaScript -->

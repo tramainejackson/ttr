@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
 	<div class="container-fluid bgrd3">
@@ -12,7 +12,7 @@
 				<div class="my-4">
 					<div class="text-center mb-5">
 						<h1 class="">Are you sure you want to delete this game?</h1>
-						{!! Form::open(['action' => ['LeagueScheduleController@delete_game', 'league_schedule' => $league_schedule->id, 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'DELETE']) !!}
+						{!! Form::open(['action' => ['Leagues\LeagueScheduleController@delete_game', 'league_schedule' => $league_schedule->id, 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'DELETE']) !!}
 							<button class="btn red darken-2" type="submit">Delete Game</button>
 						{!! Form::close() !!}
 						

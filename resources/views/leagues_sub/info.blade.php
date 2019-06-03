@@ -1,12 +1,25 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
+
+@section('styles')
+	<style>
+		.md-form label.active[for="leagues_fee"], .md-form label.active[for="ref_fee"], .md-form label.active[for="leagues_website"] {
+			top: -15px;
+		}
+	</style>
+@endsection
 
 @section('content')
+
 	@include('include.functions')
 
 	<div class="container-fluid bgrd3">
+
 		<div class="row">
+
 			<div class="col-12 col-md-10 mx-auto leagueContactInfo">
+
 				{!! Form::open(['action' => ['LeagueProfilesController@update', 'league' => $league->id], 'method' => 'PATCH', 'files' => true]) !!}
+
 					<div class="row">
 						<div class="col-12 col-md-10 col-lg-8 col-xl-6 my-3 mx-auto">
 							<div id="update_pic" class="card card-cascade mx-auto">

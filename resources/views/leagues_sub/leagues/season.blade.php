@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
+
 	@include('include.functions')
 	
 	<div class="container-fluid bgrd4">
@@ -8,9 +9,9 @@
 			<div class="col-3">
 				<div class="text-center">
 					@if($season->completed == "Y")
-						<button class="btn btn-block orange darken-1 my-1">Season Completed</button>
+						<button class="btn btn-block orange darken-1 my-1 white-text">Season Completed</button>
 					@elseif($season->completed == "N")
-						<button class="btn btn-block green darken-1 my-1">Season Active</button>
+						<button class="btn btn-block green darken-1 my-1 white-text">Season Active</button>
 					@endif
 					
 					<img src="{{ $league->picture !== null ? asset($league->picture) : $defaultImg }}" class="img-fluid z-depth-1 rounded-circle" />

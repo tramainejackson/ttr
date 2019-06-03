@@ -20,6 +20,7 @@ $(document).ready(function() {
 	
 	// Initialize MDB select
 	$('.mdb-select').material_select();
+    $('.mdb-select').closest('[class*="col-"]').each(function (index, item) { $(item).style('z-index', 1, 'important'); });
 	
 	// Initialize datetimepicker
 	$('.datetimepicker').pickadate({
@@ -38,15 +39,16 @@ $(document).ready(function() {
 	
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
-	
-	// SideNav Scrollbar Initialization
-	var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-	Ps.initialize(sideNavScrollbar);
+
 	// SideNav Button Initialization
 	$(".button-collapse").sideNav({
 		edge: 'left', // Choose the horizontal origin
 		closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	});
+
+    // SideNav Scrollbar Initialization
+    var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(sideNavScrollbar);
 
 	// Remove flash message if there is one after 8 seconds
 	if($('.flashMessage').length == 1) {
@@ -312,7 +314,17 @@ $(document).ready(function() {
 		$('#delete_player form').attr('action', deleteURL);
 		$('#delete_player .modal-header h2').text('Delete Player ' + playerName);
 	});
-	
+
+	// Delete the player from the team
+	$('body').on('click', '#new_season_court_description .btn-link', function() {
+		var newRow = $('#new_season_court_row').clone();
+
+		newRow.insertAfter('#new_season_court_description')
+            .attr('id', '')
+			.removeClass('hidden')
+			.find('textarea').removeAttr('disabled');
+	});
+
 	// Clear all the stats for a particular game on the stats edit page
 	$('body').on('click', '.clearStatsBtn', function() {
 		$(this).parents('.card').find('input').val('');

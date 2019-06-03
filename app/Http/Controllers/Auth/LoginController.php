@@ -74,9 +74,16 @@ class LoginController extends Controller
 			$user->save();
 
 			if($user->type == 'commish') {
+				// Sub Domain
+				$domain = 'leagues.' . parse_url(config('app.url'), PHP_URL_HOST);
 
-				// This needs to redirect the commish to the regular totherec site
-				return redirect()->action('LeagueProfilesController@edit', ['league' => $user->league->id]);
+				if(strpos(request()->header('host'), $domain) !== false) {
+					// This needs to redirect the commish to the subdomain totherec site
+					return redirect()->action('Leagues\LeagueProfilesController@show', ['league' => $user->league->id]);
+				} else {
+					// This needs to redirect the commish to the regular totherec site
+					return redirect()->action('LeagueProfilesController@edit', ['league' => $user->league->id]);
+				}
 
 			} elseif($user->type == 'writer') {
 

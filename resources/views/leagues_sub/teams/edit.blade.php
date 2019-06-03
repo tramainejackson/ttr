@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('styles')
 	<link href="{{ asset('/css/ttr_leagues.css') }}" rel="stylesheet">

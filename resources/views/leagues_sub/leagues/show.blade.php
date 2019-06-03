@@ -6,13 +6,14 @@
 	
 	<div class="container-fluid bgrd4">
 		<div class="row py-3">
+
 			@if($league->seasons()->active()->count() > 0)
 				<div class="col-2">
 					<h4 class="h4-responsive text-center white-text">Active Seasons</h4>
 					
 					<div class="">
 						@foreach($league->seasons()->active()->get() as $active)
-							<a href="{{ route('league_profile.season', ['league' => str_ireplace(' ', '', strtolower($league->name)), 'season' => str_ireplace(' ', '', strtolower($active->name))]) }}" class="btn btn-block blue darken-1 my-1">{{ $active->name }}</a>
+							<a class="btn btn-block blue darken-1 my-1 white-text" href="{{ route('league_profile.season', ['league' => str_ireplace(' ', '', strtolower($league->name)), 'season' => str_ireplace(' ', '', strtolower($active->name))]) }}">{{ $active->name }}</a>
 						@endforeach
 					</div>
 				</div>

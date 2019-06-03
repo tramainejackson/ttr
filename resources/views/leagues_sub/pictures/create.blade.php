@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
 	<div class="container-fluid bgrd3">
@@ -24,7 +24,7 @@
 				</div>
 
 				<!-- Create Form -->
-				{!! Form::open(['action' => ['LeaguePictureController@store', 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'POST', 'files' => true, 'name' => 'new_pictures_form']) !!}
+				{!! Form::open(['action' => ['Leagues\LeaguePictureController@store', 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'POST', 'files' => true, 'name' => 'new_pictures_form']) !!}
 				
 					<div class="md-form">
 					

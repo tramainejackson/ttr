@@ -103,6 +103,21 @@ button:hover {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
+.select-wrapper input{
+    z-index: 2;
+}
+
+.select-wrapper+ label.active{
+    transform: translateY(-14px);
+    font-size: .8rem;
+    top: 1.5rem;
+    left: 15px;
+}
+
+.select-wrapper +label.mdb-main-label {
+    z-index: 1;
+}
+
 .w-auto {
     width: auto;
 }

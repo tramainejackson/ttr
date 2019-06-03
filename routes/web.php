@@ -35,8 +35,6 @@ Route::domain($domain)->group(function () {
 
 	Route::get('/', 'HomeController@welcome')->name('welcome');
 
-	Route::get('/home', 'HomeController@index')->name('home');
-
 	Route::get('/about_us', 'HomeController@about')->name('about');
 
 	Route::resource('/rec_centers', 'RecCenterController');
@@ -132,11 +130,11 @@ Route::domain($sub_domain)->namespace('Leagues')->group(function () {
 
 	Route::resource('league_profile', 'LeagueProfilesController');
 
-	Route::resource('league_season', 'LeagueSeasonController');
+	Route::resource('league_season', 'LeagueSeasonsController');
 
-	Route::post('create_playoffs', 'LeagueSeasonController@create_playoffs');
+	Route::post('create_playoffs', 'LeagueSeasonsController@create_playoffs');
 
-	Route::post('complete_season', 'LeagueSeasonController@complete_season');
+	Route::post('complete_season', 'LeagueSeasonsController@complete_season');
 
 	Route::get('league_profile/{league}/{season}', 'LeagueProfilesController@show_season')->name('league_profile.season');
 });

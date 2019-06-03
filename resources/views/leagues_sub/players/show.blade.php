@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
+
 	@include('include.functions')
 	
 	<div class="playerDisplay">

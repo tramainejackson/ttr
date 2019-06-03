@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
 	<div class="container-fluid bgrd3">
@@ -29,7 +29,7 @@
 						<!--Title-->
 						<h2 class="card-title h2-responsive text-center">Create New Team</h2>
 						<!-- Create Form -->
-						{!! Form::open(['action' => ['LeagueTeamController@store', 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'POST']) !!}
+						{!! Form::open(['action' => ['Leagues\LeagueTeamController@store', 'season' => $showSeason->id, 'year' => $showSeason->year], 'method' => 'POST']) !!}
 							<div class="md-form">
 								<input type="text" name="team_name" class="form-control" value="{{ old('team_name') }}" />
 								<label for="team_name">Team Name</label>

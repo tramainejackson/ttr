@@ -49,16 +49,16 @@ class LeagueScheduleController extends Controller
 					$playInGames = $showSeason->games()->playoffPlayinGames();
 					$playoffSettings = $showSeason->playoffs;
 					
-					return view('playoffs.schedule', compact('showSeason', 'activeSeasons', 'playInGames', 'nonPlayInGames', 'playoffRounds', 'playoffSettings'));
+					return view('leagues_sub.playoffs.schedule', compact('showSeason', 'activeSeasons', 'playInGames', 'nonPlayInGames', 'playoffRounds', 'playoffSettings'));
 				} else {
 					$seasonScheduleWeeks = collect();
 					
-					return view('schedule.index', compact('showSeason', 'activeSeasons', 'seasonScheduleWeeks'));
+					return view('leagues_sub.schedule.index', compact('showSeason', 'activeSeasons', 'seasonScheduleWeeks'));
 				}
 			
 			} else {
 				
-				return view('no_season', compact('showSeason'));
+				return view('leagues_sub.no_season', compact('showSeason'));
 				
 			}
 			
@@ -72,11 +72,11 @@ class LeagueScheduleController extends Controller
 				$playInGames = $showSeason->games()->playoffPlayinGames();
 				$playoffSettings = $showSeason->playoffs;
 				
-				return view('playoffs.schedule', compact('showSeason', 'activeSeasons', 'playInGames', 'nonPlayInGames', 'playoffRounds', 'playoffSettings'));
+				return view('leagues_sub.playoffs.schedule', compact('showSeason', 'activeSeasons', 'playInGames', 'nonPlayInGames', 'playoffRounds', 'playoffSettings'));
 			} else {
 				$seasonScheduleWeeks = $showSeason->games()->getScheduleWeeks();
 				
-				return view('schedule.index', compact('showSeason', 'activeSeasons', 'seasonScheduleWeeks'));
+				return view('leagues_sub.schedule.index', compact('showSeason', 'activeSeasons', 'seasonScheduleWeeks'));
 			}
 			
 		}
@@ -95,7 +95,7 @@ class LeagueScheduleController extends Controller
 
 		$weekCount = $showSeason->games()->getScheduleWeeks()->get();
 		
-		return view('schedule.create', compact('showSeason', 'activeSeasons', 'showSeason', 'weekCount'));
+		return view('leagues_sub.schedule.create', compact('showSeason', 'activeSeasons', 'showSeason', 'weekCount'));
     }
 	
 	/**
@@ -111,7 +111,7 @@ class LeagueScheduleController extends Controller
 		$weekGames 	= $showSeason->games()->getWeekGames($week)->orderBy('game_date')->orderBy('game_time')->get();
 		$activeSeasons = $showSeason->league_profile->seasons()->active()->get();
 		
-		return view('schedule.edit', compact('showSeason', 'weekGames', 'thisWeek', 'activeSeasons'));
+		return view('leagues_sub.schedule.edit', compact('showSeason', 'weekGames', 'thisWeek', 'activeSeasons'));
     }
 	
 	/**
@@ -126,7 +126,7 @@ class LeagueScheduleController extends Controller
 		$weekGames 	= $showSeason->games()->playoffPlayinGames()->get();
 		$activeSeasons = $showSeason->league_profile->seasons()->active()->get();
 		
-		return view('playoffs.edit', compact('showSeason', 'weekGames', 'activeSeasons'));
+		return view('leagues_sub.playoffs.edit', compact('showSeason', 'weekGames', 'activeSeasons'));
     }
 	
 	/**
@@ -141,7 +141,7 @@ class LeagueScheduleController extends Controller
 		$weekGames 	= $showSeason->games()->roundGames($round)->get();
 		$activeSeasons = $showSeason->league_profile->seasons()->active()->get();
 
-		return view('playoffs.edit_round', compact('showSeason', 'weekGames', 'round', 'activeSeasons'));
+		return view('leagues_sub.playoffs.edit_round', compact('showSeason', 'weekGames', 'round', 'activeSeasons'));
     }
 	
 	/**
@@ -837,7 +837,7 @@ class LeagueScheduleController extends Controller
 		$activeSeasons = $showSeason->league_profile->seasons()->active()->get();
 		
 
-		return view('schedule.show', compact('league_schedule', 'allStats', 'showSeason', 'result', 'homeTeam', 'awayTeam', 'activeSeasons'));
+		return view('leagues_sub.schedule.show', compact('league_schedule', 'allStats', 'showSeason', 'result', 'homeTeam', 'awayTeam', 'activeSeasons'));
 	}
 
 	/**
@@ -846,29 +846,59 @@ class LeagueScheduleController extends Controller
      * @return seaon
     */
 	public function find_season(Request $request) {
+
 		if(Auth::check()) {
-			$league = Auth::user()->leagues_profiles->first();
+
+			$league = Auth::user()->league;
 			$showSeason = '';
-			
+
 			if($request->query('season') != null && $request->query('year') != null) {
+
 				$showSeason = $league->seasons()->active()->find($request->query('season'));
+
 			} else {
-				if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
-					$showSeason = $league;
-				} else {
-					if($league->seasons()->active()->first()) {
-						$showSeason = $league->seasons()->active()->first();
+
+				if($league) {
+
+					if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
+
+						$showSeason = $league;
+
 					} else {
-						if($league->seasons()->first()) {
-							$showSeason = $league->seasons()->first();
+
+						if($league->seasons()->active()->first()) {
+
+							$showSeason = $league->seasons()->active()->first();
+
 						} else {
-							$showSeason = $league;
+
+							if($league->seasons()->first()) {
+
+								$showSeason = $league->seasons()->first();
+
+							} else {
+
+								$showSeason = $league;
+
+							}
+
 						}
+
 					}
+
+				} else {
+
+
+
 				}
+
 			}
-			
+
 			return $showSeason;
+		} else {
+			if(session()->has('commish')) {
+				Auth::loginUsingId(session()->get('commish'));
+			}
 		}
 	}
 }

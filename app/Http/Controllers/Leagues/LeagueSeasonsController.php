@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 
-class LeagueSeasonController extends Controller
+class LeagueSeasonsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -35,7 +35,62 @@ class LeagueSeasonController extends Controller
      */
     public function index()
     {
-		
+	    // Get the season to show
+	    $showSeason = $this->find_season(request());
+
+	    if($showSeason instanceof \App\LeagueProfile) {
+
+		    $completedSeasons = $showSeason->seasons()->completed()->get();
+		    $activeSeasons = $showSeason->seasons()->active()->get();
+		    $ageGroups = explode(' ', $showSeason->age);
+		    $compGroups = explode(' ', $showSeason->comp);
+		    $showSeasonUnpaidTeams = $showSeasonTeams = $showSeasonStat = $showSeasonPlayers = $showSeasonSchedule = collect();
+
+		    if($showSeason->is_playoffs == 'Y') {
+
+			    $allGames = $showSeason->games;
+			    $allTeams = $showSeason->league_teams;
+			    $playoffSettings = $showSeason->playoffs;
+			    $nonPlayInGames = $showSeason->games()->playoffNonPlayinGames()->get();
+			    $playInGames = $showSeason->games()->playoffPlayinGames()->get();
+
+			    return view('leagues_sub.playoffs.index', compact('ageGroups', 'compGroups', 'completedSeasons', 'activeSeasons', 'showSeason', 'nonPlayInGames', 'playInGames', 'playoffSettings', 'allGames', 'allTeams'));
+
+		    } else {
+
+			    return view('leagues_sub.season.index', compact('completedSeasons', 'activeSeasons', 'showSeason', 'showSeasonSchedule', 'showSeasonStat', 'showSeasonPlayers', 'showSeasonTeams', 'ageGroups', 'compGroups', 'showSeasonUnpaidTeams'));
+
+		    }
+
+	    } else {
+
+		    $completedSeasons = $showSeason->league_profile->seasons()->completed()->get();
+		    $activeSeasons = $showSeason->league_profile->seasons()->active()->get();
+		    $ageGroups = explode(' ', $showSeason->league_profile->age);
+		    $compGroups = explode(' ', $showSeason->league_profile->comp);
+		    $showSeasonSchedule = $showSeason->games()->upcomingGames()->get();
+		    $showSeasonStat = $showSeason->stats()->get();
+		    $showSeasonTeams = $showSeason->league_teams;
+		    $showSeasonUnpaidTeams = $showSeason->league_teams()->unpaid();
+		    $showSeasonPlayers = $showSeason->league_players;
+
+		    if($showSeason->is_playoffs == 'Y') {
+
+			    $allGames = $showSeason->games;
+			    $allTeams = $showSeason->league_teams;
+			    $playoffSettings = $showSeason->playoffs;
+			    $nonPlayInGames = $showSeason->games()->playoffNonPlayinGames()->get();
+			    $playInGames = $showSeason->games()->playoffPlayinGames()->get();
+
+			    return view('leagues_sub.playoffs.index', compact('ageGroups', 'compGroups', 'completedSeasons', 'activeSeasons', 'showSeason', 'nonPlayInGames', 'playInGames', 'playoffSettings', 'allGames', 'allTeams'));
+
+		    } else {
+
+			    return view('leagues_sub.season.index', compact('completedSeasons', 'activeSeasons', 'showSeason', 'showSeasonSchedule', 'showSeasonStat', 'showSeasonPlayers', 'showSeasonTeams', 'ageGroups', 'compGroups', 'showSeasonUnpaidTeams'));
+
+		    }
+
+	    }
     }
 	
 	/**
@@ -116,7 +171,27 @@ class LeagueSeasonController extends Controller
 		$showSeason->league_fee = $request->leagues_fee;
 		$showSeason->ref_fee = $request->ref_fee;
 		$showSeason->location = $request->leagues_address;
-		
+
+		if($request->new_court_description != null && $request->new_court_location != null) {
+			foreach($request->new_court_location as $key => $value) {
+				$showSeason->courts()->create([
+					'court_description' => $request->new_court_description[$key],
+					'court_location' => $request->new_court_location[$key],
+				]);
+			}
+		}
+
+		if($request->court_id != null) {
+			foreach($request->court_id as $key => $value) {
+				$court = $showSeason->courts()->find($request->court_id[$key]);
+
+				$court->court_description = $request->court_description[$key];
+				$court->court_location = $request->court_location[$key];
+
+				if($court->save()) {}
+			}
+		}
+
 		if($showSeason->save()) {
 			return redirect()->back()->with(['status' => 'Season Updated Successfully']);
 		}
@@ -162,29 +237,59 @@ class LeagueSeasonController extends Controller
      * @return seaon
     */
 	public function find_season(Request $request) {
+
 		if(Auth::check()) {
-			$league = Auth::user()->leagues_profiles->first();
+
+			$league = Auth::user()->league;
 			$showSeason = '';
-			
+
 			if($request->query('season') != null && $request->query('year') != null) {
+
 				$showSeason = $league->seasons()->active()->find($request->query('season'));
+
 			} else {
-				if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
-					$showSeason = $league;
-				} else {
-					if($league->seasons()->active()->first()) {
-						$showSeason = $league->seasons()->active()->first();
+
+				if($league) {
+
+					if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
+
+						$showSeason = $league;
+
 					} else {
-						if($league->seasons()->first()) {
-							$showSeason = $league->seasons()->first();
+
+						if($league->seasons()->active()->first()) {
+
+							$showSeason = $league->seasons()->active()->first();
+
 						} else {
-							$showSeason = $league;
+
+							if($league->seasons()->first()) {
+
+								$showSeason = $league->seasons()->first();
+
+							} else {
+
+								$showSeason = $league;
+
+							}
+
 						}
+
 					}
+
+				} else {
+
+
+
 				}
+
 			}
-			
+
 			return $showSeason;
+		} else {
+			if(session()->has('commish')) {
+				Auth::loginUsingId(session()->get('commish'));
+			}
 		}
 	}
 }

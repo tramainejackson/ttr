@@ -698,7 +698,7 @@
 						
 						<div class="d-flex align-items-center justify-content-between">
 							<button class="btn btn-lg green" type="button" onclick="event.preventDefault(); document.getElementById('complete_season_form').submit();">Yes</button>
-								{!! Form::open(['action' => ['LeagueSeasonController@complete_season', 'season' => $showSeason->id, 'year' => $showSeason->year], 'id' => 'complete_season_form', 'method' => 'POST']) !!}
+								{!! Form::open(['action' => ['LeagueSeasonsController@complete_season', 'season' => $showSeason->id, 'year' => $showSeason->year], 'id' => 'complete_season_form', 'method' => 'POST']) !!}
 								{!! Form::close() !!}
 							<button class="btn btn-lg btn-warning" type="button" data-dismiss="modal" aria-label="Close">No</button>
 						</div>

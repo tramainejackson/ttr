@@ -52,11 +52,11 @@ class LeagueTeamController extends Controller
 				)->save(storage_path('app/public/images/lg/default_img.jpg'));
 				$defaultImg = asset('/storage/images/lg/default_img.jpg');
 
-				return view('teams.index', compact('showSeason', 'activeSeasons', 'seasonTeams', 'defaultImg'));
+				return view('leagues_sub.teams.index', compact('showSeason', 'activeSeasons', 'seasonTeams', 'defaultImg'));
 				
 			} else {
 				
-				return view('no_season', compact('showSeason'));
+				return view('leagues_sub.no_season', compact('showSeason'));
 				
 			}
 			
@@ -73,7 +73,7 @@ class LeagueTeamController extends Controller
 			)->save(storage_path('app/public/images/lg/default_img.jpg'));
 			$defaultImg = asset('/storage/images/lg/default_img.jpg');
 
-			return view('teams.index', compact('showSeason', 'activeSeasons', 'seasonTeams', 'defaultImg'));
+			return view('leagues_sub.teams.index', compact('showSeason', 'activeSeasons', 'seasonTeams', 'defaultImg'));
 
 		}
     }
@@ -97,7 +97,7 @@ class LeagueTeamController extends Controller
 		)->save(storage_path('app/public/images/lg/default_img.jpg'));
 		$defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-		return view('teams.create', compact('showSeason', 'activeSeasons', 'defaultImg', 'totalTeams'));
+		return view('leagues_sub.teams.create', compact('showSeason', 'activeSeasons', 'defaultImg', 'totalTeams'));
     }
 	
 	/**
@@ -152,7 +152,7 @@ class LeagueTeamController extends Controller
 			)->save(storage_path('app/public/images/lg/default_img.jpg'));
 			$defaultImg = asset('/storage/images/lg/default_img.jpg');
 
-			return view('teams.edit', compact('league_team', 'showSeason', 'defaultImg', 'activeSeasons'));
+			return view('leagues_sub.teams.edit', compact('league_team', 'showSeason', 'defaultImg', 'activeSeasons'));
 			
 		} else {
 			
@@ -340,7 +340,7 @@ class LeagueTeamController extends Controller
     public function destroy(Request $request, LeagueTeam $league_team)
     {
 		// Get the season to show
-		$league = Auth::user()->leagues_profiles->first();
+		$league = Auth::user()->league->first();
 		$showSeason = '';
 		
 		if(isset(parse_url($request->session()->previousUrl())['query'])) {
@@ -404,28 +404,57 @@ class LeagueTeamController extends Controller
     */
 	public function find_season(Request $request) {
 		if(Auth::check()) {
-			$league = Auth::user()->leagues_profiles->first();
+
+			$league = Auth::user()->league;
 			$showSeason = '';
-			
+
 			if($request->query('season') != null && $request->query('year') != null) {
+
 				$showSeason = $league->seasons()->active()->find($request->query('season'));
+
 			} else {
-				if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
-					$showSeason = $league;
-				} else {
-					if($league->seasons()->active()->first()) {
-						$showSeason = $league->seasons()->active()->first();
+
+				if($league) {
+
+					if($league->seasons()->active()->count() < 1 && $league->seasons()->completed()->count() > 0) {
+
+						$showSeason = $league;
+
 					} else {
-						if($league->seasons()->first()) {
-							$showSeason = $league->seasons()->first();
+
+						if($league->seasons()->active()->first()) {
+
+							$showSeason = $league->seasons()->active()->first();
+
 						} else {
-							$showSeason = $league;
+
+							if($league->seasons()->first()) {
+
+								$showSeason = $league->seasons()->first();
+
+							} else {
+
+								$showSeason = $league;
+
+							}
+
 						}
+
 					}
+
+				} else {
+
+
+
 				}
+
 			}
-			
+
 			return $showSeason;
+		} else {
+			if(session()->has('commish')) {
+				Auth::loginUsingId(session()->get('commish'));
+			}
 		}
 	}
 }

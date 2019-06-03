@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('leagues_sub.layouts.app')
 
 @section('content')
 	<div class="container-fluid bgrd3">
@@ -132,7 +132,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						{!! Form::open(['action' => ['LeagueScheduleController@update_game'], 'method' => 'PATCH', 'name' => 'edit_game_form',]) !!}
+						{!! Form::open(['action' => ['Leagues\LeagueScheduleController@update_game'], 'method' => 'PATCH', 'name' => 'edit_game_form',]) !!}
 							<!--Card-->
 							<div class="card mb-4">
 								<!--Card content-->
@@ -250,7 +250,7 @@
 					</div>
 					<div class="modal-body">
 						<!-- Create Form -->
-						{!! Form::open(['action' => ['LeagueScheduleController@add_game'], 'name' => 'new_game_form','method' => 'POST']) !!}
+						{!! Form::open(['action' => ['Leagues\LeagueScheduleController@add_game'], 'name' => 'new_game_form','method' => 'POST']) !!}
 							<div class="">
 								<select class="mdb-select md-form" name="season_week">
 									<option value="blank" disabled selected>Choose a week</option>
